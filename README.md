@@ -4,6 +4,8 @@
 ---
 
 ### 使用方法
+* 安装gcc编译器
+* ish需要额外的apk add build-base
 ```
 gcc C-English-Training.c
 ./a.out
