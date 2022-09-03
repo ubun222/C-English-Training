@@ -11,8 +11,8 @@
 #include <errno.h>
 #include <unistd.h>
 #include <fcntl.h>
-/***#include<conio.h>***/
-/***#include<curses.h>***/
+
+
 #define BOOL int
 #define TRUE 1
 #define FALSE 0
@@ -25,7 +25,7 @@ void my_exit(void)
 {
 	printf("\033[?25h\nbefore exit () !\n");
     tcgetattr(0,&init_setting);
-    /*system("stty -icanon");*/
+    
 }
 
 
@@ -36,8 +36,7 @@ void my_exit(void)
 
 
 
-/* Return a new file descriptor to the current TTY.
-*/
+
 int current_tty(void)
 {
     const char *dev;
@@ -88,11 +87,7 @@ static inline int rd(const int Fd)
 
    return 0;
 }
-/* As the tty for current cursor position.
- * This function returns 0 if success, errno code otherwise.
- * Actual errno will be unchanged.
-*/
-//BOOL re;
+
 struct itimerval value, value0;
 int cursor_position(int *const Row ,int *const Col)
 {
@@ -107,14 +102,9 @@ int cursor_position(int *const Row ,int *const Col)
     value0.it_interval.tv_sec=0;
     value0.it_interval.tv_usec=0;
 
-//system("stty -echo");
-//system("stty -icanon");
-   // struct termios  saved, temporary;
-   //int             retval, rows, cols, saved_errno;
-   //alarm(0);
-    int retry=0;
+             int retry=0;
     char result;
-    /* Bad tty? */
+    
     char receive;
     char receives[999];
     int a=0;
@@ -123,40 +113,18 @@ int cursor_position(int *const Row ,int *const Col)
     int f=0;
     int lf;
 char   buffer[4];
-//strcpy(a,"");
-//strcpy(b,"");
 strcpy(receives,"");
-//wr(fd1, "\033[6n", 4);
-//fflush(stdout);
 
-    //i=write(fd1,"\033[6n",1);
-//fseek(stdout,0,SEEK_CUR);
-//lf=ftell(stdout);
-printf("\033[6n");
-//fflush(stdout);
-//f=ftell(stdout);
-//printf("%d",f);
-    //printf("%d",lf);
-    //printf("%d",f);
-    fflush(stdout);
+    printf("\033[6n");
+            fflush(stdout);
 
-//if(re==TRUE){
-//re=FALSE;
-//return 2;
-//}
 retry=0;
-        /* Request cursor coordinates from the terminal. */
-//fseek(stdin,0,SEEK_END);
-//printf("\033[6n");
-//ualarm(100000,9999999);
+        
     setitimer(ITIMER_REAL,&value,NULL);
 while(((result = rd(fd1))!='R'))
 {
-    //ualarm(0,0);
-    setitimer(ITIMER_REAL,&value0,NULL);
-    //if(result==-1 || result==-2)
-    //return 2;
-if((int)result>=48 && (int)result<=57 || (int)result==59){
+        setitimer(ITIMER_REAL,&value0,NULL);
+        if((int)result>=48 && (int)result<=57 || (int)result==59){
     if ((int)result==59){
     retry++;
     continue;
@@ -167,30 +135,19 @@ if (result >= '0' && result <= '9') {
         }
     }
     if(retry==1){
-    //strncat(b,&result,1);
-if (result >= '0' && result <= '9') {
+    if (result >= '0' && result <= '9') {
     b = 10 * b + result - '0';
         }    
     }
 }
 }
-//ualarm(0,0);
 setitimer(ITIMER_REAL,&value0,NULL);
-//printf("22222");
-//printf("s:%s",receives);
-//b=strtok(NULL,"\0");
-//if(!b)
-//eturn 2;
 *Row=a;
 *Col=b;
-//printf(":%d;%d",*Row,*Col);
-    /* Restore saved terminal settings. */
-    /* Done. */
-   // if( *Row + *Col != 0 )
-    return 0;
-   // else 
-   // return 2;
-}
+    
+    
+       return 0;
+      }
 
 
 
@@ -216,13 +173,11 @@ int checkstr(char *s, char *t, int sflag,int lenstr)
     char *q;
     for (; *(s + lenstr); s++)
     {
-        if (sflag)  // 不区分大小写
-        {
+        if (sflag)          {
           for (q = t; (*s == *q||*s-32==*q||*s+32==*q) && *q; s++, q++)
             ;
 
-        }else  //区分大小写
-        {
+        }else          {
             for (q = t; *s == *q && *q; s++, q++)
             ;
         }
@@ -247,7 +202,6 @@ int ifre(int a1[4],int  b ){
         }
     }
     return TRUE;
-//    return FALSE;
 
 }
 
@@ -275,8 +229,7 @@ int getlines(char * string){
     for(i=0;i<l;i++){
             strcpy(aline[i],"\0");
     }
-    //if(ysv1=='v' || ysv1=='V')
-    strcpy(aline[0],"\n");
+        strcpy(aline[0],"\n");
     for(i=0;i<l-1;i++){
         strncat(aline[i],&string[ni[i]],ni[i+1]-ni[i]);
     }
@@ -314,49 +267,29 @@ BOOL CORRECT;
 char * en;
 char * zh;
 char ez;
-//char xbuffer[200];
 FILE * fp;
 FILE * rfp;
 FILE * rfpa;
-//FILE rfpc;
 char EN[200];
 int max;
 BOOL NL;
 char * xtxt;
-//xtxt=(char *)malloc(3000010);
 char *  alltxt;
 BOOL rw;
 int rwfp(char * word1,char * word2,char ze,char ifrw){
 
-//int offset;
-//BOOL a;
-//BOOL b;
 int i;
-//rrpp = fopen("CORRECT.txt", "r");
-//strcpy(alltxt,"");
 
-//if(ze=='1')
-//strcat(word2,"\t\t");
-//if(ze=='2')
 strcat(word1,"\t\t");
-//a=FALSE;
 
-//strcpy(Buffer,"");
-//fclose(rrpp);
 
-    //offset=strlen(lists);
-
-      //  strcpy(en1,"");
-      //  strcpy(zh1,"");
-
+    
+            
 if (ifrw==FALSE && rw==FALSE && ysv1!='s' && ysv1!='S' ){
-    //printf("\n\n22\n");
-    rfpa = fopen("CORRECT.txt", "r+");
+        rfpa = fopen("CORRECT.txt", "r+");
     rfp = fopen("CORRECT.txt", "w+");
     if(ze=='1'){
-    //    strcpy(en1,word2);
-    //    strcpy(zh1,word1);
-
+        
 
 
     fprintf(rfp,"%s\t\t\t\t\t%s\n",word1,word2);
@@ -371,9 +304,7 @@ if (ifrw==FALSE && rw==FALSE && ysv1!='s' && ysv1!='S' ){
     printf("\n错题+1");
 }
     else if(ze=='2'){
-   //     strcpy(zh1,word2);
-    //    strcpy(en1,word1);
-
+       
 
     fprintf(rfp,"%s\t\t\t\t\t%s\n",word1,word2);
     fflush(stdout);
@@ -390,9 +321,7 @@ printf("\n错题+1");
 }
 
 else if ((ifrw==TRUE ||  ysv1=='s' ||  ysv1=='S') && rw==TRUE ){
-    //rfpa = fopen("CORRECT.txt", "r+");
-    //rfpa = fopen("CORRECT.txt", "r+");
-    rfp = fopen("CORRECT.txt", "w+");
+            rfp = fopen("CORRECT.txt", "w+");
     if(ze=='1'){
     fseek(rfp,0L,SEEK_END);
     if (xtxt[0]!='\0'){
@@ -410,10 +339,8 @@ else if ((ifrw==TRUE ||  ysv1=='s' ||  ysv1=='S') && rw==TRUE ){
     fprintf(rfp,"%s",xtxt);
     fflush(stdout);
     fclose(rfp);
-//printf("2");
     }
 }
-//strcpy(alltxt,"");
 strcpy(xtxt,"");
 return 0;
 }
@@ -440,7 +367,6 @@ char a[200];
 char tbuffer[399];
 char theline[4000];
 char bbuffer[4001];
-//char * del;
 BOOL vflag=FALSE;
 BOOL aflag=FALSE;
 BOOL llocate=FALSE;
@@ -451,26 +377,18 @@ char Buffer[2048];
 FILE * rrpp;
 int i;
 rw=FALSE;
-//alltxt=(char *)malloc(2999999);
-//Fp=fp;
-//strcat(rtxt,"");
 strcpy(En,"");
 strcpy(rtxt,"");
 strcpy(xtxt,"");
 strcpy(btxt,"");
 strcpy(rbuffer,"");
 strcpy(bbuffer,"");
-//Fp=fopen(path,"r");
-//yFp=fopen(path,"r");
 BOOL non=FALSE;
 while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r')
     continue;
-//printf("%c",ysv1);
 if (ysv1=='v' || ysv1=='V'){
     Fp=fopen(path,"r");
-    //strcat(EN,"");
-   // printf("\n\n222");
-    while (fgets(rbuffer,3999,Fp)){
+           while (fgets(rbuffer,3999,Fp)){
         if (strcmp(rbuffer,"\n")==0){
             if(vflag==TRUE){
                 zlocate=strlen(rtxt);
@@ -493,14 +411,11 @@ if (ysv1=='v' || ysv1=='V'){
                 vflag=TRUE;
             }
             strcpy(bbuffer,"");
-           //  printf("\nEn:%s",En);
-           //  printf("\nEN:%s",EN);
-        }
+                              }
     }
     if(vflag==TRUE){
     if(rtxt[0]!='\0')
-    //printf("\n%s",&rtxt[locate]);
-    theline[strlen(theline)-1]='\0';
+        theline[strlen(theline)-1]='\0';
     getlines(&rtxt[locate]);
     if(theline[0]!='\0')
     printf("\n%s",theline);
@@ -519,8 +434,7 @@ if (ysv1=='v' || ysv1=='V'){
 
 else if (ysv1=='y' || ysv1=='Y'){
     Fp=fopen(path,"r");
-   // printf("\n\n222");
-    while (fgets(rbuffer,3999,Fp)){
+       while (fgets(rbuffer,3999,Fp)){
         if (strcmp(rbuffer,"\n")!=0 && zlocate!=0){
             strcpy(bbuffer,rbuffer);
             
@@ -544,9 +458,7 @@ else if (ysv1=='y' || ysv1=='Y'){
                 strcpy(rtxt,"");
                 nrtxt=0;
             }
-           //  printf("\nEn:%s",En);
-           //  printf("\nEN:%s",EN);
-    }
+                          }
     if(vflag==TRUE)
     theline[strlen(theline)-1]='\0';
     if(rtxt[0]!='\0'){
@@ -561,14 +473,12 @@ else if (ysv1=='y' || ysv1=='Y'){
     fflush(stdout);
     }
     fseek(fp,max , SEEK_SET);
-       // fseek(Fp,max , SEEK_SET);
-    strcpy(rbuffer,"");
+           strcpy(rbuffer,"");
     strcpy(bbuffer,"");
     strcpy(rtxt,"");
     strcpy(theline,"");
     vflag=FALSE;
-  //  fseek(Fp,+max , SEEK_SET);
-
+  
 }
 
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
@@ -588,22 +498,16 @@ if (CORRECT==TRUE){
     
     strcpy(word1,EN);
     strcat(word1,"\t\t");
-    //printf("\n\n%s\n",word1);
-    while (fgets(Buffer,2047,rrpp)){ 
+        while (fgets(Buffer,2047,rrpp)){ 
             strncat(alltxt,Buffer,2047);
             if (Buffer[0]=='\\')
             non=TRUE;
            if(ze=='1' && non==FALSE){
-           // if(checkstr(buffer,zh,1,strlen(zh))){
-            //strcat(zh,"\t");
-            for(i=0;i<strlen(word1)-1;i++){
+                                   for(i=0;i<strlen(word1)-1;i++){
             if(Buffer[i]==word1[i])
             continue;
             else {
-//printf("%c",zh[i]);
-//puts(&buffer[i]);
-            //a=FALSE;
-            break;
+                        break;
             }
             
             }
@@ -612,13 +516,11 @@ if (CORRECT==TRUE){
 
 } 
            else if(ze=='2'  && non==FALSE){
-            //strcat(en,"\t");
-            for(i=0;i<strlen(word1)-1;i++){
+                        for(i=0;i<strlen(word1)-1;i++){
             if(Buffer[i]==word1[i])
             continue;
             else{
-            //a=FALSE;
-            break;
+                        break;
             } 
             }
             if(i==strlen(word1)-1)
@@ -632,28 +534,23 @@ if (CORRECT==TRUE){
 
 
 if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv1=='s' || rw==TRUE && CORRECT==TRUE && ysv1=='S' ){
-    //printf("\n222\n");
-
+    
     wfpn = fopen("CORRECT.txt", "a");
     fprintf(wfpn,"%s","\n\n\n\n\n");
     fclose(wfpn);
     rfpr = fopen("CORRECT.txt", "r");
-    //strcpy(xtxt,"");
-    while (fgets(rbuffer,3999,rfpr)  ){
+        while (fgets(rbuffer,3999,rfpr)  ){
         if ( checkstr(rbuffer,"\t",0,1)==TRUE  ){
-            //printf("\n222");
-            strncpy(tbuffer,rbuffer,398);
+                        strncpy(tbuffer,rbuffer,398);
             strcpy(a,strtok(tbuffer,"\t"));
 
-            //strcpy(b,strtok(NULL,"\t"));
-            if(strcmp(a,EN)==0){
+                        if(strcmp(a,EN)==0){
                 strcpy(tbuffer,"");
                 strcpy(rbuffer,"");
                 continue;
             }
                 strncat(xtxt,rbuffer,399);
-            //printf("%s222",btxt);
-        }
+                    }
         else{
             if(rbuffer[0]=='\\'){
             strncat(xtxt,rbuffer,399);
@@ -663,35 +560,20 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
             }
             if ( strcmp(rbuffer,"\n")!=0  ){
             strcpy(bbuffer,rbuffer);
-            //printf("\n222");
-            //printf("%s",bbuffer);
-            //nrtxt=strlen(rtxt);
-            strcpy(En,strtok(rbuffer," "));
+                                                strcpy(En,strtok(rbuffer," "));
             if(strcmp(EN,En)==0 && checkstr(bbuffer,"|",1,1)){
-               // locate=nrtxt;
-               // clocate=locate-alocate;
-                vflag=TRUE;
-                //if(vflag==TRUE)
-                //printf("%s",bbuffer);
-                //strcpy(theline,bbuffer);
-        } 
-            //strncat(rtxt,bbuffer,999);
-            strncat(btxt,bbuffer,3999);
-            //del=btxt;
-            strcpy(tbuffer,"");
+                                              vflag=TRUE;
+                                                        } 
+                        strncat(btxt,bbuffer,3999);
+                        strcpy(tbuffer,"");
             strcpy(rbuffer,"");
             strcpy(bbuffer,"");
         }
         else
             {
-                //printf("\n222");
-                //zlocate=1;
-		if (vflag==TRUE){
-                //strcpy(xtxt,"\n");
-                strcat(xtxt,"\n");
-                //del=NULL;
-                //strcat(xtxt,btxt);
-                vflag=FALSE;
+                                		if (vflag==TRUE){
+                                strcat(xtxt,"\n");
+                                                vflag=FALSE;
                 strcpy(tbuffer,"");
                 strcpy(rbuffer,"");
                 strcpy(bbuffer,"");
@@ -699,40 +581,23 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
 		}
         else{
             if (btxt[0]!='\0' && strcmp(btxt,"")!=0){
-            //printf("\n222");
-            strcat(xtxt,btxt);
+                        strcat(xtxt,btxt);
             strcat(xtxt,"\n");
-            //printf("\n222%s",xtxt);
-            //strcpy(btxt,"");
-            }
+                                    }
             strcpy(tbuffer,"");
             strcpy(rbuffer,"");
             strcpy(bbuffer,"");
             strcpy(btxt,"");
 
         }
-            //strcpy(del,"");
-        }
+                    }
     }
     }
     fclose(rfpr);
-    //if(rtxt[0]!='\0'){
-    //getlines(rtxt);
-    //}
-    //if(theline[0]!='\0')
-    //printf("\n%s",rtxt);
-    //strcpy(xtxt,"");
-    //strcpy(xtxt,rtxt);
-    //printf("\n%s",xtxt);
-    //strcpy(rtxt,"");
-    fflush(stdout);
+                                        fflush(stdout);
     NL=TRUE;
-    //fclose(rfpa);
-    //fseek(fp,max , SEEK_SET);
-    fseek(fp,max , SEEK_SET); 
-    //fclose(rfpr); 
-   // fseek(Fp,max , SEEK_SET);  
-}
+            fseek(fp,max , SEEK_SET); 
+       }
 
 
 
@@ -743,60 +608,41 @@ yFp=fopen(path,"r");
         if (strcmp(rbuffer,"\n")!=0 ){
             strcpy(bbuffer,rbuffer);
             
-            //nrtxt=strlen(rtxt);
-            strcpy(En,strtok(rbuffer," "));
+                        strcpy(En,strtok(rbuffer," "));
             if(strcmp(EN,En)==0 && checkstr(bbuffer,"|",1,1)==TRUE){
-                //locate=nrtxt;
-                //clocate=locate-alocate;
-                vflag=TRUE;
-                //strcpy(theline,bbuffer);
-                        } 
+                                                vflag=TRUE;
+                                        } 
             strncat(rtxt,bbuffer,3998);
             strcpy(bbuffer,"");
         }
         else
             {
-                //zlocate=1;
-		if (vflag==TRUE){
-                //strcpy(xtxt,"\n");
-                
+                		if (vflag==TRUE){
+                                
                 strcpy(xtxt,rtxt);
                 strcat(xtxt,"\n");
                 strcpy(rtxt,"");
-                //strcpy(tbuffer,"");
-                strcpy(rbuffer,"");
+                                strcpy(rbuffer,"");
                 strcpy(bbuffer,"");
-		//printf("%s",xtxt);
-		    break;
+				    break;
 		}
 		else{
                 alocate=strlen(rtxt);
-                //strcpy(xtxt,rtxt);
-		//printf("%s",xtxt);
-                //strcpy(tbuffer,"");
-                strcpy(rbuffer,"");
+                		                                strcpy(rbuffer,"");
                 strcpy(bbuffer,"");
                 strcpy(rtxt,"");
-                //nrtxt=0;
-		}
+                		}
             }
                 strcpy(rbuffer,"");
                 strcpy(bbuffer,"");
  }
-    //if(rtxt[0]!='\0'){
-    //getlines(rtxt);
-    //}
-    //if(theline[0]!='\0')
-    //printf("\n%s",theline);
-    fflush(stdout);
+                        fflush(stdout);
     NL=TRUE;
-    //fseek(yFp,max , SEEK_SET);    
-fclose(yFp);
+    fclose(yFp);
 }
 return 0;
 }
 
-//return;
 int ci=0;
 char astrs[100];
 BOOL bk=FALSE;
@@ -812,8 +658,6 @@ BOOL ascii;
 char lword[4];
 char asc[3]="”";
 BOOL iszh=FALSE;
-//int asci=14844061;
-//int fd1;
 int prt(char str)
 {
     int         rown, coln, rowm, colm;
@@ -826,31 +670,14 @@ int prt(char str)
     coln = 0;
     rowm = 0;
     colm = 0;
- /*  if(ez=='1' && bk==TRUE){
-        
-    //fd = current_tty();
-cursor_position(&rown,&coln);
-        str='\0';
-        if(coln==1){
-            //printf("111");
-            printf("\033[1A\033[%dC",col);
-            now1=TRUE;
-            nown=TRUE;
-            fflush(stdout);
-            }
-    
-    //printf("%c",str);
-    return 0;
-    }
-*/
+ 
     iszh=FALSE;
     if (ez=='1' && bk!=TRUE){
         
         while (TRUE){
             cursor_position(&rown,&coln);
             printf("%c",str);
-            //        printf("%c",str);
-            fflush(stdout);
+                        fflush(stdout);
             cursor_position(&rowm,&colm);
             if(colm!=coln)
                 break;
@@ -858,13 +685,9 @@ cursor_position(&rown,&coln);
                 break;
             }
         }
-//        now=FALSE;
         if(colm==col && coln==col){
-            //printf("111");
-            //printf("\033[1A\033[%dC ",col);
-            now=TRUE;
-            //fflush(stdout);
-            }
+                                    now=TRUE;
+                        }
         return 0;
     }
 
@@ -872,20 +695,15 @@ cursor_position(&rown,&coln);
         if (ascii==TRUE){
 cursor_position(&rown,&coln);
         if(coln==1){
-        //ci=0;
-        printf("\033[1A\033[%dC",col+1);
+                printf("\033[1A\033[%dC",col+1);
         nown=TRUE;
         fflush(stdout);
         now1=TRUE;
         }
         }
-        //printf("222")
-//        if (fd == -1)
-//           return 1;
-cursor_position(&rown,&coln);
+        cursor_position(&rown,&coln);
         if(coln==1){
-        //printf("222");
-        if(now3==TRUE){
+                if(now3==TRUE){
         printf("\033[1A\033[%dC",col-1);
         nown=TRUE;
         fflush(stdout);
@@ -899,8 +717,7 @@ cursor_position(&rown,&coln);
         fflush(stdout);
         now4=TRUE;
         }
-        //now2=TRUE;
-        }
+                }
         return 0;
      } 
 
@@ -910,16 +727,12 @@ cursor_position(&rown,&coln);
 
     if (str=='.' || str==',' || str==' ' ){
 cursor_position(&rown,&coln);
-       // printf("%c",str);
-        printf("%c",str);
+               printf("%c",str);
         fflush(stdout);
 cursor_position(&rowm,&colm);
         if(colm==col && coln==col){
-            //printf("111");
-            //printf("\033[1A\033[%dC ",col);
-            now=TRUE;
-            //fflush(stdout);
-            }
+                                    now=TRUE;
+                        }
         return 0;
     }
     else if(!isascii(str) ){
@@ -929,25 +742,19 @@ cursor_position(&rowm,&colm);
         if(ci==3){
             if ((int)*astrs>(int)*asc){
                 iszh=TRUE;
-                //fd = current_tty();
-            while(TRUE){
+                            while(TRUE){
                 cursor_position(&rown,&coln);
-                //printf("%d",coln);
-                printf("%s",astrs);
+                                printf("%s",astrs);
                 fflush(stdout);
-                //rowm=0;
-                //colm=0;
-                cursor_position(&rowm,&colm);
+                                                cursor_position(&rowm,&colm);
                 if(colm!=coln)
                     break;
             }
             ci=0;
-            //strcpy(astrs,"");
-        now2=FALSE;
+                    now2=FALSE;
         if(colm==col && coln==col-2){
             printf(" ");
-            //strcpy(lword,astrs);
-            now2=TRUE;
+                        now2=TRUE;
             now3=TRUE;
             ci=0;
             fflush(stdout);
@@ -977,11 +784,8 @@ cursor_position(&rowm,&colm);
 
 void  handler()
 {
-//printf("rxit");
-//  return 2;
 printf("\033[6n");
 }
-//BOOL re;
 int main(int argc, char *argv[])
 {
 int si;
@@ -989,11 +793,9 @@ int growm;
 int gcolm;
 int grown;
 int gcoln;
-    //asci=printf("%d",asc);
-alltxt=(char *)malloc(2999999); 
+    alltxt=(char *)malloc(2999999); 
 xtxt=(char *)malloc(3000010);
-	if(signal(SIGALRM,handler) == SIG_ERR){  //信号注册函数
-    perror("signal");
+	if(signal(SIGALRM,handler) == SIG_ERR){      perror("signal");
 
     exit(-1);
 
@@ -1024,7 +826,7 @@ fd1 = current_tty();
     }
         printf("%s",strs);
     char Path;
-    /*Path=malloc(200);fgets */ 
+     
     printf("C-English-Training");
     fflush(stdout);
     char aaword;
@@ -1037,20 +839,17 @@ fd1 = current_tty();
     atexit (my_exit);
 	float time_use=0;
 	struct timeval start;
-	struct timeval end;//struct timezone tz; 
-
+	struct timeval end;
     fflush(stdout);
-    /*system("stty -icanon");*/
+    
     struct termios new_setting;
     tcgetattr(0,&init_setting);
     new_setting=init_setting;
-    //new_setting.c_cflag&=~CREAD;
-    new_setting.c_lflag&=~ECHO; 
+        new_setting.c_lflag&=~ECHO; 
     new_setting.c_lflag&=~ICANON; 
     tcsetattr(0,TCSANOW,&new_setting);
-    /*scanf("%s",Path);*/
-    //printf("\033[?25l");
-    int mi;
+    
+        int mi;
     while(TRUE){
            strcpy(path,"");
            strcpy(&Path,"");
@@ -1091,11 +890,7 @@ fd1 = current_tty();
 
             fflush(stdout);
             
-            //del_char(path,'\01');
-            //del_char(path,'\0');
-            //printf("%s",path);
-            //return 0;
-            fp=fopen(path,"r");
+                                                            fp=fopen(path,"r");
             if(fp==NULL){
                 continue;
                 printf("\n");
@@ -1103,37 +898,27 @@ fd1 = current_tty();
             break;
 
 }
-//printf("\n%d\n",CORRECT);
 if (CORRECT==TRUE){
-//printf("@22");
 rfp = fopen("CORRECT.txt", "r");
 if(rfp==NULL){
     printf("\n错题集合不存在，在当前目录自动生成CORRECT.txt");
     rfp = fopen("CORRECT.txt", "w+");
     rfpa = fopen("CORRECT.txt", "a+");
     fprintf(rfp,"%s","\\\\\\\n");
-   // Fp=fopen(path,"r");
-}
+   }
 else
 {
-    //rfp = fopen("CORRECT.txt", "r+");
-    printf("\n使用./CORRECT.txt");
+        printf("\n使用./CORRECT.txt");
     rfpa = fopen("CORRECT.txt", "a+");
-   // Fp=fopen(path,"r");
-}
+   }
 
 fflush(stdout);
 fclose(rfp);
-//rfpc=*rfp;
-//sleep(10);
-//fgets(xbuffer,150,rfp);
-//printf("\n%s\n",xbuffer);
-    //fpc=*fp;
-}
+    }
     printf("\n");
     while (fgets(buffer,150,fp)){ 
         if ( checkstr(buffer,"\t",0,1) && buffer[0]!='\n' ){
-            /***printf("%s",buffer);***/
+            
             strncat(txt,buffer,100);
             lines++;
         }
@@ -1143,8 +928,6 @@ fclose(rfp);
     if(txt[strlen(txt)-1]!='\n')
     strcat(txt,"\n");
 printf("已加载%d组单词\n",lines);
-//del_char(txt,EOF);
-//strcat(txt,"\n");
     char word[200];
 
     char ii[200];
@@ -1183,10 +966,9 @@ printf("已加载%d组单词\n",lines);
     BOOL getin=FALSE;
     char tline[]="\033[32m●\033[0m";
     char fline[]="\033[31m●\033[0m";
-    //char eline[]="\033[32m○\033[0m";
-    char nline[]="\033[33m○\033[0m";
+        char nline[]="\033[33m○\033[0m";
     max=strlen(txt);
-    /*system("stty -icanon");*/
+    
     char block;
     printf("1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/2-12);
     fflush(stdout);
@@ -1195,7 +977,7 @@ printf("已加载%d组单词\n",lines);
     }	
     printf("%c",ez);
     fflush(stdout); 
-    /*fflush(stdout);*/
+    
     printf("\n1,顺序\033[%dC2,倒序\033[%dC3,乱序:",col/2-10,col/2-10);
     fflush(stdout);
 
@@ -1212,13 +994,13 @@ printf("已加载%d组单词\n",lines);
         
 	    i=-1;
         while (i++,i<max){
-	/*printf("%d",i);*/
-        /***printf("%c",txt[i]);***/
+	
+        
 
         if(i==0 | txt[i]=='\n'){
             num++;
             nend[num]=i;
-            /*printf("%d\n",i);*/
+            
             
             
         }
@@ -1235,16 +1017,14 @@ printf("已加载%d组单词\n",lines);
         now4=FALSE;
         ci=0;
         strcpy(astrs,"");
-        //strcpy(word,"");
-        //zword='\0';
-        iii=0;
+                        iii=0;
 
         getin=FALSE;
         
         rx++;
         ran=rand() % num;
         n=nend[ran];
-        /*printf("%d",nend[ran]);*/    
+            
         strcpy(word,"");
 	if(n==0)
             strncat(word,&txt[0],1);
@@ -1258,17 +1038,15 @@ printf("已加载%d组单词\n",lines);
         printf("\033[2m%s\n\033[0m",strs);
 	    if(ez=='3'||iez==TRUE){
 	    iez=TRUE;   
-            //srand((unsigned)time(NULL));
-            //ab++;
-	    ez=rand()%2+49;
-	    /*ez=iez+48;*/
-	    /*printf("%c",ez);*/ 
+                        	    ez=rand()%2+49;
+	    
+	     
 		}
         acount=0;
 	    if(ez=='1'){
             zh=strtok(word,"\t");
-            /*del_char(zh,'\01');*/
-	    /*del_char(zh,'\0');*/
+            
+	    
 	        en=strtok(NULL,"\t");
             strcpy(EN,zh);
             strcpy(ch,en);
@@ -1284,17 +1062,11 @@ printf("已加载%d组单词\n",lines);
             mmm=0;
             zhleng=0;
             zhleng=strlen(zh);
-            /*strcpy(azh[0],"");
-            strcpy(azh[1],"");
-            strcpy(azh[2],"");
-            strcpy(azh[3],"");
-            strcpy(azh[4],"");
-            strcpy(azh[5],"");
-            strcpy(azh[6],"");*/
+            
             for(n=0;n<10;n=n+1){
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
-                /*printf("%d\n",zhleng);*/
+                
                 cmmm=0;
                 mmm=m;
                 m=m+2+cmmm;
@@ -1313,16 +1085,14 @@ printf("已加载%d组单词\n",lines);
                 }
                 if(ch[m]=='\0' )
                 break;
-                /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
+                
             }
 
-            /*printf("\n%s\n",azh[0]);
-            printf("\n%s\n",azh[1]);
-            printf("\n%s\n",azh[2]);*/
+            
 
             }
             printf("\r\033[1m%s\033[0m\033[2m——————:\033[0m",en);
-            /***puts(en);***/
+            
 
 
             bword[0]='\0'; 
@@ -1330,9 +1100,9 @@ printf("已加载%d组单词\n",lines);
             strcat(bword," ");
             strcat(bword,zh);
             
-            /*word[0]='\0';*/
+            
             fflush(stdout);
-            /***fgets(aword,2,stdin);***/
+            
             aword[0]='\0';
             zword='\0';
             tleng=0;
@@ -1342,64 +1112,31 @@ printf("已加载%d组单词\n",lines);
             flag = FALSE;
             iii=0;
 
-            //strcpy(temp,"");
-            strcpy(ltemp,"");
-            //strcmp(ltemp,"\0");
-            //strcmp(ch,"\0");
-            //strcmp(astrs,"\0");
-            //strcmp(zwords,"\0");
-            aii=0;
-            //backed=FALSE;
-
+                        strcpy(ltemp,"");
+                                                            aii=0;
+            
             if(ez=='1'){
                 strcpy(zwords,"");
                 zwords[0]='\0';
-                //printf("%s\n",EN);
-            for(si=0;si<strlen(EN);si++){
+                            for(si=0;si<strlen(EN);si++){
                 zwords[si]='-';
                 zwords[si+strlen(EN)]='\x7f';
                 zwords[si+strlen(EN)*2]='\x7f';
             }
 
-            //printf("\n%lu\n",strlen(zwords));
-                //strcpy(zwords,backs);
-                getin=TRUE;
-                //backed=TRUE;
-                //continue;
-            }
+                                            getin=TRUE;
+                                            }
             leng=0;
             
             while(TRUE){
-                //printf("2\n");
-                //now1=FALSE;
-                if(getin==FALSE){
+                                                if(getin==FALSE){
                     zword=getchar();
 
-                /**    gettimeofday(&start,NULL);
-                    while((zword=getchar())){
-                        gettimeofday(&end,NULL);
-                        time_use=(end.tv_sec-start.tv_sec)*1000000+(end.tv_usec-start.tv_usec);
-
-		                    if(time_use>=60000)
-		                    {
-			                    strcpy(temp,"");
-                                
-                                
-                                break;
-                                
-		                    }   
-                            else
-                            {
-                                break;
-                            }
-                                                    
-                    }**/
+                
 
                 }
                 else if(getin==TRUE){
-                   // if(strlen(words)>1){
-                        //strcpy(words,zwords);
-                        
+                                                                   
                         if(iii<strlen(zwords)){
                             zword=zwords[iii];
                             iii++;
@@ -1411,8 +1148,7 @@ printf("已加载%d组单词\n",lines);
                         iii=0;
                         continue;
                         }
-                  //  }
-
+                  
                 }
                 
 
@@ -1436,12 +1172,9 @@ printf("已加载%d组单词\n",lines);
                         fflush(stdout);
                         tleng=tleng-3;
                     }
-                    //      
-                    if(ez=='1' && isascii(aword[leng-1])  && leng > 0){
+                                        if(ez=='1' && isascii(aword[leng-1])  && leng > 0){
                             
-                        //now=FALSE;
-                        //now1=FALSE;
-                        if(leng<=strlen(EN))
+                                                                        if(leng<=strlen(EN))
                         block='-';
                         else
                         block=' ';
@@ -1478,8 +1211,7 @@ printf("已加载%d组单词\n",lines);
                         }
                         if(ish==TRUE)
                             if(gcolm==1){
-            //printf("111");
-                            printf("\033[1A\033[%dC",col);
+                                        printf("\033[1A\033[%dC",col);
                             now1=TRUE;
                             nown=TRUE;
                             fflush(stdout);
@@ -1494,27 +1226,21 @@ printf("已加载%d组单词\n",lines);
                         aword[leng-2]='\0';
                         aword[leng-1]='\0';
                         if(now4==TRUE){
-                            //printf("2222");
-                            printf("\b  \b");
+                                                        printf("\b  \b");
                             fflush(stdout);
                             now4=FALSE;
                             leng=leng-3;
                             continue;
                         }
                         if(now5==TRUE){
-                            //printf("2222");
-                            printf("\b  \b");
+                                                        printf("\b  \b");
                             fflush(stdout);
                             now5=FALSE;
                             leng=leng-3;
                             continue;
                         }
                         printf("\b\b  \b\b");
-                        //if(now2==TRUE){
-                        //printf("\033[1C");
-                        //now2=FALSE;
-                        //}
-                        fflush(stdout);
+                                                                                                                        fflush(stdout);
                         leng=leng-3;
                         if(ish==TRUE)
                         prt(zword);
@@ -1524,8 +1250,7 @@ printf("已加载%d组单词\n",lines);
                     }
                     if(ez=='2' && isascii(aword[leng-1]) && leng > 0)
                     {
-                        //printf("3333");
-                        ascii=TRUE;
+                                                ascii=TRUE;
                         bk=TRUE; 
                         aword[leng-1]='\0';
                         leng=leng-1; 
@@ -1554,13 +1279,13 @@ printf("已加载%d组单词\n",lines);
                 
                 }
                 if(zword == '\r' || zword == '\n' || zword == '\0'){
-                    /*printf("%s",zh);*/
-		    /*printf("%s",zh);*/
+                    
+		    
 		    break;
                 }
             
-                    /***zword=getchar();***/
-                    /*printf("aword:%c",zword);*/
+                    
+                    
 if(ez == '1'  &&  isascii(zword) && (int)zword >= 65 && (int)zword <=122 || ez == '1' && zword=='-' || zword==' ' )
 {
 
@@ -1605,14 +1330,12 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         if(now2==TRUE)
         {
             strcpy(zwords,astrs);
-            //printf("zwords:%s",zwords);
-            iii=0;
+                        iii=0;
             
             strcpy(astrs,"");
             getin=TRUE;
             now2=FALSE;
-            //continue;
-        }
+                    }
     }
     else{
         mi++;
@@ -1621,15 +1344,13 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         if ((int)*astrs>(int)*asc){
             printf("%s",astrs);
             fflush(stdout);
-            //fd = current_tty();
-            iszh=TRUE;
+                        iszh=TRUE;
             mi=0;
         }
         else{
             mi=0;
             strcpy(astrs,"");
-        //printf("%c",zword);
-        }
+                }
     }
     else
         iszh=FALSE;
@@ -1652,13 +1373,11 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         
         iszh=FALSE;
         strcpy(astrs,"");
-    }                //getin=FALSE;
-}
+    }                }
  else
 continue;
-//strcpy(&zword,"");
-                /*if ((aword==zh))*/
-		   /* printf("答对了");*/
+                
+		   
                 if ((ifright = strcmp(aword,zh)) == 0 && ez=='1'){
                     printf("\033[%dC%s\r",col,tline);
                     getin=FALSE;
@@ -1669,15 +1388,15 @@ continue;
                  }  
                 if (ez=='2'){
                     
-                    /*printf("\n%s\n",temp);*/
+                    
                     aii=0;
-                    /*printf("l:%s",ltemp);*/
+                    
                     for(i=0;i<=n;i++){
                         if(strcmp(temp,azh[i])==0 && strcmp(temp,ltemp)!=0 ){
                             strcpy(zwords,"，");
                             getin=TRUE;
                             strcpy(bzh[i],azh[i]);
-                            /*strcpy(azh[i],"\1");*/
+                            
                             strcpy(ltemp,""); 
                             strcpy(ltemp,temp); 
                             strcpy(temp,"");
@@ -1691,10 +1410,8 @@ continue;
                         if(aii==n+1){
                            printf("\033[%dC%s\r",col,tline);
                            fflush(stdout);
-                           //getin=FALSE;
-                            fflush(stdin);
-                            //fflush(stdout);
-                            strcpy(ltemp,""); 
+                                                       fflush(stdin);
+                                                        strcpy(ltemp,""); 
                             getin=FALSE;
                             flag = TRUE;
                             break;
@@ -1706,10 +1423,9 @@ continue;
                 }  
 
                 
-                    //fflush(stdout);
-                    
+                                        
                  
-                    /***printf("%d",xword);***/ 
+                     
                 
                 
                 }
@@ -1721,13 +1437,10 @@ continue;
                     ysv(flag,bword,ez);
                 }
                 else{
-                //fflush(stdin);
-                printf("\033[%dC%s\r",col,fline);
+                                printf("\033[%dC%s\r",col,fline);
                 fflush(stdout);
                 ysv(flag,bword,ez); 
-                //printf("\n%s",bword);
-                //fflush(stdout);
-                } 
+                                                } 
                 }
                 else{
                     ysv(flag,bword,ez);
@@ -1749,44 +1462,43 @@ continue;
 	i=max-1;
      srand((unsigned)time(NULL));
         while (i=i-1,i>=0){
-	/*printf("%d",i);*/
-        /***printf("%c",txt[i]);***/
+	
+        
         if(txt[i] != '\n'){
             
             strcpy(ii,word);
             
             strcpy(word,"");
-	/*printf("word:%s",word);*/ 
- /*strncat(word,&txt[i],2);*/
+	 
+ 
 	    strncat(word,&txt[i],1);
-            /*printf("%s",word);*/
+            
 
             strncat(word,ii,strlen(ii));
-	    /*printf("%s",word); */     
+	         
             strcpy(ii,"");
 
         }
 
         if(i==0 | txt[i]=='\n'){
-	    /*printf("%d",i);*/
+	    
             puts("");
-            /*printf("%s",word);*/
+            
 	    zh="\0";
 	    en="\0";
         printf("\033[2m%s\n\033[0m",strs);
 	    if(ez=='3'||iez==TRUE){
 	    iez=TRUE;   
-            //srand(times * (ab+1) * (ab+1));
-            ab++;
+                        ab++;
 	    ez=rand()%2+49;
-	    /*ez=iez+48;*/
-	    /*printf("%c",ez);*/ 
+	    
+	     
 		}
         acount=0;
 	    if(ez=='1'){
             zh=strtok(word,"\t");
-            /*del_char(zh,'\01');*/
-	    /*del_char(zh,'\0');*/
+            
+	    
 	        en=strtok(NULL,"\t");
             strcpy(EN,zh);
             strcpy(ch,en);
@@ -1808,7 +1520,7 @@ continue;
             for(n=0;n<10;n=n+1){
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
-                /*printf("%d\n",zhleng);*/
+                
                 cmmm=0;
                 mmm=m;
                 m=m+2+cmmm;
@@ -1827,31 +1539,30 @@ continue;
                 }
                 if(ch[m]=='\0' )
                 break;
-                /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
+                
             }
-            /*printf("%s\n",azh[0]);*/
+            
             printf("\r\033[1m%s\033[0m\033[2m——————:\033[0m",en);
-            /***puts(en);***/
+            
 
             bword[0]='\0'; 
             strcat(bword,en);
             strcat(bword," ");
             strcat(bword,zh);
-            /*word[0]='\0'; */
-            /*memset(word,0,sizeof word); */
-            /*printf("%s",word);*/
+            
+            
+            
             fflush(stdout);
-            /***fgets(aword,2,stdin);***/
+            
             aword[0]='\0';
             strcpy(word,"");
             zword='\0';
             strcpy(ii,"");
             tleng=0;
             leng=0;        
-            /***if (fgets(aword,2,stdin) != '\0'){*///
-
-               /*** if ((xword = getchar()) != '\n') { ***/
-                  /***   strncat(aword,&xword,1); ***/
+            
+               
+                  
             strcpy(temp,"\0");
             aii=0;
             strcpy(temp,"");
@@ -1859,49 +1570,21 @@ continue;
             if(ez=='1'){
                 strcpy(zwords,"");
                 zwords[0]='\0';
-                //printf("%s\n",EN);
-            for(si=0;si<strlen(EN);si++){
+                            for(si=0;si<strlen(EN);si++){
                 zwords[si]='-';
                 zwords[si+strlen(EN)]='\x7f';
                 zwords[si+strlen(EN)*2]='\x7f';
             }
-            //printf("\n%lu\n",strlen(zwords));
-                //strcpy(zwords,backs);
-                getin=TRUE;
-                //continue;
-            }
-            //strcmp(ltemp,"\0");
-            //strcmp(ch,"\0");
-            //strcmp(astrs,"\0");
-            //strcmp(zwords,"\0");
-            while(TRUE){
+                                            getin=TRUE;
+                            }
+                                                            while(TRUE){
                 if(getin==FALSE){
                     zword=getchar();
-                /**    gettimeofday(&start,NULL);
-                    while((zword=getchar())){
-                        gettimeofday(&end,NULL);
-                        time_use=(end.tv_sec-start.tv_sec)*1000000+(end.tv_usec-start.tv_usec);
-
-		                    if(time_use>=60000)
-		                    {
-			                    strcpy(temp,"");
-                                
-                                
-                                break;
-                                
-		                    }   
-                            else
-                            {
-                                break;
-                            }
-                                                    
-                    }**/
+                
 
                 }
                 else if(getin==TRUE){
-                   // if(strlen(words)>1){
-                        //strcpy(words,zwords);
-                        
+                                                                   
                         if(iii<strlen(zwords)){
                             zword=zwords[iii];
                             iii++;
@@ -1913,8 +1596,7 @@ continue;
                         iii=0;
                         continue;
                         }
-                  //  }
-
+                  
                 }                
                 bk=FALSE;
                 if(zword == '\x7f'){  
@@ -1936,12 +1618,9 @@ continue;
                         fflush(stdout);
                         tleng=tleng-3;
                     }
-                    //      
-                    if(ez=='1' && isascii(aword[leng-1]) && leng > 0){
+                                        if(ez=='1' && isascii(aword[leng-1]) && leng > 0){
 
-                        //now=FALSE;
-                        //now1=FALSE;
-                        if(leng<=strlen(EN))
+                                                                        if(leng<=strlen(EN))
                         block='-';
                         else
                         block=' ';
@@ -1978,8 +1657,7 @@ continue;
                         }
                         if(ish==TRUE)
                             if(gcolm==1){
-            //printf("111");
-                            printf("\033[1A\033[%dC",col);
+                                        printf("\033[1A\033[%dC",col);
                             now1=TRUE;
                             nown=TRUE;
                             fflush(stdout);
@@ -1994,27 +1672,21 @@ continue;
                         aword[leng-2]='\0';
                         aword[leng-1]='\0';
                         if(now4==TRUE){
-                            //printf("2222");
-                            printf("\b  \b");
+                                                        printf("\b  \b");
                             fflush(stdout);
                             now4=FALSE;
                             leng=leng-3;
                             continue;
                         }
                         if(now5==TRUE){
-                            //printf("2222");
-                            printf("\b  \b");
+                                                        printf("\b  \b");
                             fflush(stdout);
                             now5=FALSE;
                             leng=leng-3;
                             continue;
                         }
                         printf("\b\b  \b\b");
-                        //if(now2==TRUE){
-                        //printf("\033[1C");
-                        //now2=FALSE;
-                        //}
-                        fflush(stdout);
+                                                                                                                        fflush(stdout);
                         leng=leng-3;
                         if(ish==TRUE)
                         prt(zword);
@@ -2024,8 +1696,7 @@ continue;
                     }
                     if(ez=='2' && isascii(aword[leng-1]) && leng > 0)
                     {
-                        //printf("3333");
-                        ascii=TRUE;
+                                                ascii=TRUE;
                         bk=TRUE; 
                         aword[leng-1]='\0';
                         leng=leng-1; 
@@ -2054,13 +1725,13 @@ continue;
                 
                 }
                 if(zword == '\r' || zword == '\n' || zword == '\0'){
-                    /*printf("%s",zh);*/
-		    /*printf("%s",zh);*/
+                    
+		    
 		    break;
                 }
             
-                    /***zword=getchar();***/
-                    /*printf("aword:%c",zword);*/
+                    
+                    
 if(ez == '1'  &&  isascii(zword) && (int)zword >= 65 && (int)zword <=122 || ez == '1' && zword=='-' || zword==' ' )
 {
 
@@ -2103,14 +1774,12 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         if(now2==TRUE)
         {
             strcpy(zwords,astrs);
-            //printf("zwords:%s",zwords);
-            iii=0;
+                        iii=0;
             
             strcpy(astrs,"");
             getin=TRUE;
             now2=FALSE;
-            //continue;
-        }
+                    }
     }
     else{
         mi++;
@@ -2119,15 +1788,13 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         if ((int)*astrs>(int)*asc){
             printf("%s",astrs);
             fflush(stdout);
-            //fd = current_tty();
-            iszh=TRUE;
+                        iszh=TRUE;
             mi=0;
         }
         else{
             mi=0;
             strcpy(astrs,"");
-        //printf("%c",zword);
-        }
+                }
     }
     else
         iszh=FALSE;
@@ -2150,14 +1817,12 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         
         iszh=FALSE;
         strcpy(astrs,"");
-    }                //getin=FALSE;
-}
+    }                }
 
 else
 continue;
-//strcpy(&zword,"");
-                /*if ((aword==zh))*/
-		   /* printf("答对了");*/
+                
+		   
                 if ((ifright = strcmp(aword,EN)) == 0 && ez=='1'){
                     printf("\033[%dC%s\r",col,tline);
                     fflush(stdout);
@@ -2168,14 +1833,14 @@ continue;
 
                 if (ez=='2'){
                     
-                    /*printf("\n%d\n",n);*/
+                    
                     aii=0;
                     for(z=0;z<=n;z++){
                         if(strcmp(temp,azh[z])==0 && strcmp(temp,ltemp)!=0){
                             strcpy(zwords,"，");
                             getin=TRUE;
                             strcpy(bzh[z],azh[z]);
-                            /*strcpy(azh[i],"\1");*/
+                            
                             strcpy(ltemp,""); 
                             strcpy(ltemp,temp); 
                             strcpy(temp,"");
@@ -2202,7 +1867,7 @@ continue;
                     fflush(stdout);
                     flag = FALSE;
                  
-                    /***printf("%d",xword);***/
+                    
                 
                 
                 }
@@ -2220,9 +1885,7 @@ continue;
                 printf("\033[%dC%s\r",col,fline);
                 fflush(stdout);
                 ysv(flag,bword,ez);
-                //printf("\n%s",bword);
-                //fflush(stdout);
-                } 
+                                                } 
                 }
                 else{
                     ysv(flag,bword,ez);
@@ -2245,7 +1908,7 @@ continue;
         n=-1;
          srand((unsigned)time(NULL));
     while (i++,i<max){
-        /***printf("%c",txt[i]);***/
+        
         if(txt[i] != '\n'){
             strncat(word,&txt[i],1);
         }
@@ -2257,23 +1920,19 @@ continue;
             now3=FALSE;
             now4=FALSE;
             ci=0;
-            //strcpy(astrs,"");
-            iii=0;
+                        iii=0;
             
-            //getin=FALSE;
-	    if(ez=='3'||iez==TRUE){
+            	    if(ez=='3'||iez==TRUE){
 	    iez=TRUE;   
-            //srand(times * (ab+1) * (ab+1));
-            //ab++;
-	    ez=rand()%2+49;
-	    /*ez=iez+48;*/
-	    /*printf("%c",ez);*/ 
+                        	    ez=rand()%2+49;
+	    
+	     
 		}
         acount=0;
 	    if(ez=='1'){
             zh=strtok(word,"\t");
-            /*del_char(zh,'\01');*/
-	    /*del_char(zh,'\0');*/
+            
+	    
 	        en=strtok(NULL,"\t");
             strcpy(EN,zh);
             strcpy(ch,en);
@@ -2293,7 +1952,7 @@ continue;
             for(n=0;n<10;n=n+1){
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
-                /*printf("%d\n",zhleng);*/
+                
                 cmmm=0;
                 mmm=m;
                 m=m+2+cmmm;
@@ -2313,12 +1972,12 @@ continue;
 
                 if(ch[m]=='\0' )
                 break;
-                /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
+                
             }
-            /*printf("%s\n",azh[0]);*/
+            
             printf("\033[2m%s\n\033[0m",strs);
             printf("\r\033[1m%s\033[0m\033[2m——————:\033[0m",en);
-            /***puts(en);***/
+            
 
             bword[0]='\0'; 
             strcat(bword,en);
@@ -2326,17 +1985,16 @@ continue;
             strcat(bword,zh);
             
             fflush(stdout);
-            /***fgets(aword,2,stdin);***/
+            
             
             strcpy(word,"");
             aword[0]='\0';
             zword='\0';
-            /*system("stty -icanon");*/
-            /***if (fgets(aword,2,stdin) != '\0'){*///
-            leng=0;
+            
+                        leng=0;
             tleng=0;
-               /*** if ((xword = getchar()) != '\n') { ***/
-                  /***   strncat(aword,&xword,1); ***/
+               
+                  
             strcpy(temp,"");
             aii=0;
             strcpy(temp,"");
@@ -2344,48 +2002,23 @@ continue;
             if(ez=='1'){
                 strcpy(zwords,"");
                 zwords[0]='\0';
-                //printf("%s\n",EN);
-            for(si=0;si<strlen(EN);si++){
+                            for(si=0;si<strlen(EN);si++){
                 zwords[si]='-';
                 zwords[si+strlen(EN)]='\x7f';
                 zwords[si+strlen(EN)*2]='\x7f';
             }
 
-            //printf("\n%lu\n",strlen(zwords));
-                //strcpy(zwords,backs);
-                getin=TRUE;
-                //backed=TRUE;
-                //continue;
-            }
+                                            getin=TRUE;
+                                            }
             while(TRUE){
                 iszh=FALSE;
                 if(getin==FALSE){
                     zword=getchar();
-                /**    gettimeofday(&start,NULL);
-                    while((zword=getchar())){
-                        gettimeofday(&end,NULL);
-                        time_use=(end.tv_sec-start.tv_sec)*1000000+(end.tv_usec-start.tv_usec);
-
-		                    if(time_use>=60000)
-		                    {
-			                    strcpy(temp,"");
-                                
-                                
-                                break;
-                                
-		                    }   
-                            else
-                            {
-                                break;
-                            }
-                                                    
-                    }**/
+                
 
                 }
                 else if(getin==TRUE){
-                   // if(strlen(words)>1){
-                        //strcpy(words,zwords);
-                        
+                                                                   
                         if(iii<strlen(zwords)){
                             zword=zwords[iii];
                             iii++;
@@ -2397,8 +2030,7 @@ continue;
                         iii=0;
                         continue;
                         }
-                  //  }
-
+                  
                 }
                 
                 bk=FALSE;
@@ -2421,15 +2053,12 @@ continue;
                         fflush(stdout);
                         tleng=tleng-3;
                     }
-                    //      
-                    if(ez=='1' && isascii(aword[leng-1]) && leng > 0){
+                                        if(ez=='1' && isascii(aword[leng-1]) && leng > 0){
                         if(leng<=strlen(EN))
                         block='-';
                         else
                         block=' ';
-                        //now=FALSE;
-                        //now1=FALSE;
-
+                                                
                         bk=TRUE; 
                         aword[leng-1]='\0';
                         leng=leng-1;
@@ -2462,8 +2091,7 @@ continue;
                         }
                         if(ish==TRUE)
                             if(gcolm==1){
-            //printf("111");
-                            printf("\033[1A\033[%dC",col);
+                                        printf("\033[1A\033[%dC",col);
                             now1=TRUE;
                             nown=TRUE;
                             fflush(stdout);
@@ -2478,27 +2106,21 @@ continue;
                         aword[leng-2]='\0';
                         aword[leng-1]='\0';
                         if(now4==TRUE){
-                            //printf("2222");
-                            printf("\b  \b");
+                                                        printf("\b  \b");
                             fflush(stdout);
                             now4=FALSE;
                             leng=leng-3;
                             continue;
                         }
                         if(now5==TRUE){
-                            //printf("2222");
-                            printf("\b  \b");
+                                                        printf("\b  \b");
                             fflush(stdout);
                             now5=FALSE;
                             leng=leng-3;
                             continue;
                         }
                         printf("\b\b  \b\b");
-                        //if(now2==TRUE){
-                        //printf("\033[1C");
-                        //now2=FALSE;
-                        //}
-                        fflush(stdout);
+                                                                                                                        fflush(stdout);
                         leng=leng-3;
                         if(ish==TRUE)
                         prt(zword);
@@ -2508,8 +2130,7 @@ continue;
                     }
                     if(ez=='2' && isascii(aword[leng-1]) && leng > 0)
                     {
-                        //printf("3333");
-                        ascii=TRUE;
+                                                ascii=TRUE;
                         bk=TRUE; 
                         aword[leng-1]='\0';
                         leng=leng-1; 
@@ -2538,13 +2159,13 @@ continue;
                 
                 }
                 if(zword == '\r' || zword == '\n' || zword == '\0'){
-                    /*printf("%s",zh);*/
-		    /*printf("%s",zh);*/
+                    
+		    
 		    break;
                 }
             
-                    /***zword=getchar();***/
-                    /*printf("aword:%c",zword);*/
+                    
+                    
 if(ez == '1'  &&  isascii(zword) && (int)zword >= 65 && (int)zword <=122 || ez == '1' && zword=='-'|| zword==' ' )
 {
 
@@ -2587,14 +2208,12 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         if(now2==TRUE)
         {
             strcpy(zwords,astrs);
-            //printf("zwords:%s",zwords);
-            iii=0;
+                        iii=0;
             
             strcpy(astrs,"");
             getin=TRUE;
             now2=FALSE;
-            //continue;
-        }
+                    }
     }
     else{
         mi++;
@@ -2603,15 +2222,13 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         if ((int)*astrs>(int)*asc){
             printf("%s",astrs);
             fflush(stdout);
-            //fd = current_tty();
-            iszh=TRUE;
+                        iszh=TRUE;
             mi=0;
         }
         else{
             mi=0;
             strcpy(astrs,"");
-        //printf("%c",zword);
-        }
+                }
     }
     else
         iszh=FALSE;
@@ -2634,13 +2251,11 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         
         iszh=FALSE;
         strcpy(astrs,"");
-    }                //getin=FALSE;
-}
+    }                }
 else
 continue;
-//strcpy(&zword,"");
-                /*if ((aword==zh))*/
-		   /* printf("答对了");*/
+                
+		   
                 if ((ifright = strcmp(aword,EN)) == 0 && ez=='1'){
                     printf("\033[%dC%s\r",col,tline);
                     fflush(stdout);
@@ -2652,14 +2267,14 @@ continue;
 
                 else if (ez=='2'){
                     
-                    /*printf("\n%d\n",n);*/
+                    
                     aii=0;
                     for(z=0;z<=n;z++){
                         if(strcmp(temp,azh[z])==0 && strcmp(temp,ltemp)!=0){
                             strcpy(zwords,"，");
                             getin=TRUE;
                             strcpy(bzh[z],azh[z]);
-                            /*strcpy(azh[i],"\1");*/
+                            
                             strcpy(ltemp,""); 
                             strcpy(ltemp,temp); 
                             strcpy(temp,"");
@@ -2686,7 +2301,7 @@ continue;
                     fflush(stdout);
                     flag = FALSE;
                  
-                    /***printf("%d",xword);***/
+                    
             }
                 if (flag != TRUE ){
                 if(strcmp(aword,"")==0){
@@ -2699,9 +2314,7 @@ continue;
                 printf("\033[%dC%s\r",col,fline);
                 fflush(stdout);
                 ysv(flag,bword,ez);
-                //printf("\n%s",bword);
-                //fflush(stdout);
-                } 
+                                                } 
                 }
                 else{
                     ysv(flag,bword,ez);
@@ -2710,14 +2323,13 @@ continue;
                 if(CORRECT==TRUE)
                 rwfp(EN,ch,ez,flag);  
                 fflush(stdin);               
-            /***scanf("%s",aword);***/
-            /***aaword=getchar();***/
-            /*printf("aword:%s",aword);*/
+            
+            
+            
             }  
         }
     
-   /*system("stty icanon");*/ 
-}    /***printf("%s",word);***/
- //tcsetattr(0,TCSANOW,&init_setting);
-    return 0;
+    
+}    
+     return 0;
 } 

@@ -5,7 +5,7 @@
 
 ### 使用方法
 ```
-gcc c12.c
+gcc C-English-Training.c
 ./a.out
 ```
 
