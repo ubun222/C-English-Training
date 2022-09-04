@@ -11,13 +11,9 @@
 #include <errno.h>
 #include <unistd.h>
 #include <fcntl.h>
-
-
 #define BOOL int
 #define TRUE 1
 #define FALSE 0
-
-#define MODE_RW_UGO (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH |S_IWOTH)
 
 int fd1;
 struct termios init_setting;
@@ -758,9 +754,7 @@ cursor_position(&rowm,&colm);
             now3=TRUE;
             ci=0;
             fflush(stdout);
-            strcpy(astrs,"");
-            iszh=FALSE;
-            return 0;
+                                    return 0;
             }
             now5=FALSE;
         if(colm==col && coln==col-1){
@@ -1317,6 +1311,18 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
     
     
     if(ish==TRUE){
+            if(isascii(zword)){
+        leng++;
+        strncat(aword,&zword,1);
+        printf("%c",zword);
+        fflush(stdout);
+        ci=0;
+        if(getin==FALSE){
+            tleng++;
+            strncat(temp,&zword,1);
+        }
+    }
+    else{
         now=FALSE;
         now1=FALSE;
        if(nown==TRUE ){
@@ -1327,17 +1333,22 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         nown=FALSE;
     }
         prt(zword);
-        if(now2==TRUE)
-        {
-            strcpy(zwords,astrs);
-                        iii=0;
-            
-            strcpy(astrs,"");
-            getin=TRUE;
-            now2=FALSE;
-                    }
+    }
+
     }
     else{
+    if(isascii(zword)){
+        leng++;
+        strncat(aword,&zword,1);
+        printf("%c",zword);
+        mi=0;
+        if(getin==FALSE){
+            tleng++;
+            strncat(temp,&zword,1);
+        }
+    }
+
+        else if(!isascii(zword)){
         mi++;
     strncat(astrs,&zword,1);
     if(mi==3){
@@ -1355,14 +1366,8 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
     else
         iszh=FALSE;
     }
-    if(isascii(zword)){
-        leng++;
-        strncat(aword,&zword,1);
-        if(getin==FALSE){
-            tleng++;
-            strncat(temp,&zword,1);
-        }
     }
+
     if(iszh){
                 leng=leng+3;
                 strncat(aword,astrs,3);
@@ -1373,7 +1378,7 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         
         iszh=FALSE;
         strcpy(astrs,"");
-    }                }
+            }                }
  else
 continue;
                 
@@ -1760,7 +1765,21 @@ if(ez == '1'  &&  isascii(zword) && (int)zword >= 65 && (int)zword <=122 || ez =
 }
 else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' || bk==TRUE )
 {
+
+
     if(ish==TRUE){
+            if(isascii(zword)){
+        leng++;
+        strncat(aword,&zword,1);
+        printf("%c",zword);
+        fflush(stdout);
+        ci=0;
+        if(getin==FALSE){
+            tleng++;
+            strncat(temp,&zword,1);
+        }
+    }
+    else{
         now=FALSE;
         now1=FALSE;
        if(nown==TRUE ){
@@ -1771,17 +1790,21 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         nown=FALSE;
     }
         prt(zword);
-        if(now2==TRUE)
-        {
-            strcpy(zwords,astrs);
-                        iii=0;
-            
-            strcpy(astrs,"");
-            getin=TRUE;
-            now2=FALSE;
-                    }
+    }
     }
     else{
+    if(isascii(zword)){
+        leng++;
+        strncat(aword,&zword,1);
+        printf("%c",zword);
+        mi=0;
+        if(getin==FALSE){
+            tleng++;
+            strncat(temp,&zword,1);
+        }
+    }
+
+        else if(!isascii(zword)){
         mi++;
     strncat(astrs,&zword,1);
     if(mi==3){
@@ -1799,14 +1822,8 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
     else
         iszh=FALSE;
     }
-    if(isascii(zword)){
-        leng++;
-        strncat(aword,&zword,1);
-        if(getin==FALSE){
-            tleng++;
-            strncat(temp,&zword,1);
-        }
     }
+
     if(iszh){
                 leng=leng+3;
                 strncat(aword,astrs,3);
@@ -1817,8 +1834,7 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         
         iszh=FALSE;
         strcpy(astrs,"");
-    }                }
-
+            }                }
 else
 continue;
                 
@@ -2195,6 +2211,18 @@ if(ez == '1'  &&  isascii(zword) && (int)zword >= 65 && (int)zword <=122 || ez =
 else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' || bk==TRUE )
 {
     if(ish==TRUE){
+            if(isascii(zword)){
+        leng++;
+        strncat(aword,&zword,1);
+        printf("%c",zword);
+        fflush(stdout);
+        ci=0;
+        if(getin==FALSE){
+            tleng++;
+            strncat(temp,&zword,1);
+        }
+    }
+    else{
         now=FALSE;
         now1=FALSE;
        if(nown==TRUE ){
@@ -2205,17 +2233,21 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         nown=FALSE;
     }
         prt(zword);
-        if(now2==TRUE)
-        {
-            strcpy(zwords,astrs);
-                        iii=0;
-            
-            strcpy(astrs,"");
-            getin=TRUE;
-            now2=FALSE;
-                    }
+    }
     }
     else{
+    if(isascii(zword)){
+        leng++;
+        strncat(aword,&zword,1);
+        printf("%c",zword);
+        mi=0;
+        if(getin==FALSE){
+            tleng++;
+            strncat(temp,&zword,1);
+        }
+    }
+
+        else if(!isascii(zword)){
         mi++;
     strncat(astrs,&zword,1);
     if(mi==3){
@@ -2233,14 +2265,8 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
     else
         iszh=FALSE;
     }
-    if(isascii(zword)){
-        leng++;
-        strncat(aword,&zword,1);
-        if(getin==FALSE){
-            tleng++;
-            strncat(temp,&zword,1);
-        }
     }
+
     if(iszh){
                 leng=leng+3;
                 strncat(aword,astrs,3);
@@ -2251,7 +2277,7 @@ else if (ez=='2' && !isascii(zword) || zword==' ' || zword==',' || zword=='.' ||
         
         iszh=FALSE;
         strcpy(astrs,"");
-    }                }
+            }                }
 else
 continue;
                 
