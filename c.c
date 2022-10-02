@@ -14,7 +14,6 @@
 #define BOOL int
 #define TRUE 1
 #define FALSE 0
-
 int fd1;
 struct termios init_setting;
 void my_exit(void)
@@ -117,9 +116,13 @@ strcpy(receives,"");
 retry=0;
         
     setitimer(ITIMER_REAL,&value,NULL);
-while(((result = rd(fd1))!='R'))
+while(((result = rd(fd1))!='R' ))
 {
         setitimer(ITIMER_REAL,&value0,NULL);
+    if (result == '\r'){
+    setitimer(ITIMER_REAL,&value,NULL);
+    continue;
+    }
         if((int)result>=48 && (int)result<=57 || (int)result==59){
     if ((int)result==59){
     retry++;
@@ -201,6 +204,88 @@ int ifre(int a1[4],int  b ){
 
 }
 
+int col;
+char asc[3]="”";
+int fresh(char * aline){
+    int i;
+    char theline[1999];
+    char abc[4];
+    int lengn=0;
+    int co=col;
+    int lasti=0;
+    int whereadd;
+    strcpy(theline,aline);
+    i=0;
+    while(i<=strlen(theline)){
+
+        if (i>=co)
+        {
+            if (lengn%co==0){
+                co=co+col;
+                lasti=i;
+            }
+            if(lengn%co==1){
+                                                                return lasti;
+            }
+        }
+                       if ((int)theline[i]-12<=128 && (int)theline[i]>12 ){
+            lengn=lengn+1;
+            i=i+1;   
+                       continue;
+        }
+        if ((int)(theline[i])+256 >=224 && (int)theline[i]+256<227 && (int)theline[i+1]+256>128  && (int)theline[i+1]+256<=191 ){
+            lengn=lengn+1;
+            i=i+3;
+                       continue;
+        }
+        if((int)theline[i]+256<224 && (int)theline[i]+256>128 && (int)theline[i+1]+256>128){
+                lengn=lengn+1;
+                i=i+2;
+                continue;
+
+        }
+        if((int)theline[i+1]+256>128 && (int)theline[i]+256>=227 && (int)theline[i]+256<=239  ){
+                lengn=lengn+2;
+                i=i+3;
+                                continue;
+        }
+        else
+        i++;
+
+    }
+
+    
+            return -1;
+}
+    BOOL ish=FALSE;
+char * aprt(char * aline){
+if(ish==TRUE){
+int whereadd=0;
+char baline[1999];
+char aaline[1999];
+char alinea[3999];
+while (TRUE){
+    if((whereadd=fresh(aline))==-1){
+        break;
+    }
+    else{
+        strcpy(aaline,"");
+strcpy(baline,"");
+        strcat(baline,&aline[whereadd]);
+        strncat(aaline,aline,whereadd);
+        strcat(aaline,"~");
+        strcat(aaline,baline);
+        strcpy(aline,"");
+        strcpy(aline,aaline);
+    }
+    }
+return aline;
+}
+else
+return aline;
+}
+
+
 char ysv1;
 int getlines(char * string){
     int i;
@@ -208,6 +293,7 @@ int getlines(char * string){
     int l=1;
     int ni[50];
     char strings[999999];
+    char temp[3999];
     int times = (unsigned int)time(NULL);
     ni[0]=0;
     int rx=0;
@@ -230,12 +316,19 @@ int getlines(char * string){
         strncat(aline[i],&string[ni[i]],ni[i+1]-ni[i]);
     }
     
+        for(i=0;i<l-1;i++){
+            strcpy(temp,"");
+            strcpy(temp,"   ");
+            strcat(temp,&aline[i][1]);
+                        strcpy(aline[i],temp);
+    }
+
     i=0;
     while(i<=3){
     if (l<4){
         for(m=0;m<4;m++){
-            if(aline[m][0]!='\0')
-        printf("%c  %s",aline[m][0],&aline[m][1]);
+            if(strlen(aline[m])>=5)
+        printf("\n%s",aprt(&aline[m][1]));
     }
     break;
     }
@@ -247,7 +340,7 @@ int getlines(char * string){
     if(ifre(rans,ran)==TRUE){
     rans[i]=ran;
     if(aline[ran][0]!='\0')
-    printf("%c  %s",aline[ran][0],&aline[ran][1]);
+    printf("\n%s",aprt(&aline[ran][1]));
     i++;
     }
     else{
@@ -341,12 +434,13 @@ strcpy(xtxt,"");
 return 0;
 }
 
+
 FILE * rfpr;
 FILE * Fp;
 char path[200];
 
 int row;
-int col;
+
 
 int ysv(char flag,char * bword,char ze){
 char eline[]="\033[32m○\033[0m";
@@ -414,8 +508,8 @@ if (ysv1=='v' || ysv1=='V'){
         theline[strlen(theline)-1]='\0';
     getlines(&rtxt[locate]);
     if(theline[0]!='\0')
-    printf("\n%s",theline);
-    fflush(stdout);
+    printf("\n%s",aprt(theline));
+        fflush(stdout);
     }
     if (flag!=TRUE){
     printf("\n%s",bword);
@@ -461,7 +555,7 @@ else if (ysv1=='y' || ysv1=='Y'){
     getlines(rtxt);
     }
     if(theline[0]!='\0')
-    printf("\n%s",theline);
+    printf("\n%s",aprt(theline));
     fflush(stdout);
     NL=TRUE;
     if (flag!=TRUE){
@@ -652,7 +746,6 @@ BOOL now5=FALSE;
 BOOL nown=FALSE;
 BOOL ascii;
 char lword[4];
-char asc[3]="”";
 BOOL iszh=FALSE;
 int prt(char str)
 {
@@ -745,10 +838,17 @@ cursor_position(&rowm,&colm);
                                                 cursor_position(&rowm,&colm);
                 if(colm!=coln)
                     break;
+                else if(colm==coln && coln==col){
+                printf(" ");
+                now2=TRUE;
+                now3=TRUE;
+                ci=0;
+                fflush(stdout);
+                }
             }
             ci=0;
                     now2=FALSE;
-        if(colm==col && coln==col-2){
+        if(colm==col && coln==col-2 ){
             printf(" ");
                         now2=TRUE;
             now3=TRUE;
@@ -795,7 +895,6 @@ xtxt=(char *)malloc(3000010);
 
       }
     int arga;
-    BOOL ish=FALSE;
     int args;
 fd1 = current_tty();
 
@@ -1030,6 +1129,7 @@ printf("已加载%d组单词\n",lines);
 	    zh="\0";
 	    en="\0";
         printf("\033[2m%s\n\033[0m",strs);
+        fflush(stdout);
 	    if(ez=='3'||iez==TRUE){
 	    iez=TRUE;   
                         	    ez=rand()%2+49;
