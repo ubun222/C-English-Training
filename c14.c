@@ -577,7 +577,7 @@ else if (ysv1=='y' || ysv1=='Y'){
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
 NL=FALSE;
 if (ysv1=='S' || ysv1=='s')
-printf("\033[%dC%s\r",col,eline);
+printf("\r\033[%dC%s\r",col-2,eline);
 
 if(flag==FALSE){
     printf("\n%s",bword);
@@ -1629,7 +1629,7 @@ continue;
                 
 		   
                 if ((ifright = strcmp(aword,zh)) == 0 && ez=='1'){
-                    printf("\033[%dC%s\r",col,tline);
+                    printf("\r\033[%dC%s\r",col-2,tline);
                     getin=FALSE;
                     fflush(stdin);
                     fflush(stdout);
@@ -1658,7 +1658,7 @@ continue;
                     }
 
                         if(aii==n+1){
-                           printf("\033[%dC%s\r",col,tline);
+                           printf("\r\033[%dC%s\r",col-2,tline);
                            fflush(stdout);
                                                        fflush(stdin);
                                                         strcpy(ltemp,""); 
@@ -1682,12 +1682,12 @@ continue;
 
                 if (flag != TRUE ){
                 if(strcmp(aword,"")==0){
-                    printf("\033[%dC%s\r",col,nline);
+                    printf("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
                     ysv(flag,bword,ez);
                 }
                 else{
-                                printf("\033[%dC%s\r",col,fline);
+                                printf("\r\033[%dC%s\r",col-2,fline);
                 fflush(stdout);
                 ysv(flag,bword,ez); 
                                                 } 
@@ -2096,7 +2096,7 @@ continue;
                 
 		   
                 if ((ifright = strcmp(aword,EN)) == 0 && ez=='1'){
-                    printf("\033[%dC%s\r",col,tline);
+                    printf("\r\033[%dC%s\r",col-2,tline);
                     fflush(stdout);
                     fflush(stdin);
                     flag=TRUE;
@@ -2124,7 +2124,7 @@ continue;
                     }  
                     }
                     if(aii==n+1){
-                        printf("\033[%dC%s\r",col,tline);
+                        printf("\r\033[%dC%s\r",col-2,tline);
                         fflush(stdout);
                         getin=FALSE;
                         flag = TRUE;
@@ -2148,13 +2148,13 @@ continue;
     
                 if (flag != TRUE ){
                 if(strcmp(aword,"")==0){
-                    printf("\033[%dC%s\r",col,nline);
+                    printf("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
                     ysv(flag,bword,ez);
                 }
                 else{
                 fflush(stdin);
-                printf("\033[%dC%s\r",col,fline);
+                printf("\r\033[%dC%s\r",col-2,fline);
                 fflush(stdout);
                 ysv(flag,bword,ez);
                                                 } 
@@ -2550,7 +2550,7 @@ continue;
                 
 		   
                 if ((ifright = strcmp(aword,EN)) == 0 && ez=='1'){
-                    printf("\033[%dC%s\r",col,tline);
+                    printf("\r\033[%dC%s\r",col-2,tline);
                     fflush(stdout);
                     fflush(stdin);
                     flag=TRUE;
@@ -2579,7 +2579,7 @@ continue;
                     }  
                     }
                     if(aii==n+1){
-                        printf("\033[%dC%s\r",col,tline);
+                        printf("\r\033[%dC%s\r",col-2,tline);
                         fflush(stdout);
                         getin=FALSE;
                         flag = TRUE;
@@ -2598,13 +2598,13 @@ continue;
             }
                 if (flag != TRUE ){
                 if(strcmp(aword,"")==0){
-                    printf("\033[%dC%s\r",col,nline);
+                    printf("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
                     ysv(flag,bword,ez);
                 }
                 else{
                 fflush(stdin);
-                printf("\033[%dC%s\r",col,fline);
+                printf("\r\033[%dC%s\r",col-2,fline);
                 fflush(stdout);
                 ysv(flag,bword,ez);
                                                 } 
