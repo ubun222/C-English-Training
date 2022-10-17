@@ -244,7 +244,7 @@ int fresh(char * aline){
                 continue;
 
         }
-        if((int)theline[i+1]+256>128 && (int)theline[i]+256>=227 && (int)theline[i]+256<=239  ){
+        if((int)theline[i+1]+256>=128 && (int)theline[i]+256>=227 && (int)theline[i]+256<=239  ){
                 lengn=lengn+2;
                 i=i+3;
                                 continue;
@@ -944,7 +944,7 @@ int findword(char * en, char * en2 , char * txt){
 
         if ((int)Zword+256>=227 && (int)Zword+256<=239  ){
                 Zword2=getchar();
-            if((int)Zword2+256>128){
+            if((int)Zword2+256>=128){
                 Zword3=getchar();
                 printf("%c%c%c",Zword,Zword2,Zword3);
                 fflush(stdout);
@@ -1010,7 +1010,7 @@ int findword(char * en, char * en2 , char * txt){
     printf("\n");
     printf("\033[2m%s\n\033[0m",strs);
     fflush(stdout);
-    printf("\r\033[1m%s\033[0m\033[2m——————:\033[0m",en2);
+    printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en2);
     fflush(stdout);
 return 0;
 }
@@ -1317,7 +1317,7 @@ fclose(rfp);
             
 
             }
-            printf("\r\033[1m%s\033[0m\033[2m——————:\033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
             
 
 
@@ -1441,7 +1441,7 @@ fclose(rfp);
                         }
                         }
                         if(ish==TRUE)
-                            if(gcolm==1){
+                            if(gcolm==1 && leng > 0){
                                         printf("\033[1A\033[%dC",col);
                             now1=TRUE;
                             nown=TRUE;
@@ -1792,7 +1792,7 @@ continue;
                 
             }
             
-            printf("\r\033[1m%s\033[0m\033[2m——————:\033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
             
 
             bword[0]='\0'; 
@@ -2248,7 +2248,7 @@ continue;
             }
             
             printf("\033[2m%s\n\033[0m",strs);
-            printf("\r\033[1m%s\033[0m\033[2m——————:\033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
             
 
             bword[0]='\0'; 
