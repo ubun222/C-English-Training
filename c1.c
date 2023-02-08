@@ -45,9 +45,9 @@ char answer1[200];
 int ci=0;
 char astrs[100];
 BOOL bk=FALSE;
-BOOL now=FALSE;
-BOOL now1=FALSE;
-BOOL now2=FALSE;
+//BOOL now=FALSE;
+//BOOL now1=FALSE;
+//BOOL now2=FALSE;
 BOOL now3;
 BOOL now4=FALSE;
 BOOL now5=FALSE;
@@ -200,6 +200,40 @@ int ifre(int a1[4],int  b ){
     return TRUE;
 //    return FALSE;
 }
+
+static inline int rd(const int Fd)
+{
+    unsigned char   buffer[4];
+    ssize_t         n;
+
+    while (1) {
+        //fflush(stdin);
+        fflush(stdout);
+        n = read(Fd, buffer, 1);
+        if (n > (ssize_t)0)
+            return buffer[0];
+
+        else
+        if (n == (ssize_t)0)
+            return RD_EOF;
+
+        else
+        if (n != (ssize_t)-1)
+            return RD_EIO;
+
+        else
+        if (errno != EINTR && errno != EAGAIN && errno != EWOULDBLOCK)
+            return RD_EIO;
+    }
+
+   return 0;
+}
+/* As the tty for current cursor position.
+ * This function returns 0 if success, errno code otherwise.
+ * Actual errno will be unchanged.
+*/
+//BOOL re;
+
 
 char ysv1;
 
@@ -668,177 +702,6 @@ return 0;
 BOOL ish=FALSE;
 BOOL termux=FALSE;
 
-int prt(char str)
-{
-    int         rown, coln, rowm, colm;
-    char        buffer[64];
-    char *const tail = buffer + sizeof(buffer);
-    char       *head = buffer + sizeof(buffer);
-    now=FALSE;
-    now1=FALSE;
-    rown = 0;
-    coln = 0;
-    rowm = 0;
-    colm = 0;
- /*  if(ez=='1' && bk==TRUE){
-        
-    //fd = current_tty();
-cursor_position(&rown,&coln);
-        str='\0';
-        if(coln==1){
-            //printf("111");
-            printf("\033[1A\033[%dC",col);
-            now1=TRUE;
-            nown=TRUE;
-            fflush(stdout);
-            }
-    
-    //printf("%c",str);
-    return 0;
-    }
-*/
-    iszh=FALSE;
-    if (ez=='1' && bk!=TRUE){
-        
-        while (TRUE){
-            cursor_position(&rown,&coln);
-            printf("%c",str);
-            //        printf("%c",str);
-            fflush(stdout);
-            cursor_position(&rowm,&colm);
-            if(colm!=coln)
-                break;
-            if(colm==col && colm==coln){
-                break;
-            }
-        }
-//        now=FALSE;
-        if(colm==col && coln==col){
-            //printf("111");
-            //printf("\033[1A\033[%dC ",col);
-            now=TRUE;
-            //fflush(stdout);
-            }
-        return 0;
-    }
-
-    if  (ez=='2' && bk==TRUE){
-        if (ascii==TRUE){
-cursor_position(&rown,&coln);
-        if(coln==1){
-        //ci=0;
-        printf("\033[1A\033[%dC",col+1);
-        nown=TRUE;
-        fflush(stdout);
-        now1=TRUE;
-        }
-        }
-        //printf("222")
-//        if (fd == -1)
-//           return 1;
-cursor_position(&rown,&coln);
-        if(coln==1){
-        //printf("222");
-        if(now3==TRUE){
-        printf("\033[1A\033[%dC",col-1);
-        nown=TRUE;
-        fflush(stdout);
-        ci=0;
-        now3=FALSE;
-        }
-        else if(now3==FALSE){
-        ci=0;
-        printf("\033[1A\033[%dC",col+1);
-        nown=TRUE;
-        fflush(stdout);
-        now4=TRUE;
-        now=TRUE;
-        }
-        //now2=TRUE;
-        }
-        return 0;
-     } 
-
-
-
-    if  (ez=='2'  && bk!=TRUE){
-
-    if (str=='.' || str==',' || str==' ' ){
-        //printf("1111");
-cursor_position(&rown,&coln);
-       // printf("%c",str);
-        printf("%c",str);
-        fflush(stdout);
-cursor_position(&rowm,&colm);
-        if(colm==col && coln==col){
-            //printf("111");
-            //printf("\033[1A\033[%dC ",col);
-            now=TRUE;
-            //fflush(stdout);
-            }
-        return 0;
-    }
-    else if(!isascii(str) ){
-        
-        ci++;
-        strncat(astrs,&str,1);
-        if(ci==3){
-            if ((int)*astrs>(int)*asc){
-                iszh=TRUE;
-                //fd = current_tty();
-            while(TRUE){
-                cursor_position(&rown,&coln);
-                //printf("%d",coln);
-                printf("%s",astrs);
-                fflush(stdout);
-                //rowm=0;
-                //colm=0;
-                cursor_position(&rowm,&colm);
-                if(colm!=coln)
-                    break;
-                else if(colm==coln && coln==col){
-                printf(" ");
-                now2=TRUE;
-                now3=TRUE;
-                ci=0;
-                fflush(stdout);
-                }
-            }
-            ci=0;
-            //strcpy(astrs,"");
-        now2=FALSE;
-        if(colm==col && coln==col-2 ){
-            printf(" ");
-            //strcpy(lword,astrs);
-            now2=TRUE;
-            now3=TRUE;
-            ci=0;
-            fflush(stdout);
-            //strcpy(astrs,"");
-            //iszh=FALSE;
-            return 0;
-            }
-            now5=FALSE;
-        if(colm==col && coln==col-1){
-            now5=TRUE;
-            }
-                return 0;
-        }
-            else
-                iszh=FALSE;
-        }
-    }
-    else{
-        ci=0;
-        iszh=FALSE;
-        strcpy(astrs,"");
-    }
-
-        }
-    return 0;
-}
-
-
 char * aprt(char * aline){
 if(ish==TRUE){
 int whereadd=0;
@@ -1097,10 +960,15 @@ return 2;
 char backs[99];
 int leng;
 char block;
+char llword;
+BOOL now1;
+BOOL now2;
+BOOL now3;
 int ezback(){
     int         rown, coln, rowm, colm;
 
    // setvbuf(stdin, NULL, _IONBF, 1);
+   if(ez=='1'){
                         while (TRUE){
                         if(ish==TRUE || termux==TRUE){
                         cursor_position(&rown,&coln);
@@ -1112,17 +980,89 @@ int ezback(){
                         }
                         
                         }
+                        if(now3==TRUE){
+                        //printf("2222");
+                        strcpy(backs,"\b\033[1C \b\033[1C");
+                        now3=FALSE;
+                        //break;
+                        }
+
                         printf("%s",backs);
                         fflush(stdout);
                         if(ish==TRUE)
                         cursor_position(&rowm,&colm);
                         if(ish==TRUE){
-                        if(coln==colm){
+                        if(coln==colm && coln!=col ){
                         continue;
                         }
                         }
                         break;
                         }
+
+   }
+
+      if(ez=='2'){
+        llword=aword[strlen(aword)-1];
+//printf("%c",llword);
+                        while (TRUE){
+                        if(ish==TRUE || termux==TRUE){
+                        cursor_position(&rown,&coln);
+                        if(coln==1 && ( llword=='.' || llword=='-' ) ){
+                         //printf("2222");
+                        if(now1==TRUE){
+                           // printf("2222");
+                        printf("\033[1A\033[%dC\b%c\b",col,' ');
+                        now1=FALSE;
+                        break;
+                        }
+                        else if(now1==FALSE){
+                          //  printf("2222");
+                        printf("\033[1A\033[%dC%c\b\033[1C",col,' ');
+                        break;
+                        }
+                        //backs=
+                        //continue;
+                        }
+                        else if(coln==1  && now1==TRUE){
+                           // printf("222");
+                            printf("\033[1A\033[%dC  \b\b",col-2);
+                            break;
+
+                        }
+                        else if(coln==1 && now1==FALSE){
+                            printf("\033[1A\033[%dC\b \b",col);
+                            break;
+                        }
+                    
+
+
+                        }
+                        if(now3==TRUE){
+                        //printf("2222");
+                        strcpy(backs,"\b\033[1C \b\033[1C");
+                        now3=FALSE;
+                        //break;
+                        }
+                        else if(now2==TRUE){
+                           //printf("2222");
+                        strcpy(backs,"\b \b");
+                        now2=FALSE;
+                        //break;
+                        }
+                        printf("%s",backs);
+                        fflush(stdout);
+                        if(ish==TRUE)
+                        cursor_position(&rowm,&colm);
+                        if(ish==TRUE){
+                        if(coln==colm && colm!=col){
+                        continue;
+                        }
+                        }
+                        break;
+                        }
+
+   }
+
                         //fprintf(stdout,"%s",backs);
                         //fflush(stdout);
 return 0;
@@ -1139,18 +1079,15 @@ BOOL c2=FALSE;
 BOOL c3=FALSE;
 int ezprintf(){
 int         rown, coln, rowm, colm;
-//char zword;
-//*zword=*word;
-//strncat(&zword,&word,1);
-//zword=word;
-//strcpy(cword,"");
+now2='\x00';
+now3='\x00';
 if(ez=='2'){
 //strcpy(cword,"");
 //strncat(cword,&zword,1);
 if ( zword==',' || zword==' '  ){
     zword='\x00';
 strcpy(cword,"");
-strcpy(yword," ，");
+strcpy(yword,"*，");
 //xword='\x00';
 getin=FALSE;
 //waiting=TRUE;
@@ -1169,22 +1106,18 @@ else if ( zword=='.' || zword=='-'  ){
                         if(ish==TRUE)
                         cursor_position(&rowm,&colm);
                         if(ish==TRUE){
-                        if(coln==colm){
+                        if(coln==colm && coln!=col){
                         continue;
+                        }
+                        else if(coln==colm && colm==col){
+                            now3=TRUE;
+                            break;
                         }
                         }
                         break;
                         }
                     
-                        fflush(stdout);
-                        //if(ish==TRUE)
-                     //   cursor_position(&growm,&gcolm);
-                     //   if(ish==TRUE ){
-                      //  if(gcoln==gcolm && gcoln!=1)
-                      //  continue;
-                        
-                     //   break;
-                    
+                        fflush(stdout);       
 
     strncat(aword,&zword,1);
     return(0);
@@ -1201,9 +1134,24 @@ else if (c3==TRUE) {
                         if(ish==TRUE)
                         cursor_position(&rowm,&colm);
                         if(ish==TRUE){
+                            if(coln==col-2 && colm==col){
+                                //printf("222");
+                                now1=TRUE;
+                                now2=FALSE;
+                            }
+                            else if(coln==col-1 && colm==col){
+                                now1=FALSE;
+                                now2=TRUE;
+                            }
+                            else
+                            {
+                                //now1='\x00';
+                                now2='\x00';
+                            }
                         if(coln==colm){
                         if(colm==col){
                         printf(" ");
+                        now1=TRUE;
                         continue;
                         }
                         else
@@ -1260,6 +1208,11 @@ if (((int)zword>=65  && (int)zword<=122) || ((int)zword==32 || (int)zword==46 ||
                         if(ish==TRUE){
                         if(coln==colm && coln!=col)
                         continue;
+                        else if(coln==colm && colm==col){
+                            //printf("2222");
+                            now3=TRUE;
+                            break;
+                        }
                         }
                         break;
                         }
@@ -2264,10 +2217,10 @@ strcpy(backs,"");
                         block=' ';
                         }
                         bk=TRUE; 
-                        ezback();
+                        //ezback();
                         aword[leng3-1]='\0';
                         //leng=leng-1;
-                        
+                        ezback();
                         //printf("\b%c\b",block);
                         fflush(stdout);
                         continue;
@@ -2277,13 +2230,13 @@ strcpy(backs,"");
             else if((int)aword[leng3-2]+add>=128 && (int)aword[leng3-3]+add>=227  && (int)aword[leng3-3]+add<=239  && leng3 > 0){
                         
                         bk=TRUE;  
+                        strcpy(backs,"\b\b  \b\b");
+                    
                         aword[leng3-3]='\0';
                         aword[leng3-2]='\0';
                         aword[leng3-1]='\0';
-
-                        strcpy(backs,"\b\b  \b\b");
-                        ezback();
                         //fflush(stdout);      
+                        ezback();
                     }
                     else{
     
@@ -2528,9 +2481,7 @@ printf("1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/2-12);
         int ran;
     srand((unsigned)time(NULL));
 	while (TRUE){
-        now2=FALSE;
-        now3=FALSE;
-        now4=FALSE;
+
         ci=0;
         strcpy(astrs,"");
         //strcpy(word,"");
@@ -3014,7 +2965,7 @@ int arga;
 		switch (arga) {
 			case 'r': printf("错题集模式\n");fflush(stdout);CORRECT=TRUE; break;
 			case 'i': printf("优化ish\n");fflush(stdout);ish=TRUE;termux=TRUE; break;
-            case 'm': printf("通用性优化\n");fflush(stdout);termux=TRUE; break;
+            //case 'm': printf("优化termux\n");fflush(stdout);termux=TRUE; break;
 			
 		}
 	}
