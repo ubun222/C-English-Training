@@ -703,11 +703,17 @@ BOOL ish=FALSE;
 BOOL termux=FALSE;
 
 char * aprt(char * aline){
+char aaline[2999];
+int mi=-1;
+int leng;
+char valine[999];
+char baline[2999];
+leng=strlen(answer1);
 if(ish==TRUE){
+    //printf("%s",answer1);
 int whereadd=0;
-char baline[1999];
-char aaline[1999];
-char alinea[3999];
+char vvline[4999];
+char alinea[4999];
 while (TRUE){
     if((whereadd=fresh(aline))==-1){
         break;
@@ -723,9 +729,35 @@ strcpy(baline,"");
         strcpy(aline,aaline);
     }
     }
-return aline;
+
+
+//return aline;
 }
-else
+//else
+
+    if(ysv1=='v' || ysv1=='V'){
+        while(mi=mi+1,mi<=strlen(aline)){
+strncpy(valine,&aline[mi],leng);
+//printf(":%s:%s:",valine,answer1);
+if(strncmp(valine,answer1,leng)==0){
+break;
+}
+    }
+    if (mi==0 || mi>=strlen(aline))
+    return aline;
+        strcpy(aaline,"");
+        strcpy(baline,"");
+        strncat(aaline,aline,mi);
+        strcat(aaline,"\033[1m\033[33m");
+        strcat(aaline,answer1);
+        strcat(aaline,"\033[0m");
+        strcat(aaline,&aline[mi+leng]);
+        strcpy(aline,aaline);
+
+
+
+    }
+
 return aline;
 }
 
@@ -807,6 +839,9 @@ BOOL flag = FALSE;
 char azh[10][100];
 int zm=0;
 int c;
+
+char w1[10][9999];
+
 int ififright(char * aword){
     //int ifright;
 int i,n;
@@ -820,7 +855,7 @@ char * dzh;
         mmm=0;
         strcpy(tch,"");
     strcpy(tch,aword);
-    char w1[10][9999];
+    //char w1[10][9999];
 if(strlen(tch) >=2 ){
             for(n=0;n<10;n=n+1){
                 //printf("222");
@@ -833,7 +868,7 @@ if(strlen(tch) >=2 ){
                 m=m+2+cmmm;
                 while(m=m+1,m<=strlen(tch)){
                     //printf("222");
-                    strcpy(w1[n],"");
+                    //strcpy(w1[n],"");
                     if(tch[m]=='\xef' && tch[m+1]=='\xbc' && tch[m+2]=='\x8c' ||  tch[m]=='\0'  ){
                         cmmm=m-mmm-3;
                         if(n==0){
@@ -982,7 +1017,12 @@ int ezback(){
                         }
                         if(now3==TRUE){
                         //printf("2222");
+                        if(block=='-'){
+                            strcpy(backs,"\b\033[1C-\b\033[1C");
+                        }
+                        else if(block==' '){
                         strcpy(backs,"\b\033[1C \b\033[1C");
+                        }
                         now3=FALSE;
                         //break;
                         }
@@ -2522,6 +2562,11 @@ printf("1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/2-12);
 	        en=strtok(NULL,"\t");
             strcpy(answer1,zh);
             strcpy(ch,en);
+            
+            for(n=0;n<10;n=n+1){
+            strcpy(bzh[n],"");
+            strcpy(azh[n],"");
+            }         
             }
     
         else if(ez=='2'){
@@ -2544,6 +2589,7 @@ printf("1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/2-12);
             for(n=0;n<10;n=n+1){
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
+                strcpy(w1[n],"");
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
                 mmm=m;
@@ -2686,6 +2732,11 @@ colourp();
 	        en=strtok(NULL,"\t");
             strcpy(answer1,zh);
             strcpy(ch,en);
+            for(n=0;n<10;n=n+1){
+            strcpy(bzh[n],"");
+            strcpy(azh[n],"");
+            } 
+            
             }
 
             else if(ez=='2'){
@@ -2693,6 +2744,10 @@ colourp();
             zh=strtok(NULL,"\t");
             strcpy(answer1,en);
             strcpy(ch,zh);
+            for(n=0;n<10;n=n+1){
+            strcpy(bzh[n],"");
+            strcpy(azh[n],"");
+            } 
             }
             flag=FALSE;
             getin=FALSE;
@@ -2710,6 +2765,7 @@ colourp();
                 cmmm=0;
                 mmm=m;
                 m=m+2+cmmm;
+                strcpy(w1[n],"");
                 while(m=m+1,m<=zhleng){
                     if(ch[m]=='\xef' && ch[m+1]=='\xbc' && ch[m+2]=='\x8c' ||  ch[m]=='\0'  ){
                         cmmm=m-mmm-3;
@@ -2847,12 +2903,18 @@ colourp();
 	        en=strtok(NULL,"\t");
             strcpy(answer1,zh);
             strcpy(ch,en);
+
+            for(n=0;n<10;n=n+1){
+            strcpy(bzh[n],"");
+            strcpy(azh[n],"");
+            } 
+
             }
 
             else if(ez=='2'){
             en=strtok(word,"\t");
             zh=strtok(NULL,"\t");
-            strcpy(answer1,zh);
+            strcpy(answer1,en);
             strcpy(ch,zh);
             }
             m=-1;
@@ -2863,6 +2925,7 @@ colourp();
             for(n=0;n<10;n=n+1){
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
+                strcpy(w1[n],"");
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
                 mmm=m;
@@ -2965,7 +3028,7 @@ int arga;
 		switch (arga) {
 			case 'r': printf("错题集模式\n");fflush(stdout);CORRECT=TRUE; break;
 			case 'i': printf("优化ish\n");fflush(stdout);ish=TRUE;termux=TRUE; break;
-            //case 'm': printf("优化termux\n");fflush(stdout);termux=TRUE; break;
+            case 'm': printf("通用性优化\n");fflush(stdout);termux=TRUE; break;
 			
 		}
 	}
