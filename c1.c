@@ -1428,71 +1428,13 @@ void print_args(char *dir_arg, char *file, int flag_all, int flag_long, int flag
     closedir(dir);
 }
 
-
-    char path[9999];
-    FILE * fp;
-int getfromread(){
-    char Path;
-    //char txt[999999]; //segment error
-    char buffer[200];
-    int pleng;
-    while(TRUE){
-    strcpy(path,"");
-    strcpy(&Path,"");
-    pleng=0;
-    printf("\r输入txt文件路径:\033[K");
-    fflush(stdout);
-           while((Path=getchar())  != '\0'){
-                if(Path == '\x7f'){          
-                    if(isascii(path[pleng-1]) && pleng > 0){
-                        path[pleng-1]='\0';
-                        pleng=pleng-1;
-                        printf("\b \b");
-                        fflush(stdout);
-                        continue;
-                    }
-                    else if(!isascii(path[pleng-1]) && pleng > 0){
-                        path[pleng-3]='\0';
-                        path[pleng-2]='\0';
-                        path[pleng-1]='\0';
-                        printf("\b\b  \b\b");
-                        fflush(stdout);
-                        pleng=pleng-3;
-                        continue;
-                    }
-                continue;
-                }
-
-           if(Path == '\r' || Path == '\n' || Path == '\0'){
-           break;
-        }
-            pleng++;
-            strncat(path,&Path,1);
-            printf("%c",Path);
-            fflush(stdout);
-
-    }
-            fflush(stdout);
-            fp=fopen(path,"r");
-            if(fp==NULL){
-                continue;
-                printf("\n");
-            }
-            break;
-}
-
-return 0;
-
-}
-
 FILE * rfp;
 FILE * rfpa;
 BOOL CORRECT;
 char * txt;
-int loadcontent(){
-    txt=(char *)malloc(9999999); 
     int lines;
-    lines=0;
+    //lines=0;
+int loadcontent(){
     if (CORRECT==TRUE){
         rfp = fopen("CORRECT.txt", "r");
         if(rfp==NULL){
@@ -1527,8 +1469,93 @@ fclose(rfp);
     if(txt[strlen(txt)-1]!='\n')
     strcat(txt,"\n"); //
 printf("已加载%d组单词\n",lines);
+//printf("%s",txt);
 return 0;
 }
+
+
+    char PATH[99999][99];
+    char path[39999];
+    FILE * fp;
+    int p=0;
+int getfromread(){
+    txt=(char *)malloc(9999999); 
+    lines=0;
+    char Path;
+    //char txt[999999]; //segment error
+    char buffer[200];
+    int pleng;
+    //strcpy(PATH,"");
+    while(TRUE){
+    strcpy(path,"");
+    strcpy(&Path,"");
+    pleng=0;
+    printf("\r输入txt文件路径，按回车键结束:\033[K");
+    fflush(stdout);
+           while((Path=getchar())  != '\0'){
+                if(Path == '\x7f'){          
+                    if(isascii(path[pleng-1]) && pleng > 0){
+                        path[pleng-1]='\0';
+                        pleng=pleng-1;
+                        printf("\b \b");
+                        fflush(stdout);
+                        continue;
+                    }
+                    else if(!isascii(path[pleng-1]) && pleng > 0){
+                        path[pleng-3]='\0';
+                        path[pleng-2]='\0';
+                        path[pleng-1]='\0';
+                        printf("\b\b  \b\b");
+                        fflush(stdout);
+                        pleng=pleng-3;
+                        continue;
+                    }
+                continue;
+                }
+
+           if(Path == '\r' || Path == '\n' || Path == '\0'){
+           break;
+        }
+            pleng++;
+            strncat(path,&Path,1);
+            printf("%c",Path);
+            fflush(stdout);
+
+    }
+            fflush(stdout);
+                if(strcmp(path,"")==0 && strcmp(PATH[0],"")!=0){
+                    //printf("\n");
+            break;
+            }
+            else{
+                        fp=fopen(path,"r");
+            if(fp==NULL ){
+                strcpy(path,"");
+                //strcpy(path,"");
+                printf("\n");
+                continue;
+            }  
+            else{  
+            strcpy(PATH[p],path);
+            //printf("%s",PATH[p]);
+            p++;
+            loadcontent();
+            }
+            //strcat(PATH,"\n");
+            strcpy(path,"");
+            continue;
+
+
+}
+            //else
+            
+            //printf("\n\n%s",path);
+    }
+
+return 0;
+
+}
+
 
     //int max;
     //BOOL getin=FALSE;
@@ -1581,6 +1608,7 @@ char Buffer[4096];
 FILE * rrpp;
 int i;
 rw=FALSE;
+int P=0;
 //alltxt=(char *)malloc(2999999);
 //Fp=fp;
 //strcat(rtxt,"");
@@ -1597,7 +1625,15 @@ while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s'
     continue;
 //printf("%c",ysv1);
 if (ysv1=='v' || ysv1=='V'){
-    Fp=fopen(path,"r");
+    if (flag!=TRUE){
+    printf("\n%s",bword);
+    fflush(stdout);
+    }
+for(P=0;P<p;P++){
+    //P=0;
+    if(Fp!=NULL)
+    fclose(Fp);
+    Fp=fopen(PATH[P],"r");
     //strcat(answer1,"");
    // printf("\n\n222");
     while (fgets(rbuffer,9998,Fp)){
@@ -1638,19 +1674,29 @@ if (ysv1=='v' || ysv1=='V'){
     //printf("\n%s",theline);
     fflush(stdout);
     }
-    if (flag!=TRUE){
-    printf("\n%s",bword);
-    fflush(stdout);
+    if(theline[0]!='\0'){
+    break;
     }
-    fseek(fp,Max , SEEK_SET);
+
+}
+
+   // fseek(fp,Max , SEEK_SET);
     NL=TRUE;
     strcpy(rtxt,"");
     strcpy(theline,"");
     vflag=FALSE;
-}
 
+}
 else if (ysv1=='y' || ysv1=='Y'){
-    Fp=fopen(path,"r");
+        if (flag!=TRUE){
+    printf("\n%s",bword);
+    fflush(stdout);
+    }
+
+for(P=0;P<p;P++){
+    if(Fp!=NULL )
+    fclose(Fp);
+    Fp=fopen(PATH[P],"r");
    //printf("\n\n222");
     while (fgets(rbuffer,9998,Fp)){
         if (strcmp(rbuffer,"\n")!=0 && zlocate!=0){
@@ -1692,11 +1738,11 @@ else if (ysv1=='y' || ysv1=='Y'){
     printf("\n%s",aprt(theline));
     fflush(stdout);
     NL=TRUE;
-    if (flag!=TRUE){
-    printf("\n%s",bword);
-    fflush(stdout);
+    if(theline[0]!='\0'){
+    break;
     }
-    fseek(fp,Max , SEEK_SET);
+}
+   // fseek(fp,Max , SEEK_SET);
        // fseek(Fp,max , SEEK_SET);
     strcpy(rbuffer,"");
     strcpy(bbuffer,"");
@@ -1887,7 +1933,9 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
 
 
 else if (rw==FALSE && CORRECT==TRUE && flag!=TRUE && ysv1!='s' && ysv1!='S'){
-yFp=fopen(path,"r");
+
+for(P=0;P<p;P++){
+yFp=fopen(PATH[P],"r");
     while (fgets(rbuffer,3998,yFp)){
         if (strcmp(rbuffer,"\n")!=0 ){
             strcpy(bbuffer,rbuffer);
@@ -1941,6 +1989,10 @@ yFp=fopen(path,"r");
     NL=TRUE;
     //fseek(yFp,max , SEEK_SET);    
 fclose(yFp);
+		if (vflag==TRUE){
+        break;
+        }
+}
 }
 return 0;
 }
@@ -2501,7 +2553,7 @@ int fun(){
     int i;
     int n;
     int z;
-printf("1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/2-12);
+printf("\r\033[K1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/2-12);
     fflush(stdout);
     while ((ez=getchar())!='\n' && ez!='1' && ez!='2' && ez!='3' ){
         continue;
@@ -3128,6 +3180,6 @@ alltxt=(char *)malloc(8999999);
 
     calendar();
     getfromread();
-    loadcontent();
+   // loadcontent();
     fun();
 }
