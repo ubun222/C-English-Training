@@ -981,13 +981,13 @@ cc++;
 }
 }
 if (cc==zm+1){
+    flag=TRUE;
 return TRUE;
-//flag=TRUE;
    // break;
 }
 else{
+    flag=FALSE;
     return FALSE;
-    //flag=FALSE;
 }
 }
 return 2;
@@ -1009,7 +1009,7 @@ int ezback(){
                         if(ish==TRUE || termux==TRUE){
                         cursor_position(&rown,&coln);
                         if(coln==1){
-                        printf("\033[1A\033[%dC%c",col,block);
+                        printf("\033[1A\033[%dC%c\b\033[1C",col,block);
                         break;
                         //backs=
                         //continue;
