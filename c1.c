@@ -49,7 +49,7 @@ BOOL bk=FALSE;
 //BOOL now1=FALSE;
 //BOOL now2=FALSE;
 BOOL now3;
-BOOL now4=FALSE;
+//BOOL now4=FALSE;
 BOOL now5=FALSE;
 BOOL nown=FALSE;
 BOOL ascii;
@@ -1000,6 +1000,7 @@ char llword;
 BOOL now1;
 BOOL now2;
 BOOL now3;
+BOOL now4=FALSE;
 int ezback(){
     int         rown, coln, rowm, colm;
 
@@ -1016,6 +1017,8 @@ int ezback(){
                         }
                         
                         }
+
+                        
                         if(now3==TRUE){
                         //printf("2222");
                         if(block=='-'){
@@ -1027,7 +1030,7 @@ int ezback(){
                         now3=FALSE;
                         //break;
                         }
-
+                        
                         printf("%s",backs);
                         fflush(stdout);
                         if(ish==TRUE)
@@ -1057,6 +1060,8 @@ int ezback(){
                         break;
                         }
                         else if(now1==FALSE){
+                            now1=TRUE;
+                            now2=FALSE;
                           //  printf("2222");
                         printf("\033[1A\033[%dC%c\b\033[1C",col,' ');
                         break;
@@ -1081,6 +1086,8 @@ int ezback(){
                         if(now3==TRUE){
                         //printf("2222");
                         strcpy(backs,"\b\033[1C \b\033[1C");
+                                                    now1=TRUE;
+                            now2=FALSE;
                         now3=FALSE;
                         //break;
                         }
@@ -1122,6 +1129,7 @@ int ezprintf(){
 int         rown, coln, rowm, colm;
 now2='\x00';
 now3='\x00';
+//now4=FALSE;
 if(ez=='2'){
 //strcpy(cword,"");
 //strncat(cword,&zword,1);
@@ -1151,8 +1159,15 @@ else if ( zword=='.' || zword=='-'  ){
                         continue;
                         }
                         else if(coln==colm && colm==col){
+                            now1=FALSE;
+                            now2='\x00';
                             now3=TRUE;
+                            //now4=TRUE;
                             break;
+                        }
+                        else if(coln==colm-1 && colm==col){
+                            now1=TRUE;
+                            now2=FALSE;
                         }
                         }
                         break;
@@ -1179,10 +1194,12 @@ else if (c3==TRUE) {
                                 //printf("222");
                                 now1=TRUE;
                                 now2=FALSE;
+                                now3=FALSE;
                             }
                             else if(coln==col-1 && colm==col){
                                 now1=FALSE;
                                 now2=TRUE;
+                                now3=FALSE;
                             }
                             else
                             {
@@ -1193,6 +1210,8 @@ else if (c3==TRUE) {
                         if(colm==col){
                         printf(" ");
                         now1=TRUE;
+                        now2=FALSE;
+                        now3=FALSE;
                         continue;
                         }
                         else
@@ -2327,10 +2346,10 @@ strcpy(backs,"");
                         block=' ';
                         }
                         bk=TRUE; 
-                        //ezback();
+                        ezback();
                         aword[leng3-1]='\0';
                         //leng=leng-1;
-                        ezback();
+                        //ezback();
                         //printf("\b%c\b",block);
                         fflush(stdout);
                         continue;
@@ -2341,12 +2360,12 @@ strcpy(backs,"");
                         
                         bk=TRUE;  
                         strcpy(backs,"\b\b  \b\b");
-                    
+                        ezback();
                         aword[leng3-3]='\0';
                         aword[leng3-2]='\0';
                         aword[leng3-1]='\0';
                         //fflush(stdout);      
-                        ezback();
+                        //ezback();
                     }
                     else{
     
