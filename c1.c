@@ -18,7 +18,7 @@
 #include <libgen.h>
 #include <sys/types.h>
 #include <grp.h>
-
+#include <stdarg.h>
 /***#include<conio.h>***/
 /***#include<curses.h>***/
 #define BOOL int
@@ -606,31 +606,7 @@ int findword(char * en, char * en2 , char * txt){
         }
 
 
-/*        if ((int)Zword-12<=128 && (int)Zword>12 && Zword != '\x7f'){
-            printf("%c",Zword);
-            fflush(stdout);
-            strncat(Zwords,&Zword,1);
-            Lengn=Lengn+1;
-            
-            continue;
-        }
 
-        if ((int)Zword+256>=227 && (int)Zword+256<=239  ){
-                fgets(&Zword2, 2, stdin);
-            if((int)Zword2+256>=128){
-                fgets(&Zword3, 2, stdin);
-                printf("%c%c%c",Zword,Zword2,Zword3);
-                fflush(stdout);
-                strncat(Zwords,&Zword,1);
-                strncat(Zwords,&Zword2,1);
-                strncat(Zwords,&Zword3,1);
-                Lengn=Lengn+3;
-            }
-
-            else
-            continue;
-                //printf("%c",theline[i]);
-        }*/
         else{
         Lengn=Lengn+1;
         strncat(Zwords,&Zword,1);
@@ -743,7 +719,7 @@ if(strncmp(valine,answer1,leng)==0){
 break;
 }
     }
-    if (mi==0 || mi>=strlen(aline))
+    if (mi==1 || mi==0 || mi>=strlen(aline))
     return aline;
         strcpy(aaline,"");
         strcpy(baline,"");
@@ -842,6 +818,36 @@ int c;
 
 char w1[10][9999];
 
+int         rown, coln, rowm, colm;
+int ishprt( const char *restrict format, ... ){
+int b=1;
+while(TRUE){
+
+if (ish==TRUE){
+cursor_position(&rown,&coln);
+}
+
+    va_list ap;
+    va_start(ap, format);
+    // ...
+    vprintf(format, ap);
+    // ...
+    va_end(ap); 
+
+//printf("%s",format);
+if (ish==TRUE){
+cursor_position(&rowm,&colm);
+if(colm==coln){
+//format
+printf("\r\033[%dC",b);
+continue;
+}
+}
+break;
+}
+return 0;
+}
+
 int ififright(char * aword){
     //int ifright;
 int i,n;
@@ -896,7 +902,7 @@ c++;
 strcpy(azh[m],"");
 if (c==zm+1){
     flag=TRUE;
-    printf("\r\033[%dC%s\r",col-2,tline);
+    ishprt("\r\033[%dC%s\r",col-2,tline);
     c=0;
     break;
 }
@@ -918,7 +924,7 @@ return(0);
       // printf("%s\n",aword);
        if(strcmp(aword,answer1)==0){
         flag=TRUE;
-        printf("\r\033[%dC%s\r",col-2,tline);
+        ishprt("\r\033[%dC%s\r",col-2,tline);
         return 0;
        }
 
@@ -1001,22 +1007,23 @@ BOOL now1;
 BOOL now2;
 BOOL now3;
 BOOL now4=FALSE;
+
 int ezback(){
-    int         rown, coln, rowm, colm;
+   // int         rown, coln, rowm, colm;
 
    // setvbuf(stdin, NULL, _IONBF, 1);
    if(ez=='1'){
                         while (TRUE){
-                        if(ish==TRUE || termux==TRUE){
+                        //if(ish==TRUE || termux==TRUE){
                         cursor_position(&rown,&coln);
                         if(coln==1){
-                        printf("\033[1A\033[%dC%c\b\033[1C",col,block);
+                        ishprt("\033[1A\033[%dC%c\b\033[1C",col,block);
                         break;
                         //backs=
                         //continue;
                         }
                         
-                        }
+                       // }
 
                         
                         if(now3==TRUE){
@@ -1033,7 +1040,7 @@ int ezback(){
                         
                         printf("%s",backs);
                         fflush(stdout);
-                        if(ish==TRUE)
+                        //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
                         if(ish==TRUE){
                         if(coln==colm && coln!=col ){
@@ -1049,13 +1056,13 @@ int ezback(){
         llword=aword[strlen(aword)-1];
 //printf("%c",llword);
                         while (TRUE){
-                        if(ish==TRUE || termux==TRUE){
+                        //if(ish==TRUE || termux==TRUE){
                         cursor_position(&rown,&coln);
                         if(coln==1 && ( llword=='.' || llword=='-' ) ){
                          //printf("2222");
                         if(now1==TRUE){
                            // printf("2222");
-                        printf("\033[1A\033[%dC\b%c\b",col,' ');
+                        ishprt("\033[1A\033[%dC\b%c\b",col,' ');
                         now1=FALSE;
                         break;
                         }
@@ -1063,7 +1070,7 @@ int ezback(){
                             now1=TRUE;
                             now2=FALSE;
                           //  printf("2222");
-                        printf("\033[1A\033[%dC%c\b\033[1C",col,' ');
+                        ishprt("\033[1A\033[%dC%c\b\033[1C",col,' ');
                         break;
                         }
                         //backs=
@@ -1071,18 +1078,18 @@ int ezback(){
                         }
                         else if(coln==1  && now1==TRUE){
                            // printf("222");
-                            printf("\033[1A\033[%dC  \b\b",col-2);
+                            ishprt("\033[1A\033[%dC  \b\b",col-2);
                             break;
 
                         }
                         else if(coln==1 && now1==FALSE){
-                            printf("\033[1A\033[%dC\b \b",col);
+                            ishprt("\033[1A\033[%dC\b \b",col);
                             break;
                         }
                     
 
 
-                        }
+                    
                         if(now3==TRUE){
                         //printf("2222");
                         strcpy(backs,"\b\033[1C \b\033[1C");
@@ -1099,7 +1106,7 @@ int ezback(){
                         }
                         printf("%s",backs);
                         fflush(stdout);
-                        if(ish==TRUE)
+                        //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
                         if(ish==TRUE){
                         if(coln==colm && colm!=col){
@@ -1126,7 +1133,6 @@ BOOL c1=FALSE;
 BOOL c2=FALSE;
 BOOL c3=FALSE;
 int ezprintf(){
-int         rown, coln, rowm, colm;
 now2='\x00';
 now3='\x00';
 //now4=FALSE;
@@ -1148,17 +1154,18 @@ else if ( zword=='.' || zword=='-'  ){
     strcpy(cword,"");
 
                         while (TRUE){
-                        if(ish==TRUE)
+                        //if(ish==TRUE)
                         cursor_position(&rown,&coln);
                         printf("%s",&zword);
                         fflush(stdout);
-                        if(ish==TRUE)
+                        //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
                         if(ish==TRUE){
                         if(coln==colm && coln!=col){
                         continue;
                         }
-                        else if(coln==colm && colm==col){
+                        }
+                        if(coln==colm && colm==col){
                             now1=FALSE;
                             now2='\x00';
                             now3=TRUE;
@@ -1169,7 +1176,7 @@ else if ( zword=='.' || zword=='-'  ){
                             now1=TRUE;
                             now2=FALSE;
                         }
-                        }
+                        
                         break;
                         }
                     
@@ -1183,13 +1190,13 @@ else if (c3==TRUE) {
                     c3=FALSE;
                     c2=FALSE;
                         while (TRUE){
-                        if(ish==TRUE)
+                        //if(ish==TRUE)
                         cursor_position(&rown,&coln);
                         fprintf(stdout,"%s",cword);
                         fflush(stdout);
-                        if(ish==TRUE)
+                        //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
-                        if(ish==TRUE){
+                        //if(ish==TRUE){
                             if(coln==col-2 && colm==col){
                                 //printf("222");
                                 now1=TRUE;
@@ -1206,6 +1213,7 @@ else if (c3==TRUE) {
                                 //now1='\x00';
                                 now2='\x00';
                             }
+                        if(ish==TRUE){
                         if(coln==colm){
                         if(colm==col){
                         printf(" ");
@@ -1259,21 +1267,22 @@ if(ez=='1'){
 fflush(stdin);
 if (((int)zword>=65  && (int)zword<=122) || ((int)zword==32 || (int)zword==46 || (int)zword==45 ) ){
                         while (TRUE){
-                        if(ish==TRUE)
+                        //if(ish==TRUE)
                         cursor_position(&rown,&coln);
                         fprintf(stdout,"%c",zword);
                         fflush(stdout);
-                        if(ish==TRUE)
+                        //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
                         if(ish==TRUE){
                         if(coln==colm && coln!=col)
                         continue;
-                        else if(coln==colm && colm==col){
+                        }
+                        if(coln==colm && colm==col){
                             //printf("2222");
                             now3=TRUE;
                             break;
                         }
-                        }
+                        
                         break;
                         }
 strncat(aword,&zword,1);
@@ -1672,7 +1681,7 @@ for(P=0;P<p;P++){
             strncat(rtxt,rbuffer,9998);
             nrtxt=strlen(rtxt);
             strcpy(En,strtok(rbuffer," "));
-            if(strcmp(answer1,En)==0 && checkstr(bbuffer,"|",1,1)){
+            if(strcmp(answer1,En)==0 && checkstr(bbuffer,"|",0,1)){
                 strncpy(theline,bbuffer,9996);
                 locate=nrtxt;
                 vflag=TRUE;
@@ -1723,7 +1732,7 @@ for(P=0;P<p;P++){
             
             nrtxt=strlen(rtxt);
             strcpy(En,strtok(rbuffer," "));
-            if(strcmp(answer1,En)==0 && checkstr(bbuffer,"|",1,1)){
+            if(strcmp(answer1,En)==0 && checkstr(bbuffer,"|",0,1)){
                 locate=nrtxt;
                 clocate=locate-alocate;
                 vflag=TRUE;
@@ -1775,7 +1784,7 @@ for(P=0;P<p;P++){
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
 NL=FALSE;
 if (ysv1=='S' || ysv1=='s')
-printf("\r\033[%dC%s\r",col-2,eline);
+ishprt("\r\033[%dC%s\r",col-2,eline);
 if(flag==FALSE){
     printf("\n%s",bword);
     fflush(stdout);
@@ -2040,7 +2049,7 @@ BOOL nd=TRUE;
 //int si=0;
 char a1[10][9999];
 
-
+char czh[10][200];
 int Read(){
 int leng3;
 int yn=0;
@@ -2048,7 +2057,6 @@ int i;
 int M;
     int N;
     int I;
-    char czh[10][200];
 while(TRUE){
     leng3=strlen(aword);
     setitimer(ITIMER_REAL,&value0,NULL);
@@ -2104,6 +2112,7 @@ break;
 
 if( zword=='\x06' && getin==FALSE ){
 findword(answer1,en,txt);
+continue;
 }
 
 else if (getin!=TRUE && waiting!=TRUE ){
@@ -2458,7 +2467,7 @@ int colourp(){
                 if(ez=='1'){
                 if (flag != TRUE ){
                 if(strcmp(aword,"")==0){
-                    printf("\r\033[%dC%s\r",col-2,nline);
+                    ishprt("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
                     ysv(flag,bword,ez);
                 }
@@ -2469,7 +2478,7 @@ int colourp(){
                 }
                 else{
                 //fflush(stdin);
-                printf("\r\033[%dC%s\r",col-2,fline);
+                ishprt("\r\033[%dC%s\r",col-2,fline);
                 fflush(stdout);
                 ysv(flag,bword,ez); 
                 //printf("\n%s",bword);
@@ -2483,7 +2492,7 @@ int colourp(){
             if(ez=='2'){
                 if (flag != TRUE ){
                 if(strcmp(aword,"")==0){
-                    printf("\r\033[%dC%s\r",col-2,nline);
+                    ishprt("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
                     ysv(flag,bword,ez);
                 }
@@ -2493,7 +2502,7 @@ else if (ifRight()==TRUE){
     ysv(flag,bword,ez);
 } 
 else{
-    printf("\r\033[%dC%s\r",col-2,fline);
+    ishprt("\r\033[%dC%s\r",col-2,fline);
     fflush(stdout);
     ysv(flag,bword,ez);
 }
@@ -2692,6 +2701,11 @@ nend[num+1]=max;
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
                 strcpy(w1[n],"");
+                strcpy(czh[n],"");
+            }
+
+
+            for(n=0;n<10;n=n+1){
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
                 mmm=m;
@@ -2725,7 +2739,9 @@ nend[num+1]=max;
             bword[0]='\0'; 
             strcat(bword,en);
             strcat(bword," ");
+            strcat(bword,"\033[1m");
             strcat(bword,zh);
+            strcat(bword,"\033[0m");
             
             /*word[0]='\0';*/
             fflush(stdout);
@@ -2880,10 +2896,14 @@ strncat(word,&txt[n],1);
             mmm=0;
             zhleng=0;
             zhleng=strlen(zh);
-            strcpy(azh[1],"");
+            //strcpy(azh[1],"");
             for(n=0;n<10;n=n+1){
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
+                strcpy(w1[n],"");
+                strcpy(czh[n],"");
+            }
+            for(n=0;n<10;n=n+1){
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
                 mmm=m;
@@ -2914,7 +2934,9 @@ strncat(word,&txt[n],1);
             bword[0]='\0'; 
             strcat(bword,en);
             strcat(bword," ");
+            strcat(bword,"\033[1m");
             strcat(bword,zh);
+            strcat(bword,"\033[0m");
             /*word[0]='\0'; */
             /*memset(word,0,sizeof word); */
             /*printf("%s",word);*/
@@ -3073,6 +3095,9 @@ strncat(word,&txt[n],1);
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
                 strcpy(w1[n],"");
+                strcpy(czh[n],"");
+            }
+            for(n=0;n<10;n=n+1){
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
                 mmm=m;
@@ -3104,7 +3129,9 @@ strncat(word,&txt[n],1);
             bword[0]='\0'; 
             strcat(bword,en);
             strcat(bword," ");
+            strcat(bword,"\033[1m");
             strcat(bword,zh);
+            strcat(bword,"\033[0m");
             
             fflush(stdout);
             /***fgets(aword,2,stdin);***/
@@ -3174,8 +3201,7 @@ int arga;
 		switch (arga) {
 			case 'r': printf("错题集模式\n");fflush(stdout);CORRECT=TRUE; break;
 			case 'i': printf("优化ish\n");fflush(stdout);ish=TRUE;termux=TRUE; break;
-            case 'p': printf("通关模式\n");fflush(stdout);PASS1=TRUE; break;
-			
+            case 'p': printf("通关模式\n");fflush(stdout);PASS1=TRUE; break;			
 		}
 	}
 
