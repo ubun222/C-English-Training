@@ -189,6 +189,33 @@ add=0;
     return 0;
 }
 
+ int Checkstr(char *s, char *t, int lenstr)
+{
+    int n=0;
+    int m;
+    BOOL same=FALSE;
+    for (m=0;m<strlen(s);m++)
+    {
+            for (n=0;n<lenstr;n++){
+            if(s[n+m] == t[n]){
+               // printf("%c",s[n+m]);
+                same=TRUE;
+            }
+            else{
+                same=FALSE;
+                break;
+            }
+            }
+
+        if (same==TRUE)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 int ifre(int a1[4],int  b ){
     int l;
     //BOOL F;
@@ -631,7 +658,7 @@ int findword(char * en, char * en2 , char * txt){
             strncat(Word,&Txt[I],1);
         }
         else{
-            if(checkstr(Word,Zwords,1,strlen(Zwords)-1)){
+            if(Checkstr(Word,Zwords,strlen(Zwords))){
                 if(ish==TRUE){
                     if(fresh(Word)!=-1)
                 printf("\n~");
@@ -2136,6 +2163,43 @@ break;
 
 if( zword=='\x06' && getin==FALSE ){
 findword(answer1,en,txt);
+            if(ez=='1'){
+                strcpy(yword,"");
+                yword[0]='\0';
+                //printf("%s\n",answer1);
+            for(si=0;si<strlen(answer1);si++){
+                yword[si]='-';
+                yword[si+strlen(answer1)]='\x7f';
+                yword[si+strlen(answer1)*2]='\x7f';
+            }
+
+            //printf("\n%lu\n",strlen(zwords));
+                //strcpy(zwords,backs);
+                zd=FALSE;
+                waiting=TRUE;
+                getin=TRUE;
+                //backed=TRUE;
+                //continue;
+            }
+            else{
+            //getin=FALSE;
+
+waiting=FALSE;
+            }
+            leng=-1;
+strcpy(cword,"");
+strcpy(aword,"");
+int yn=0;
+//free(yword);
+zword='\x00';
+yi=-1;
+bd=FALSE;
+pd=FALSE;
+ad=FALSE;
+zd=FALSE;
+//nd=FALSE;
+bk=FALSE;
+c=0;
 continue;
 }
 
