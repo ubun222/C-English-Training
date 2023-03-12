@@ -3322,7 +3322,7 @@ tailor						裁缝，定制
 take a bow					谢幕
 takeoff					起飞
 tale					故事，流言
-tangled					缠结，混乱，争论
+tangled					缠在一起的
 tank							容器，一箱，坦克，惨败
 tank						容器，一箱，坦克，惨败
 tap						龙头，抽液，利用，轻拍
