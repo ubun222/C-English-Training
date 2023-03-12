@@ -65,6 +65,7 @@ accurate						准确的
 accurate				精确的
 accusation				指控
 accuse						指责，指控
+accuse						指责，指控
 accuse					指责，指控
 accustom						使某人习惯于某事
 accustom					使某人习惯于某事
@@ -208,6 +209,7 @@ apologize						道歉
 appeal						呼吁，上诉，吸引
 appeal					呼吁，上诉，吸引
 appealing							有吸引力的，恳求的
+appear						出现，显得，出版，出庭
 appearance						到来，外表，出版，演出
 appearing			呈现
 appetite						食欲，欲望
@@ -257,13 +259,11 @@ aside				向旁边，旁白
 aside from			除...之外
 aspect							部分，方面，景色
 aspect				部分，方面
-aspirational			志向
 aspirational			有志向的
 assassinate				暗杀
 assault					袭击，冲击
 assault					袭击，冲击
 assemble						召集，收集，装配
-assemble				召集，收集，装配
 assemble				召集，收集，装配
 assembly							人群，集会，立法机构
 assert						断言，主张
@@ -293,9 +293,9 @@ at play			某种因素在大格局里起作用
 at the expense	以...为代价
 athletic					运动的，运动员的
 athletics				田径运动
-athletics				田径运动
 atmosphere						大气，空气，气氛
 atmosphere				空气，大气，气氛
+attach						固定，附属
 attempt						企图
 attendance						出席人数，就诊
 attendance						出席人数，就诊
@@ -332,7 +332,6 @@ awkward					不方便的，令人尴尬的
 background						背景，不显著的位置
 background					背景，不显著的位置
 backslide						故态复萌的人
-backup				支持，备用物品，备份
 backup				支持，备用物品，备份
 backward						向后的，倒退的，落后的，犹豫的
 bacteria							细菌
@@ -407,6 +406,7 @@ boom						隆隆声，繁荣，暴涨
 boost							促进，宣传，增加
 boost						促进，宣传，增加
 boot					靴子，解雇，猛踢，启动
+bore							钻，挖，口径，讨厌
 botanical					植物学的
 botanist					植物学家
 bother						打扰，使...不安，费事
@@ -568,7 +568,6 @@ coach						长途汽车，车厢，教练，辅导
 coach						长途汽车，车厢，教练，辅导
 coast									海岸，滑行
 coastal				近海的，海滨的
-coastal				近海的，海滨的
 cobweb		蜘蛛网
 code							密码，规范
 code							密码，规范
@@ -583,6 +582,7 @@ collapse					倒塌，折叠
 collapse				倒塌，折叠
 colleague					同事
 collective					集体的
+college						学院，大学，协会
 collide				碰撞，冲突
 collision					碰撞，冲突
 colonial					殖民地的
@@ -594,6 +594,7 @@ combination				混合体，组合
 combination lock					密码锁
 combine						混合，搭配，使结合
 combine					混合，搭配，使结合
+come about						发生，转向
 comets					彗星
 commencement					开始
 comment					评论，注解，批评，意见
@@ -822,13 +823,13 @@ critical						批评性的，关键的，评论家的
 critical					批评性的，关键的，评论家的
 criticism						评论，批评
 criticism					评论，批评
+criticize						批评，评论
 criticize					批评，评论
 critter					动物
 crop					作物，收成，剪短
 cross						十字形，磨难，生气的，穿过
 cross over			转投
 crossing						横渡，道口
-crucial				至关重要的
 crucial				至关重要的
 crucial				至关重要的
 cruelty					残忍，暴行
@@ -847,6 +848,7 @@ curb							控制，限制
 curb						控制，限制
 curiosity						好奇，珍稀物
 curious						好奇的
+curious						好奇的
 currency					货币，通行
 current						当前的，流行的，电流，趋势
 currently					当前
@@ -864,10 +866,10 @@ deadline						最后期限
 deadly						致命的，极度的
 deal with			处理
 debris				残骸，垃圾
-debris				残骸，垃圾
 debt							欠款，人情债
 debut		首次亮相，出道
 decade				十年
+decency						得体，正派，礼仪
 decent							正派的，得体的，像样的
 decent						正派的，得体的，像样的
 decision				决定，判决，果断
@@ -947,7 +949,6 @@ describe			描述，形容
 descriptive					描写的，记叙的
 desert						抛弃，背离，沙漠
 desert				抛弃，背离，沙漠
-desert				抛弃，背离，沙漠
 deserve					应得
 deserve				应得
 designate						命名，指派
@@ -967,6 +968,7 @@ detach oneself			挣脱
 detached				单独的，公正的
 detail						细节，详情，特遣队
 detailed						详细的，精细的
+detect						查明，发现
 detect						查明，发现
 detect					查明，发现
 detection					发现，侦查
@@ -1016,14 +1018,12 @@ disc						圆盘，椎间盘，唱片
 discern						分辨出，觉察到
 discharge						解雇，流出，履行，出院
 discipline				纪律，惩罚，训导
-discipline				纪律，惩罚，训导
 disconnect						拔下，停止供应
 discount						折扣，不予考虑，贴现
 discourage						使灰心，阻拦
 discourage				使灰心，阻拦
 discover					查明，发现
 discrepancy				差异
-discriminate			区别对待，区别
 discriminate			区别对待，区别
 discrimination					歧视，鉴赏力
 discrimination			其实，鉴赏力
@@ -1173,7 +1173,6 @@ eloquent					雄辩的，传神达意的
 embarrass						使尴尬
 embarrassed					尴尬的
 embassy			大使馆
-embody				象征，使具体化，包括，收录
 embody				象征，使具体化，包括，收录
 embrace						拥抱，包括，欣然接受
 embrace					拥抱，包括，欣然接受
@@ -1330,7 +1329,6 @@ expertise				专长
 explicitly					明确的，生动的
 exploit					英雄业绩，开发，剥削
 exploit				英雄业绩，开发，剥削
-exploit				英雄业绩，开发，剥削
 explore					勘查，探索
 explore					勘查，探索
 explosion						爆炸，激增，突然出现
@@ -1404,6 +1402,7 @@ feature						特征，方面，以...为特色，占据重要位置
 federal			联邦制的
 feed				喂，满足，给...提词
 feedback						反馈
+feign							假装
 feral					野生的
 fertility					生育能力，丰富性
 fertilizer					肥料
@@ -1580,6 +1579,7 @@ greener pastures	更好的事物或地方
 greenhouse				温室
 grid								格栅，网格
 grief							悲伤，麻烦
+grief							悲伤，麻烦
 grievance				不平的事，委屈
 grind						磨碎，压迫
 grip						抓牢，控制
@@ -1665,11 +1665,13 @@ honour						正义感，荣誉，荣幸，崇敬
 honour						正义感，荣誉，荣幸，崇敬
 hoodwink					欺诈
 hook				勾住
+horizon						地平线，范围
 horrific						令人恐惧的
 hospitable						友好的，适宜的
 hospitality					款待
 hospitalize					送...入院治疗
 host						主人，主持人，主办
+hostile						不友善的，反对的，不利的，敌人的
 hostile					不友善的，反对的，不利的，敌人的
 hostilities				战争行为
 hostility				不友善，敌意，反对
@@ -1753,6 +1755,7 @@ imprisonment			监禁
 improper					不合时宜的，非法的，不正确的
 in advance						预先
 in ascending order			按升序排列
+in consequence					因此
 in effect						实质上
 in no small measure				在很大程度上
 in proportion					成等比的
@@ -1774,6 +1777,7 @@ incidence						发生，发生率
 incidence					发生，发生率
 incidentally				附带的，偶然
 incline						弯下，使...倾向于，弯腰，倾向
+inclined						有愿望的，有倾向的，有天赋的
 include						包括
 income				收入
 incomparable				无与伦比的，完全不同的
@@ -1926,6 +1930,7 @@ intervention						干涉
 intervention				干涉
 interview					面试，面谈
 interview				面试，面谈
+intimate						亲密的，详尽的，暗示
 intimate					亲密的，详尽的，暗示
 intolerant					偏执的，过敏的
 intoxication			醉酒，陶醉
@@ -2016,6 +2021,7 @@ lengthy						长时间的
 lessen				减轻，降低
 lessen				减轻，降低
 lest						以免，万一，担心
+levity						轻率
 liability					不利条件，负债，责任
 liability					不利条件，负债，责任
 liberation							解放，解脱
@@ -2082,6 +2088,7 @@ manual					体力的，手的，使用手册
 manufacture					大量生产，生成，编造，工业品
 manufacture				大量生产，生成，编造，工业品
 manuscript						手抄本，手稿
+mar							破坏
 march							齐步走，使行进，进展
 margin						页边空白，边缘，幅度，极限
 margin				页边空白，边缘，幅度，极限
@@ -2156,7 +2163,6 @@ minor								较小的，未成年人
 minor							较小的，未成年人
 minor					较小的，未成年人
 minority				少数，未成年
-minority				少数，未成年
 minority		少数
 miracle					奇迹
 miraculously	奇迹般的
@@ -2224,6 +2230,7 @@ narrow					狭窄的，有限的，微小的，变窄，缩小
 national			国家的
 nationally			全国性的
 native						出生的，当地的，本地人
+nature						本质，自然
 navigate					导航，指路，驾驶，横渡
 navigation				导航，航行
 necessity					必要，必需品
@@ -2231,7 +2238,6 @@ necessity				必要，必需品
 necropolis				墓地
 needle					针，惹恼
 needy							贫穷的
-needy					贫穷的
 needy					贫穷的
 negative						否定的，消极的，负面的
 neglect						疏于照管，遗漏，忽视
@@ -2252,13 +2258,11 @@ neutrality					中立，中性
 nevertheless			尽管如此
 nigh				近的
 nightmare				噩梦，可怕的经历，难缠的人
-nightmare				噩梦，可怕的经历，难缠的人
 nocturnal					夜间的
 nominate						提名，任命，指定
 non-linear					非线性的
 non-profit			非营利性的
 normality			正常状态
-notably				尤其，极其，显眼的
 notably				尤其，极其，显眼的
 noted							著名的
 notion								观念，了解
@@ -2299,6 +2303,7 @@ on a par with			与...同样
 once and for all		彻底的
 ongoing					持续的，发展中的
 ongoing					持续的，发展中的
+open up						开门，变宽，发展
 operation							运行，实施，手术，行动
 opium							鸦片
 opponent							对手，反对者
@@ -2376,6 +2381,8 @@ paradise			天堂，乐园
 paradox					悖论，矛盾的人或事物
 paradox				悖论，矛盾的人或事物
 paralyze					使...瘫痪
+parcel						包裹
+parcel out						分配
 parish					堂区，乡村小区
 parliament			议会
 participate			参加
@@ -2405,7 +2412,6 @@ peculiar				奇怪的，不舒服的，特别的，特有的
 peer							仔细看，同龄人
 peer					仔细看，同龄人
 peer					仔细看，同龄人
-peer					仔细看，同龄人
 penalty						处罚
 penalty					处罚
 penalty				处罚
@@ -2413,7 +2419,6 @@ pension						养老金
 pension					养老金
 perceive					察觉，把...看作
 perception						感觉，洞察，看法
-perception				感觉，洞察，看法
 perception				感觉，洞察，看法
 perception				感觉，洞察，看法
 perch						栖息处，栖息，放置
@@ -2454,6 +2459,7 @@ piece				块，片，段，张，件，部件
 pierce					穿孔于，穿透
 pioneer						先驱，开创
 pipeline			管道，渠道
+plagiaristic					抄袭的
 plague					瘟疫，灾祸，困扰
 planet						行星
 plant								植物，工厂，机器，播种，安放，给予
@@ -2464,7 +2470,6 @@ plough					犁，耕地
 plumage					全身羽毛
 plunge									纵身一跳，下沉，参与，投入
 poetry				诗歌，美好品质
-poetry				诗歌，美好品质
 point out			指出
 pointless						无意义的
 poison							毒物，毒死，污染
@@ -2472,6 +2477,7 @@ poisonous					有毒的，恶毒的
 poke					戳，拳打，捅出，插入，伸出
 polar							极地的，截然对立的
 policy				政策，原则
+politician						政治家
 poll						投票，获得，调查
 poll						投票，获得，调查
 ponder						仔细考虑
@@ -2525,6 +2531,7 @@ prematurely					过早的
 premise				前提
 premium					附加费，优质的
 premium				附加费，优质的
+preoccupation					全神贯注
 prepare									准备
 prepare						准备
 prescribe						嘱咐，规定
@@ -2573,6 +2580,7 @@ private					私人的，秘密的，内向的，私立的
 private sector					私营部门
 privilege					特权，荣幸
 privileged					有特权的，荣幸的
+privy							知情的，茅房
 probably					很可能
 procedure						程序
 procedure					程序
@@ -2664,11 +2672,13 @@ qualification			资格，素质
 qualify						使具有资格，限定，修饰，有权
 qualify					使具有资格，限定，修饰，有权
 quality						质量，性质，优质
+quality						质量，性质，优质
 quantifiable					可量化的
 quantity						数量，大量
 quantity				数量，大量
 quicken					加快，激起
 quit							停止，辞去，退出
+quiver						发抖，颤抖
 quiz					知识竞赛
 quota							定额，限额
 quotation						引文，报价
@@ -2706,8 +2716,6 @@ reach a crisis point		迫在眉睫
 react							作出反应，有不良反应
 reaction					反应
 readjust				整理，重新调校，调整
-readjust				整理，重新调校，调整
-readjust to			重新适应
 readjust to			重新适应
 ready						准备好的，急切的，需要的，机敏的
 realistic						切实可行的，逼真的
@@ -2833,7 +2841,9 @@ resemblance			相似之处
 resemble						像，类似于
 reservation					预定，预留，保留意见
 reservation					预订，预留，保留意见
+reserve						储备，保护区，拘谨，预订
 reserve					储备，保护区，拘谨，预订
+reserved						矜持的
 reserved				矜持的
 resident						居民，常住的
 resident						居民，常住的
@@ -2881,6 +2891,7 @@ reunion					团聚
 reveal					披露，展现
 reveal				披露，展现
 reveal				披露，展现
+revelation						披露
 revenge						报复，报仇
 revenue						收入
 revenue					收入
@@ -3043,7 +3054,6 @@ shrewd						精明的
 shrink					缩小，退缩，回避
 shrug						耸肩
 shuttle				往返运行，往返两地的运输工具
-shuttle				往返运行，往返两地的运输工具
 sideways						向旁边的，向旁边，侧身
 sightseeing					观光
 sign				符号，迹象，征兆，签订
@@ -3084,7 +3094,6 @@ slave								奴隶，苦干
 slavery					奴隶身份，奴隶制，沉迷
 slavery to					受...支配
 slight				小的，肤浅的，冒犯
-slight				小的，肤浅的，冒犯
 slightly						略微的，纤细的
 slightly				略微的，纤细的
 slim						纤细的，些许的，减肥
@@ -3098,9 +3107,9 @@ smoothly					平稳的，圆滑的
 smuggle					走私，偷运
 snack							快餐，小食品
 sneak					溜，偷偷拿，偷偷的
+snobbish						势利的
 snooze					打盹
 soar						高飞，升高
-soar					高飞，升高
 soar					高飞，升高
 sociable					好交际的
 social-distance		社交距离
@@ -3172,7 +3181,6 @@ standpoint				立场
 start-up			初创公司
 startle					使吃惊
 startle				使吃惊
-startle				使吃惊
 startup					初创公司
 starving						挨饿的
 state				状况，说明
@@ -3181,7 +3189,6 @@ statistics						统计数字
 status						地位，重要程度
 steadily			逐步的，平静的
 steady						稳定的，均匀的
-steady				稳定的，均匀的
 steady				稳定的，均匀的
 steady		稳定的，均匀的
 steal							偷，偷偷移动，便宜货
@@ -3223,7 +3230,6 @@ strict conformity					绝对盲从
 strike					击打，碰撞，给予，打动，罢工
 strike a pose					装模作样
 string				细绳，一串，悬挂
-strip					脱掉衣服，除去，剥夺，条
 strip					脱掉衣服，除去，剥夺，条
 stroke			一击，一笔
 structure						结构，条理性，建筑物，安排
@@ -3268,6 +3274,7 @@ supply				供应，供给
 suppose							认为，设想
 suppose				认为，设想
 suppress					镇压，封锁，克制
+suppression					镇压，封锁，克制
 surf						拍岸浪花，冲浪
 surge				使强烈感受到，急剧上涨
 surgical				外科手术的，矫正用的，精确的
@@ -3302,7 +3309,6 @@ symbol						符号，象征
 symbol					符号，象征
 symbolize							象征，代表
 sympathetic			有同情心的，讨人喜欢的，赞同的
-sympathetic			有同情心的，讨人喜欢的，赞同的
 sympathy						同情，支持，意气相投
 symptom						症状，征兆
 symptom					症状，征兆
@@ -3311,7 +3317,6 @@ synonymous	同义的
 synthetic						合成的，假的
 tackle							处理，阻截
 tackle					处理，阻截
-tackle				处理，阻截
 tackle				处理，阻截
 tailor						裁缝，定制
 take a bow					谢幕
@@ -3362,7 +3367,6 @@ the generation gap				代沟
 the indicative mood				陈述语气
 the music of the spheres			天籁
 the needy				穷人
-the needy				穷人
 the outgoing tide				退潮
 the privileged				特权人士
 the regions				除首都以外的完全地区
@@ -3377,7 +3381,6 @@ threat						恐吓，威胁
 threat					恐吓，威胁
 threaten					恐吓，危及
 threaten					恐吓，危及
-threshold				门槛，关口
 threshold				门槛，关口
 threshold	门槛，关口
 thrilling					令人兴奋的
@@ -3464,6 +3467,7 @@ turbulence				揣流，动荡
 turbulence				揣流，动荡
 turbulent								猛烈的，动荡的
 turn out			结果是，出现
+turn over						翻，空转，移交，考虑
 turn up			出现
 turtle				海龟
 tutor							教师，课本
@@ -3501,8 +3505,8 @@ undervalue							对...估价太低，轻视
 undocumented				无证明文件的，无执照的
 undoubtedly					毫无疑问的
 unearthly			神秘的，荒唐的
+unequally						不公平的
 unethical					不道德的
-uneven					不平整的，不规则的，悬殊的
 uneven					不平整的，不规则的，悬殊的
 unexpected					出乎意料的
 unfold					展开，披露
@@ -3515,7 +3519,9 @@ unintentionally					非故意的
 unique						唯一的，独特的
 unique					唯一的，独特的
 universal						普遍的，全体的，通用的
+unjustly						不公平的
 unkindness					不友善，残酷
+unmistakable					不会弄错的
 unpleasant					令人不快的
 unpleasantness				不愉快
 unprecedented							空前的
@@ -3525,6 +3531,7 @@ unreasonable			不讲道理的，过分的
 unrest						动乱
 unrest					动乱
 unsettling				令人不安的
+unsought						未经请求的
 unstable				不稳定的
 untiring					不屈不挠的，持续不衰的
 untreated					未治疗的
@@ -3576,6 +3583,7 @@ venerate					崇敬
 ventilate				使...通风，公开表达
 version						说法，变体，版本
 vessel				船，容器，导管
+veteran						老兵
 veteran				老兵
 via							经由，通过
 vice							有伤风化的行为，缺陷
@@ -3618,6 +3626,7 @@ voluntary					自愿的，无偿的，随意的
 vote							票，投票，建议，同意
 voyage					航行
 vulnerability			易遭攻击
+vulnerable						脆弱的，易受影响的
 vulnerable					脆弱的，易受影响的
 wander					游荡，闲逛
 warehouse				仓库
@@ -3638,6 +3647,7 @@ wide							宽的，广的，大的
 widen						变宽，扩展
 widespread						普遍的
 widespread					普遍的
+wild							野生的，放荡的，狂怒的，极棒的
 wilderness				荒野
 wildfire								烈火
 wildlife					野生动物
@@ -37395,327 +37405,6 @@ needy |ˈniːdi| Adjective/:有需要的,贫困的
 needy and elderly people:有需要人士及长者
 those from needy backgrounds:来自贫穷背景的人
 
-If someone or something shuttles or is shuttled from one place to another place, they frequently go from one place to the other. 使频频往返于两地之间; 频频往返于两地之间
-A shuttle is a plane, bus, or train which makes frequent trips between two places. 穿梭班机; 穿梭班车; 穿梭火车
-shuttle |英 ['ʃʌt(ə)l]  美 ['ʃʌtl]| n. 航天飞机；穿梭；梭子；穿梭班机、公共汽车等/vt. 使穿梭般来回移动；短程穿梭般运送/vi. 穿梭往返/
-He and colleagues have shuttled back and forth between the three capitals.他和同事们一直来回往返于3个首都之间。
-There is a free 24-hour shuttle between the airport terminals.在机场的各航空站之间有24小时的免费穿梭巴士。
-
-
-If you refer to a situation as a nightmare, you are saying in a very emphatic way that it is irritating because it causes you a lot of trouble. 噩梦 (指恼人的情况)
-If you refer to a situation as a nightmare, you mean that it is very frightening and unpleasant. 噩梦 (指可怕处境)
-A nightmare is a very frightening dream. 恶梦
-nightmare |英 ['naɪtmeə]  美 ['naɪt'mɛr]| n. 恶梦；梦魇般的经历/adj. 可怕的；噩梦似的/
-Taking my son Peter to a restaurant was a nightmare.带我儿子彼得去饭店吃饭真是一场噩梦。
-The years in prison were a nightmare.数年的铁窗生涯是一场噩梦。
-All the victims still suffered nightmares.所有的受害者仍为恶梦所扰。
-
-
-startled 受惊吓了的
-If something sudden and unexpected startles you, it surprises and frightens you slightly. 使受惊
-startle |英 ['stɑːt(ə)l]  美 ['stɑrtl]| vt. 使吓一跳；使惊奇/vi. 惊吓；惊跳；惊奇/n. 惊愕；惊恐/
-Martha gave her a startled look.玛莎受惊地看了她一眼。
-The telephone startled him.电话声吓了他一跳。
-
-
-Debris is pieces from something that has been destroyed or pieces of rubbish or unwanted material that are spread around. 碎片; 散乱的垃圾
-debris |英 [ˈdeɪbri:]  美 [dəˈbri]| n. 碎片，残骸/n. (Debris)人名；(法)德布里/
-A number of people were killed by flying debris.一些人遭飞溅的碎片致死。
-
-
-To assemble something means to collect it together or to fit the different parts of it together. 聚集; 组装
-When people assemble or when someone assembles them, they come together in a group, usually for a particular purpose such as a meeting. 集合
-assemble |英 [ə'semb(ə)l]  美 [ə'sɛmbl]| vt. 集合，聚集；装配；收集/vi. 集合，聚集/
-Greenpeace managed to assemble a small flotilla of inflatable boats to waylay the ship at sea.绿色和平组织设法聚集了一支充气艇小舰队去拦截海上的那艘船。
-There wasn't even a convenient place for students to assemble between classes.甚至没有一个学生们课间集合的方便的地方。
-
-
-Someone who has perception realizes or notices things that are not obvious. 洞察力
-Your perception of something is the way that you think about it or the impression you have of it. 理解; 看法
-perception |英 [pə'sepʃ(ə)n]  美 [pɚ'sɛpʃən]| n. 知觉；[生理] 感觉；看法；洞察力；获取/
-It did not require a lot of perception to realize the interview was over.不需要很强的洞察力就可以意识到面试结束了。
-He is interested in how our perceptions of death affect the way we live.他对我们的死亡观如何影响我们的生活方式感兴趣。
-
-
-Coastal is used to refer to things that are in the sea or on the land near a coast. 沿海的
-coastal |英 ['kəʊstl]  美 ['kostl]| adj. 沿海的；海岸的/
-Local radio stations serving coastal areas often broadcast forecasts for yachtsmen.服务沿海地区的地方电台经常向驾驶快艇者播放天气预报。
-
-
-If you say that someone got their just deserts, you mean that they deserved the unpleasant things that happened to them, because they did something bad. 应受的惩罚
-If someone deserts, or deserts a job, especially a job in the armed forces, they leave that job without permission. 开小差
-desertion 放弃
-If you desert something that you support, use, or are involved with, you stop supporting it, using it, or being involved with it. 放弃
-desertion 遗弃
-If someone deserts you, they go away and leave you, and no longer help or support you. 抛弃
-deserted 被遗弃的
-If people or animals desert a place, they leave it and it becomes empty. 遗弃
-A desert is a large area of land, usually in a hot region, where there is almost no water, rain, trees, or plants. 沙漠
-desert |英 [(for v.) dɪ'zɜːt; (for n.) 'dezət]  美 [(for v.) dɪˈzɝ​t; (for n.) 'dɛzɚt]| vt. 遗弃；放弃；逃跑/vi. 遗弃；开小差；逃掉/n. 沙漠；荒原；应得的赏罚/adj. 沙漠的；荒凉的；不毛的/
-At the end of the book the child's true identity is discovered, and the bad guys get their just deserts.在书的结尾，这孩子的真实身份被揭开了，那些坏人也受到了应有的惩罚。
-He deserted from army intelligence last month.他上个月从军队情报部门开了小差。
-He was a second lieutenant in the army until he deserted.他在开小差之前是个少尉。
-They blamed his proposal for much of the mass desertion by the Republican electorate.他们把共和党选民的大批离弃主要原因归咎于他的提议。
-He was pained to see many youngsters deserting kibbutz life.他痛心地看到许多年轻人放弃集体农场生活。
-The sport is being written off as boring and predictable and the fans are deserting in droves.这项运动因为枯燥且易于预测而不再吸引人，爱好者们正成批地退出。
-It was a long time since she'd referred to her father's desertion.自从她谈到被父亲遗弃已经很长时间了。
-Mrs. Roding's husband deserted her years ago.罗丁太太的丈夫数年前抛弃了她。
-She led them into a deserted sidestreet.她领他们来到一条废弃的小巷。
-Poor farmers are deserting their parched farm fields and coming here looking for jobs.贫穷的农民丢下干旱的农田，来这里寻找工作。
-...the Sahara Desert.…撒哈拉沙漠。
-
-
-Your peers are the people who are the same age as you or who have the same status as you. 同龄人; 同等地位的人
-If you peer at something, you look at it very hard, usually because it is difficult to see clearly. 费力地看; 盯着
-peer |英 [pɪə]  美 [pɪr]| n. 贵族；同等的人；同龄人/vi. 凝视，盯着看；窥视/vt. 封为贵族；与…同等/n. (Peer)人名；(英、巴基)皮尔/
-His engaging personality made him popular with his peers.他迷人的个性使他很受同龄人欢迎。
-I had been peering at a computer print-out that made no sense at all.我一直在费力地看一份不知所云的电脑打印稿。
-
-
-If something is embodied in a particular thing, the second thing contains or consists of the first. 包含; 收录
-To embody an idea or quality means to be a symbol or expression of that idea or quality. 体现; 具体象征
-embody |英 [ɪm'bɒdɪ; em-]  美 [ɪm'bɑdi]| vt. 体现，使具体化；具体表达/n. (Embody)人名；(英)恩博迪/
-The proposal has been embodied in a draft resolution.这项提议已经被包含在一份决议草案中。
-For twenty-nine years, Checkpoint Charlie embodied the Cold War.29年来，查理检查站具体象征了冷战。
-Jack Kennedy embodied all the hopes of the 1960s.杰克•肯尼迪体现了20世纪60年代的全部希望。
-
-
-sympathetically 赞同地
-If you are sympathetic to a proposal or action, you approve of it and are willing to support it. 赞同的
-sympathetically 同情地
-If you are sympathetic to someone who is in a bad situation, you are kind to them and show that you understand their feelings. 同情的
-sympathetic |英 [sɪmpə'θetɪk]  美 [,sɪmpə'θɛtɪk]| adj. 同情的；交感神经的；共鸣的；赞同的；和谐的；合意的/n. 交感神经；容易感受的人/
-After a year we will sympathetically consider an application for reinstatement.一年以后我们会考虑赞同复职申请。
-Many of these early visitors were sympathetic to the Chinese socialist experiment.这些早期访问者中的很多人都赞同中国的社会主义实验。
-She nodded sympathetically.她同情地点了点头。
-She was very sympathetic to the problems of adult students.她对成年学生的问题很同情。
-
-
-The backup of a song is the music that is sung or played to accompany the main tune. 伴奏; 伴唱
-If you have something such as a second piece of equipment or set of plans as backup, you have arranged for them to be available for use in case the first one does not work. 备用物 (如设备、计划)
-Backup consists of extra equipment, resources, or people that you can get help or support from if necessary. 后备 (设备、物资或人力)
-backup |英 ['bækʌp]  美 ['bæk,ʌp]| n. 支持；后援；阻塞/adj. 支持的；候补的/vt. 做备份/
-Sharon also sang backup for Barry Manilow.莎伦还为巴里·马尼洛唱了伴唱。
-Every part of the system has a backup.这套系统的每个部分都有备件。
-There is no emergency back-up immediately available.没有立即就能获得的后备。
-
-
-You can use notably to emphasize a particular quality that someone or something has. 明显地
-You use notably to specify an important or typical example of something that you are talking about. 尤其
-notably |英 ['nəʊtəblɪ]  美 ['notəbli]| adv. 显著地；尤其/
-Old established friends are notably absent, so it's a good opportunity to make new contacts.老朋友们显然都已不在身边，所以这是结交新朋友的一个好机会。
-The divorce would be granted when more important problems, notably the fate of the children, had been decided.当更重要的问题，尤其是孩子们的命运被决定时，离婚就会获得批准。
-
-
-If you refer to someone's exploits, you mean the brave, interesting, or amusing things that they have done. 英勇事迹
-exploitation (对资源、原材料的) 开发利用
-To exploit resources or raw materials means to develop them and use them for industry or commercial activities. 开发利用 (资源、原材料)
-If you exploit something, you use it well, and achieve something or gain an advantage from it. 充分利用
-exploitation (对某种情势的) 利用
-If you say that someone is exploiting a situation, you disapprove of them because they are using it to gain an advantage for themselves, rather than trying to help other people or do what is right. 利用 (某种情势)
-exploitation 利用; 剥削
-If you say that someone is exploiting you, you think that they are treating you unfairly by using your work or ideas and giving you very little in return. 利用; 剥削
-exploit |英 [ˈeksplɔɪt;ɪkˈsplɔɪt]  美 [ɛksplɔɪt; ɪkˈsplɔɪt]| vt. 开发，开拓；剥削；开采/n. 勋绩；功绩/
-His wartime exploits were later made into a film and a television series.他战时的英勇事迹后来被改编成了电影和电视剧。
-...the planned exploitation of its potential oil and natural gas reserves.…对其潜在石油和天然气储备的有计划的开采利用。
-I think we're being very short-sighted in not exploiting our own coal.我想我们不开采利用自己的煤矿实在是目光短浅。
-You'll need a good antenna to exploit the radio's performance.你需要一根好的天线来充分利用该电台的节目。
-...the exploitation of the famine by local politicians.…当地政客对饥荒的利用。
-The government and its opponents compete to exploit the troubles to their advantage.政府及其反对者们竞相利用这些动乱来取得利益。
-Extra payments should be made to protect the interests of the staff and prevent exploitation.额外报酬应被支付以维护员工的利益和防止剥削。
-Critics claim he exploited black musicians for personal gain.批评家们声称他为私利利用了黑人音乐家们。
-
-
-You can describe something very beautiful as poetry. 富有诗意的东西
-Poems, considered as a form of literature, are referred to as poetry. 诗歌
-poetry |英 ['pəʊɪtrɪ]  美 ['poətri]| n. 诗；诗意，诗情；诗歌艺术/
-His music is purer poetry than a poem in words.他的音乐比诗文更具诗意。
-...Russian poetry.…俄罗斯诗歌。
-
-
-To discriminate against a group of people or in favour of a group of people means to unfairly treat them worse or better than other groups. 不公平对待
-If you can discriminate between two things, you can recognize that they are different. 区分
-discriminate |英 [dɪ'skrɪmɪneɪt]  美 [dɪ'skrɪmɪnet]| vt. 歧视；区别；辨别/vi. 区别；辨别/
-...legislation which would discriminate in favour of racial minorities.…会偏向少数民族的法规。
-They believe the law discriminates against women.他们认为这项法律歧视妇女。
-He is incapable of discriminating between a good idea and a terrible one.他没能力在一个好主意和一个坏主意之间进行区分。
-
-
-If you readjust something such as a piece of clothing or a mechanical device, you correct or alter its position or setting. 校准; 重置
-If you readjust the level of something, your attitude to something, or the way you do something, you change it to make it more effective or appropriate. 调整
-When you readjust to a new situation, usually one you have been in before, you adapt to it. 重新适应
-readjust |英 [riːə'dʒʌst]  美 [,riə'dʒʌst]| vi. 再调整；重新适应/vt. 使…重新调整；使…重新适应/
-Readjust your watch. You are now on Moscow time.校准你的手表。你现在正处于莫斯科时间。
-In the end you have to readjust your expectations.最后你得调整你的期望值。
-I can understand why astronauts find it difficult to readjust to life on earth.我能明白为什么宇航员们发现难以重新适应地球上的生活。
-
-
-
-readjust to || 
-
-
-
-You use in the slightest to emphasize a negative statement. (用于加强否定的陈述语气) 一点也
-Slight is also a noun. 轻视; 冷落
-If you are slighted, someone does or says something that insults you by treating you as if your views or feelings are not important. 轻蔑; 怠慢
-slightly 瘦小地; 纤细地
-A slight person has a fairly thin and delicate looking body. 瘦小的; 纤细的
-Something that is slight is very small in degree or quantity. 轻微的; 细微的
-slight |英 [slaɪt]  美 [slaɪt]| adj. 轻微的，少量的；脆弱的；细长的；不重要的/vt. 轻视，忽略；怠慢/n. 怠慢；轻蔑/
-That doesn't interest me in the slightest.那事儿一点也勾不起我的兴趣。
-It's difficult to persuade my husband that it isn't a slight on him that I enjoy my evening class.很难劝说我丈夫相信我喜欢去上夜校课程并不是对他的冷落。
-They felt slighted by not being adequately consulted.因为没有充分地征求他们的意见，他们感到被怠慢了。
-...a slightly built man.…一个身材瘦小的男人。
-She is smaller and slighter than Christie.她比克里斯蒂更瘦小更纤弱。
-He's not the slightest bit worried.他一点儿也不着急。
-Doctors say he has made a slight improvement.医生说他已经有些轻微的好转。
-
-
-Strip down means the same as . 拆卸
-If you strip an engine or a piece of equipment, you take it to pieces so that it can be cleaned or repaired. 拆卸
-To strip something means to remove everything that covers it. 剥离
-If someone is stripped, their clothes are taken off by another person, for example in order to search for hidden or illegal things. 脱掉…的衣服
-Strip off means the same as . 脱衣服
-If you strip, you take off your clothes. 脱衣服
-A strip is a long street in a city or town, where there are a lot of stores, restaurants, and hotels. 商业街
-A strip of land or water is a long narrow area of it. 狭长 (地带或水域)
-A strip of something such as paper, cloth, or food is a long, narrow piece of it. (纸、布或食物的) 条
-strip |英 [strɪp]  美 [strɪp]| vt. 剥夺；剥去；脱去衣服/n. 带；条状；脱衣舞/vi. 脱去衣服/
-...the Doonesbury strip.…杜恩斯伯利的连环画。
-The soldiers have stripped the civilians of their passports, and every other type of document.那些士兵们已经夺走了市民的护照以及所有其他证件。
-In five years I had to strip the water pump down four times.在5年里我不得不拆卸了那个水泵4次。
-Volvo's three-man team stripped the car and treated it to a restoration.沃尔沃的3人小组拆了那辆汽车并对它进行了修复。
-After Mike left for work I stripped the beds and vacuumed the carpets.迈克去上班后，我揭下了床罩并吸了地毯。
-One prisoner claimed he'd been dragged to a cell, stripped, and beaten.一个犯人声称他曾被拖进一间牢房，被脱掉衣服殴打。
-The children were brazenly stripping off and leaping into the sea.这些孩子们那时正无所顾忌地脱掉衣服，跳进海里。
-They stripped completely, and lay and turned in the damp grass.他们脱光了衣服，躺在潮湿的草地上翻滚。
-...Goff's Charcoal Hamburgers on Lover's Lane, a busy commercial strip in North Dallas.…在北达拉斯的一条繁忙的商业街——“情人巷”上的戈夫炭烤汉堡店。
-The coastal cities of Liguria sit on narrow strips of land lying under steep mountains.利古里亚的那些海滨城市坐落在陡峭山脉下的狭长地带。
-The simplest rag-rugs are made with strips of fabric braided together.这些最简单的碎布地毯是由织物条编织而成的。
-...a new kind of manufactured wood made by pressing strips of wood together and baking them.…一种通过把木条挤压并烘干而制成的新型人造木材。
-
-
-Tackle is the equipment that you need for a sport or activity, especially fishing. (尤指钓鱼等活动的) 器具
-If you tackle someone, you attack them and fight them. 攻击
-If you tackle someone about a particular matter, you speak to them honestly about it, usually in order to get it changed or done. 坦率地与某人交谈
-Tackle is also a noun. 擒抱撞倒; 抢断
-If you tackle someone in a game such as American football or rugby, you knock them to the ground. If you tackle someone in soccer or hockey, you try to take the ball away from them. (美式或英式橄榄球比赛中) 擒抱摔倒; (足球运动或曲棍球运动中) 抢断
-If you tackle a difficult problem or task, you deal with it in a very determined or efficient way. 处理
-tackle |英 ['tæk(ə)l]  美 ['tækl]| n. 滑车；装备；用具；扭倒/vt. 处理；抓住；固定；与…交涉/vi. 扭倒；拦截抢球/
-...fishing tackle.…渔具。
-Two security guards tackled and apprehended a man suspected of robbing 17 banks.两名保安与一名涉嫌抢劫17家银行的男子搏斗并逮捕了他。
-I tackled him about how anyone could live amidst so much poverty.我坦率地与他谈论哪有人能在如此的极度贫困中生活。
-...a tackle by fullback Brian Burrows.…后卫布赖恩•伯罗斯的阻截。
-Foley tackled the quarterback.福利擒住并摔倒了四分卫。
-The first reason to tackle these problems is to save children's lives.解决这些问题的首要原因是为了挽救孩子们的生命。
-
-
-If you steady yourself, you control your voice or expression, so that people will think that you are calm and not nervous. 使镇定
-If you steady something or if it steadies, it stops shaking or moving around. 使平稳; 平稳
-If you describe a person as steady, you mean that they are sensible and reliable. 可靠的
-steadily 镇定地
-If you look at someone or speak to them in a steady way, you look or speak in a calm, controlled way. 镇定的
-If an object is steady, it is firm and does not shake or move around. 平稳的
-steadily 稳定地
-A steady situation continues or develops gradually without any interruptions and is not likely to change quickly. 稳定的
-steady |英 ['stedɪ]  美 ['stɛdi]| adj. 稳定的；不变的；沉着的/vi. 稳固/vt. 使稳定；稳固；使坚定/adv. 稳定地；稳固地/n. 关系固定的情侣；固定支架/
-Somehow she steadied herself and murmured, "Have you got a cigarette?"她设法使自己镇定下来，并低声问道,“你有香烟吗？”
-Two men were on the bridge-deck, steadying a ladder.两人站在船桥甲板上，扶稳一个梯子。
-He was firm and steady unlike other men she knew.他坚定、可靠，和她所认识的其他男人不同。
-He moved back a little and stared steadily at Elaine.他往后退了点，镇定地盯着依莱恩。
-"Well, go on," said Camilla, her voice fairly steady.“嗯，继续吧。”卡米拉说道，声音相当镇定。
-Get as close to the subject as you can and hold the camera steady.尽可能靠近对象，拿稳相机。
-Relax as much as possible and keep breathing steadily.尽量放松，保持呼吸平稳。
-The improvement in standards has been steady and persistent, but has attracted little comment from educationalists.虽然标准在持续稳步提高，但教育者并未对此有何评论。
-Despite the steady progress of building work, the campaign against it is still going strong.尽管建筑工程稳步进行，反工运动却仍然高涨。
-
-
-A minority is a group of people of the same race, culture, or religion who live in a place where most of the people around them are of a different race, culture, or religion. 少数民族; 信仰其他宗教的少数派
-If people are in a minority or in the minority, they belong to a group of people or things that form less than half of a larger group. 占少数
-If you talk about a minority of people or things in a larger group, you are referring to a number of them that forms less than half of the larger group, usually much less than half. 少数
-minority |英 [maɪ'nɒrɪtɪ; mɪ-]  美 [maɪ'nɔrəti]| n. 少数民族；少数派；未成年/adj. 少数的；属于少数派的/
-...the region's ethnic minorities.…这个地区的少数民族。
-Even in the 1960s, politically active students and academics were in a minority.即使是在20世纪60年代，政治上活跃的学生和高校教师也是占少数。
-Local authority child-care provision covers only a tiny minority of working mothers.地方政府提供的儿童保育服务只惠及了极少数上班族母亲们。
-
-
-If you describe a product as aspirational, you mean that it is bought or enjoyed by people who have strong hopes of moving to a higher social class. 有抱负的人所欣赏的
-If you describe someone as aspirational, you mean that they have strong hopes of moving to a higher social status. 有雄心壮志的
-aspirational || adj. 有雄心壮志的；（生活形态等）梦寐以求的/n. 成功指南；处世自助手册/
-Fine music, particularly opera, has become aspirational, like fine wine or foreign travel.优雅的音乐，尤其是歌剧，已像美酒或海外旅游一样被人追求。
-...the typical tensions of an aspirational household....雄心勃勃的家庭里存在的典型的紧张关系。
-
-
-A discipline is a particular area of study, especially a subject of study in a college or university. (尤指大学里的) 学科
-If you discipline yourself to do something, you train yourself to behave and work in a strictly controlled and regular way. 训练
-If someone is disciplined for something that they have done wrong, they are punished for it. 处罚
-If you refer to an activity or situation as a discipline, you mean that, in order to be successful in it, you need to behave in a strictly controlled way and obey particular rules or standards. 训练; 磨练
-Discipline is the quality of being able to behave and work in a controlled way which involves obeying particular rules or standards. 自律
-Discipline is the practice of making people obey rules or standards of behaviour, and punishing them when they do not. 纪律
-discipline |英 ['dɪsɪplɪn]  美 ['dɪsəplɪn]| n. 学科；纪律；训练；惩罚/vt. 训练，训导；惩戒/
-We're looking for people from a wide range of disciplines.我们正在寻找各类学科的人才。
-Discipline yourself to check your messages once a day or every couple of days.训练你自己每天或每两天查看一次你的留言。
-The workman was disciplined by his company but not dismissed.这名工人被他的公司处罚了，但没有被开除。
-The discipline of studying music can help children develop good work habits and improve self-esteem.学习音乐的规范训练能帮助孩子们养成良好的做事习惯和增强自尊心。
-It was that image of calm, control, and discipline that appealed to millions of voters.正是那冷静、克制和自律的形象吸引了数以百万计的选民。
-Order and discipline have been placed in the hands of governing bodies.秩序与纪律已交由管控机构负责。
-
-
-If you are on the threshold of something exciting or new, you are about to experience it. 即将经历
-A threshold is an amount, level, or limit on a scale. When the threshold is reached, something else happens or changes. 界限; 临界点
-The threshold of a building or room is the floor in the doorway, or the doorway itself. 门口
-threshold |英 ['θreʃəʊld; 'θreʃ,həʊld]  美 ['θrɛʃhold]| n. 入口；门槛；开始；极限；临界值/
-We are on the threshold of a new era in astronomy.我们将迈入天文学的新时代。
-Moss has a high threshold for pain and a history of fast healing.莫斯的忍痛力很强，而且有迅速愈合的经历。
-He stopped at the threshold of the bedroom.他在卧室门口停了下来。
-
-
-If something such as a bird soars into the air, it goes quickly up into the air. 高飞
-If the amount, value, level, or volume of something soars, it quickly increases by a great deal. 急剧增加
-soar |英 [sɔː]  美 [sɔr]| vi. 高飞；高耸；往上飞舞/n. 高飞；高涨/n. (Soar)人名；(英、葡)索尔/
-If you're lucky, a splendid golden eagle may soar into view.幸运的话，一只金色雄鹰会跃入视线。
-Shares soared on the New York stock exchange.纽约证券交易所股票暴涨。
-Insurance claims are expected to soar.预计保险索赔会急剧增加。
-
-
-An uneven system or situation is unfairly arranged or organized. 不均衡的
-Something that is uneven is not regular or consistent. 不规则的; 不一致的
-An uneven surface or edge is not smooth, flat, or straight. 不平坦的; 不直的
-uneven |英 [ʌn'iːv(ə)n]  美 [ʌn'ivən]| adj. 不均匀的；不平坦的；[数] 奇数的/
-Some of the victims are complaining loudly about the uneven distribution of emergency aid.一些受害者正大声地抱怨紧急援助的不均衡分配。
-He could hear that her breathing was uneven.他能听到她的呼吸不均匀。
-The pathways were uneven, broken and dangerous.道路不平坦、被损坏，而且危险。
-He staggered on the uneven surface.他摇摇晃晃地走在高低不平的表面上。
-
-
-crucially 至关重要地
-If you describe something as crucial, you mean it is extremely important. 至关重要的
-crucial |英 ['kruːʃ(ə)l]  美 ['krʊʃəl]| adj. 重要的；决定性的；定局的；决断的/
-Chewing properly is crucially important.正确地咀嚼是至关重要的。
-He had administrators under him but made the crucial decisions himself.尽管他手下有许多官员，但重要的决定还是他自己做。
-
-
-Athletics refers to track and field sports such as running, the high jump, and the javelin. 田径运动
-Athletics refers to any kind of physical sports, exercise, or games. 体育运动
-athletics |英 [æθ'letɪks]  美 [æθ'lɛtɪks]| n. 竞技；体育运动；田径运动/
-...events that range from athetics to soccer, rugby and hockey.…比赛项目包括田径、足球、橄榄球和曲棍球。
-...students who play intercollegiate athletics.…参加大学校际体育运动的学生们。
-
-
-The needy are people who are needy. 穷人
-Needy people do not have enough food, medicine, or clothing, or adequate houses. 贫困的
-needy |英 ['niːdɪ]  美 ['nidi]| adj. 贫困的；贫穷的；生活艰苦的/n. (Needy)人名；(英)尼迪/
-There will be efforts to get larger amounts of food to the needy.将努力把更多的食品送给穷人。
-...a multinational force aimed at ensuring that food and medicine get to needy Somalis.…旨在确保食品和药品送到索马里贫民手中的一支多国部队。
-
-
- Silber says the tax rollback would decimate basic services for the needy.  [33m西尔伯说税收的回落可能导致大幅缩减为贫困人口提供的基本服务。
- There will be efforts to get larger amounts of food to the needy.  [33m将努力把更多的食品送给穷人。
- The guidelines drive billions of dollars of food production through federal programs like school lunches and nutrition assistance for the needy.  [33m这些指导方针通过如学校午餐和营养援助穷人这些联邦项目推动了数十亿美元的食品生产。
-the needy || 
-
-
-
 
 a woman on her wedding day or just before and after the event:一位女士在婚礼当天或活动前后
 bride |brʌɪd| Noun/:新娘,婚礼
@@ -44454,3 +44143,397 @@ a solution of ammonia in water:a氨水溶液
 gum tragacanth in solution is best used thinly on paper:
 the solution of British supremacy in South Africa:英国在南非的霸权解决方案
 
+
+exposed to the possibility of being attacked or harmed, either physically or emotionally:暴露在身体或情感上受到攻击或伤害的可能性
+(of a person) in need of special care, support, or protection because of age, disability, or risk of abuse or neglect:（某人的）由于年龄、残疾或受到虐待或忽视的风险而需要特别照顾、支持或保护
+(of a partnership) liable to higher penalties, either by convention or through having won one game towards a rubber:（合伙人）可能会受到更高的处罚，无论是按照惯例还是通过赢得一场比赛的橡胶
+vulnerable |ˈvʌln(ə)rəbl| Adjective/:易受伤害的,脆弱的
+we were in a vulnerable position:我们处于弱势地位
+the scheme will help charities working with vulnerable adults and young people:该计划将帮助慈善机构与弱势成年人和年轻人合作
+the authors advise a variable no-trump opening bid which means weak non-vulnerable and strong vulnerable:theauthors建议使用可变的无王牌开标，这意味着弱非易受攻击和强易受攻击
+
+turn over | 翻,翻身,翻过来
+
+
+
+
+
+indicate the faults of (someone or something) in a disapproving way:以不赞成的方式指出（某人或某事）的错误
+form and express a judgement of (a literary or artistic work):形成并表达对（文学或艺术作品）的判断
+criticize |ˈkrɪtɪsʌɪz| Verb/:批评,批判,指责
+the opposition criticized the government's failure to consult adequately:反对派批评政府未能充分协商
+a literary text may be criticized on two grounds: the semantic and the expressive:一个文学文本可能会受到两个理由-
+
+slow to reveal emotion or opinions:slow表达情感或意见
+kept specially for a particular person:专门为特定的人保留
+reserved |rɪˈzəːvd| Adjective/:预订的,保留,预留
+he is a reserved, almost taciturn man:他是一个内向，几乎沉默寡言的人
+a reserved seat:预留座位
+
+in consequence | 结果,因此
+
+
+
+
+
+leaning or turning away from the vertical or horizontal; sloping:倾斜或转身远离垂直或水平；倾斜的
+inclined |ɪnˈklʌɪnd| Adjective/:倾斜的,斜
+an inclined ramp:一个斜坡道
+
+retain for future use:retain以备将来使用
+use or engage in something only in or at (a particular circumstance or time):仅在（特定情况或时间）或在（特定情况或时间）使用或从事某事
+(in church use) retain (a portion of the consecrated elements) after Mass for communion of the sick or as a focus for devotion.:（在教堂使用）在弥撒后保留（部分奉献的元素）以供病人共融或作为灵修的焦点。
+retain or hold (a right or entitlement), especially by formal or legal stipulation:保留或持有（权利或权利），尤其是通过正式或法律规定
+arrange for (a room, seat, ticket, etc.) to be kept for the use of a particular person:安排（房间、座位、门票等）留给特定的人使用
+refrain from delivering (a judgement or decision) without due consideration or evidence:不要在没有适当考虑或证据的情况下交付（判决或决定）
+a supply of a commodity not needed for immediate use but available if required:一种不需要立即使用但在需要时可用的商品
+funds kept available by a bank, company, or government:funds由银行、公司或政府保留
+a part of a company's profits added to capital rather than paid as a dividend:公司利润的一部分添加到资本中，而不是作为股息支付
+a body of troops withheld from action to reinforce or protect others, or additional to the regular forces and available in an emergency:一个部队被扣留行动以加强或保护他人，或补充常规部队并在紧急情况下可用
+a member of the military reserve:一名预备役军人
+an extra player who is a possible substitute in a team:一名额外的球员，可能是球队的替补球员
+the second-choice team:二选一队
+a place set aside for special use.:一个留作特殊用途的地方。
+a reservation for an indigenous people:原住民的预订
+a protected area for wildlife:野生动物保护区
+a lack of warmth or openness in manner or expression:在方式或表达上缺乏热情或开放
+a feeling of doubt qualifying acceptance of a person, statement, or plan:对接受某人、声明或计划的怀疑感
+(in the decoration of ceramics or textiles) an area in which the original material or background colour remains visible.:（在陶瓷或纺织品的装饰中）原始材料或背景颜色仍然可见的区域。
+reserve |rɪˈzəːv| Noun/Verb/:预订,储备,保留
+roll out half the dough and reserve the other half:把一半面团擀开，另一半留着
+Japanese food has been presented as expensive and reserved for special occasions:日本食物被认为是昂贵的并且是为特殊场合保留的
+a place was reserved for her in the front row:前排为她预留了一个位置
+I'll reserve my views on his ability until he's played again:我会保留对他能力的看法，直到他再次上场
+Australia has major coal, gas, and uranium reserves:澳大利亚拥有主要的煤炭、天然气和铀储量
+foreign exchange reserves:外汇储备
+the bank built up a cash reserve of £2bn to meet any run on the bank once the loss was revealed:the银行建立了20亿英镑的现金储备，以在损失被披露后应对银行的任何挤兑
+the men were stationed as a central reserve ready to be transported wherever necessary:这些人作为中央后备队驻扎，随时准备运送到任何需要的地方
+the army began calling up reserves for combat training:军队开始征集预备役进行战斗训练
+playing in the first team has been a big step up after the reserves:在一线队打球是预备队之后的一大步
+a reserve was allocated to the tribe on Bear Island:a储备分配给熊岛上的部落
+part of the marshes has been managed to create a splendid reserve full of birds:部分沼泽地已建成一个充满鸟类的壮丽保护区
+she smiled and some of her natural reserve melted:她笑了，她的一些自然储备融化了
+she trusted him without reserve:她毫无保留地信任他
+
+open up | 打开,开拓,开辟,敞开心扉
+
+
+
+
+
+eager to know or learn something:渴望知道或学习一些东西
+expressing curiosity:表达好奇
+strange; unusual:奇怪；异常
+(of books) erotic or pornographic.:（书籍）色情或色情。
+curious |ˈkjʊərɪəs| Adjective/:好奇的,好奇,好奇心强
+I began to be curious about the whereabouts of the bride and groom:我开始好奇新郎新娘的去向
+a curious stare:好奇的凝视
+a curious sensation overwhelmed her:一种奇怪的感觉让她不知所措
+
+the phenomena of the physical world collectively, including plants, animals, the landscape, and other features and products of the earth, as opposed to humans or human creations:物理世界的现象的总称，包括植物、动物、景观以及地球的其他特征和产品，而不是人类或人类创造物
+the physical force regarded as causing and regulating the phenomena of the world:被视为引起和调节世界现象的物理力量
+the basic or inherent features, character, or qualities of something:某物的基本或固有特征、性格或品质
+the innate or essential qualities or character of a person or animal:人或动物的先天或基本品质或性格
+inborn or hereditary characteristics as an influence on or determinant of personality.:先天或遗传特征对人格的影响或决定因素。
+a person of a specified character:指定人物的人
+nature |ˈneɪtʃə| Noun/:自然,性质,性
+the breathtaking beauty of nature:大自然的惊人之美
+it is impossible to change the laws of nature:改变自然规律是不可能的
+helping them to realize the nature of their problems:帮助他们认识到问题的本质
+it's not in her nature to listen to advice:听劝告不是她的天性
+Emerson was so much more luminous a nature:Emerson是一种更加明亮的自然
+
+a person who has had long experience in a particular field:在特定领域有长期经验的人
+an ex-member of the armed forces:一名前武装部队成员
+veteran |ˈvɛt(ə)rən| Noun/:老将,老兵,老手,退伍军人
+he was a veteran of the big screen:他是大银幕老手
+a Vietnam veteran:一名越战老兵
+
+make (a hole) in something with a tool or by digging:用工具或挖掘在某物上打洞
+hollow out (a gun barrel or other tube):hollowout（枪管或其他管子）
+(of an athlete or racehorse) push another competitor out of the way.:（运动员或赛马）将另一名参赛者推开。
+the hollow part inside a gun barrel or other tube.:枪管或其他管内的中空部分。
+the diameter of a bore; the calibre:孔径；口径
+a gun of a specified bore:指定口径的枪
+a person whose talk or behaviour is dull and uninteresting:说话或行为乏味无趣的人
+a tedious or annoying situation or activity:乏味或烦人的情况或活动
+cause (someone) to feel weary and uninterested by dull talk or behaviour:使（某人）对无聊的谈话或行为感到疲倦和不感兴趣
+a steep-fronted wave caused by the meeting of two tides or by the constriction of a tide rushing up a narrow estuary:由两次潮汐汇合或冲上狭窄河口的潮汐收缩引起的陡峭波浪
+bore |bɔː| Noun/Verb/:钻孔,孔
+bore a hole in the wall to pass the cable through:在墙上打一个洞让电缆穿过
+an 1100 cc road bike bored out to 1168 cc:an1100cc公路自行车无聊到1168cc
+a small-bore rifle:小口径步枪
+he shot a guard in the leg with a twelve-bore:他用十二孔射中了一名后卫的腿
+he can be a crashing bore:他可能是个令人讨厌的人
+it's such a bore cooking when one's alone:一个人做饭真无聊
+she is too polite to bore us with anecdotes:她太客气了，不会用轶事让我们厌烦
+a barrage could kill off the Severn bore, the wave that runs in from the Bristol Channel during certain tides:a拦河坝可以杀死塞文孔，在某些潮汐期间从布里斯托尔海峡流入的波浪
+
+discover or identify the presence or existence of:发现或识别存在或存在
+discern (something intangible or barely perceptible):辨别（无形的或几乎无法察觉的东西）
+discover or investigate (a crime or its perpetrators):discover或调查（犯罪或其肇事者）
+detect |dɪˈtɛkt| Verb/:探测,检测,检测到
+cancer may soon be detected in its earliest stages:cancer可能很快就会在其最早阶段被发现
+Paul detected a faint note of weariness in his father's voice:Paul从他父亲的声音中察觉到一丝疲倦
+the public can help the police to detect crime:公众可以帮助警方侦破犯罪
+
+join or fasten (something) to something else:join或将（某物）固定到其他物上
+add or fasten (a related document) to another, or to an email:添加或固定（相关文档）到另一个，或电子邮件
+include (a condition) as part of an agreement:include（条件）作为协议的一部分
+accompany (a person or group) without being invited:未经邀请陪同（一个人或一群人）
+appoint (someone) for special or temporary duties:任命（某人）担任特殊或临时职责
+attribute importance or value to:属性重要性或价值
+(of importance or value) be attributed to:（重要性或价值）归因于
+seize (a person or property) by legal authority:seize（个人或财产）由法律授权
+attach |əˈtatʃ| Verb/:附,连接,附上,附加
+I attach a copy of the memo for your information:我附上一份备忘录副本供您参考
+the Commission can attach appropriate conditions to the operation of the agreement:委员会可以为协议的运作附加适当的条件
+they were all too ready to attach themselves to you for the whole day:他们已经准备好整天依附在你身上了
+I was attached to another working group:我隶属于另一个工作组
+he doesn't attach too much importance to fixed ideas:他不太重视固定的想法
+a good deal of prominence attaches to the central union federations:中央工会联合会享有很高的声望
+the Earl Marshal attached Gloucester for high treason:伯爵元帅以叛国罪依附格洛斯特
+
+the standard of something as measured against other things of a similar kind; the degree of excellence of something:某事物相对于其他同类事物的衡量标准；7
+general excellence of standard or level:一般优秀的标准或水平
+high social standing:社会地位高
+people of high social standing:社会地位高社会地位高的人
+a distinctive attribute or characteristic possessed by someone or something:某人或某物所具有的独特属性或特征
+the distinguishing characteristic or characteristics of a speech sound.:语音的一个或多个区别特征。
+any of three properties (cardinal, fixed, or mutable), representing types of movement, that a zodiacal sign can possess.:代表黄道星座可以拥有的运动类型的三个属性（基本属性、固定属性或可变属性）中的任何一个。
+of good quality; excellent:质量好；14
+quality |ˈkwɒlɪti| Adjective/Noun/:质量,优质的,品质
+an improvement in product quality:产品质量的提高
+a masterpiece for connoisseurs of quality:质量鉴赏家的杰作
+commanding the admiration of people of quality:令人钦佩的品质
+he's dazed at being called on to speak before quality:他对被要求在质量之前发言感到茫然
+he shows strong leadership qualities:he表现出很强的领导才能
+he's a quality player:他是个优秀的球员
+
+come into sight; become visible or noticeable, especially without apparent cause:映入眼帘；7
+come into existence or use:产生或使用
+be published or offered for sale:被出版或出售
+present oneself formally in a court or tribunal:正式出庭
+perform publicly in a film, play, etc.:在电影、戏剧等中公开表演。
+feature or be shown:feature或被显示
+arrive at a place:到达一个地方
+seem; give the impression of being:似乎；14
+appear |əˈpɪə| Verb/:出现,显现
+smoke appeared on the horizon:smoke出现在地平线上
+the major life forms appeared on earth:地球上出现的主要生命形式
+the paperback edition didn't appear for another two years:平装版又两年没有出现
+he appeared on six charges of theft:他被控六项盗窃罪
+he appeared on Broadway:他出现在百老汇
+the symbol appears in many paintings of the period:这个符号出现在那个时期的许多画作中
+by ten o'clock Bill still hadn't appeared:10点钟比尔还没有出现
+
+come about | 来,出现
+
+
+
+
+
+an educational institution or establishment, in particular one providing higher education or specialized professional or vocational training:一个教育机构或机构，特别是提供高等教育或专业或职业培训的机构
+any of the independent institutions into which certain universities are separated, each having its own teaching staff, students, and buildings:某些大学分开的任何独立机构，每个机构都有自己的教职员工、学生和建筑物
+a private secondary school:a私立中学
+a university offering a limited curriculum or teaching only to a bachelor's degree:一所大学提供有限的课程或只教授学士学位
+the teaching staff and students of a college considered collectively:一所大学的教职员工和学生集体考虑
+an organized group of professional people with particular aims, duties, and privileges:一群有组织的专业人士，具有特定的目标、职责和特权
+college |ˈkɒlɪdʒ| Noun/:大学,学院
+colleges of further education:继续教育学院
+the Oxford colleges:牛津大学
+the college was shocked by his death:学院对他的死感到震惊
+
+in a manner that is not in accordance with what is morally right and fair:以不符合道德正确和公平的方式
+unjustly |ʌnˈdʒʌstli| Adverb/:不公正的,不公平
+he was unjustly accused of being a spy:他被不公正地指控为间谍
+
+charge (someone) with an offence or crime:charge（某人）有罪或犯罪
+claim that (someone) has done something wrong:声称（某人）做错了什么
+accuse |əˈkjuːz| Verb/:,控诉,告,指控,控
+he was accused of murdering his wife's lover:他被指控谋杀了他妻子的情人
+he was accused of favouritism:他被指控徇私舞弊
+
+a person who is professionally involved in politics, especially as a holder of an elected office:一个专业参与政治的人，特别是作为民选职位的持有人
+a person who acts in a manipulative and devious way, typically to gain advancement within an organization.:以操纵和狡猾的方式行事的人，通常是为了在组织内获得晋升。
+politician |ˌpɒlɪˈtɪʃn| Noun/:政治家,政客
+a local politician:当地政客
+
+sharing in the knowledge of (something secret or private):分享（秘密或私人的）知识
+hidden; secret:隐藏；6
+a toilet located in a small shed outside a house or other building.:位于房屋或其他建筑物外的小棚内的厕所。
+a person having a part or interest in any action, matter, or thing.:对任何行动、事项或事物有参与或利益的人。
+privy |ˈprɪvi| Adjective/Noun/:私房,私人的
+he was no longer privy to her innermost thoughts:他不再了解她内心深处的想法
+a privy place:和私人工资
+
+intense sorrow, especially caused by someone's death:强烈的悲伤，尤其是因某人的死亡而引起的
+an instance or cause of intense sorrow:极度悲伤的事例或原因
+trouble or annoyance:麻烦或烦恼
+grief |ɡriːf| Noun/:悲伤,伤心
+she was overcome with grief:她悲痛欲绝
+time heals griefs and quarrels:time治愈悲伤和争吵
+we were too tired to cause any grief:我们太累了，无法引起任何悲伤
+
+(of an animal or plant) living or growing in the natural environment; not domesticated or cultivated:（动物或植物）在自然环境中生活或生长；18
+produced from wild animals or plants without cultivation:由未经栽培的野生动植物生产
+(of a place or region) uninhabited, uncultivated, or inhospitable:（地方或地区的）无人居住的、荒凉的或荒凉的
+(of sea or the weather) rough and stormy:（大海或天气）风雨无阻
+(of people) not civilized; primitive:（人）不文明；11
+(of a look, appearance, etc.) indicating distraction or strong emotion:（神情、外表等）表示分心或强烈的情绪
+lacking discipline or restraint:缺乏纪律或约束
+very enthusiastic or excited:非常热情或兴奋
+very angry.:非常生气。
+not based on sound reasoning or probability:不是基于合理的推理或概率
+(of a playing card) deemed to have any value, suit, colour, or other property in a game at the discretion of the player holding it.:（扑克牌的）在游戏中被认为具有由持有它的玩家自行决定的任何价值、花色、颜色或其他属性。
+wild |wʌɪld| Adjective/Noun/Verb/:荒野,野生的,野生,野,狂野
+a herd of wild goats:一群野山羊
+wild honey:野蜂蜜
+an expanse of wild moorland:一大片荒野
+a wild, bitterly cold night:一个狂野、寒冷的夜晚
+the wild tribes from the north:来自北方的野蛮部落
+her wild eyes were darting back and forth:她狂野的眼睛来回扫视
+wild parties were never her scene:狂欢派对从来不是她的舞台
+I'm not wild about the music:我不喜欢音乐
+a wild guess:一个疯狂的猜测
+
+not searched for, requested, or desired:未搜索、未请求或不想要
+unsought |ʌnˈsɔːt| Adjective/:不受欢迎的,不求之不得
+an unsought pregnancy:意外怀孕
+
+pretend to be affected by (a feeling, state, or injury):假装受到（一种感觉、状态或伤害）的影响
+invent (a story or excuse).:invent（一个故事或借口）。
+feign |feɪn| Verb/:假装,佯,装作
+she feigned nervousness:她假装紧张
+
+the state or condition of being preoccupied or engrossed with something:全神贯注或全神贯注于某事的状态或状态
+a subject or matter that engrosses someone:一个吸引某人的主题或事物
+preoccupation |prɪˌɒkjʊˈpeɪʃn| Noun/:全神贯注,全心全意
+he began to overcome his preoccupation with germs:他开始克服对细菌的执念
+their main preoccupation was how to feed their families:他们的主要关注点是如何养家糊口
+
+showing or feeling opposition or dislike; unfriendly:表现出或感到反对或不喜欢；5
+of or belonging to a military enemy:属于或属于军事敌人
+opposed:反对
+(of a takeover bid) opposed by the company to be bought:（收购要约的）公司反对被收购
+hostile |ˈhɒstʌɪl| Adjective/:,充满敌意
+a hostile audience:敌对的观众
+hostile aircraft:敌机
+people are very hostile to the idea:人们非常反对这个想法
+the brewery fought off a hostile takeover bid last year:thebrewery去年击败了敌意收购
+
+the treatment of a serious matter with humour or lack of due respect:以幽默或缺乏应有的尊重处理严肃的事情
+levity |ˈlɛvɪti| Noun/:轻浮,轻率
+as an attempt to introduce a note of levity, the words were a disastrous flop:作为一种轻率的尝试，这些词是一个灾难性的失败
+
+not able to be mistaken for anything else; very distinctive:不能被误认为其他任何东西；很有特色
+unmistakable |ʌnmɪˈsteɪkəbl| Adjective/:,明确无误
+the unmistakable sound of his laughter:他清晰的笑声
+
+closely acquainted; familiar:熟识；熟悉的
+(of a place or setting) having a cosy and private or relaxed atmosphere:（一个地方或环境）有舒适、私密或轻松的气氛
+involving very close connection:涉及非常紧密的连接
+(of knowledge) detailed or thorough:（知识的）详细的或彻底的
+private and personal:私人和个人
+having a sexual relationship:发生性关系
+a very close friend:一个非常亲密的朋友
+state or make known:state或公开
+imply or hint:暗示或提示
+intimate |ˈɪntɪmət| Adjective/Noun/Verb/:亲密的,暗示,知己,亲密,贴心
+intimate friends:亲密朋友
+an intimate little Italian restaurant:一个温馨的小意大利餐厅
+their intimate involvement with their community:他们与社区的亲密接触
+an intimate knowledge of the software:对软件的深入了解
+intimate details of his sexual encounters:他性接触的亲密细节
+they plan to wait before becoming intimate with one another:他们计划在彼此亲密之前等待
+his circle of intimates:他的亲密圈子
+Mr Hutchison has intimated his decision to retire:MrHutchison已暗示他决定退休
+he had already intimated that he might not be able to continue:他已经暗示他可能无法继续
+
+a surprising and previously unknown fact that has been disclosed to others:一个令人惊讶且以前未知的事实，已向他人披露
+the making known of something that was previously secret or unknown:使以前秘密或未知的事情为人所知
+used to emphasize the remarkable quality of someone or something:用于强调某人或某物的卓越品质
+the divine or supernatural disclosure to humans of something relating to human existence:向人类揭示与人类存在有关的神圣或超自然现象
+the last book of the New Testament, recounting a divine revelation of the future to St John.:新约的最后一本书，讲述了圣约翰对未来的神圣启示。
+revelation |ˌrɛvəˈleɪʃn| Noun/:启示,启示录,天启
+revelations about his personal life:revelations关于他的个人生活
+the revelation of a plot to assassinate the king:暗杀国王的阴谋的启示
+seeing them play at international level was a revelation:看到他们在国际级别的比赛是一个启示
+an attempt to reconcile Darwinian theories with biblical revelation:试图调和达尔文理论与圣经启示
+
+tremble or shake with a slight rapid motion:颤抖或轻轻摇晃
+cause (something) to make a slight rapid motion:导致（某事）做出轻微的快速运动
+a slight trembling movement or sound, especially one caused by a sudden strong emotion:轻微颤抖的动作或声音，尤其是由突然的强烈情绪引起的
+an archer's portable case for holding arrows.:an弓箭手的携带箭头的手提箱。
+a set of surfboards of different lengths and shapes for use with different types of waves:一组不同长度和形状的冲浪板，用于不同类型的波浪
+quiver |ˈkwɪvə| Noun/Verb/:颤动,颤抖
+the tree's branches stopped quivering:树枝不再颤抖
+the bird runs along in a zigzag path, quivering its wings:小鸟在曲折的小路上奔跑，颤抖着翅膀
+she couldn't help the quiver in her voice:她控制不住声音中的颤抖
+he had created a whole new quiver of boards specifically for Hawaii:he专门为夏威夷创建了一个全新的箭袋
+
+the line at which the earth's surface and the sky appear to meet:地球表面和天空似乎相交的线
+the circular boundary of the part of the earth's surface visible from a particular point, ignoring irregularities and obstructions.:从特定点可见的地球表面部分的圆形边界，忽略不规则和障碍物。
+a great circle of the celestial sphere, the plane of which passes through the centre of the earth and is parallel to that of the apparent horizon of a place.:天球的一个大圆，它的平面经过地心，与一个地方的视地平线平行。
+the limit of a person's knowledge, experience, or interest:一个人的知识、经验或兴趣的极限
+a layer of soil or rock, or a set of strata, with particular characteristics.:具有特定特征的一层土壤或岩石，或一组地层。
+a level of an excavated site representing a particular period:代表特定时期的挖掘场地的水平
+horizon |həˈrʌɪz(ə)n| Noun/:地平线,视界
+the sun rose above the horizon:太阳从地平线升起
+she wanted to leave home and broaden her horizons:她想离开家，开阔眼界
+the upper horizon of the site showed an arrangement of two rows of features:网站的上层地平线显示了两排特征的排列
+
+plagiaristic |pleɪdʒəˈrɪstɪk| Adjective/:抄袭,剽窃
+
+impair the quality or appearance of; spoil:损害产品的质量或外观；宠坏
+mar |mɑː| Verb/:马尔,三月
+violence marred a number of New Year celebrations:violence破坏了许多新年庆祝活动
+
+the action of suppressing something such as an activity or publication:抑制某项活动或出版物等某事的行为
+stoppage or reduction of a discharge or secretion.:停止或减少分泌物或分泌物。
+the absence or non-development of a part or organ that is normally present.:正常存在的部分或器官的缺失或不发育。
+the cancelling of the effect of one mutation by a second mutation.:第二个突变抵消了一个突变的影响。
+the restraint or repression of an idea, activity, or reaction by something more powerful.:更强大的事物对想法、活动或反应的约束或压制。
+the conscious inhibition of unacceptable memories, impulses, or desires.:有意识地抑制不可接受的记忆、冲动或欲望。
+prevention of electrical interference.:防止电气干扰。
+suppression |səˈprɛʃn| Noun/:抑制,压制,镇压
+the heavy-handed suppression of political dissent:对不同政见的严厉镇压
+
+relating to, characteristic of, or like a snob:与势利小人有关、有其特征或类似势利小人
+snobbish |ˈsnɒbɪʃ| Adjective/:势利,势利的
+the writer takes a rather snobbish tone:作者的语气相当势利
+
+behaviour that conforms to accepted standards of morality or respectability:行为符合公认的道德或体面标准
+behaviour or appearance that avoids impropriety or immodesty:避免不当或不谦虚的行为或外表
+the requirements of accepted or respectable behaviour:接受或尊重行为的要求
+things required for a reasonable standard of life:合理的生活标准所需的东西
+decency |ˈdiːsnsi| Noun/:体面,正派
+she had the decency to come and confess:她有礼貌地来坦白
+a loose dress, rather too low-cut for decency:一件宽松的连衣裙，太低胸了
+an appeal to common decencies:呼吁共同礼仪
+I can't afford any of the decencies of life:我买不起任何体面的生活
+
+an object or collection of objects wrapped in paper in order to be carried or sent by post:一个或一组用纸包裹的物品，以便携带或邮寄
+a quantity or amount of something, especially as dealt with in one commercial transaction:某物的数量或数量，尤指在一次商业交易中处理的
+a piece of land, especially one considered as part of an estate:一块土地，尤指被视为庄园一部分的土地
+a group of people of a specified sort:一组特定类型的人
+a portion of a larger body of air or other fluid considered as a discrete element:被视为离散元素的较大空气或其他流体的一部分
+make (something) into a parcel by wrapping it:make(something)通过包裹它变成一个包裹
+divide into portions and then distribute:分成几份再分发
+wrap (rope) with strips of tarred canvas, before binding it with yarn as part of a traditional technique to reduce chafing.:wrap（绳子）用涂了焦油的帆布条，然后用纱线将其捆绑，作为减少擦伤的传统技术的一部分。
+parcel |ˈpɑːsl| Noun/Verb/:包裹,打包,包
+the lorry was carrying a large number of Royal Mail parcels:卡车上载着大量皇家邮政包裹
+a parcel of shares:a股
+she decided to divide her property into three parcels and invite sealed bids:她决定将她的财产分成三块并进行密封投标
+a parcel of rogues:一群流氓
+an inversion forms a barrier to a rising parcel of air:aninversion对上升的空气形成屏障
+he parcelled up the goods and sent them back:他将货物打包寄回
+the farmers argue that parcelling out commercial farmland in small plots will reduce productivity:农民认为，在小块土地上划分商业农田会降低生产力
+
+parcel out | 打包,包裹
+
+
+
+
+
+unequally |ʌnˈiːkwəli| Adverb/:不平等,不平等的
