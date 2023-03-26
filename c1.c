@@ -864,6 +864,8 @@ char format2[9999];
 char * format3;
 char * format4;
 char result;
+    if(ish==TRUE){
+
     va_list ap;
     va_start(ap, format);
     // ...
@@ -901,6 +903,15 @@ if(b==1){
 }
 break;
 }
+    }
+    else{
+    va_list ap;
+    va_start(ap, format);
+    // ...
+    vprintf(format, ap);
+    // ...
+    va_end(ap); 
+    }
 return 0;
 }
 
