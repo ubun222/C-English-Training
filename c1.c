@@ -449,7 +449,7 @@ int fresh(char * aline){
             //printf("%d\n",(int)theline[i]);
            continue;
         }
-        if ((int)(theline[i])+256 >=224 && (int)theline[i]+256<227 && (int)theline[i+1]+256>128  && (int)theline[i+1]+256<=191 ){
+        if ((int)(theline[i])+256 >=224 && (int)theline[i]+256<227 && (int)theline[i+1]+256>=128  && (int)theline[i+1]+256<=191 ){
             lengn=lengn+1;
             i=i+3;
            continue;
@@ -855,30 +855,49 @@ int c;
 
 char w1[10][9999];
 
-int         rown, coln, rowm, colm;
+int         rown, rowm;
+int coln=-1;
+int colm=-2;
 int ishprt( const char *restrict format, ... ){
-int b=1;
-while(TRUE){
-
-if (ish==TRUE){
-cursor_position(&rown,&coln);
-}
-
+int b=0;
+char format2[9999];
+char * format3;
+char * format4;
+char result;
     va_list ap;
     va_start(ap, format);
     // ...
-    vprintf(format, ap);
+    strcpy(format2,format);
+    strcat(format2,"\033[6n");
+    format3=va_arg(ap,char *);
+    format4=va_arg(ap,char *);
+while(TRUE){
+
+    printf(format2,format3,format4);
+
+   // b++;
     // ...
     va_end(ap); 
 
-//printf("%s",format);
-if (ish==TRUE){ 
-cursor_position(&rowm,&colm);
-if(colm==coln){
-//format
-printf("\r\033[%dC",b);
-continue;
+while(((result = rd(fd1))))
+{
+    if (result == '\r' || (int)result == RD_EOF || (int)result ==  RD_EIO ){
+        b=1;
+      //  printf("222");
+    break;
+    }
+    if (result == 'R' ){
+    b=0;
+    break;
 }
+    continue;
+    //if(result==-1 || result==-2)
+    //return 2;
+
+}
+if(b==1){
+    b=0;
+    continue;
 }
 break;
 }
@@ -1053,6 +1072,7 @@ int ezback(){
                         while (TRUE){
                         //if(ish==TRUE || termux==TRUE){
                         cursor_position(&rown,&coln);
+                        //coln=colm;
                         if(coln==1){
                         ishprt("\033[1A\033[%dC%c\b\033[1C",col,block);
                         cursor_position(&rowm,&colm);
@@ -1073,13 +1093,16 @@ int ezback(){
                         strcpy(backs,"\b\033[1C \b\033[1C");
                         }
                         now3=FALSE;
-                        //break;
+                        ishprt("%s",backs);
+                        fflush(stdout);
+                        break;
                         }
                         
                         printf("%s",backs);
                         fflush(stdout);
                         //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
+                        //coln=colm;
                         if(ish==TRUE){
                         if(coln==colm && coln!=col ){
                         continue;
@@ -1134,20 +1157,24 @@ int ezback(){
                                                     now1=TRUE;
                             now2=FALSE;
                         now3=FALSE;
-                        //break;
+                        ishprt("%s",backs);
+                        fflush(stdout);
+                        break;
                         }
                         else if(now2==TRUE){
                            //printf("2222");
                         strcpy(backs,"\b \b");
                         now2=FALSE;
-                        //break;
+                        ishprt("%s",backs);
+                        fflush(stdout);
+                        break;
                         }
                         printf("%s",backs);
                         fflush(stdout);
                         //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
                         if(ish==TRUE){
-                        if(coln==colm && colm!=col){
+                        if(coln==colm && coln!=col){
                         continue;
                         }
                         }
@@ -1656,7 +1683,7 @@ int nend[39999];
 int ran;
 int num=-1;
     char order;
-int ysv(char flag,char * bword,char ze){
+int ysv(char * bword,char ze){
 //char eline[]="\033[32m○\033[0m";
 char * rbuffer;
 char * rtxt;
@@ -2552,29 +2579,31 @@ return 0;
 }
 char ch[200];
 int colourp(){
+            colm=-1;
+            coln=-2;
                 if(ez=='1'){
                 if (flag != TRUE ){
                 if(strcmp(aword,"")==0){
                     ishprt("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
-                    ysv(flag,bword,ez);
+                    ysv(bword,ez);
                 }
                 else if(strcmp(aword,answer1)==0){
                     printf("\r\033[%dC%s\r",col-2,tline);
                     fflush(stdout);
-                    ysv(flag,bword,ez);
+                    ysv(bword,ez);
                 }
                 else{
                 //fflush(stdin);
                 ishprt("\r\033[%dC%s\r",col-2,fline);
                 fflush(stdout);
-                ysv(flag,bword,ez); 
+                ysv(bword,ez); 
                 //printf("\n%s",bword);
                 //fflush(stdout);
                 } 
                 }
                 else{
-                    ysv(flag,bword,ez);
+                    ysv(bword,ez);
                 }
             }
             if(ez=='2'){
@@ -2582,21 +2611,21 @@ int colourp(){
                 if(strcmp(aword,"")==0){
                     ishprt("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
-                    ysv(flag,bword,ez);
+                    ysv(bword,ez);
                 }
 else if (ifRight()==TRUE){
     printf("\r\033[%dC%s\r",col-2,tline);
     fflush(stdout);
-    ysv(flag,bword,ez);
+    ysv(bword,ez);
 } 
 else{
     ishprt("\r\033[%dC%s\r",col-2,fline);
     fflush(stdout);
-    ysv(flag,bword,ez);
+    ysv(bword,ez);
 }
                  } 
                 else
-                 ysv(flag,bword,ez);
+                 ysv(bword,ez);
                 
             }
 
