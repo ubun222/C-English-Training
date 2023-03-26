@@ -1,6 +1,6 @@
 # C-English-Training
 1. 这是一个用C重写的，依赖终端的，背单词程序。支持ish，termux等移动端，也支持macOS，Linux等桌面端。
-2. 不支持windows的cmd和powershell。若要在win下编译运行，请安装WSL。
+2. 不支持windows。若要在win下编译运行，请安装WSL。
 ---
 
 ### 使用方法
