@@ -76,15 +76,16 @@ char *  alltxt;
 
 char zwords[199];
 
-
-
+int b=0;
+BOOL p6;
 void  handler()
 {
 //printf("rxit");
 //  return 2;
 //exit(0);
-printf("\033[6n");
+b=1;
 
+printf("\033[6n");
 }
 
 
@@ -118,7 +119,7 @@ int current_tty(void)
     int add=0;
 int calendar(){
 //    BOOL ish=FALSE;
-//fd1 = current_tty();
+fd1 = current_tty();
     struct winsize Max;
     ioctl(0, TIOCGWINSZ , &Max);
     row=Max.ws_row;
@@ -479,7 +480,7 @@ int cursor_position(int *const Row ,int *const Col)
     value.it_value.tv_sec=0;
     value.it_value.tv_usec=150000;
     value.it_interval.tv_sec=0;
-    value.it_interval.tv_usec=0;
+    value.it_interval.tv_usec=200000;
 
     value0.it_value.tv_sec=0;
     value0.it_value.tv_usec=0;
@@ -514,6 +515,7 @@ strcpy(receives,"");
 //setvbuf(stdin, NULL, _IOLBF, 512);
 //setvbuf(stdout, NULL, _IOLBF, 512);
 printf("\033[6n");
+fflush(stdout);
 //printf("%d",f);
     //printf("%d",lf);
     //printf("%d",f);
@@ -530,16 +532,20 @@ retry=0;
 //ualarm(100000,9999999);
     setitimer(ITIMER_REAL,&value,NULL);
 //setvbuf(stdin, NULL, _IONBF, 2);
-while(((result = rd(fd1))!='R' ))
+while(((result = rd(fd1)) ))
 {
-    setitimer(ITIMER_REAL,&value0,NULL);
+if (result=='R'){
+setitimer(ITIMER_REAL,&value0,NULL);
+break;
+}
+    setitimer(ITIMER_REAL,&value,NULL);
     //ualarm(0,0);
     //setitimer(ITIMER_REAL,&value0,NULL);
-    if (result == '\r' ){
-      //  printf("222");
-    setitimer(ITIMER_REAL,&value,NULL);
-    continue;
-    }
+  //  if ((int)result==-1 || (int)result==-2 ){
+      // printf("222");
+  //  setitimer(ITIMER_REAL,&value,NULL);
+ //   break;
+  //  }
     //if(result==-1 || result==-2)
     //return 2;
 
@@ -565,7 +571,7 @@ if (result >= '0' && result <= '9') {
 }
 }
 //ualarm(0,0);
-setitimer(ITIMER_REAL,&value0,NULL);
+//setitimer(ITIMER_REAL,&value0,NULL);
 //printf("22222");
 //printf("a:%db:%d",a,b);
 //b=strtok(NULL,"\0");
@@ -859,7 +865,7 @@ int         rown, rowm;
 int coln=-1;
 int colm=-2;
 int ishprt( const char *restrict format, ... ){
-int b=0;
+
 char format2[9999];
 char * format3;
 char * format4;
@@ -874,25 +880,20 @@ char result;
     format3=va_arg(ap,char *);
     format4=va_arg(ap,char *);
 while(TRUE){
-
-    printf(format2,format3,format4);
-
+b=0;
+printf(format2,format3,format4);
+setitimer(ITIMER_REAL,&value,NULL);
    // b++;
-    // ...
-    va_end(ap); 
+    // ..
 
 while(((result = rd(fd1))))
 {
-    if (result == '\r' || (int)result == RD_EOF || (int)result ==  RD_EIO ){
-        b=1;
-      //  printf("222");
-    break;
-    }
     if (result == 'R' ){
-    b=0;
+    setitimer(ITIMER_REAL,&value0,NULL);
+    //b=0;
     break;
 }
-    continue;
+
     //if(result==-1 || result==-2)
     //return 2;
 
@@ -901,8 +902,10 @@ if(b==1){
     b=0;
     continue;
 }
+setitimer(ITIMER_REAL,&value0,NULL);
 break;
 }
+va_end(ap); 
     }
     else{
     va_list ap;
@@ -912,6 +915,7 @@ break;
     // ...
     va_end(ap); 
     }
+
 return 0;
 }
 
@@ -1106,9 +1110,10 @@ int ezback(){
                         now3=FALSE;
                         ishprt("%s",backs);
                         fflush(stdout);
+                        cursor_position(&rowm,&colm);
                         break;
                         }
-                        
+
                         printf("%s",backs);
                         fflush(stdout);
                         //if(ish==TRUE)
@@ -1292,7 +1297,7 @@ else if (c3==TRUE) {
                         if(ish==TRUE){
                         if(coln==colm){
                         if(colm==col){
-                        printf(" ");
+                        ishprt("\n");
                         now1=TRUE;
                         now2=FALSE;
                         now3=FALSE;
@@ -1352,7 +1357,12 @@ if (((int)zword>=65  && (int)zword<=122) || ((int)zword==32 || (int)zword==46 ||
     //                        now2=TRUE;
       //                     
                        // fflush(stdout);
-//}                      
+//}
+if(coln==col){ 
+ishprt("%c",zword);
+fflush(stdout);
+}
+else
 printf("%c",zword);
 fflush(stdout);
 //ef(ish==TRUE)
@@ -2590,8 +2600,8 @@ return 0;
 }
 char ch[200];
 int colourp(){
-            colm=-1;
-            coln=-2;
+            //colm=-1;
+            //coln=-2;
                 if(ez=='1'){
                 if (flag != TRUE ){
                 if(strcmp(aword,"")==0){
@@ -2600,7 +2610,7 @@ int colourp(){
                     ysv(bword,ez);
                 }
                 else if(strcmp(aword,answer1)==0){
-                    printf("\r\033[%dC%s\r",col-2,tline);
+                    ishprt("\r\033[%dC%s\r",col-2,tline);
                     fflush(stdout);
                     ysv(bword,ez);
                 }
@@ -2625,7 +2635,7 @@ int colourp(){
                     ysv(bword,ez);
                 }
 else if (ifRight()==TRUE){
-    printf("\r\033[%dC%s\r",col-2,tline);
+    ishprt("\r\033[%dC%s\r",col-2,tline);
     fflush(stdout);
     ysv(bword,ez);
 } 
@@ -2871,6 +2881,9 @@ nend[num+1]=max;
             zm=n;
             }
             printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
+
+            //cursor_position(&rown,&coln);
+            cursor_position(&rowm,&colm);
             /***puts(en);***/
             strcpy(bword,"");
             if (ish==TRUE){
@@ -3076,6 +3089,7 @@ strncat(word,&txt[n],1);
             printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
             /***puts(en);***/
 
+            cursor_position(&rowm,&colm);
             strcpy(bword,"");
             if (ish==TRUE){
             strcat(bword,en);
@@ -3279,7 +3293,7 @@ strncat(word,&txt[n],1);
             printf("\n\033[2m%s\n\033[0m",strs);
             printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
             /***puts(en);***/
-
+            cursor_position(&rowm,&colm);
             strcpy(bword,"");
             if (ish==TRUE){
             strcat(bword,en);
