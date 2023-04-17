@@ -1308,11 +1308,12 @@ else if (c3==TRUE) {
                                 now2='\x00';
                             }
                         if(ish==TRUE){
-                        if(colm==col && coln==colm){
+                        if(colm==col && coln==colm ){
                         ishprt("\n");
                         now1=TRUE;
                         now2=FALSE;
                         now3=FALSE;
+                        cursor_position(&rowm,&colm);
                         continue;
                         }
                         if(coln==colm){
@@ -1763,13 +1764,13 @@ BOOL non=FALSE;
 while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r')
     continue;
 //printf("%c",ysv1);
+if (ysv1=='V')
+ishprt("\r\033[%dC%s\r",col-2,eline);
 if (ysv1=='v' || ysv1=='V'){
     if (flag!=TRUE){
     printf("\n%s",bword);
     fflush(stdout);
     }
-if (ysv1=='V')
-ishprt("\r\033[1A\033[%dC%s\r",col-2,eline);
 for(P=0;P<p;P++){
     //P=0;
     if(Fp!=NULL)
@@ -1848,13 +1849,14 @@ for(P=0;P<p;P++){
 
 }
 else if (ysv1=='y' || ysv1=='Y'){
+if (ysv1=='Y')
+ishprt("\r\033[%dC%s\r",col-2,eline);
+
+
         if (flag!=TRUE){
     printf("\n%s",bword);
     fflush(stdout);
     }
-
-if (ysv1=='Y')
-ishprt("\r\033[1A\033[%dC%s\r",col-2,eline);
 
 for(P=0;P<p;P++){
     if(Fp!=NULL )
@@ -1942,8 +1944,16 @@ num--;
 
 
 if (CORRECT==TRUE){
+
+	strcpy(tbuffer,"");
+        strcpy(rbuffer,"");
+        strcpy(bbuffer,"");
+        strcpy(btxt,"");
+        strcpy(Buffer,"");
+        strcpy(word1,"");
+    //if(rrpp!=NULL )
+    //fclose(rrpp);
     rrpp = fopen("CORRECT.txt", "r");
-    
     strcpy(word1,answer1);
     strcat(word1,"\t\t");
     //printf("\n\n%s\n",word1);
@@ -1991,14 +2001,19 @@ if (CORRECT==TRUE){
 
 if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv1=='s' || rw==TRUE && CORRECT==TRUE && ysv1=='S' ){
     //printf("\n222\n");
+   // if(rfpr!=NULL )
+   // fclose(rfpr);
 
+   // if(wfpn!=NULL )
+   // fclose(wfpn);
+    strcpy(xtxt,"");
     wfpn = fopen("CORRECT.txt", "a");
     fprintf(wfpn,"%s","\n\n\n\n\n");
     fclose(wfpn);
     rfpr = fopen("CORRECT.txt", "r");
     //strcpy(xtxt,"");
     while (fgets(rbuffer,9998,rfpr)  ){
-        if ( checkstr(rbuffer,"\t",0,1)==TRUE  ){
+        if ( Checkstr(rbuffer,"\t",1)==TRUE  ){
             //printf("\n222");
             strncpy(tbuffer,rbuffer,398);
             strcpy(a,strtok(tbuffer,"\t"));
@@ -2025,7 +2040,7 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
             //printf("%s",bbuffer);
             //nrtxt=strlen(rtxt);
             strcpy(En,strtok(rbuffer," "));
-            if(strcmp(answer1,En)==0 && checkstr(bbuffer,"|",1,1)){
+            if(strcmp(answer1,En)==0 && Checkstr(bbuffer,"|",1)){
                // locate=nrtxt;
                // clocate=locate-alocate;
                 vflag=TRUE;
@@ -2098,6 +2113,8 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
 else if (rw==FALSE && CORRECT==TRUE && flag!=TRUE && ysv1!='s' && ysv1!='S'){
 
 for(P=0;P<p;P++){
+   // if(yFp!=NULL )
+   // fclose(yFp);
 yFp=fopen(PATH[P],"r");
     while (fgets(rbuffer,3998,yFp)){
         if (strcmp(rbuffer,"\n")!=0 ){
@@ -2644,6 +2661,7 @@ int colourp(){
                     ishprt("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
                     ysv(bword,ez);
+                    flag=FALSE;
                 }
                 else if(strcmp(aword,answer1)==0){
                     ishprt("\r\033[%dC%s\r",col-2,tline);
