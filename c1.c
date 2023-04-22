@@ -1171,6 +1171,7 @@ int ezback(){
                         }
                         else if(coln==1 && now1==FALSE){
                             ishprt("\033[1A\033[%dC\b \b",col);
+                            cursor_position(&rowm,&colm);
                             break;
                         }
                     
