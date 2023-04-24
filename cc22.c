@@ -19,6 +19,7 @@
 #include <sys/types.h>
 #include <grp.h>
 #include <stdarg.h>
+#include <regex.h>
 /***#include<conio.h>***/
 /***#include<curses.h>***/
 #define BOOL int
@@ -273,7 +274,7 @@ FILE * rfp;
 FILE * rfpa;
 
 BOOL rw;
-int rwfp(char * word1,char * word2,char ze,char ifrw){
+int rwfp(char * word1,char * word2,char ifrw){
 
 //int offset;
 //BOOL a;
@@ -300,7 +301,7 @@ if (ifrw==FALSE && rw==FALSE && ysv1!='s' && ysv1!='S' && ysv1!='V' && ysv1!='Y'
     //printf("\n\n22\n");
     rfpa = fopen("CORRECT.txt", "r+");
     rfp = fopen("CORRECT.txt", "w+");
-    if(ze=='1'){
+    if(ez=='1'){
     //    strcpy(en1,word2);
     //    strcpy(zh1,word1);
 
@@ -317,7 +318,7 @@ if (ifrw==FALSE && rw==FALSE && ysv1!='s' && ysv1!='S' && ysv1!='V' && ysv1!='Y'
     fclose(rfpa);
     printf("\n错题+1");
 }
-    else if(ze=='2'){
+    else if(ez=='2'){
    //     strcpy(zh1,word2);
     //    strcpy(en1,word1);
 
@@ -336,11 +337,11 @@ printf("\n错题+1");
     }
 }
 
-else if ((ifrw==TRUE ||  ysv1=='s' ||  ysv1=='S') && rw==TRUE ){
+else if ((ifrw==TRUE ||  ysv1=='s' ||  ysv1=='S' ||  ysv1=='V' ||  ysv1=='Y') && rw==TRUE ){
     //rfpa = fopen("CORRECT.txt", "r+");
     //rfpa = fopen("CORRECT.txt", "r+");
     rfp = fopen("CORRECT.txt", "w+");
-    if(ze=='1'){
+    if(ez=='1'){
     fseek(rfp,0L,SEEK_END);
     if (xtxt[0]!='\0'){
     printf("\n错题-1");
@@ -349,7 +350,7 @@ else if ((ifrw==TRUE ||  ysv1=='s' ||  ysv1=='S') && rw==TRUE ){
     fflush(stdout);
     fclose(rfp);
 }
-    else if(ze=='2'){
+    else if(ez=='2'){
     fseek(rfp,0L,SEEK_END);
     if (xtxt[0]!='\0'){
     printf("\n错题-1");
@@ -1718,8 +1719,13 @@ int nend[39999];
 int ran;
 int num=-1;
     char order;
-int ysv(char * bword,char ze){
-//char eline[]="\033[32m○\033[0m";
+
+char *pattern = "[a-zA-Z]+[|ˈˌɪəʊɪʊɔɪʌæɜːɑːʊəɪɒʃθðŋʧʤŋ]+";
+regex_t regex;
+regmatch_t match;
+
+void RWfp(char * bword){
+
 char * rbuffer;
 char * rtxt;
 rbuffer=(char *)malloc(9997);
@@ -1727,21 +1733,11 @@ rtxt=(char *)malloc(1999999);
 char * btxt;
 btxt=(char *)malloc(1999999);
 int nrtxt;
-int alocate=0;
-int locate;
-int zlocate=0;
-int clocate=0;
-char En[200];
 char a[200];
 char tbuffer[399];
-char * theline;
-theline=(char *)malloc(9999);
 char * bbuffer;
 bbuffer=(char *)malloc(9998);
-//char * del;
 BOOL vflag=FALSE;
-BOOL aflag=FALSE;
-BOOL llocate=FALSE;
 FILE * yFp;
 FILE * wfpn;
 char word1[201];
@@ -1749,211 +1745,17 @@ char Buffer[4096];
 FILE * rrpp;
 int i;
 rw=FALSE;
-int P=0;
-//alltxt=(char *)malloc(2999999);
-//Fp=fp;
-//strcat(rtxt,"");
-strcpy(En,"");
-strcpy(rtxt,"");
-strcpy(xtxt,"");
-strcpy(btxt,"");
-strcpy(rbuffer,"");
-strcpy(bbuffer,"");
-//Fp=fopen(path,"r");
-//yFp=fopen(path,"r");
 BOOL non=FALSE;
-while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r')
-    continue;
-//printf("%c",ysv1);
-if (ysv1=='V')
-ishprt("\r\033[%dC%s\r",col-2,eline);
-if (ysv1=='v' || ysv1=='V'){
-    if (flag!=TRUE){
-    printf("\n%s",bword);
-    fflush(stdout);
-    }
-for(P=0;P<p;P++){
-    //P=0;
-    if(Fp!=NULL)
-    fclose(Fp);
-    Fp=fopen(PATH[P],"r");
-    //strcat(answer1,"");
-   // printf("\n\n222");
-    while (fgets(rbuffer,9998,Fp)){
-        if (strcmp(rbuffer,"\n")==0){
-            if(vflag==TRUE){
-                zlocate=strlen(rtxt);
-                break;
-            }
-            alocate=zlocate;
-            strcpy(rtxt,"");
-            
-            nrtxt=0;
-
-        } 
-        else{
-            strncpy(bbuffer,rbuffer,9996);
-            strncat(rtxt,rbuffer,9998);
-            nrtxt=strlen(rtxt);
-            strcpy(En,strtok(rbuffer," "));
-            if(strcmp(answer1,En)==0 && checkstr(bbuffer,"|",0,1)){
-                strncpy(theline,bbuffer,9996);
-                locate=nrtxt;
-                vflag=TRUE;
-            }
-            strcpy(bbuffer,"");
-           //  printf("\nEn:%s",En);
-           //  printf("\nEN:%s",answer1);
-        }
-    }
-    if(vflag==TRUE){
-    if(locate==zlocate){
-        //strcpy(rtxt,"");
-for(P=0;P<p;P++){
-    //P=0;
-    if(Fp!=NULL)
-    fclose(Fp);
-    Fp=fopen(PATH[P],"r");
-    while (fgets(rbuffer,9998,Fp)){
-        if (Checkstr(rbuffer,answer1,strlen(answer1)) && Checkstr(rbuffer,"	",1)!=1 && Checkstr(rbuffer,"|",1)!=1 ){
-           // printf("%s",rbuffer);
-            strcat(rtxt,"*");
-            strncat(rtxt,rbuffer,9996);
-        }
-
-    }
-    //locate=0;
-}
-    }
-    if(rtxt[0]!='\0')
-    //printf("\n%s",&rtxt[locate]);
-    theline[strlen(theline)-1]='\0';
-   /// printf("\n\n222");
-    getlines(&rtxt[locate]);
-    if(theline[0]!='\0')
-    printf("\n%s",aprt(theline));
-
-    //printf("\n%s",theline);
-    fflush(stdout);
-    }
-    if(theline[0]!='\0'){
-    break;
-    }
-
-}
-
-   // fseek(fp,Max , SEEK_SET);
-    NL=TRUE;
-    strcpy(rtxt,"");
-    strcpy(theline,"");
-    vflag=FALSE;
-
-}
-else if (ysv1=='y' || ysv1=='Y'){
-if (ysv1=='Y')
-ishprt("\r\033[%dC%s\r",col-2,eline);
-
-
-        if (flag!=TRUE){
-    printf("\n%s",bword);
-    fflush(stdout);
-    }
-
-for(P=0;P<p;P++){
-    if(Fp!=NULL )
-    fclose(Fp);
-    Fp=fopen(PATH[P],"r");
-   //printf("\n\n222");
-    while (fgets(rbuffer,9998,Fp)){
-        if (strcmp(rbuffer,"\n")!=0 && zlocate!=0){
-            strncpy(bbuffer,rbuffer,9997);
-            
-            nrtxt=strlen(rtxt);
-            strcpy(En,strtok(rbuffer," "));
-            if(strcmp(answer1,En)==0 && checkstr(bbuffer,"|",0,1)){
-                locate=nrtxt;
-                clocate=locate-alocate;
-                vflag=TRUE;
-                strncpy(theline,bbuffer,9997);
-                break;
-
-        } 
-            strncat(rtxt,bbuffer,9998);
-            strcpy(bbuffer,"");
-        }
-        else
-            {
-                zlocate=1;
-                alocate=strlen(rtxt);
-                strcpy(rtxt,"");
-                nrtxt=0;
-            }
-           //  printf("\nEn:%s",En);
-           //  printf("\nEN:%s",answer1);
-    }
-    if(vflag==FALSE){
-        strcpy(rtxt,"");
-       //strcpy(rtxt,"");
-    }
-    if(vflag==TRUE)
-    theline[strlen(theline)-1]='\0';
-    if(rtxt[0]!='\0'){
-    getlines(rtxt);
-    }
-    if(theline[0]!='\0')
-    printf("\n%s",aprt(theline));
-    fflush(stdout);
-    NL=TRUE;
-    if(theline[0]!='\0'){
-    break;
-    }
-}
-   // fseek(fp,Max , SEEK_SET);
-       // fseek(Fp,max , SEEK_SET);
-    strcpy(rbuffer,"");
-    strcpy(bbuffer,"");
-    strcpy(rtxt,"");
-    strcpy(theline,"");
-    vflag=FALSE;
-  //  fseek(Fp,+max , SEEK_SET);
-
-}
-
-else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
-NL=FALSE;
-if (ysv1=='S' || ysv1=='s')
-ishprt("\r\033[%dC%s\r",col-2,eline);
-if(flag==FALSE){
-    printf("\n%s",bword);
-    fflush(stdout);
-}
-}
-strcpy(alltxt,"");
-strcpy(word1,"");
-
-if(PASS1==TRUE){
-    if (ysv1=='S' || ysv1=='s' || ysv1=='V' || ysv1=='Y' ||  flag==TRUE){
-        for (i=ran;i<=num;i++){
-            nend[i]=nend[i+1];
-        }
-num--;
-    }
-
-        if(ysv1=='v' || ysv1=='V' || ysv1=='y' || ysv1=='Y' )
-        printf("\n还有%d题",num);
-}
-
-
-if (CORRECT==TRUE){
-
-	strcpy(tbuffer,"");
+int P=0;
+	vflag=FALSE;
+        strcpy(alltxt,"");
+        strcpy(xtxt,"");
+        strcpy(tbuffer,"");
         strcpy(rbuffer,"");
         strcpy(bbuffer,"");
         strcpy(btxt,"");
         strcpy(Buffer,"");
         strcpy(word1,"");
-    //if(rrpp!=NULL )
-    //fclose(rrpp);
     rrpp = fopen("CORRECT.txt", "r");
     strcpy(word1,answer1);
     strcat(word1,"\t\t");
@@ -1962,7 +1764,7 @@ if (CORRECT==TRUE){
             strncat(alltxt,Buffer,4095);
             if (Buffer[0]=='\\')
             non=TRUE;
-           if(ze=='1' && non==FALSE){
+           if(ez=='1' && non==FALSE){
            // if(checkstr(buffer,zh,1,strlen(zh))){
             //strcat(zh,"\t");
             for(i=0;i<strlen(word1)-1;i++){
@@ -1971,7 +1773,6 @@ if (CORRECT==TRUE){
             else {
 //printf("%c",zh[i]);
 //puts(&buffer[i]);
-            //a=FALSE;
             break;
             }
             
@@ -1980,13 +1781,12 @@ if (CORRECT==TRUE){
             rw=TRUE;
 
 } 
-           else if(ze=='2'  && non==FALSE){
+           else if(ez=='2'  && non==FALSE){
             //strcat(en,"\t");
             for(i=0;i<strlen(word1)-1;i++){
             if(Buffer[i]==word1[i])
             continue;
             else{
-            //a=FALSE;
             break;
             } 
             }
@@ -1996,7 +1796,6 @@ if (CORRECT==TRUE){
 }
     }
     fclose(rrpp);
-}
 
 
 
@@ -2040,14 +1839,9 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
             //printf("\n222");
             //printf("%s",bbuffer);
             //nrtxt=strlen(rtxt);
-            strcpy(En,strtok(rbuffer," "));
-            if(strcmp(answer1,En)==0 && Checkstr(bbuffer,"|",1)){
-               // locate=nrtxt;
-               // clocate=locate-alocate;
+            
+            if(Checkstr(answer1,bbuffer,strlen(answer1)) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
                 vflag=TRUE;
-                //if(vflag==TRUE)
-                //printf("%s",bbuffer);
-                //strcpy(theline,bbuffer);
         } 
             //strncat(rtxt,bbuffer,999);
             strncat(btxt,bbuffer,9998);
@@ -2059,7 +1853,6 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
         else
             {
                 //printf("\n222");
-                //zlocate=1;
 		if (vflag==TRUE){
                 //strcpy(xtxt,"\n");
                 strcat(xtxt,"\n");
@@ -2090,22 +1883,9 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
     }
     }
     fclose(rfpr);
-    //if(rtxt[0]!='\0'){
-    //getlines(rtxt);
-    //}
-    //if(theline[0]!='\0')
-    //printf("\n%s",rtxt);
-    //strcpy(xtxt,"");
-    //strcpy(xtxt,rtxt);
-    //printf("\n%s",xtxt);
-    //strcpy(rtxt,"");
     fflush(stdout);
     NL=TRUE;
-    //fclose(rfpa);
-    //fseek(fp,max , SEEK_SET);
     fseek(fp,Max , SEEK_SET); 
-    //fclose(rfpr); 
-   // fseek(Fp,max , SEEK_SET);  
 }
 
 
@@ -2114,66 +1894,279 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
 else if (rw==FALSE && CORRECT==TRUE && flag!=TRUE && ysv1!='s' && ysv1!='S'){
 
 for(P=0;P<p;P++){
-   // if(yFp!=NULL )
-   // fclose(yFp);
 yFp=fopen(PATH[P],"r");
     while (fgets(rbuffer,3998,yFp)){
         if (strcmp(rbuffer,"\n")!=0 ){
             strcpy(bbuffer,rbuffer);
-            
-            //nrtxt=strlen(rtxt);
-            strcpy(En,strtok(rbuffer," "));
-            if(strcmp(answer1,En)==0 && checkstr(bbuffer,"|",1,1)==TRUE){
-                //locate=nrtxt;
-                //clocate=locate-alocate;
+            if(Checkstr(answer1,bbuffer,strlen(answer1)) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
                 vflag=TRUE;
-                //strcpy(theline,bbuffer);
                         } 
             strncat(rtxt,bbuffer,3998);
             strcpy(bbuffer,"");
         }
         else
             {
-                //zlocate=1;
 		if (vflag==TRUE){
-                //strcpy(xtxt,"\n");
-                
                 strcpy(xtxt,rtxt);
                 strcat(xtxt,"\n");
                 strcpy(rtxt,"");
-                //strcpy(tbuffer,"");
                 strcpy(rbuffer,"");
                 strcpy(bbuffer,"");
-		//printf("%s",xtxt);
 		    break;
 		}
 		else{
-                alocate=strlen(rtxt);
-                //strcpy(xtxt,rtxt);
-		//printf("%s",xtxt);
-                //strcpy(tbuffer,"");
                 strcpy(rbuffer,"");
                 strcpy(bbuffer,"");
                 strcpy(rtxt,"");
-                //nrtxt=0;
 		}
             }
                 strcpy(rbuffer,"");
                 strcpy(bbuffer,"");
  }
-    //if(rtxt[0]!='\0'){
-    //getlines(rtxt);
-    //}
-    //if(theline[0]!='\0')
-    //printf("\n%s",theline);
+
     fflush(stdout);
-    NL=TRUE;
-    //fseek(yFp,max , SEEK_SET);    
+    NL=TRUE; 
 fclose(yFp);
 		if (vflag==TRUE){
         break;
         }
 }
+}
+}
+//char *pattern = "[a-zA-Z]+[\\s]*\\[[^\\[\\]]+\\][\\s]*";
+int ysv(char * bword){
+//char eline[]="\033[32m○\033[0m";
+char * rbuffer;
+char * rtxt;
+rbuffer=(char *)malloc(9997);
+rtxt=(char *)malloc(1999999);
+char * btxt;
+btxt=(char *)malloc(1999999);
+int nrtxt;
+int alocate=0;
+int locate;
+int zlocate=0;
+int clocate=0;
+char En[200];
+char a[200];
+char tbuffer[399];
+char * theline;
+theline=(char *)malloc(9999);
+char * bbuffer;
+bbuffer=(char *)malloc(9998);
+//char * del;
+BOOL vflag=FALSE;
+BOOL aflag=FALSE;
+BOOL llocate=FALSE;
+FILE * yFp;
+FILE * wfpn;
+char word1[201];
+char Buffer[4096];
+FILE * rrpp; 
+int i;
+rw=FALSE;
+int P=0;
+//alltxt=(char *)malloc(2999999);
+//Fp=fp;
+//strcat(rtxt,"");
+strcpy(En,"");
+strcpy(rtxt,"");
+strcpy(xtxt,"");
+strcpy(btxt,"");
+strcpy(rbuffer,"");
+strcpy(bbuffer,"");
+//Fp=fopen(path,"r");
+//yFp=fopen(path,"r");
+BOOL non=FALSE;
+while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r')
+    continue;
+//printf("%c",ysv1);
+if (ysv1=='V'){
+ishprt("\r\033[%dC%s\r",col-2,eline);
+flag=TRUE;
+rw=TRUE;
+}
+if (ysv1=='v' || ysv1=='V'){
+    if (flag!=TRUE){
+    printf("\n%s",bword);
+    fflush(stdout);
+    }
+for(P=0;P<p;P++){
+    //P=0;
+    if(Fp!=NULL)
+    fclose(Fp);
+    Fp=fopen(PATH[P],"r");
+    //strcat(answer1,"");
+   // printf("\n\n222");
+    while (fgets(rbuffer,9998,Fp)){
+        if (strcmp(rbuffer,"\n")==0){
+            if(vflag==TRUE){
+                zlocate=strlen(rtxt);
+                break;
+            }
+            alocate=zlocate;
+            strcpy(rtxt,"");
+            
+            nrtxt=0;
+
+        } 
+        else{
+            strncpy(bbuffer,rbuffer,9996);
+            strncat(rtxt,rbuffer,9998);
+            nrtxt=strlen(rtxt);
+            strcpy(En,strtok(rbuffer," "));
+            if(Checkstr(answer1,bbuffer,strlen(answer1)) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
+                strncpy(theline,bbuffer,9996);
+                locate=nrtxt;
+                vflag=TRUE;
+            }
+            strcpy(bbuffer,"");
+           //  printf("\nEn:%s",En);
+           //  printf("\nEN:%s",answer1);
+        }
+    }
+    if(vflag==TRUE){
+    if(locate==zlocate){
+        //strcpy(rtxt,"");
+for(P=0;P<p;P++){
+    //P=0;
+    if(Fp!=NULL)
+    fclose(Fp);
+    Fp=fopen(PATH[P],"r");
+    while (fgets(rbuffer,9998,Fp)){
+        if (Checkstr(rbuffer,answer1,strlen(answer1)) && Checkstr(rbuffer,"	",1)!=1 && regexec(&regex, rbuffer, 1, &match, 0) == 1 ){
+           // printf("%s",rbuffer);
+            strcat(rtxt,"*");
+            strncat(rtxt,rbuffer,9996);
+        }
+
+    }
+    //locate=0;
+}
+    }
+    if(rtxt[0]!='\0')
+    //printf("\n%s",&rtxt[locate]);
+    theline[strlen(theline)-1]='\0';
+   /// printf("\n\n222");
+    getlines(&rtxt[locate]);
+    if(theline[0]!='\0')
+    printf("\n%s",aprt(theline));
+
+    //printf("\n%s",theline);
+    fflush(stdout);
+    }
+    if(theline[0]!='\0'){
+    break;
+    }
+
+}
+
+   // fseek(fp,Max , SEEK_SET);
+    // NL=TRUE;
+    strcpy(rtxt,"");
+    strcpy(theline,"");
+    vflag=FALSE;
+
+}
+else if (ysv1=='y' || ysv1=='Y'){
+if (ysv1=='Y'){
+ishprt("\r\033[%dC%s\r",col-2,eline);
+flag=TRUE;
+rw=TRUE;
+}
+
+        if (flag!=TRUE){
+    printf("\n%s",bword);
+    fflush(stdout);
+    }
+
+for(P=0;P<p;P++){
+    if(Fp!=NULL )
+    fclose(Fp);
+    Fp=fopen(PATH[P],"r");
+   //printf("\n\n222");
+    while (fgets(rbuffer,9998,Fp)){
+        if (strcmp(rbuffer,"\n")!=0 && zlocate!=0){
+            strncpy(bbuffer,rbuffer,9997);
+            
+            nrtxt=strlen(rtxt);
+            strcpy(En,strtok(rbuffer," "));
+            if(Checkstr(answer1,bbuffer,strlen(answer1)) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
+                locate=nrtxt;
+                clocate=locate-alocate;
+                vflag=TRUE;
+                strncpy(theline,bbuffer,9997);
+                break;
+
+        } 
+            strncat(rtxt,bbuffer,9998);
+            strcpy(bbuffer,"");
+        }
+        else
+            {
+                zlocate=1;
+                alocate=strlen(rtxt);
+                strcpy(rtxt,"");
+                nrtxt=0;
+            }
+           //  printf("\nEn:%s",En);
+           //  printf("\nEN:%s",answer1);
+    }
+    if(vflag==FALSE){
+        strcpy(rtxt,"");
+       //strcpy(rtxt,"");
+    }
+    if(vflag==TRUE)
+    theline[strlen(theline)-1]='\0';
+    if(rtxt[0]!='\0'){
+    getlines(rtxt);
+    }
+    if(theline[0]!='\0')
+    printf("\n%s",aprt(theline));
+    fflush(stdout);
+    // NL=TRUE;
+    if(theline[0]!='\0'){
+    break;
+    }
+}
+   // fseek(fp,Max , SEEK_SET);
+       // fseek(Fp,max , SEEK_SET);
+    strcpy(rbuffer,"");
+    strcpy(bbuffer,"");
+    strcpy(rtxt,"");
+    strcpy(theline,"");
+    vflag=FALSE;
+  //  fseek(Fp,+max , SEEK_SET);
+
+}
+
+else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
+NL=FALSE;
+if (ysv1=='S' || ysv1=='s')
+ishprt("\r\033[%dC%s\r",col-2,eline);
+if(flag==FALSE){
+    printf("\n%s",bword);
+    fflush(stdout);
+}
+}
+strcpy(alltxt,"");
+strcpy(word1,"");
+
+if(PASS1==TRUE){
+    if (ysv1=='S' || ysv1=='s' || ysv1=='V' || ysv1=='Y' ||  flag==TRUE){
+        for (i=ran;i<=num;i++){
+            nend[i]=nend[i+1];
+        }
+num--;
+    }
+
+        if(ysv1=='v' || ysv1=='V' || ysv1=='y' || ysv1=='Y' )
+        printf("\n还有%d题",num);
+}
+
+
+if (CORRECT==TRUE){
+RWfp(bword);
 }
 return 0;
 }
@@ -2661,26 +2654,26 @@ int colourp(){
                 if(strcmp(aword,"")==0){
                     ishprt("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
-                    ysv(bword,ez);
+                    ysv(bword);
                     flag=FALSE;
                 }
                 else if(strcmp(aword,answer1)==0){
                     ishprt("\r\033[%dC%s\r",col-2,tline);
                     flag=TRUE;
                     fflush(stdout);
-                    ysv(bword,ez);
+                    ysv(bword);
                 }
                 else{
                 //fflush(stdin);
                 ishprt("\r\033[%dC%s\r",col-2,fline);
                 fflush(stdout);
-                ysv(bword,ez); 
+                ysv(bword); 
                 //printf("\n%s",bword);
                 //fflush(stdout);
                 } 
                 }
                 else{
-                    ysv(bword,ez);
+                    ysv(bword);
                 }
             }
             if(ez=='2'){
@@ -2688,28 +2681,28 @@ int colourp(){
                 if(strcmp(aword,"")==0){
                     ishprt("\r\033[%dC%s\r",col-2,nline);
                     fflush(stdout);
-                    ysv(bword,ez);
+                    ysv(bword);
                 }
 else if (ifRight()==TRUE){
     ishprt("\r\033[%dC%s\r",col-2,tline);
     fflush(stdout);
-    ysv(bword,ez);
+    ysv(bword);
 } 
 else{
     ishprt("\r\033[%dC%s\r",col-2,fline);
     fflush(stdout);
-    ysv(bword,ez);
+    ysv(bword);
 }
                  } 
                 else
-                 ysv(bword,ez);
+                 ysv(bword);
                 
             }
 
          
                 fflush(stdin);
                 if(CORRECT==TRUE)
-                rwfp(answer1,ch,ez,flag);
+                rwfp(answer1,ch,flag);
                 fflush(stdin); 
 
 return 0;
@@ -3248,7 +3241,7 @@ nend[0]=-1;
 nend[num+1]=max;
 ran=-1;
 while (TRUE){
-if ( ysv1!='S' && ysv1!='s'  && flag==FALSE ){
+if ( ysv1!='S' && ysv1!='s' && ysv1!='V' && ysv1!='Y' && flag==FALSE ){
     ran++;
 }
 	if(ran==num+1){
@@ -3463,6 +3456,14 @@ alltxt=(char *)malloc(8999999);
     new_setting.c_lflag&=~ECHO; 
     new_setting.c_lflag&=~ICANON; 
     tcsetattr(0,TCSANOW,&new_setting);
+
+    
+    int reti = regcomp(&regex, pattern, REG_EXTENDED);
+    if (reti) {
+        fprintf(stderr, "Could not compile regex\n");
+        return 1;
+    }
+   
 
     calendar();
     getfromread();
