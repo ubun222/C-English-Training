@@ -1682,6 +1682,7 @@ int getfromread(){
             //printf("%s",PATH[p]);
             p++;
             loadcontent();
+            strcpy(path,"");
             }
             //strcat(PATH,"\n");
             strcpy(path,"");
@@ -1803,7 +1804,6 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
     //printf("\n222\n");
    // if(rfpr!=NULL )
    // fclose(rfpr);
-
    // if(wfpn!=NULL )
    // fclose(wfpn);
     strcpy(xtxt,"");
@@ -1884,8 +1884,9 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
     }
     fclose(rfpr);
     fflush(stdout);
-    NL=TRUE;
-    fseek(fp,Max , SEEK_SET); 
+   //NL=TRUE;
+    //fseek(fp,Max , SEEK_SET); 
+    //printf("2222");
 }
 
 
@@ -1959,7 +1960,6 @@ BOOL vflag=FALSE;
 BOOL aflag=FALSE;
 BOOL llocate=FALSE;
 FILE * yFp;
-FILE * wfpn;
 char word1[201];
 char Buffer[4096];
 FILE * rrpp; 
@@ -1983,8 +1983,7 @@ while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s'
 //printf("%c",ysv1);
 if (ysv1=='V'){
 ishprt("\r\033[%dC%s\r",col-2,eline);
-flag=TRUE;
-rw=TRUE;
+
 }
 if (ysv1=='v' || ysv1=='V'){
     if (flag!=TRUE){
@@ -2071,8 +2070,6 @@ for(P=0;P<p;P++){
 else if (ysv1=='y' || ysv1=='Y'){
 if (ysv1=='Y'){
 ishprt("\r\033[%dC%s\r",col-2,eline);
-flag=TRUE;
-rw=TRUE;
 }
 
         if (flag!=TRUE){
