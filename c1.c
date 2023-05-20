@@ -2030,13 +2030,13 @@ for(P=0;P<p;P++){
     }
 
     if(locate==zlocate || vflag==0 ){
-        //strcpy(rtxt,"");
+        strcpy(rtxt,"");
 for(P=0;P<p;P++){
     //P=0;
     if(Fp!=NULL)
     fclose(Fp);
     Fp=fopen(PATH[P],"r");
-    strcat(theline,"");
+    strcpy(theline,"");
     while (fgets(rbuffer,9998,Fp)){
         if (Checkstr(rbuffer,answer1,strlen(answer1)) && !Checkstr(rbuffer,"\t",1) &&  regexec(&regex, rbuffer, 1, &match, 0)!=0 ){
            // printf("%s",rbuffer);
