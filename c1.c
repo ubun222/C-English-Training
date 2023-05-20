@@ -798,7 +798,9 @@ return aline;
 char ysv1;
 int getlines(char * string){
     int i;
-    int n=strlen(string);
+    char strings[2999999];
+    strcpy(strings,string);
+    int n=strlen(strings);
     int l=1;
     int ni[50];
     //char strings[999999];
@@ -810,12 +812,12 @@ int getlines(char * string){
     int m;
     int rans[5]={-1,-1,-1,-1,-1};
     for(i=0;i<n;i++){
-        if(string[i]=='\n'){
+        if(strings[i]=='\n'){
             ni[l]=i;
             l++;
         }
     }
-    char aline[l-1][999];
+    char aline[l-1][9997];
 
     for(i=0;i<l;i++){
             strcpy(aline[i],"\0");
@@ -823,7 +825,7 @@ int getlines(char * string){
     //if(ysv1=='v' || ysv1=='V')
     strcpy(aline[0],"\n");
     for(i=0;i<l-1;i++){
-        strncat(aline[i],&string[ni[i]],ni[i+1]-ni[i]);
+        strncat(aline[i],&strings[ni[i]],ni[i+1]-ni[i]);
     }
     
         for(i=0;i<l-1;i++){
@@ -840,6 +842,7 @@ int getlines(char * string){
         for(m=0;m<4;m++){
             if(strlen(aline[m])>=5)
         printf("\n%s",aprt(&aline[m][1]));
+   
     }
     break;
     }
@@ -847,7 +850,7 @@ int getlines(char * string){
     srand(times * (rx+1));
     rx++;
     ran=rand() % (l+1);
-
+    //printf("%d",ran);
     if(ifre(rans,ran)==TRUE){
     rans[i]=ran;
     if(aline[ran][0]!='\0')
@@ -1899,7 +1902,7 @@ yFp=fopen(PATH[P],"r");
     while (fgets(rbuffer,3998,yFp)){
         if (strcmp(rbuffer,"\n")!=0 ){
             strcpy(bbuffer,rbuffer);
-            if(Checkstr(answer1,bbuffer,strlen(answer1)) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
+            if(Checkstr(bbuffer,answer1,strlen(answer1)) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
                 vflag=TRUE;
                         } 
             strncat(rtxt,bbuffer,3998);
@@ -2013,8 +2016,9 @@ for(P=0;P<p;P++){
             strncpy(bbuffer,rbuffer,9996);
             strncat(rtxt,rbuffer,9998);
             nrtxt=strlen(rtxt);
-            strcpy(En,strtok(rbuffer," "));
-            if(Checkstr(answer1,bbuffer,strlen(answer1)) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
+            strncpy(En,rbuffer,strlen(answer1)+1);
+            //printf("%s:%s",En,answer1);
+            if(Checkstr(En,answer1,strlen(answer1)) && !isalpha(En[strlen(answer1)]) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
                 strncpy(theline,bbuffer,9996);
                 locate=nrtxt;
                 vflag=TRUE;
@@ -2024,26 +2028,31 @@ for(P=0;P<p;P++){
            //  printf("\nEN:%s",answer1);
         }
     }
-    if(vflag==TRUE){
-    if(locate==zlocate){
+
+    if(locate==zlocate || vflag==0 ){
         //strcpy(rtxt,"");
 for(P=0;P<p;P++){
     //P=0;
     if(Fp!=NULL)
     fclose(Fp);
     Fp=fopen(PATH[P],"r");
+    strcat(theline,"");
     while (fgets(rbuffer,9998,Fp)){
-        if (Checkstr(rbuffer,answer1,strlen(answer1))){
+        if (Checkstr(rbuffer,answer1,strlen(answer1)) && !Checkstr(rbuffer,"\t",1) &&  regexec(&regex, rbuffer, 1, &match, 0)!=0 ){
            // printf("%s",rbuffer);
             strcat(rtxt,"*");
             strncat(rtxt,rbuffer,9996);
+            vflag=TRUE;
+            locate=0;
         }
 
     }
     //locate=0;
 }
     }
+    if(vflag==TRUE){
     if(rtxt[0]!='\0')
+    if(theline[0]!='\0')
     //printf("\n%s",&rtxt[locate]);
     theline[strlen(theline)-1]='\0';
    /// printf("\n\n222");
@@ -2087,8 +2096,8 @@ for(P=0;P<p;P++){
             strncpy(bbuffer,rbuffer,9997);
             
             nrtxt=strlen(rtxt);
-            strcpy(En,strtok(rbuffer," "));
-            if(Checkstr(answer1,bbuffer,strlen(answer1)) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
+            strncpy(En,rbuffer,strlen(answer1)+1);
+            if(Checkstr(En,answer1,strlen(answer1)) && !isalpha(En[strlen(answer1)]) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
                 locate=nrtxt;
                 clocate=locate-alocate;
                 vflag=TRUE;
