@@ -2033,7 +2033,7 @@ for(P=0;P<p;P++){
     fclose(Fp);
     Fp=fopen(PATH[P],"r");
     while (fgets(rbuffer,9998,Fp)){
-        if (Checkstr(rbuffer,answer1,strlen(answer1)) && Checkstr(rbuffer,"	",1)!=1 && regexec(&regex, rbuffer, 1, &match, 0) == 1 ){
+        if (Checkstr(rbuffer,answer1,strlen(answer1))){
            // printf("%s",rbuffer);
             strcat(rtxt,"*");
             strncat(rtxt,rbuffer,9996);
