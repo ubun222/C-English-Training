@@ -1835,6 +1835,10 @@ line_number = 0;
 int m;
 char * line;
 while (1){
+         if(thetxts[0]=='\0'){
+    strcpy(thetxts,txts);
+    printf("请重新输入:\n%s",thetxts);
+}
 printf("请输入词表名称，按回车键结束:");
 fflush(stdout);
 strcpy(thetxt,"");
@@ -1860,6 +1864,7 @@ strcpy(thetxt,"");
                 }
 
            if(T == '\r' || T == '\n' || T == '\0'){
+            
             printf("\n");
             fflush(stdout);
            break;
@@ -1915,11 +1920,8 @@ break;
 
 
 
-else if(strcmp(thetxt,"")!=0){
-     if(thetxts[0]=='\0'){
-    strcpy(thetxts,txts);
-    printf("请重新输入:\n%s",thetxts);
-}
+else if(strcmp(thetxt,"")!=0 && strcmp(thetxts,"")!=1){
+
 
     line_number = 0;
     line = strtok(thetxts, "\n");
