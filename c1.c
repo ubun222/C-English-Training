@@ -1570,6 +1570,7 @@ char * lstxt(char * txtpath) {
 
 char * ls(char * txtpath) {
     DIR *directory;
+   // DIR *directoryt;
     struct dirent *entry;
     struct stat file_stat;
 
@@ -1581,27 +1582,45 @@ char * ls(char * txtpath) {
         return NULL;
     }
 
+char aentry[999];
+
     char** directories = NULL;
     int numDirectories = 0;
 
     // 读取目录中的文件和子目录
-    while ((entry = readdir(directory)) != NULL) {
+    while (entry = readdir(directory)) {
         // 排除当前目录和上级目录
-        
+       // printf("%s\n",entry->d_name);
        // getchar();
        // if (Checkstr(entry->d_name,"." ,1) == 1 || Checkstr(entry->d_name, "..",2) == 1) {
             
            // continue;
        // }
-        //printf("%s",entry->d_name);
+       // printf("%s",entry->d_name);
+//printf("%s",entry->d_name);
+strcpy(aentry,txtpath);
+if(aentry[strlen(aentry)-1]!='/')
+strcat(aentry,"/");
+strcat(aentry,entry->d_name);
+if(stat(aentry, &file_stat)!=0){
+    //printf("ssss");
+    printf("%s",aentry);
+    perror("stat");
+    continue;
+}
 
+
+//printf("%s",entry->d_name);
         // 获取文件/目录的详细信息
-        stat(entry->d_name, &file_stat);
-
+       // stat(path, &fileStat) == 0
+       // stat(entry->d_name, &file_stat);
+        //directoryt = opendir(entry->d_name);
         // 如果是目录则保存到数组中
-        if (S_ISDIR(file_stat.st_mode) &&( Checkstr(".",entry->d_name,1) == 0 ||  Checkstr( "..",entry->d_name,2) == 0) ) {
+        if (S_ISDIR(file_stat.st_mode) && entry->d_name[0]!='.' ) {
+            //printf("%s",entry->d_name);
+            
             numDirectories++;
-
+//printf("%s",entry->d_name);
             // 重新分配数组的内存空间
             directories = realloc(directories, numDirectories * sizeof(char*));
             if (directories == NULL) {
@@ -1611,7 +1630,7 @@ char * ls(char * txtpath) {
             }
 
             // 分配内存保存目录名称
-            directories[numDirectories - 1] = malloc(strlen(entry->d_name) + 1);
+            directories[numDirectories - 1] = malloc(strlen(aentry) + 1);
             if (directories[numDirectories - 1] == NULL) {
                 printf("内存分配失败.\n");
                 fflush(stdout);
@@ -1619,7 +1638,7 @@ char * ls(char * txtpath) {
             }
 
             // 复制目录名称到数组中
-            strcpy(directories[numDirectories - 1], entry->d_name);
+            strcpy(directories[numDirectories - 1], aentry);
         }
     }
 
@@ -1701,7 +1720,7 @@ return 0;
 }
 int p=0;
 
-char *Thepath;
+char *Thepath=NULL;
 void entries(char * directories){
     txt=(char *)malloc(9999999);
     char directories1[99999];
@@ -1808,13 +1827,8 @@ printf("\033[1B\r");
 
 char t[399];
 
-strcpy(t,"./txt/");
-if(Thepath!=NULL){
-    if(Thepath[strlen(Thepath)-1]!='/'){
-    strcat(Thepath,"/");
-}
-    strcpy(t,Thepath);
-}
+strcpy(t,"");
+
 char * txt_;
 txt_=strcat(t,&rows[thei-1][2]);
 printf("open:%s\n",txt_);
