@@ -1588,7 +1588,7 @@ char aentry[999];
     int numDirectories = 0;
 
     // 读取目录中的文件和子目录
-    while (entry = readdir(directory)) {
+    while ((entry = readdir(directory))) {
         // 排除当前目录和上级目录
        // printf("%s\n",entry->d_name);
        // getchar();
