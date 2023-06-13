@@ -1820,7 +1820,7 @@ char thetxts[99999];
 char temp[99999];
 txts=lstxt(txt_);
 strcpy(thetxts,txts);
-printf("%s",txts);
+printf("\033[2m%s\033[0m",txts);
 fflush(stdout);
 char  thetxt[199];
 //printf("请输入词表名称，按回车键结束:");
@@ -1837,7 +1837,7 @@ char * line;
 while (1){
          if(thetxts[0]=='\0'){
     strcpy(thetxts,txts);
-    printf("请重新输入:\n%s",thetxts);
+    printf("请重新输入:\n\033[2m%s\033[0m",thetxts);
 }
 printf("请输入词表名称，按回车键结束:");
 fflush(stdout);
@@ -1927,9 +1927,15 @@ else if(strcmp(thetxt,"")!=0 && strcmp(thetxts,"")!=1){
     line = strtok(thetxts, "\n");
    //  printf("%d: %s\n", line_number+1, line);
     strcpy(temp,"");
+    char *pattern1 = thetxt;
+    regex_t regex1;
+    regmatch_t match1;
+    int reti = regcomp(&regex1, pattern1, REG_EXTENDED);
+        if (!reti) {
+
     while (line != NULL) {
-        if (Checkstr(line, thetxt, strlen(thetxt))) {
-            printf("%d: %s\n", line_number+1, line);
+        if ( regexec(&regex1, line, 1, &match1, 0) == 0) {
+            printf("%s\n", line);
             fflush(stdout);
             strcat(temp,line);
             strcat(temp,"\n");
@@ -1939,6 +1945,21 @@ else if(strcmp(thetxt,"")!=0 && strcmp(thetxts,"")!=1){
     }
     strcpy(thetxts,temp);
     //printf("%s",thetxts);
+}
+else{
+        while (line != NULL) {
+        if (Checkstr(line, thetxt, strlen(thetxt))) {
+            printf("%s\n", line);
+            fflush(stdout);
+            strcat(temp,line);
+            strcat(temp,"\n");
+            line_number++;
+        }
+        line = strtok(NULL, "\n");
+    }
+    strcpy(thetxts,temp);
+    //printf("%s",thetxts);
+}
 }
 else{
          if(thetxts[0]=='\0'){
@@ -2068,7 +2089,7 @@ void RWfp(char * bword){
 
 char * rbuffer;
 char * rtxt;
-rbuffer=(char *)malloc(9997);
+rbuffer=(char *)malloc(9999);
 rtxt=(char *)malloc(1999999);
 char * btxt;
 btxt=(char *)malloc(1999999);
@@ -2293,7 +2314,7 @@ int ysv(char * bword,char ysv0){
 //char eline[]="\033[32m○\033[0m";
 char * rbuffer;
 char * rtxt;
-rbuffer=(char *)malloc(9997);
+rbuffer=(char *)malloc(9999);
 rtxt=(char *)malloc(1999999);
 char * btxt;
 btxt=(char *)malloc(1999999);
