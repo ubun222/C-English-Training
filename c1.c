@@ -1587,15 +1587,19 @@ char * ls(char * txtpath) {
     // 读取目录中的文件和子目录
     while ((entry = readdir(directory)) != NULL) {
         // 排除当前目录和上级目录
-        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
-            continue;
-        }
+        
+       // getchar();
+       // if (Checkstr(entry->d_name,"." ,1) == 1 || Checkstr(entry->d_name, "..",2) == 1) {
+            
+           // continue;
+       // }
+        //printf("%s",entry->d_name);
 
         // 获取文件/目录的详细信息
         stat(entry->d_name, &file_stat);
 
         // 如果是目录则保存到数组中
-        if (S_ISDIR(file_stat.st_mode)) {
+        if (S_ISDIR(file_stat.st_mode) && Checkstr(".",entry->d_name,1) == 0 || Checkstr( "..",entry->d_name,2) == 0 ) {
             numDirectories++;
 
             // 重新分配数组的内存空间
