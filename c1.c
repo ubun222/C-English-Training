@@ -1599,7 +1599,7 @@ char * ls(char * txtpath) {
         stat(entry->d_name, &file_stat);
 
         // 如果是目录则保存到数组中
-        if (S_ISDIR(file_stat.st_mode) && Checkstr(".",entry->d_name,1) == 0 || Checkstr( "..",entry->d_name,2) == 0 ) {
+        if (S_ISDIR(file_stat.st_mode) &&( Checkstr(".",entry->d_name,1) == 0 ||  Checkstr( "..",entry->d_name,2) == 0) ) {
             numDirectories++;
 
             // 重新分配数组的内存空间
