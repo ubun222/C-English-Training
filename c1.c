@@ -2133,6 +2133,8 @@ int getfromread(){
             //printf("%s",PATH[p]);
             p++;
             loadcontent();
+            printf("\n");
+            fflush(stdout);
             strcpy(path,"");
             }
             //strcat(PATH,"\n");
