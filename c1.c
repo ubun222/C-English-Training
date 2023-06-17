@@ -140,11 +140,33 @@ add=0;
         strcat(strs,"\x94");
         strcat(strs,"\x80");
     }
-        printf("%s",strs);
-        printf("C-English-Training\n");
+    printf("%s",strs);
+    fflush(stdout);
+    getchar();
+    printf("\033[2J"); // 清屏
+    printf("\033[0;0H"); // 光标移动到左上角
+  char placard[]="  _____\n / ___/\n/ /__\n\\___/\n   ____          ___     __\n  / __/__  ___ _/ (_)__ / /\n / _// _ \\/ _ `/ / (_-</ _ \\\n/___/_//_/\\_, /_/_/___/_//_/\n         /___/\n ______         _      _\n/_  __/______ _(_)__  (_)__  ___ _\n / / / __/ _ `/ / _ \\/ / _ \\/ _ `/\n/_/ /_/  \\_,_/_/_//_/_/_//_/\\_, /\n                           /___/";
+        printf("\033[1m");
+        if(col>=34){
+            int N;
+        for(N=0;N<strlen(placard);N++){
+            printf("%c",placard[N]);
+            if (placard[N]=='\n'){
+                usleep(32000);
+            }
+        }
+        }
+        else{
+            printf("C-English-Training");
+        }
+        printf("\033[0m");
+
+        printf("\n%s",strs);
+        //printf("\n");
         fflush(stdout);
         char txtlist[99999];
         //strcpy(ls("txt"),txtlist);
+        getchar();
         return 0;
 
 }
@@ -1570,6 +1592,7 @@ char * lstxt(char * txtpath) {
 
 char * ls(char * txtpath) {
     DIR *directory;
+   // DIR *directoryt;
     struct dirent *entry;
     struct stat file_stat;
 
@@ -1581,23 +1604,45 @@ char * ls(char * txtpath) {
         return NULL;
     }
 
+char aentry[999];
+
     char** directories = NULL;
     int numDirectories = 0;
 
     // 读取目录中的文件和子目录
-    while ((entry = readdir(directory)) != NULL) {
+    while ((entry = readdir(directory))) {
         // 排除当前目录和上级目录
-        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
-            continue;
-        }
+       // printf("%s\n",entry->d_name);
+       // getchar();
+       // if (Checkstr(entry->d_name,"." ,1) == 1 || Checkstr(entry->d_name, "..",2) == 1) {
+            
+           // continue;
+       // }
+       // printf("%s",entry->d_name);
+//printf("%s",entry->d_name);
+strcpy(aentry,txtpath);
+if(aentry[strlen(aentry)-1]!='/')
+strcat(aentry,"/");
+strcat(aentry,entry->d_name);
+if(stat(aentry, &file_stat)!=0){
+    //printf("ssss");
+    printf("%s",aentry);
+    perror("stat");
+    continue;
+}
 
+
+//printf("%s",entry->d_name);
         // 获取文件/目录的详细信息
-        stat(entry->d_name, &file_stat);
-
+       // stat(path, &fileStat) == 0
+       // stat(entry->d_name, &file_stat);
+        //directoryt = opendir(entry->d_name);
         // 如果是目录则保存到数组中
-        if (S_ISDIR(file_stat.st_mode)) {
+        if (S_ISDIR(file_stat.st_mode) && entry->d_name[0]!='.' ) {
+            //printf("%s",entry->d_name);
+            
             numDirectories++;
-
+//printf("%s",entry->d_name);
             // 重新分配数组的内存空间
             directories = realloc(directories, numDirectories * sizeof(char*));
             if (directories == NULL) {
@@ -1607,7 +1652,7 @@ char * ls(char * txtpath) {
             }
 
             // 分配内存保存目录名称
-            directories[numDirectories - 1] = malloc(strlen(entry->d_name) + 1);
+            directories[numDirectories - 1] = malloc(strlen(aentry) + 1);
             if (directories[numDirectories - 1] == NULL) {
                 printf("内存分配失败.\n");
                 fflush(stdout);
@@ -1615,7 +1660,7 @@ char * ls(char * txtpath) {
             }
 
             // 复制目录名称到数组中
-            strcpy(directories[numDirectories - 1], entry->d_name);
+            strcpy(directories[numDirectories - 1], aentry);
         }
     }
 
@@ -1668,7 +1713,7 @@ int loadcontent(){
 }
 else
 {
-    printf("\n使用./CORRECT.txt");
+   // printf("\n使用./CORRECT.txt");
     rfpa = fopen("CORRECT.txt", "a+");
 }
 
@@ -1678,7 +1723,7 @@ fclose(rfp);
 
     char buffer[9999];
 
-    printf("\n");
+   // printf("\n");
     while (fgets(buffer,150,fp)){ 
         if ( checkstr(buffer,"\t",0,1) && buffer[0]!='\n' ){
             /***printf("%s",buffer);***/
@@ -1690,14 +1735,14 @@ fclose(rfp);
     }
     if(txt[strlen(txt)-1]!='\n')
     strcat(txt,"\n"); //
-printf("已加载%d组单词\n",lines);
+printf("已加载%d组单词\033[K\r",lines);
 fflush(stdout);
 //printf("%s",txt);
 return 0;
 }
 int p=0;
 
-char *Thepath;
+char *Thepath=NULL;
 void entries(char * directories){
     txt=(char *)malloc(9999999);
     char directories1[99999];
@@ -1743,9 +1788,58 @@ fflush(stdout);
 BOOL flag1=FALSE;
 int thei=0;
 char the;
+the='\n';
 while (1){
-    while ((the=getchar())!='\n' && the!='\r' && the!=' ' && the!='\x06'){
+    while ((the=='\x00' || flag1==TRUE && ( the=getchar())!='\n' && the!='\r' && the!=' ' && the!='\x06' && the!='\x06'  && the!='\x41'  && the!='\x42'  && the!='\x5b'  && the!='\x1b' && the!='\x43'  )){
         continue;
+    }
+
+    if(the=='\x1b'){
+        the=getchar();
+        //printf("222");
+    if(the=='\x5b'){
+        the=getchar();
+        //printf("333");
+            if(the=='\x42'){
+                the=' ';
+                //flag1=FALSE;
+                //continue;
+            }
+            if(the=='\x41'){
+                if(flag1==FALSE){
+                    thei=1;
+                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
+                    fflush(stdout);
+       // if(LS[thei-1]>1)
+       // printf("\033[%sA\r",LS[thei-1]-1);
+                    flag1=TRUE;
+        //printf("\033[%dB",LS[thei-1]);
+            }
+                else{
+                    printf("\033[0m");
+                    fflush(stdout);
+                    if(LS[thei-1]>1)
+                        printf("\033[%dB\r",LS[thei-1]-1);
+                    fflush(stdout);
+                    printf("\r%s\033[K\r",aprt(rows[thei-1]));
+                    fflush(stdout);
+                    thei--;
+                    if(thei==0){
+                        thei=LSall;
+                        printf("\033[%dB",LSall-LS[rown-1]);
+                        fflush(stdout);
+                    }
+                    else{
+                    printf("\033[1A\r");
+                    }
+                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
+        //printf("\n");
+                    fflush(stdout);
+
+        }
+
+            }
+    }
     }
 
      if(the==' '){
@@ -1780,7 +1874,7 @@ printf("\033[1B\r");
         }
         }
 
-    else if(the=='\n' || the=='\r'){
+    else if(the=='\n' || the=='\r' || the=='\x43'){
         if(flag1==FALSE){
             thei=1;
     printf("\r>>\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
@@ -1804,13 +1898,8 @@ printf("\033[1B\r");
 
 char t[399];
 
-strcpy(t,"./txt/");
-if(Thepath!=NULL){
-    if(Thepath[strlen(Thepath)-1]!='/'){
-    strcat(Thepath,"/");
-}
-    strcpy(t,Thepath);
-}
+strcpy(t,"");
+
 char * txt_;
 txt_=strcat(t,&rows[thei-1][2]);
 printf("open:%s\n",txt_);
@@ -1820,7 +1909,7 @@ char thetxts[99999];
 char temp[99999];
 txts=lstxt(txt_);
 strcpy(thetxts,txts);
-printf("%s",txts);
+printf("\033[2m%s\033[0m",txts);
 fflush(stdout);
 char  thetxt[199];
 //printf("请输入词表名称，按回车键结束:");
@@ -1837,7 +1926,7 @@ char * line;
 while (1){
          if(thetxts[0]=='\0'){
     strcpy(thetxts,txts);
-    printf("请重新输入:\n%s",thetxts);
+    printf("请重新输入:\n\033[2m%s\033[0m",thetxts);
 }
 printf("请输入词表名称，按回车键结束:");
 fflush(stdout);
@@ -1881,8 +1970,9 @@ strcpy(thetxt,"");
 if(strcmp(thetxt,"")==0 && strcmp(thetxts,"")!=0 && line_number>0 ){
     //printf("以下词表将被加载:\n");
 //strcpy(line,"");
-printf("\n一共要加载%d张词表\n",line_number);
-printf("%s\n",thetxts);
+
+    printf("\n一共要加载%d张词表\n",line_number);
+//printf("%s",thetxts);
 fflush(stdout);
 line = strtok(thetxts, "\n");
 m=0;
@@ -1890,7 +1980,7 @@ p=line_number;
 while(line != NULL && m<line_number){
 strcpy(PATH[m],line);
 //loadcontent();
-printf("%s",PATH[m]);
+//printf("\r%s",PATH[m]);
 fflush(stdout);
             if(fp!=NULL ){
                 fclose(fp);
@@ -1906,6 +1996,7 @@ fflush(stdout);
 line = strtok(NULL, "\n");
 m++;
 }
+printf("\n");
 if(m>0){
 printf("%s",strs);
 fflush(stdout);
@@ -1927,9 +2018,17 @@ else if(strcmp(thetxt,"")!=0 && strcmp(thetxts,"")!=1){
     line = strtok(thetxts, "\n");
    //  printf("%d: %s\n", line_number+1, line);
     strcpy(temp,"");
+    char *pattern1 = thetxt;
+    regex_t regex1;
+    regmatch_t match1;
+    int reti = regcomp(&regex1, pattern1, REG_EXTENDED);
+        if (!reti) {
+    printf("\033[2J"); // 清屏
+    printf("\033[0;0H"); // 光标移动到左上角
     while (line != NULL) {
-        if (Checkstr(line, thetxt, strlen(thetxt))) {
-            printf("%d: %s\n", line_number+1, line);
+        if ( regexec(&regex1, line, 1, &match1, 0) == 0) {
+            usleep(6000);
+            printf("%s\n", line);
             fflush(stdout);
             strcat(temp,line);
             strcat(temp,"\n");
@@ -1939,6 +2038,21 @@ else if(strcmp(thetxt,"")!=0 && strcmp(thetxts,"")!=1){
     }
     strcpy(thetxts,temp);
     //printf("%s",thetxts);
+}
+else{
+        while (line != NULL) {
+        if (Checkstr(line, thetxt, strlen(thetxt))) {
+            printf("%s\n", line);
+            fflush(stdout);
+            strcat(temp,line);
+            strcat(temp,"\n");
+            line_number++;
+        }
+        line = strtok(NULL, "\n");
+    }
+    strcpy(thetxts,temp);
+    //printf("%s",thetxts);
+}
 }
 else{
          if(thetxts[0]=='\0'){
@@ -2068,7 +2182,7 @@ void RWfp(char * bword){
 
 char * rbuffer;
 char * rtxt;
-rbuffer=(char *)malloc(9997);
+rbuffer=(char *)malloc(9999);
 rtxt=(char *)malloc(1999999);
 char * btxt;
 btxt=(char *)malloc(1999999);
@@ -2293,7 +2407,7 @@ int ysv(char * bword,char ysv0){
 //char eline[]="\033[32m○\033[0m";
 char * rbuffer;
 char * rtxt;
-rbuffer=(char *)malloc(9997);
+rbuffer=(char *)malloc(9999);
 rtxt=(char *)malloc(1999999);
 char * btxt;
 btxt=(char *)malloc(1999999);
@@ -3083,7 +3197,7 @@ printf("\033[?25h\n");
 
 
 int fun3(){
-
+BOOL getin3=FALSE;
 int RAN0[4];
     int n1;
     int n2;
@@ -3138,6 +3252,7 @@ int ran5;
         getin=FALSE;
   //  srand((unsigned)time(NULL));
         while(1){
+            fflush(stdin);
 flag=FALSE;
 strcpy(Word1,"");
 strcpy(Word2,"");
@@ -3463,11 +3578,11 @@ BOOL vflag=FALSE;
 int thei=0;
 char the;
 while (1){
-    while ((the=getchar())!='\n' && the!='\r' && the!=' ' && the!='\x06'){
+    while ((getin3==FALSE && ( the=getchar())!='\n' && the!='\r' && the!=' ' && the!='\x06'  && the!='\x41'  && the!='\x42'  && the!='\x5b'  && the!='\x1b' && the!='\x43' )){
         continue;
     }
 
-
+getin3=FALSE;
     if(the=='\x06'){
         flag1=FALSE;
         findword(answer1,en,txt);
@@ -3498,6 +3613,54 @@ else{
             continue;
     }
     }
+    if(the=='\x1b'){
+        the=getchar();
+        //printf("222");
+    if(the=='\x5b'){
+        the=getchar();
+        //printf("333");
+            if(the=='\x42'){
+                the=' ';
+                getin3=TRUE;
+                continue;
+            }
+            if(the=='\x41'){
+                if(flag1==FALSE){
+                    thei=1;
+                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    fflush(stdout);
+       // if(LS[thei-1]>1)
+       // printf("\033[%sA\r",LS[thei-1]-1);
+                    flag1=TRUE;
+        //printf("\033[%dB",LS[thei-1]);
+            }
+                else{
+                    printf("\033[0m");
+                    fflush(stdout);
+                    if(LS[thei-1]>1)
+                        printf("\033[%dB\r",LS[thei-1]-1);
+                    fflush(stdout);
+                    printf("\r%s\033[K\r",aprt(ENS[thei-1]));
+                    fflush(stdout);
+                    thei--;
+                    if(thei==0){
+                        thei=4;
+                        printf("\033[%dB",l1+l2+l3);
+                        fflush(stdout);
+                    }
+                    else{
+                    printf("\033[1A\r");
+                    }
+                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+        //printf("\n");
+                    fflush(stdout);
+
+        }
+
+            }
+    }
+    }
+
      if(the==' '){
         if(flag1==FALSE){
         thei=1;
@@ -3530,7 +3693,8 @@ printf("\033[1B\r");
 
         }
     }
-    else if(the=='\n' || the=='\r'){
+    else if(the=='\n' || the=='\r' || the=='\x43'){
+        //the='\x00';
         if(flag1==FALSE){
             thei=1;
     printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
