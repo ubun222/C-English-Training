@@ -1727,6 +1727,8 @@ fclose(rfp);
     while (fgets(buffer,150,fp)){ 
         if ( checkstr(buffer,"\t",0,1) && buffer[0]!='\n' ){
             /***printf("%s",buffer);***/
+            if ( checkstr(buffer,"\r",0,1))
+            del_char(buffer,'\r');
             strncat(txt,buffer,100);
             lines++;
         }
@@ -2649,6 +2651,11 @@ num--;
 if (CORRECT==TRUE){
 RWfp(bword);
 }
+free(rbuffer);
+free(rtxt);
+free(btxt);
+free(theline);
+free(bbuffer);
 return 0;
 }
 char bword[100];
@@ -3196,586 +3203,7 @@ void my_exit()
 printf("\033[?25h\n");
     exit(0);
 }
-
-
-int fun3(){
-BOOL getin3=FALSE;
-int RAN0[4];
-    int n1;
-    int n2;
-    int n3;
-    int n4;
-    char en0[200];
-    char Word1[200];
-    char Word2[200];
-    char Word3[200];
-    char Word4[200];
-    char answer[399];
-int max;
-int i;
-//int num;
-int rx=0;
-max=strlen(txt);
-            int n=-1;
-        num=0;
-       // int nend[9999];
-        char ysv0;
-	    i=-1;
-
-//int ez;
-printf("\r\n\033[K1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/2-12);
-    fflush(stdout);
-    while ((ez=getchar())!='\n' && ez!='1' && ez!='2' && ez!='3' ){
-        continue;
-    }	
-    printf("%c",ez);
-    fflush(stdout); 
-
-BOOL random=FALSE;
-        while (i++,i<max){
-	/*printf("%d",i);*/
-        /***printf("%c",txt[i]);***/
-
-        if(txt[i]=='\n'){
-            num++;
-            nend[num]=i;
-            /*printf("%d\n",i);*/           
-        }
-            
-        }
-        nend[0]=-1;
-        nend[num+1]=max;
-      //  int ran;
-  //  srand((unsigned)time(NULL));
-        //ci=0;
-        //strcpy(astrs,"");
-        //iii=0;
-int ran5;
-        getin=FALSE;
-  //  srand((unsigned)time(NULL));
-        while(1){
-            fflush(stdin);
-flag=FALSE;
-strcpy(Word1,"");
-strcpy(Word2,"");
-strcpy(Word3,"");
-strcpy(Word4,"");
-    //srand((unsigned)time(NULL));
-        rx++;
-if(num<4){
-    printf("\n词库不足");
-    exit(0);
-}
-        while (1){
-       // srand((unsigned)time(NULL) *2 );
-        ysv0=' ';
-        RAN0[0]=rand() % num;
-        n1=nend[RAN0[0]];
-// srand((unsigned)time(NULL));
-        RAN0[1]=rand() % num;
-        n2=nend[RAN0[1]];
-  //     srand((unsigned)time(NULL));
-        RAN0[2]=rand() % num;
-        n3=nend[RAN0[2]];
- // srand((unsigned)time(NULL));
-        RAN0[3]=rand() % num;
-        n4=nend[RAN0[3]];
-       // strcpy(word,"");
-
-if(RAN0[0] == RAN0[1] || RAN0[0] == RAN0[2] || RAN0[0] == RAN0[3] || RAN0[1] == RAN0[2] || RAN0[1] == RAN0[3] || RAN0[2] == RAN0[3] ){
-continue;
-}
-//srand((unsigned)time(NULL));
-ran5=rand() % 4 + 1;
-ran=RAN0[ran5-1];
-break;
-        }
-printf("\n\033[2m%s\033[0m",strs);
-//n=nend[RAN0[0]];
-if(n1==0)
-            strncat(Word1,&txt[0],1);
-            while (n1++,n1<nend[RAN0[0]+1]){
-                if(txt[n1]=='\n'){
-                    break;
-                }
-                strncat(Word1,&txt[n1],1);
-            }
-//n=nend[RAN0[1]];
-            	if(n2==0)
-            strncat(Word2,&txt[0],1);
-            while (n2++,n2<nend[RAN0[1]+1]){
-                if(txt[n2]=='\n'){
-                    break;
-                }
-                strncat(Word2,&txt[n2],1);
-            }
-
-//n=nend[RAN0[2]];
-            	if(n3==0)
-            strncat(Word3,&txt[0],1);
-            while (n3++,n3<nend[RAN0[2]+1]){
-                if(txt[n3]=='\n'){
-                    break;
-                }
-                strncat(Word3,&txt[n3],1);
-            }
-
-//n=nend[RAN0[3]];
-if(n4==0)
-            strncat(Word4,&txt[0],1);
-            while (n4++,n4<nend[RAN0[3]+1]){
-                if(txt[n4]=='\n'){
-                    break;
-                }
-                strncat(Word4,&txt[n4],1);
-            }
-char * ENS[4];
-char * ZHS[4];
-            char ZH1[200];
-            char ZH2[200];
-            char ZH3[200];
-            char ZH4[200];
-            char EN1[200];
-            char EN2[200];
-            char EN3[200];
-            char EN4[200];
-
-            int LS[4];
-//            int l1;
-//            int l2;
-//            int l3;
-//            int l4;
-            //printf("222222\n\n\n\n");
-            if(ez=='3'){
-                random=TRUE;
-            }
-            if(random==TRUE){
-                ez=rand()%2+1+'0';
-            }
-            if(ez=='1'){
-            strcpy(EN1,"  ");
-            strcpy(ZH1,"  ");
-            ENS[0]=strcat(EN1,strtok(Word1,"\t"));
-	        ZHS[0]=strcat(ZH1,strtok(NULL,"\t"));
-            strcpy(EN2,"  ");
-            strcpy(ZH2,"  ");
-            ENS[1]=strcat(EN2,strtok(Word2,"\t"));
-	        ZHS[1]=strcat(ZH2,strtok(NULL,"\t"));
-            strcpy(EN3,"  ");
-            strcpy(ZH3,"  ");
-            ENS[2]=strcat(EN3,strtok(Word3,"\t"));
-	        ZHS[2]=strcat(ZH3,strtok(NULL,"\t"));
-            strcpy(EN4,"  ");
-            strcpy(ZH4,"  ");
-            ENS[3]=strcat(EN4,strtok(Word4,"\t"));
-	        ZHS[3]=strcat(ZH4,strtok(NULL,"\t"));
-
-
-            
-strcpy(answer,"");
-//printf("222222\n\n\n\n");
-switch (ran5)
-{
-case 1:
-            strcpy(answer,ZH1);
-            strcpy(en0,&EN1[2]);
-            strcpy(ch,&ZH1[2]);
-    break;
-case 2:
-            strcpy(answer,ZH2);
-            strcpy(en0,&EN2[2]);
-            strcpy(ch,&ZH2[2]);
-    break;
-case 3:
-            strcpy(answer,ZH3);
-            strcpy(en0,&EN3[2]);
-            strcpy(ch,&ZH3[2]);
-    break;  
-case 4:
-            strcpy(answer,ZH4);
-            strcpy(en0,&EN4[2]);
-            strcpy(ch,&ZH4[2]);
-    break;
-default:
-    break;
-}
-//printf("%s",ENS[0]); #ENS[0]使用strcpy赋值将乱码
-if(thewidth(&answer[2])>0){
-printf("\n\033[%dC\033[1m%s\033[0m\n",(col-thewidth(&answer[2]))/2,aprt(&answer[2]));
-}
-else{
-    printf("\n\033[1m%s\033[0m\n",aprt(&answer[2]));
-}
-strcpy(answer1,en0);
-//printf("%s\n",aprt(EN1));
-//int l1;
-l1=thewidth(EN1);
-if (l1<0 && -l1>col ){
-l1=(-l1-1)/col+1;
-}
-else{
-    l1=1;
-}
-
-printf("%s\n",aprt(EN1));
-fflush(stdout);
-
-//int l2;
-l2=thewidth(EN2);
-printf("%s\n",aprt(EN2));
-fflush(stdout);
-if (l2<0 && -l2>col ){
-l2=(-l2-1)/col+1;
-}
-else{
-    l2=1;
-}
-
-//int l3;
-l3=thewidth(EN3);
-printf("%s\n",aprt(EN3));
-fflush(stdout);
-if (l3<0 && -l3>col ){
-l3=(-l3-1)/col+1;
-}
-else{
-    l3=1;
-}
-
-//int l4;
-l4=thewidth(EN4);
-printf("%s",aprt(EN4));
-fflush(stdout);
-if (l4<0 && -l4>col ){
-l4=(-l4-1)/col+1;
-}
-else{
-    l4=1;
-}
-
-//int LS[4];
-LS[0]=l1;
-LS[1]=l2;
-LS[2]=l3;
-LS[3]=l4;
-            }
-
-if(ez=='2'){
-            strcpy(EN1,"  ");
-            strcpy(ZH1,"  ");
-            ZHS[0]=strcat(EN1,strtok(Word1,"\t"));
-	        ENS[0]=strcat(ZH1,strtok(NULL,"\t"));
-            strcpy(EN2,"  ");
-            strcpy(ZH2,"  ");
-            ZHS[1]=strcat(EN2,strtok(Word2,"\t"));
-	        ENS[1]=strcat(ZH2,strtok(NULL,"\t"));
-            strcpy(EN3,"  ");
-            strcpy(ZH3,"  ");
-            ZHS[2]=strcat(EN3,strtok(Word3,"\t"));
-	        ENS[2]=strcat(ZH3,strtok(NULL,"\t"));
-            strcpy(EN4,"  ");
-            strcpy(ZH4,"  ");
-            ZHS[3]=strcat(EN4,strtok(Word4,"\t"));
-	        ENS[3]=strcat(ZH4,strtok(NULL,"\t"));
-//printf("%s",ENS);
-
-           // ran5=rand() % 4 + 1;
-strcpy(answer,"");
-//printf("222222\n\n\n\n");
-switch (ran5)
-{
-case 1:
-            strcpy(answer,EN1);
-            //strcpy(answer1,&EN1[2]);
-            strcpy(en0,&EN1[2]);
-            strcpy(ch,&ZH1[2]);
-    break;
-case 2:
-            strcpy(answer,EN2);
-            //strcpy(answer1,&EN2[2]);
-            strcpy(en0,&EN2[2]);
-            strcpy(ch,&ZH2[2]);
-    break;
-case 3:
-            strcpy(answer,EN3);
-            //strcpy(answer1,&EN3[2]);
-            strcpy(en0,&EN3[2]);
-            strcpy(ch,&ZH3[2]);
-    break;  
-case 4:
-            strcpy(answer,EN4);
-            //strcpy(answer1,&EN4[2]);
-            strcpy(en0,&EN4[2]);
-            strcpy(ch,&ZH4[2]);
-    break;
-default:
-    break;
-}
-//printf("%s",ENS[0]); #ENS[0]使用strcpy赋值将乱码
-if(thewidth(&answer[2])>0){
-printf("\n\033[%dC\033[1m%s\033[0m\n",(col-thewidth(&answer[2]))/2,aprt(&answer[2]));
-}
-else{
-    printf("\n\033[1m%s\033[0m\n",aprt(&answer[2]));
-}
-strcpy(answer1,en0);
-//printf("%s\n",aprt(EN1));
-//int l1;
-l1=thewidth(ZH1);
-fflush(stdout);
-if (l1<0 && -l1>col ){
-l1=(-l1-1)/col+1;
-}
-else{
-    l1=1;
-}
-
-printf("%s\n",aprt(ZH1));
-
-//int l2;
-l2=thewidth(ZH2);
-printf("%s\n",aprt(ZH2));
-fflush(stdout);
-if (l2<0 && -l2>col ){
-l2=(-l2-1)/col+1;
-}
-else{
-    l2=1;
-}
-
-//int l3;
-l3=thewidth(ZH3);
-printf("%s\n",aprt(ZH3));
-fflush(stdout);
-if (l3<0 && -l3>col ){
-l3=(-l3-1)/col+1;
-}
-else{
-    l3=1;
-}
-
-//int l4;
-l4=thewidth(ZH4);
-printf("%s",aprt(ZH4));
-fflush(stdout);
-if (l4<0 && -l4>col ){
-l4=(-l4-1)/col+1;
-}
-else{
-    l4=1;
-}
-
-LS[0]=l1;
-LS[1]=l2;
-LS[2]=l3;
-LS[3]=l4;
-
-
-}
-
-printf("\033[%dA",l1+l2+l3+l4-1);
-BOOL flag1=FALSE;
-flag=FALSE;
-BOOL vflag=FALSE;
-int thei=0;
-char the;
-while (1){
-    while ((getin3==FALSE && ( the=getchar())!='\n' && the!='\r' && the!=' ' && the!='\x06'  && the!='\x41'  && the!='\x42'  && the!='\x5b'  && the!='\x1b' && the!='\x43' )){
-        continue;
-    }
-
-getin3=FALSE;
-    if(the=='\x06'){
-        flag1=FALSE;
-        findword(answer1,en,txt);
-        if(thewidth(answer)>0){
-printf("\033[%dC\033[1m%s\033[0m\n",(col-thewidth(answer))/2,aprt(answer));
-}
-else{
-    printf("\033[1m%s\033[0m\n",aprt(answer));
-}
-        if(ez=='2'){
-            //printf("%s\n",strs);
-            printf("%s\n",aprt(ZH1));
-            printf("%s\n",aprt(ZH2));
-            printf("%s\n",aprt(ZH3));
-            printf("%s",aprt(ZH4));
-            printf("\033[%dA",l1+l2+l3+l4-1);
-            fflush(stdout);
-            continue;
-    }
-            if(ez=='1'){
-            //printf("%s\n",strs);
-            printf("%s\n",aprt(EN1));
-            printf("%s\n",aprt(EN2));
-            printf("%s\n",aprt(EN3));
-            printf("%s",aprt(EN4));
-            printf("\033[%dA",l1+l2+l3+l4-1);
-            fflush(stdout);
-            continue;
-    }
-    }
-    if(the=='\x1b'){
-        the=getchar();
-        //printf("222");
-    if(the=='\x5b'){
-        the=getchar();
-        //printf("333");
-            if(the=='\x42'){
-                the=' ';
-                getin3=TRUE;
-                continue;
-            }
-            if(the=='\x41'){
-                if(flag1==FALSE){
-                    thei=1;
-                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
-                    fflush(stdout);
-       // if(LS[thei-1]>1)
-       // printf("\033[%sA\r",LS[thei-1]-1);
-                    flag1=TRUE;
-        //printf("\033[%dB",LS[thei-1]);
-            }
-                else{
-                    printf("\033[0m");
-                    fflush(stdout);
-                    if(LS[thei-1]>1)
-                        printf("\033[%dB\r",LS[thei-1]-1);
-                    fflush(stdout);
-                    printf("\r%s\033[K\r",aprt(ENS[thei-1]));
-                    fflush(stdout);
-                    thei--;
-                    if(thei==0){
-                        thei=4;
-                        printf("\033[%dB",l1+l2+l3);
-                        fflush(stdout);
-                    }
-                    else{
-                    printf("\033[1A\r");
-                    }
-                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
-        //printf("\n");
-                    fflush(stdout);
-
-        }
-
-            }
-    }
-    }
-
-     if(the==' '){
-        if(flag1==FALSE){
-        thei=1;
-        printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
-        fflush(stdout);
-       // if(LS[thei-1]>1)
-       // printf("\033[%sA\r",LS[thei-1]-1);
-        flag1=TRUE;
-        //printf("\033[%dB",LS[thei-1]);
-        }
-        else{
-        printf("\033[0m");
-fflush(stdout);
-        if(LS[thei-1]>1)
-        printf("\033[%dA\r",LS[thei-1]-1);
-        fflush(stdout);
-        printf("\r%s\033[K\r",aprt(ENS[thei-1]));
-fflush(stdout);
-        thei++;
-        if(thei==5){
-            thei=1;
-            printf("\033[%dA",l1+l2+l3+l4);
-            fflush(stdout);
-        }
-printf("\033[1B\r");
-
-        printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
-        //printf("\n");
-        fflush(stdout);
-
-        }
-    }
-    else if(the=='\n' || the=='\r' || the=='\x43'){
-        //the='\x00';
-        if(flag1==FALSE){
-            thei=1;
-    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
-    fflush(stdout);
-            flag1=TRUE;
-            //printf("\033[%dB",LS[thei-1]);
-        }
-        else{
-           //printf("%s",ch);
-            
-                if(thei==ran5){
-                    flag=TRUE;
-                    ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
-                    fflush(stdout);
-//printf("%s",answer1);
-                    ysv0=getchar();
-                }
-                else{
-                    flag=FALSE;
-                    if (LS[thei-1]>1 ){
-                    printf("\033[%dA\r",LS[thei-1]-1);
-    }
-                    printf("\033[0m\r%s\033[K\r",aprt(ZHS[thei-1]));
-                    ishprt("\r\033[%dC%s\r",col-2,fline);
-                    getchar();
-                    if(thewidth(ZHS[thei-1])<-col){
-                    printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col-1);
-                    }
-                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
-
-                    fflush(stdout);
-                    //ysv("");
-                }
-                if (thei==ran5){            
-            switch (thei)
-            {
-
-            case 1 /* constant-expression */:
-                /* code */
-                printf("\033[%dB",l1+l2+l3+l4);
-                vflag=TRUE;
-                break;
-            case 2 /* constant-expression */:
-                /* code */
-                printf("\033[%dB",l2+l3+l4);
-                vflag=TRUE;
-                break;
-            case 3 /* constant-expression */:
-                /* code */
-                printf("\033[%dB",l3+l4);
-                vflag=TRUE;
-                break;
-            case 4 /* constant-expression */:
-                /* code */
-                printf("\033[%dB",l4);
-                vflag=TRUE;
-                break;
-        
-            }
-            ysv("",ysv0);
-            rw=TRUE;
-            ysv1='s';
-            rwfp(answer1,ch,flag);
-		}
-	    if (vflag==TRUE){
-                vflag=FALSE;
-                break;
-            }
-        }
-}
-            }
-   //     getchar();
-
-}
-        return 0;
-
-}
-
-
+BOOL FUN3=FALSE;
 int fun(){
     evalue.it_value.tv_sec=0;
     evalue.it_value.tv_usec=15000;
@@ -3835,6 +3263,7 @@ int fun(){
     int i;
     int n;
     int z;
+if(premode=='\x0'){
 printf("\r\033[K1,提词器\033[%dC2,四选一\033[%dC",col/2-12,col/2-12);
 fflush(stdout);
     while ((premode=getchar())!='\n' && premode!='\r' && premode!='1' && premode!='2'){
@@ -3842,7 +3271,7 @@ fflush(stdout);
     }
     if(premode=='2'){
         srand((unsigned)time(NULL));
-fun3();
+return 3;
     }
     
 printf("\n\r\033[K1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/2-12);
@@ -3850,6 +3279,9 @@ printf("\n\r\033[K1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/
     while ((ez=getchar())!='\n' && ez!='1' && ez!='2' && ez!='3' ){
         continue;
     }	
+    if(ez=='\n'){
+        ez='3';
+    }
     printf("%c",ez);
     fflush(stdout); 
     /*fflush(stdout);*/
@@ -3860,11 +3292,16 @@ printf("\n\r\033[K1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/
     while ((order=getchar())!='\n' && order!='1' && order!='2' && order!='3' ){
         continue;
     }
+    if(order=='\n'){
+        order='3';
+    }
     printf("%c",order);
     fflush(stdout);
+}
 
     if(order=='3'){
         int n=-1;
+    if(FUN3==FALSE)
        num=0;
        // int nend[9999];
         
@@ -3872,7 +3309,7 @@ printf("\n\r\033[K1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/
         while (i++,i<max){
 	/*printf("%d",i);*/
         /***printf("%c",txt[i]);***/
-
+if(FUN3==FALSE)
         if(txt[i]=='\n'){
             num++;
             nend[num]=i;
@@ -3880,9 +3317,10 @@ printf("\n\r\033[K1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/
         }
             
         }
-
+if(FUN3==FALSE){
         nend[0]=-1;
 nend[num+1]=max;
+}
       //  int ran;
     srand((unsigned)time(NULL));
 	while (TRUE){
@@ -4489,6 +3927,591 @@ colourp();
     }
 return 0;
     }
+
+int fun3(){
+BOOL getin3=FALSE;
+int RAN0[4];
+    int n1;
+    int n2;
+    int n3;
+    int n4;
+    char en0[200];
+    char Word1[200];
+    char Word2[200];
+    char Word3[200];
+    char Word4[200];
+    char answer[399];
+int max;
+int i;
+//int num;
+int rx=0;
+max=strlen(txt);
+            int n=-1;
+        num=0;
+       // int nend[9999];
+        char ysv0;
+	    i=-1;
+
+//int ez;
+printf("\r\n\033[K1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-12,col/2-12);
+    fflush(stdout);
+    while ((ez=getchar())!='\n' && ez!='1' && ez!='2' && ez!='3' ){
+        continue;
+    }	
+    if(ez=='\n'){
+        ez='3';
+    }
+    printf("%c",ez);
+    
+    fflush(stdout); 
+
+BOOL random=FALSE;
+        while (i++,i<max){
+	/*printf("%d",i);*/
+        /***printf("%c",txt[i]);***/
+
+        if(txt[i]=='\n'){
+            num++;
+            nend[num]=i;
+            /*printf("%d\n",i);*/           
+        }
+            
+        }
+        nend[0]=-1;
+        nend[num+1]=max;
+      //  int ran;
+  //  srand((unsigned)time(NULL));
+        //ci=0;
+        //strcpy(astrs,"");
+        //iii=0;
+int ran5;
+        getin=FALSE;
+  //  srand((unsigned)time(NULL));
+        while(1){
+            fflush(stdin);
+flag=FALSE;
+strcpy(Word1,"");
+strcpy(Word2,"");
+strcpy(Word3,"");
+strcpy(Word4,"");
+    //srand((unsigned)time(NULL));
+        rx++;
+if(num<4){
+    printf("\n词库不足");
+    order='3';
+    FUN3=TRUE;
+    fun();
+    exit(0);
+}
+        while (1){
+       // srand((unsigned)time(NULL) *2 );
+        ysv0=' ';
+        RAN0[0]=rand() % num;
+        n1=nend[RAN0[0]];
+// srand((unsigned)time(NULL));
+        RAN0[1]=rand() % num;
+        n2=nend[RAN0[1]];
+  //     srand((unsigned)time(NULL));
+        RAN0[2]=rand() % num;
+        n3=nend[RAN0[2]];
+ // srand((unsigned)time(NULL));
+        RAN0[3]=rand() % num;
+        n4=nend[RAN0[3]];
+       // strcpy(word,"");
+
+if(RAN0[0] == RAN0[1] || RAN0[0] == RAN0[2] || RAN0[0] == RAN0[3] || RAN0[1] == RAN0[2] || RAN0[1] == RAN0[3] || RAN0[2] == RAN0[3] ){
+continue;
+}
+//srand((unsigned)time(NULL));
+ran5=rand() % 4 + 1;
+ran=RAN0[ran5-1];
+break;
+        }
+printf("\n\033[2m%s\033[0m",strs);
+//n=nend[RAN0[0]];
+if(n1==0)
+            strncat(Word1,&txt[0],1);
+            while (n1++,n1<nend[RAN0[0]+1]){
+                if(txt[n1]=='\n'){
+                    break;
+                }
+                strncat(Word1,&txt[n1],1);
+            }
+//n=nend[RAN0[1]];
+            	if(n2==0)
+            strncat(Word2,&txt[0],1);
+            while (n2++,n2<nend[RAN0[1]+1]){
+                if(txt[n2]=='\n'){
+                    break;
+                }
+                strncat(Word2,&txt[n2],1);
+            }
+
+//n=nend[RAN0[2]];
+            	if(n3==0)
+            strncat(Word3,&txt[0],1);
+            while (n3++,n3<nend[RAN0[2]+1]){
+                if(txt[n3]=='\n'){
+                    break;
+                }
+                strncat(Word3,&txt[n3],1);
+            }
+
+//n=nend[RAN0[3]];
+if(n4==0)
+            strncat(Word4,&txt[0],1);
+            while (n4++,n4<nend[RAN0[3]+1]){
+                if(txt[n4]=='\n'){
+                    break;
+                }
+                strncat(Word4,&txt[n4],1);
+            }
+char * ENS[4];
+char * ZHS[4];
+            char ZH1[200];
+            char ZH2[200];
+            char ZH3[200];
+            char ZH4[200];
+            char EN1[200];
+            char EN2[200];
+            char EN3[200];
+            char EN4[200];
+
+            int LS[4];
+//            int l1;
+//            int l2;
+//            int l3;
+//            int l4;
+            //printf("222222\n\n\n\n");
+            if(ez=='3'){
+                random=TRUE;
+            }
+            if(random==TRUE){
+                ez=rand()%2+1+'0';
+            }
+            if(ez=='1'){
+            strcpy(EN1,"  ");
+            strcpy(ZH1,"  ");
+            ENS[0]=strcat(EN1,strtok(Word1,"\t"));
+	        ZHS[0]=strcat(ZH1,strtok(NULL,"\t"));
+            strcpy(EN2,"  ");
+            strcpy(ZH2,"  ");
+            ENS[1]=strcat(EN2,strtok(Word2,"\t"));
+	        ZHS[1]=strcat(ZH2,strtok(NULL,"\t"));
+            strcpy(EN3,"  ");
+            strcpy(ZH3,"  ");
+            ENS[2]=strcat(EN3,strtok(Word3,"\t"));
+	        ZHS[2]=strcat(ZH3,strtok(NULL,"\t"));
+            strcpy(EN4,"  ");
+            strcpy(ZH4,"  ");
+            ENS[3]=strcat(EN4,strtok(Word4,"\t"));
+	        ZHS[3]=strcat(ZH4,strtok(NULL,"\t"));
+
+
+            
+strcpy(answer,"");
+//printf("222222\n\n\n\n");
+switch (ran5)
+{
+case 1:
+            strcpy(answer,ZH1);
+            strcpy(en0,&EN1[2]);
+            strcpy(ch,&ZH1[2]);
+    break;
+case 2:
+            strcpy(answer,ZH2);
+            strcpy(en0,&EN2[2]);
+            strcpy(ch,&ZH2[2]);
+    break;
+case 3:
+            strcpy(answer,ZH3);
+            strcpy(en0,&EN3[2]);
+            strcpy(ch,&ZH3[2]);
+    break;  
+case 4:
+            strcpy(answer,ZH4);
+            strcpy(en0,&EN4[2]);
+            strcpy(ch,&ZH4[2]);
+    break;
+default:
+    break;
+}
+//printf("%s",ENS[0]); #ENS[0]使用strcpy赋值将乱码
+if(thewidth(&answer[2])>0){
+printf("\n\033[%dC\033[1m%s\033[0m\n",(col-thewidth(&answer[2]))/2,aprt(&answer[2]));
+}
+else{
+    printf("\n\033[1m%s\033[0m\n",aprt(&answer[2]));
+}
+strcpy(answer1,en0);
+//printf("%s\n",aprt(EN1));
+//int l1;
+l1=thewidth(EN1);
+if (l1<0 && -l1>col ){
+l1=(-l1-1)/col+1;
+}
+else{
+    l1=1;
+}
+
+printf("%s\n",aprt(EN1));
+fflush(stdout);
+
+//int l2;
+l2=thewidth(EN2);
+printf("%s\n",aprt(EN2));
+fflush(stdout);
+if (l2<0 && -l2>col ){
+l2=(-l2-1)/col+1;
+}
+else{
+    l2=1;
+}
+
+//int l3;
+l3=thewidth(EN3);
+printf("%s\n",aprt(EN3));
+fflush(stdout);
+if (l3<0 && -l3>col ){
+l3=(-l3-1)/col+1;
+}
+else{
+    l3=1;
+}
+
+//int l4;
+l4=thewidth(EN4);
+printf("%s",aprt(EN4));
+fflush(stdout);
+if (l4<0 && -l4>col ){
+l4=(-l4-1)/col+1;
+}
+else{
+    l4=1;
+}
+
+//int LS[4];
+LS[0]=l1;
+LS[1]=l2;
+LS[2]=l3;
+LS[3]=l4;
+            }
+
+if(ez=='2'){
+            strcpy(EN1,"  ");
+            strcpy(ZH1,"  ");
+            ZHS[0]=strcat(EN1,strtok(Word1,"\t"));
+	        ENS[0]=strcat(ZH1,strtok(NULL,"\t"));
+            strcpy(EN2,"  ");
+            strcpy(ZH2,"  ");
+            ZHS[1]=strcat(EN2,strtok(Word2,"\t"));
+	        ENS[1]=strcat(ZH2,strtok(NULL,"\t"));
+            strcpy(EN3,"  ");
+            strcpy(ZH3,"  ");
+            ZHS[2]=strcat(EN3,strtok(Word3,"\t"));
+	        ENS[2]=strcat(ZH3,strtok(NULL,"\t"));
+            strcpy(EN4,"  ");
+            strcpy(ZH4,"  ");
+            ZHS[3]=strcat(EN4,strtok(Word4,"\t"));
+	        ENS[3]=strcat(ZH4,strtok(NULL,"\t"));
+//printf("%s",ENS);
+
+           // ran5=rand() % 4 + 1;
+strcpy(answer,"");
+//printf("222222\n\n\n\n");
+switch (ran5)
+{
+case 1:
+            strcpy(answer,EN1);
+            //strcpy(answer1,&EN1[2]);
+            strcpy(en0,&EN1[2]);
+            strcpy(ch,&ZH1[2]);
+    break;
+case 2:
+            strcpy(answer,EN2);
+            //strcpy(answer1,&EN2[2]);
+            strcpy(en0,&EN2[2]);
+            strcpy(ch,&ZH2[2]);
+    break;
+case 3:
+            strcpy(answer,EN3);
+            //strcpy(answer1,&EN3[2]);
+            strcpy(en0,&EN3[2]);
+            strcpy(ch,&ZH3[2]);
+    break;  
+case 4:
+            strcpy(answer,EN4);
+            //strcpy(answer1,&EN4[2]);
+            strcpy(en0,&EN4[2]);
+            strcpy(ch,&ZH4[2]);
+    break;
+default:
+    break;
+}
+//printf("%s",ENS[0]); #ENS[0]使用strcpy赋值将乱码
+if(thewidth(&answer[2])>0){
+printf("\n\033[%dC\033[1m%s\033[0m\n",(col-thewidth(&answer[2]))/2,aprt(&answer[2]));
+}
+else{
+    printf("\n\033[1m%s\033[0m\n",aprt(&answer[2]));
+}
+strcpy(answer1,en0);
+//printf("%s\n",aprt(EN1));
+//int l1;
+l1=thewidth(ZH1);
+fflush(stdout);
+if (l1<0 && -l1>col ){
+l1=(-l1-1)/col+1;
+}
+else{
+    l1=1;
+}
+
+printf("%s\n",aprt(ZH1));
+
+//int l2;
+l2=thewidth(ZH2);
+printf("%s\n",aprt(ZH2));
+fflush(stdout);
+if (l2<0 && -l2>col ){
+l2=(-l2-1)/col+1;
+}
+else{
+    l2=1;
+}
+
+//int l3;
+l3=thewidth(ZH3);
+printf("%s\n",aprt(ZH3));
+fflush(stdout);
+if (l3<0 && -l3>col ){
+l3=(-l3-1)/col+1;
+}
+else{
+    l3=1;
+}
+
+//int l4;
+l4=thewidth(ZH4);
+printf("%s",aprt(ZH4));
+fflush(stdout);
+if (l4<0 && -l4>col ){
+l4=(-l4-1)/col+1;
+}
+else{
+    l4=1;
+}
+
+LS[0]=l1;
+LS[1]=l2;
+LS[2]=l3;
+LS[3]=l4;
+
+
+}
+
+printf("\033[%dA",l1+l2+l3+l4-1);
+BOOL flag1=FALSE;
+flag=FALSE;
+BOOL vflag=FALSE;
+int thei=0;
+char the;
+while (1){
+    while ((getin3==FALSE && ( the=getchar())!='\n' && the!='\r' && the!=' ' && the!='\x06'  && the!='\x41'  && the!='\x42'  && the!='\x5b'  && the!='\x1b' && the!='\x43' )){
+        continue;
+    }
+
+getin3=FALSE;
+    if(the=='\x06'){
+        flag1=FALSE;
+        findword(answer1,en,txt);
+        if(thewidth(answer)>0){
+printf("\033[%dC\033[1m%s\033[0m\n",(col-thewidth(answer))/2,aprt(answer));
+}
+else{
+    printf("\033[1m%s\033[0m\n",aprt(answer));
+}
+        if(ez=='2'){
+            //printf("%s\n",strs);
+            printf("%s\n",aprt(ZH1));
+            printf("%s\n",aprt(ZH2));
+            printf("%s\n",aprt(ZH3));
+            printf("%s",aprt(ZH4));
+            printf("\033[%dA",l1+l2+l3+l4-1);
+            fflush(stdout);
+            continue;
+    }
+            if(ez=='1'){
+            //printf("%s\n",strs);
+            printf("%s\n",aprt(EN1));
+            printf("%s\n",aprt(EN2));
+            printf("%s\n",aprt(EN3));
+            printf("%s",aprt(EN4));
+            printf("\033[%dA",l1+l2+l3+l4-1);
+            fflush(stdout);
+            continue;
+    }
+    }
+    if(the=='\x1b'){
+        the=getchar();
+        //printf("222");
+    if(the=='\x5b'){
+        the=getchar();
+        //printf("333");
+            if(the=='\x42'){
+                the=' ';
+                getin3=TRUE;
+                continue;
+            }
+            if(the=='\x41'){
+                if(flag1==FALSE){
+                    thei=1;
+                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    fflush(stdout);
+       // if(LS[thei-1]>1)
+       // printf("\033[%sA\r",LS[thei-1]-1);
+                    flag1=TRUE;
+        //printf("\033[%dB",LS[thei-1]);
+            }
+                else{
+                    printf("\033[0m");
+                    fflush(stdout);
+                    if(LS[thei-1]>1)
+                        printf("\033[%dB\r",LS[thei-1]-1);
+                    fflush(stdout);
+                    printf("\r%s\033[K\r",aprt(ENS[thei-1]));
+                    fflush(stdout);
+                    thei--;
+                    if(thei==0){
+                        thei=4;
+                        printf("\033[%dB",l1+l2+l3);
+                        fflush(stdout);
+                    }
+                    else{
+                    printf("\033[1A\r");
+                    }
+                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+        //printf("\n");
+                    fflush(stdout);
+
+        }
+
+            }
+    }
+    }
+
+     if(the==' '){
+        if(flag1==FALSE){
+        thei=1;
+        printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+        fflush(stdout);
+       // if(LS[thei-1]>1)
+       // printf("\033[%sA\r",LS[thei-1]-1);
+        flag1=TRUE;
+        //printf("\033[%dB",LS[thei-1]);
+        }
+        else{
+        printf("\033[0m");
+fflush(stdout);
+        if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
+        fflush(stdout);
+        printf("\r%s\033[K\r",aprt(ENS[thei-1]));
+fflush(stdout);
+        thei++;
+        if(thei==5){
+            thei=1;
+            printf("\033[%dA",l1+l2+l3+l4);
+            fflush(stdout);
+        }
+printf("\033[1B\r");
+
+        printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+        //printf("\n");
+        fflush(stdout);
+
+        }
+    }
+    else if(the=='\n' || the=='\r' || the=='\x43'){
+        //the='\x00';
+        if(flag1==FALSE){
+            thei=1;
+    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+    fflush(stdout);
+            flag1=TRUE;
+            //printf("\033[%dB",LS[thei-1]);
+        }
+        else{
+           //printf("%s",ch);
+            
+                if(thei==ran5){
+                    flag=TRUE;
+                    ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
+                    fflush(stdout);
+//printf("%s",answer1);
+                    ysv0=getchar();
+                }
+                else{
+                    flag=FALSE;
+                    if (LS[thei-1]>1 ){
+                    printf("\033[%dA\r",LS[thei-1]-1);
+    }
+                    printf("\033[0m\r%s\033[K\r",aprt(ZHS[thei-1]));
+                    ishprt("\r\033[%dC%s\r",col-2,fline);
+                    getchar();
+                    if(thewidth(ZHS[thei-1])<-col){
+                    printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col-1);
+                    }
+                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+
+                    fflush(stdout);
+                    //ysv("");
+                }
+                if (thei==ran5){            
+            switch (thei)
+            {
+
+            case 1 /* constant-expression */:
+                /* code */
+                printf("\033[%dB",l1+l2+l3+l4);
+                vflag=TRUE;
+                break;
+            case 2 /* constant-expression */:
+                /* code */
+                printf("\033[%dB",l2+l3+l4);
+                vflag=TRUE;
+                break;
+            case 3 /* constant-expression */:
+                /* code */
+                printf("\033[%dB",l3+l4);
+                vflag=TRUE;
+                break;
+            case 4 /* constant-expression */:
+                /* code */
+                printf("\033[%dB",l4);
+                vflag=TRUE;
+                break;
+        
+            }
+            ysv("",ysv0);
+            rw=TRUE;
+            ysv1='s';
+            rwfp(answer1,ch,flag);
+		}
+	    if (vflag==TRUE){
+                vflag=FALSE;
+                break;
+            }
+        }
+}
+            }
+   //     getchar();
+
+}
+        return 0;
+
+}
+
 int main(int argc, char *argv[]){
 int arga;
 
@@ -4555,6 +4578,8 @@ else{
     //getchar();
    // loadcontent();
    printf("\033[?25l");
-    fun();
+    if(fun()==3){
+        fun3();
+    };
     return 0;
 }
