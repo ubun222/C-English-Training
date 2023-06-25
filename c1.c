@@ -2401,6 +2401,10 @@ fclose(yFp);
         }
 }
 }
+free(rbuffer);
+free(bbuffer);
+free(btxt);
+free(rtxt);
 }
             int l1;
             int l2;
