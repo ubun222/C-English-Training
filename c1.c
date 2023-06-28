@@ -4385,8 +4385,6 @@ fflush(stdout);
                     printf("\033[0m");
                     fflush(stdout);
 
-                    //fflush(stdout);
-
                     printf("\r%s\033[K\r",aprt(ENS[thei-1]));
                     if(LS[thei-1]>1)
                         printf("\033[%dA\r",LS[thei-1]-1);
@@ -4394,7 +4392,7 @@ fflush(stdout);
                     thei--;
                     if(thei==0){
                         thei=4;
-                        printf("\033[%dB",l2+l3+1);
+                        printf("\033[%dB",l1+l2+l3);
                         fflush(stdout);
                     }
                     else{
