@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -486,9 +487,9 @@ int thewidth(char * aline){
         i++;
 
     }
-    if(lengn<=col)
+    if(lengn<col)
     return lengn;
-    if(lengn>col)
+    if(lengn>=col)
     return -lengn;
     else
     return 0;
@@ -4373,6 +4374,9 @@ else{
                     printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
                     fflush(stdout);
        // if(LS[thei-1]>1)
+        if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
+fflush(stdout);
        // printf("\033[%sA\r",LS[thei-1]-1);
                     flag1=TRUE;
         //printf("\033[%dB",LS[thei-1]);
@@ -4380,21 +4384,29 @@ else{
                 else{
                     printf("\033[0m");
                     fflush(stdout);
-                    if(LS[thei-1]>1)
-                        printf("\033[%dB\r",LS[thei-1]-1);
-                    fflush(stdout);
+
+                    //fflush(stdout);
+
                     printf("\r%s\033[K\r",aprt(ENS[thei-1]));
+                    if(LS[thei-1]>1)
+                        printf("\033[%dA\r",LS[thei-1]-1);
                     fflush(stdout);
                     thei--;
                     if(thei==0){
                         thei=4;
-                        printf("\033[%dB",l1+l2+l3);
+                        printf("\033[%dB",l2+l3+1);
                         fflush(stdout);
                     }
                     else{
+                    if(LS[thei-1]>1)
+                        printf("\033[%dA\r",LS[thei-1]);
+                    else
                     printf("\033[1A\r");
                     }
                     printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    fflush(stdout);
+                    if(LS[thei-1]>1)
+                        printf("\033[%dA\r",LS[thei-1]-1);
         //printf("\n");
                     fflush(stdout);
 
@@ -4410,6 +4422,9 @@ else{
         printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
         fflush(stdout);
        // if(LS[thei-1]>1)
+        if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
+fflush(stdout);
        // printf("\033[%sA\r",LS[thei-1]-1);
         flag1=TRUE;
         //printf("\033[%dB",LS[thei-1]);
@@ -4417,23 +4432,31 @@ else{
         else{
         printf("\033[0m");
 fflush(stdout);
-        if(LS[thei-1]>1)
-        printf("\033[%dA\r",LS[thei-1]-1);
         fflush(stdout);
         printf("\r%s\033[K\r",aprt(ENS[thei-1]));
+        if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
 fflush(stdout);
         thei++;
         if(thei==5){
             thei=1;
-            printf("\033[%dA",l1+l2+l3+l4);
+            printf("\033[%dA",l1+l2+l3);
             fflush(stdout);
         }
-printf("\033[1B\r");
+        else{
+        if(LS[thei-2]>1)
+            printf("\033[%dB\r",LS[thei-2]);
+        else
+            printf("\033[1B\r");
 
+        }
         printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
         //printf("\n");
         fflush(stdout);
-
+        if(LS[thei-1]>1)
+            printf("\033[%dA\r",LS[thei-1]-1);
+        //printf("\n");
+        fflush(stdout);
         }
     }
     else if(the=='\n' || the=='\r' || the=='\x43'){
@@ -4458,7 +4481,7 @@ printf("\033[1B\r");
                 else{
                     flag=FALSE;
                     if (LS[thei-1]>1 ){
-                    printf("\033[%dA\r",LS[thei-1]-1);
+                    ///printf("\033[%dA\r",LS[thei-1]-1);
     }
                     printf("\033[0m\r%s\033[K\r",aprt(ZHS[thei-1]));
                     ishprt("\r\033[%dC%s\r",col-2,fline);
@@ -4467,8 +4490,10 @@ printf("\033[1B\r");
                     printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col-1);
                     }
                     printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
-
                     fflush(stdout);
+            if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
+fflush(stdout);
                     //ysv("");
                 }
                 if (thei==ran5){            
@@ -4477,22 +4502,22 @@ printf("\033[1B\r");
 
             case 1 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l1+l2+l3+l4);
+                printf("\033[%dB",l1+l2+l3);
                 vflag=TRUE;
                 break;
             case 2 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l2+l3+l4);
+                printf("\033[%dB",l2+l3);
                 vflag=TRUE;
                 break;
             case 3 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l3+l4);
+                printf("\033[%dB",l3);
                 vflag=TRUE;
                 break;
             case 4 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l4);
+                //printf("\033[%dB",l4);
                 vflag=TRUE;
                 break;
         
