@@ -2475,6 +2475,9 @@ if (ysv1=='v' || ysv1=='V'){
     fflush(stdout);
     }
 for(P=0;P<p;P++){
+        strcpy(rtxt,"");
+    strcpy(theline,"");
+    vflag=FALSE;
     //P=0;
     if(Fp!=NULL)
     fclose(Fp);
@@ -2510,7 +2513,13 @@ for(P=0;P<p;P++){
            //  printf("\nEN:%s",answer1);
         }
     }
+    if(theline[0]!='\0'){
+    break;
 
+    }
+ 
+
+}
     if(locate==zlocate || vflag==0 ){
         strcpy(rtxt,"");
 for(P=0;P<p;P++){
@@ -2545,11 +2554,10 @@ for(P=0;P<p;P++){
     //printf("\n%s",theline);
     fflush(stdout);
     }
-    if(theline[0]!='\0'){
-    break;
-    }
+//    if(theline[0]!='\0'){
+//    break;
 
-}
+//    }
 
    // fseek(fp,Max , SEEK_SET);
     // NL=TRUE;
@@ -4471,7 +4479,13 @@ fflush(stdout);
             
                 if(thei==ran5){
                     flag=TRUE;
-                    ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
+                    if (LS[thei-1]>1 ){
+                        ishprt("\033[%dB",LS[thei-1]-1);
+                        ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
+                    }
+                    else{
+                        ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
+                    }
                     fflush(stdout);
 //printf("%s",answer1);
                     ysv0=getchar();
@@ -4482,7 +4496,9 @@ fflush(stdout);
                     ///printf("\033[%dA\r",LS[thei-1]-1);
     }
                     printf("\033[0m\r%s\033[K\r",aprt(ZHS[thei-1]));
+                    fflush(stdout);
                     ishprt("\r\033[%dC%s\r",col-2,fline);
+                    fflush(stdout);
                     getchar();
                     if(thewidth(ZHS[thei-1])<-col){
                     printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col-1);
@@ -4500,22 +4516,22 @@ fflush(stdout);
 
             case 1 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l1+l2+l3);
+                printf("\033[%dB",l1+l2+l3+l4-1);
                 vflag=TRUE;
                 break;
             case 2 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l2+l3);
+                printf("\033[%dB",l2+l3+l4-1);
                 vflag=TRUE;
                 break;
             case 3 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l3);
+                printf("\033[%dB",l3+l4-1);
                 vflag=TRUE;
                 break;
             case 4 /* constant-expression */:
                 /* code */
-                //printf("\033[%dB",l4);
+                printf("\033[%dB",l4-1);
                 vflag=TRUE;
                 break;
         
