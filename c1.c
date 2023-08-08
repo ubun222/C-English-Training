@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -486,9 +487,9 @@ int thewidth(char * aline){
         i++;
 
     }
-    if(lengn<=col)
+    if(lengn<col)
     return lengn;
-    if(lengn>col)
+    if(lengn>=col)
     return -lengn;
     else
     return 0;
@@ -666,6 +667,7 @@ char azh[10][100];
 char bzh[10][100];
 BOOL ish=FALSE;
 int premode;
+BOOL FUN3=FALSE;
 int findword(char * en, char * en2 , char * txt){
     char Eng[399];
     char Zword;
@@ -799,7 +801,7 @@ int n;
     printf("\n");
     printf("\033[2m%s\n\033[0m",strs);
     fflush(stdout);
-    if(premode!='2')
+    if(premode!='2' || FUN3==TRUE)
     printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en2);
     fflush(stdout);
 return 0;
@@ -2474,6 +2476,9 @@ if (ysv1=='v' || ysv1=='V'){
     fflush(stdout);
     }
 for(P=0;P<p;P++){
+        strcpy(rtxt,"");
+    strcpy(theline,"");
+    vflag=FALSE;
     //P=0;
     if(Fp!=NULL)
     fclose(Fp);
@@ -2509,7 +2514,13 @@ for(P=0;P<p;P++){
            //  printf("\nEN:%s",answer1);
         }
     }
+    if(theline[0]!='\0'){
+    break;
 
+    }
+ 
+
+}
     if(locate==zlocate || vflag==0 ){
         strcpy(rtxt,"");
 for(P=0;P<p;P++){
@@ -2544,11 +2555,10 @@ for(P=0;P<p;P++){
     //printf("\n%s",theline);
     fflush(stdout);
     }
-    if(theline[0]!='\0'){
-    break;
-    }
+//    if(theline[0]!='\0'){
+//    break;
 
-}
+//    }
 
    // fseek(fp,Max , SEEK_SET);
     // NL=TRUE;
@@ -3207,7 +3217,6 @@ void my_exit()
 printf("\033[?25h\n");
     exit(0);
 }
-BOOL FUN3=FALSE;
 int fun(){
     evalue.it_value.tv_sec=0;
     evalue.it_value.tv_usec=15000;
@@ -4373,6 +4382,9 @@ else{
                     printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
                     fflush(stdout);
        // if(LS[thei-1]>1)
+        if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
+fflush(stdout);
        // printf("\033[%sA\r",LS[thei-1]-1);
                     flag1=TRUE;
         //printf("\033[%dB",LS[thei-1]);
@@ -4380,10 +4392,10 @@ else{
                 else{
                     printf("\033[0m");
                     fflush(stdout);
-                    if(LS[thei-1]>1)
-                        printf("\033[%dB\r",LS[thei-1]-1);
-                    fflush(stdout);
+
                     printf("\r%s\033[K\r",aprt(ENS[thei-1]));
+                    if(LS[thei-1]>1)
+                        printf("\033[%dA\r",LS[thei-1]-1);
                     fflush(stdout);
                     thei--;
                     if(thei==0){
@@ -4392,9 +4404,15 @@ else{
                         fflush(stdout);
                     }
                     else{
+                    if(LS[thei-1]>1)
+                        printf("\033[%dA\r",LS[thei-1]);
+                    else
                     printf("\033[1A\r");
                     }
                     printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    fflush(stdout);
+                    if(LS[thei-1]>1)
+                        printf("\033[%dA\r",LS[thei-1]-1);
         //printf("\n");
                     fflush(stdout);
 
@@ -4410,6 +4428,9 @@ else{
         printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
         fflush(stdout);
        // if(LS[thei-1]>1)
+        if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
+fflush(stdout);
        // printf("\033[%sA\r",LS[thei-1]-1);
         flag1=TRUE;
         //printf("\033[%dB",LS[thei-1]);
@@ -4417,23 +4438,31 @@ else{
         else{
         printf("\033[0m");
 fflush(stdout);
-        if(LS[thei-1]>1)
-        printf("\033[%dA\r",LS[thei-1]-1);
         fflush(stdout);
         printf("\r%s\033[K\r",aprt(ENS[thei-1]));
+        if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
 fflush(stdout);
         thei++;
         if(thei==5){
             thei=1;
-            printf("\033[%dA",l1+l2+l3+l4);
+            printf("\033[%dA",l1+l2+l3);
             fflush(stdout);
         }
-printf("\033[1B\r");
+        else{
+        if(LS[thei-2]>1)
+            printf("\033[%dB\r",LS[thei-2]);
+        else
+            printf("\033[1B\r");
 
+        }
         printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
         //printf("\n");
         fflush(stdout);
-
+        if(LS[thei-1]>1)
+            printf("\033[%dA\r",LS[thei-1]-1);
+        //printf("\n");
+        fflush(stdout);
         }
     }
     else if(the=='\n' || the=='\r' || the=='\x43'){
@@ -4450,7 +4479,13 @@ printf("\033[1B\r");
             
                 if(thei==ran5){
                     flag=TRUE;
-                    ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
+                    if (LS[thei-1]>1 ){
+                        ishprt("\033[%dB",LS[thei-1]-1);
+                        ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
+                    }
+                    else{
+                        ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
+                    }
                     fflush(stdout);
 //printf("%s",answer1);
                     ysv0=getchar();
@@ -4458,17 +4493,21 @@ printf("\033[1B\r");
                 else{
                     flag=FALSE;
                     if (LS[thei-1]>1 ){
-                    printf("\033[%dA\r",LS[thei-1]-1);
+                    ///printf("\033[%dA\r",LS[thei-1]-1);
     }
                     printf("\033[0m\r%s\033[K\r",aprt(ZHS[thei-1]));
+                    fflush(stdout);
                     ishprt("\r\033[%dC%s\r",col-2,fline);
+                    fflush(stdout);
                     getchar();
                     if(thewidth(ZHS[thei-1])<-col){
                     printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col-1);
                     }
                     printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
-
                     fflush(stdout);
+            if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
+fflush(stdout);
                     //ysv("");
                 }
                 if (thei==ran5){            
@@ -4477,22 +4516,22 @@ printf("\033[1B\r");
 
             case 1 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l1+l2+l3+l4);
+                printf("\033[%dB",l1+l2+l3+l4-1);
                 vflag=TRUE;
                 break;
             case 2 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l2+l3+l4);
+                printf("\033[%dB",l2+l3+l4-1);
                 vflag=TRUE;
                 break;
             case 3 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l3+l4);
+                printf("\033[%dB",l3+l4-1);
                 vflag=TRUE;
                 break;
             case 4 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l4);
+                printf("\033[%dB",l4-1);
                 vflag=TRUE;
                 break;
         
