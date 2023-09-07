@@ -118,6 +118,7 @@ int current_tty(void)
     int row;
     int col;
     char strs[9999];
+    char strz[9999];
     int add=0;
 int calendar(){
 //    BOOL ish=FALSE;
@@ -127,7 +128,7 @@ fd1 = current_tty();
     row=Max.ws_row;
     col=Max.ws_col;
 char a[]="一";
-
+char z[]="<>";
 if ((int)a[1] < 0){
     add=256;
 }
@@ -135,6 +136,11 @@ else
 add=0;
 //printf("%d",add);
     int cc;
+strcpy(strz,"");
+    for (cc=0;cc<col/2;cc++){
+        strcat(strs,z);
+    }
+
     strcpy(strs,"");
     for (cc=0;cc<col;cc++){
         strcat(strs,"\xe2");
@@ -142,7 +148,7 @@ add=0;
         strcat(strs,"\x80");
     }
     printf("%s",strs);
-    fflush(stdout);
+    fflush(stdout);    
     getchar();
     printf("\033[2J"); // 清屏
     printf("\033[0;0H"); // 光标移动到左上角
@@ -1502,7 +1508,7 @@ return 0;
 void searchTxtFiles(const char* path, char*** filePaths, int* numFiles, int* totalLength) {    DIR* directory;
     struct dirent* entry;
     struct stat file_stat;
-
+    int PATH_MAx=999;
     // 打开目录
     directory = opendir(path);
     if (directory == NULL) {
@@ -1514,7 +1520,7 @@ void searchTxtFiles(const char* path, char*** filePaths, int* numFiles, int* tot
     // 读取目录中的文件和子目录
     while ((entry = readdir(directory)) != NULL) {
         // 构建完整路径
-        char fullpath[PATH_MAX];
+        char fullpath[PATH_MAx];
         snprintf(fullpath, sizeof(fullpath), "%s/%s", path, entry->d_name);
 
         // 获取文件/目录的详细信息
@@ -2002,10 +2008,10 @@ m++;
 }
 printf("\n");
 if(m>0){
-printf("%s",strs);
+printf("\r");
 fflush(stdout);
-getchar();
-printf("\n");
+//getchar();
+//printf("\n");
 fflush(stdout);
 //printf("%s\n",strs);
 break;
@@ -3209,14 +3215,19 @@ else{
 
 return 0;
 }
-
+int flags;
 void my_exit()
 {
+fcntl(STDIN_FILENO, F_SETFL, flags);
     //tcgetattr(0,&init_setting);
     tcsetattr(0,TCSANOW,&init_setting);
 printf("\033[?25h\n");
     exit(0);
 }
+
+    struct termios new_setting;
+    struct termios new_settingback;
+
 int fun(){
     evalue.it_value.tv_sec=0;
     evalue.it_value.tv_usec=15000;
@@ -3276,7 +3287,73 @@ int fun(){
     int i;
     int n;
     int z;
+
+
+int cc;
+int whatever;
+
+ //tcsetattr(STDIN_FILENO, TCSANOW, &init_setting);
+//tcsetattr(0, TCSANOW, &new_setting);
+    //tcgetattr(STDIN_FILENO, &oldt);
+    //newt = oldt;
+    //newt.c_lflag &= ~(ICANON | ECHO);
+    //tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+  //  tcgetattr(STDIN_FILENO, &oldt);
+
+    // 禁用标准输入的缓冲和回显
+  //  newt.c_lflag &= ~(ICANON | ECHO);
+   // tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
+    
 if(premode=='\x0'){
+
+    flags = fcntl(STDIN_FILENO, F_GETFL, 0);
+    fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
+
+printf("\033[2m\033[3m\033[1B\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
+
+    for (cc=0;cc<col-col%2;cc++){
+        usleep(19999);
+
+if(cc%2==0){
+printf("%s","<");
+
+printf("\033[2B\r\033[%dC%s",col-cc-1-col%2,">");
+
+printf("\033[2A\r\033[%dC",cc+1);
+
+}
+else if(cc%2==1){
+    printf("%s",">");
+if(cc<col-col%2-1){
+    printf("\033[2B\r\033[%dC%s",col-cc-1-col%2,"<");
+}
+else{
+    printf("\033[2B\r%s","<");
+}
+printf("\033[2A\r\033[%dC",cc+1);
+}
+fflush(stdout);
+fflush(stdin);
+        whatever = getchar(); // 获取字符，不会阻塞程序
+if(whatever!=EOF){
+    break;
+}
+
+
+    }
+tcsetattr(STDIN_FILENO, TCSANOW, &new_setting); 
+//tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+
+    fcntl(STDIN_FILENO, F_SETFL, flags);
+//getchar();
+
+printf("\r\033[1m\033[3m\033[1B\033[%dCC-English-Training\033[1A\r",col/2-9);
+
+
+printf("\n\n\n");
+
+
 printf("\r\033[K1,提词器\033[%dC2,四选一\033[%dC",col/2-12,col/2-12);
 fflush(stdout);
     while ((premode=getchar())!='\n' && premode!='\r' && premode!='1' && premode!='2'){
@@ -4531,7 +4608,13 @@ fflush(stdout);
                 break;
             case 4 /* constant-expression */:
                 /* code */
+                if(l4-1>0){
                 printf("\033[%dB",l4-1);
+                }
+                else{
+                printf("");
+                }
+ 
                 vflag=TRUE;
                 break;
         
@@ -4585,14 +4668,15 @@ atexit(my_exit);
 xtxt=(char *)malloc(8999999);
 alltxt=(char *)malloc(8999999); 
 //srand(time(NULL));
-    struct termios new_setting;
-    struct termios new_settingback;
+//    struct termios new_setting;
+//    struct termios new_settingback;
     tcgetattr(0,&init_setting);
     //tcgetattr(0,&new_settingback);
     new_setting=init_setting;
     new_setting.c_cflag&=~CREAD;
     new_setting.c_lflag&=~ECHO; 
     new_setting.c_lflag&=~ICANON; 
+    new_setting.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(0,TCSANOW,&new_setting);
 
     
