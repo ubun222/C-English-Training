@@ -2012,7 +2012,7 @@ printf("\r");
 fflush(stdout);
 //getchar();
 //printf("\n");
-fflush(stdout);
+//fflush(stdout);
 //printf("%s\n",strs);
 break;
 }
@@ -3310,7 +3310,7 @@ if(premode=='\x0'){
     flags = fcntl(STDIN_FILENO, F_GETFL, 0);
     fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 
-printf("\033[2m\033[3m\033[1B\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
+printf("\033[2m\033[3m\n\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
 
     for (cc=0;cc<col-col%2;cc++){
         usleep(19999);
@@ -3318,7 +3318,7 @@ printf("\033[2m\033[3m\033[1B\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9
 if(cc%2==0){
 printf("%s","<");
 
-printf("\033[2B\r\033[%dC%s",col-cc-1-col%2,">");
+printf("\n\n\r\033[%dC%s",col-cc-1-col%2,">");
 
 printf("\033[2A\r\033[%dC",cc+1);
 
@@ -3326,10 +3326,10 @@ printf("\033[2A\r\033[%dC",cc+1);
 else if(cc%2==1){
     printf("%s",">");
 if(cc<col-col%2-1){
-    printf("\033[2B\r\033[%dC%s",col-cc-1-col%2,"<");
+    printf("\n\n\r\033[%dC%s",col-cc-1-col%2,"<");
 }
 else{
-    printf("\033[2B\r%s","<");
+    printf("\n\n\r%s","<");
 }
 printf("\033[2A\r\033[%dC",cc+1);
 }
