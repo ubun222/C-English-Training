@@ -3293,7 +3293,7 @@ int cc;
 int whatever;
 
  //tcsetattr(STDIN_FILENO, TCSANOW, &init_setting);
-//tcsetattr(0, TCSANOW, &new_setting);
+tcsetattr(0, TCSANOW, &new_setting);
     //tcgetattr(STDIN_FILENO, &oldt);
     //newt = oldt;
     //newt.c_lflag &= ~(ICANON | ECHO);
@@ -3313,8 +3313,8 @@ if(premode=='\x0'){
 printf("\033[2m\033[3m\n\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
 
     for (cc=0;cc<col-col%2;cc++){
-        usleep(19999);
-
+        usleep(19000);
+printf("\033[2m\033[3m");
 if(cc%2==0){
 printf("%s","<");
 
@@ -3342,6 +3342,7 @@ if(whatever!=EOF){
 
 
     }
+    printf("\033[0m");
 tcsetattr(STDIN_FILENO, TCSANOW, &new_setting); 
 //tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 
@@ -3351,7 +3352,7 @@ tcsetattr(STDIN_FILENO, TCSANOW, &new_setting);
 printf("\r\033[1m\033[3m\033[1B\033[%dCC-English-Training\033[1A\r",col/2-9);
 
 
-printf("\n\n\n");
+printf("\033[0m\n\n\n\033[3m");
 
 
 printf("\r\033[K1,提词器\033[%dC2,四选一\033[%dC",col/2-12,col/2-12);
