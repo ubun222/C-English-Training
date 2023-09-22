@@ -40,6 +40,8 @@ struct itimerval evalue, evalue0;
     char eline[]="\033[32m○\033[0m";
     char nline[]="\033[33m○\033[0m";
 
+int ran;
+
 FILE * rfpr;
 FILE * Fp;
 int Max;
@@ -80,6 +82,9 @@ char zwords[199];
 
 int b=0;
 BOOL p6;
+
+BOOL calendar=FALSE;
+
 void  handler()
 {
 //printf("rxit");
@@ -120,7 +125,7 @@ int current_tty(void)
     char strs[9999];
     char strz[9999];
     int add=0;
-int calendar(){
+int std(){
 //    BOOL ish=FALSE;
 fd1 = current_tty();
     struct winsize Max;
@@ -302,13 +307,20 @@ FILE * fp;
 FILE * rfp;
 FILE * rfpa;
 
+BOOL CORRECT;
+char CORRECT_PATH[99999][399];
+int the_ints[999][99999];
+char default_rw[999];
+int txtn=0;
+BOOL REMOVE;
+int RAN;//错题集需要不变的序号
 int rwfp(char * word1,char * word2,char ifrw){
-
+strcpy(default_rw,"CORRECT.txt");
 //int offset;
 //BOOL a;
 //BOOL b;
 int i;
-//rrpp = fopen("CORRECT.txt", "r");
+//rrpp = fopen(default_rw, "r");
 //strcpy(alltxt,"");
 
 //if(ze=='1')
@@ -324,11 +336,37 @@ strcat(word1,"\t\t");
 
       //  strcpy(en1,"");
       //  strcpy(zh1,"");
+//printf("ran:%d",ran);
+if(calendar==TRUE && ( CORRECT==TRUE || REMOVE==TRUE )){
+int i;
+int m;
+
+for(i=0;i<txtn;i++){
+   // printf("%lu",99999);
+    for(m=1;m<99999+1;m++){
+        if(the_ints[i][m]==-2){
+            break;
+        }
+        if(RAN==the_ints[i][m]){
+            //printf("%s",CORRECT_PATH[i]);
+            strcpy(default_rw,CORRECT_PATH[i]);
+            //getout=TRUE;
+            break;
+        }
+}
+
+        if(the_ints[i][m]==-2){
+            continue;
+        }
+        break;
+
+}
+}
 
 if (ifrw==FALSE && rw==FALSE && ysv1!='s' && ysv1!='S' && ysv1!='V' && ysv1!='Y' ){
     //printf("\n\n22\n");
-    rfpa = fopen("CORRECT.txt", "r+");
-    rfp = fopen("CORRECT.txt", "w+");
+    rfpa = fopen(default_rw, "r+");
+    rfp = fopen(default_rw, "w+");
     if(ez=='1'){
     //    strcpy(en1,word2);
     //    strcpy(zh1,word1);
@@ -366,9 +404,9 @@ printf("\n错题+1");
 }
 
 else if ((ifrw==TRUE ||  ysv1=='s' ||  ysv1=='S' ||  ysv1=='V' ||  ysv1=='Y') && rw==TRUE ){
-    //rfpa = fopen("CORRECT.txt", "r+");
-    //rfpa = fopen("CORRECT.txt", "r+");
-    rfp = fopen("CORRECT.txt", "w+");
+    //rfpa = fopen(default_rw, "r+");
+    //rfpa = fopen(default_rw, "r+");
+    rfp = fopen(default_rw, "w+");
     if(ez=='1'){
     fseek(rfp,0L,SEEK_END);
     if (xtxt[0]!='\0'){
@@ -891,7 +929,7 @@ int getlines(char * string){
     int times = (unsigned int)time(NULL);
     ni[0]=0;
     int rx=0;
-    int ran;
+    //int ran;
     int m;
     int rans[5]={-1,-1,-1,-1,-1};
     for(i=0;i<n;i++){
@@ -1701,16 +1739,161 @@ if(stat(aentry, &file_stat)!=0){
     return result;
 }
 
-int lines;
+int lines=0;
 char PATH[99999][99];
 
 FILE * rfp;
 FILE * rfpa;
-BOOL CORRECT;
+//BOOL CORRECT;
 char * txt;
     //lines=0;
-int loadcontent(){
-    if (CORRECT==TRUE){
+
+//int * intspoints[999];
+//int the_ints[999][99999];
+
+
+int copyFile(const char *srcPath, const char *destPath);
+int copyDirectory(const char *srcDir, const char *destDir);
+
+
+int endsWithTxt(const char *filename) {
+    size_t len = strlen(filename);
+    if (len < 4) return 0; // 文件名太短，无法有.txt扩展名
+    return (strcmp(filename + len - 4, ".txt") == 0);
+}
+
+#ifdef _WIN32
+int copyFile(const char *srcPath, const char *destPath) {
+    return CopyFile(srcPath, destPath, FALSE) ? 0 : 1;
+}
+#else
+int copyFile(const char *srcPath, const char *destPath) {
+    FILE *srcFile, *destFile;
+    char buffer[4096];
+    size_t bytesRead;
+
+
+    if (endsWithTxt(srcPath)) {
+        //printf("跳过文件 %s\n", srcPath);
+        return 0;
+    }
+
+    srcFile = fopen(srcPath, "rb");
+    if (!srcFile) {
+        perror("打开源文件失败");
+        return 1;
+    }
+
+    destFile = fopen(destPath, "wb");
+    if (!destFile) {
+        perror("创建目标文件失败");
+        fclose(srcFile);
+        return 1;
+    }
+
+    while ((bytesRead = fread(buffer, 1, sizeof(buffer), srcFile)) > 0) {
+        fwrite(buffer, 1, bytesRead, destFile);
+    }
+
+    fclose(srcFile);
+    fclose(destFile);
+
+    return 0;
+}
+#endif
+
+int copyDirectory(const char *srcDir, const char *destDir) {
+#ifdef _WIN32
+    if (_mkdir(destDir) != 0) {
+#else
+    if (mkdir(destDir, 0755) != 0) {
+#endif
+       // perror("创建目标文件夹失败");
+        return 1;
+    }
+
+#ifdef _WIN32
+    char searchPath[MAX_PATH];
+    snprintf(searchPath, sizeof(searchPath), "%s\\*", srcDir);
+    WIN32_FIND_DATA findData;
+    HANDLE hFind = FindFirstFile(searchPath, &findData);
+
+    if (hFind == INVALID_HANDLE_VALUE) {
+        perror("查找文件失败");
+        return 1;
+    }
+
+    do {
+        if (strcmp(findData.cFileName, ".") != 0 && strcmp(findData.cFileName, "..") != 0) {
+            char srcPath[MAX_PATH];
+            char destPath[MAX_PATH];
+            snprintf(srcPath, sizeof(srcPath), "%s\\%s", srcDir, findData.cFileName);
+            snprintf(destPath, sizeof(destPath), "%s\\%s", destDir, findData.cFileName);
+
+            if (findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+                if (copyDirectory(srcPath, destPath) != 0) {
+                    FindClose(hFind);
+                    return 1;
+                }
+            } else {
+                if (copyFile(srcPath, destPath) != 0) {
+                    FindClose(hFind);
+                    return 1;
+                }
+            }
+        }
+    } while (FindNextFile(hFind, &findData) != 0);
+
+    FindClose(hFind);
+#else
+    DIR *srcDirPtr;
+    struct dirent *entry;
+
+    srcDirPtr = opendir(srcDir);
+    if (!srcDirPtr) {
+        perror("打开源文件夹失败");
+        return 1;
+    }
+
+    while ((entry = readdir(srcDirPtr))) {
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            char srcPath[PATH_MAX];
+            char destPath[PATH_MAX];
+            snprintf(srcPath, sizeof(srcPath), "%s/%s", srcDir, entry->d_name);
+            snprintf(destPath, sizeof(destPath), "%s/%s", destDir, entry->d_name);
+
+            struct stat statbuf;
+            if (lstat(srcPath, &statbuf) == -1) {
+                perror("获取文件信息失败");
+                closedir(srcDirPtr);
+                return 1;
+            }
+
+            if (S_ISDIR(statbuf.st_mode)) {
+                if (copyDirectory(srcPath, destPath) != 0) {
+                    closedir(srcDirPtr);
+                    return 1;
+                }
+            } else {
+                if (copyFile(srcPath, destPath) != 0) {
+                    closedir(srcDirPtr);
+                    return 1;
+                }
+            }
+        }
+    }
+
+    closedir(srcDirPtr);
+#endif
+
+    return 0;
+}
+
+char * txt_;
+int loadcontent(int the_txtn){
+//the_ints[0][1]=0;
+
+    if (CORRECT==TRUE && calendar!=TRUE){ //不使用txt文件夹
         rfp = fopen("CORRECT.txt", "r");
         if(rfp==NULL){
         printf("\n错题集合不存在，在当前目录自动生成CORRECT.txt");
@@ -1730,7 +1913,8 @@ fclose(rfp);
 }
 
     char buffer[9999];
-
+    //int buffer_ints[9999];
+   // int lastlines;
    // printf("\n");
     while (fgets(buffer,150,fp)){ 
         if ( checkstr(buffer,"\t",0,1) && buffer[0]!='\n' ){
@@ -1739,13 +1923,74 @@ fclose(rfp);
             del_char(buffer,'\r');
             strncat(txt,buffer,100);
             lines++;
+            if (( CORRECT==TRUE || REMOVE==TRUE )&& calendar==TRUE){ //使用txt文件夹
+            the_ints[the_txtn][lines]=lines-1;
+            }
         }
         else if(buffer[1] == '\\' )
         break;
     }
+    the_ints[the_txtn][lines+1]=-2;
     if(txt[strlen(txt)-1]!='\n')
     strcat(txt,"\n"); //
 printf("已加载%d组单词\033[K\r",lines);
+
+if (CORRECT==TRUE && calendar==TRUE){ //使用txt文件夹
+
+char theDir[999];
+char * the_Dir;
+strcat(theDir,"./txt/CORRECT/");
+the_Dir=strcat(theDir,&txt_[6]);
+    struct stat st;
+int status;
+stat("./txt/CORRECT", &st);
+        if (S_ISDIR(st.st_mode)) {
+            printf("");
+           // printf("\nCORRECT文件夹存在\n");
+        }
+                else{
+            status = mkdir("./txt/CORRECT",S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+            if (status == 0) {
+                printf("\n./txt/CORRECT/不存在，重新创建\n");
+            }
+            else{
+                printf("\n无法重新创建./txt/CORRECT/\n");
+            }
+        }
+
+    const char *srcDir = txt_;
+    const char *destDir = the_Dir;
+
+    if (copyDirectory(srcDir, destDir) == 0) {
+      //  printf("复制成功！\n");
+    } else {
+     //   printf("复制失败！\n");
+    }
+
+strcpy(theDir,"./txt/CORRECT/");
+ the_Dir=strcat(theDir,&PATH[the_txtn][6]);
+ printf("\n使用%s记录错题\n",the_Dir);
+ strcpy(CORRECT_PATH[the_txtn],the_Dir);
+rfp = fopen(the_Dir, "r");
+        if(rfp==NULL){
+        //printf("\n错题集合不存在，在当前目录自动生成");
+        rfp = fopen(the_Dir, "w+");
+        rfpa = fopen(the_Dir, "a+");
+        fprintf(rfp,"%s","\\\\\\\n");
+        fclose(rfp);
+        fclose(rfpa);
+        }
+}
+else if (REMOVE==TRUE && calendar==TRUE){
+
+printf("\n对%s直接删改\n",PATH[the_txtn]);
+strcpy(CORRECT_PATH[the_txtn],PATH[the_txtn]);
+
+}
+fflush(stdout);
+fclose(rfp);
+
+
 fflush(stdout);
 //printf("%s",txt);
 return 0;
@@ -1753,6 +1998,9 @@ return 0;
 int p=0;
 
 char *Thepath=NULL;
+
+//int txtn=0;
+
 void entries(char * directories){
     txt=(char *)malloc(9999999);
     char directories1[99999];
@@ -1910,7 +2158,7 @@ char t[399];
 
 strcpy(t,"");
 
-char * txt_;
+
 txt_=strcat(t,&rows[thei-1][2]);
 printf("open:%s\n",txt_);
 fflush(stdout);
@@ -1931,7 +2179,7 @@ lines=0;
 //const char* line;
 int line_number;
 line_number = 0;
-int m;
+//int m;
 char * line;
 while (1){
          if(thetxts[0]=='\0'){
@@ -1985,29 +2233,29 @@ if(strcmp(thetxt,"")==0 && strcmp(thetxts,"")!=0 && line_number>0 ){
 //printf("%s",thetxts);
 fflush(stdout);
 line = strtok(thetxts, "\n");
-m=0;
+//m=0;
 p=line_number;
-while(line != NULL && m<line_number){
-strcpy(PATH[m],line);
+while(line != NULL && txtn<line_number){
+strcpy(PATH[txtn],line);
 //loadcontent();
 //printf("\r%s",PATH[m]);
 fflush(stdout);
             if(fp!=NULL ){
                 fclose(fp);
             } 
-            fp=fopen(PATH[m],"r");
+            fp=fopen(PATH[txtn],"r");
             if(fp==NULL ){
                 //strcpy(path,"");
-                printf("%s无效\n",PATH[m]);
+                printf("%s无效\n",PATH[txtn]);
                 fflush(stdout);
                 continue;
             } 
-            loadcontent();
+            loadcontent(txtn);
 line = strtok(NULL, "\n");
-m++;
+txtn++;
 }
 printf("\n");
-if(m>0){
+if(txtn>0){
 printf("\r");
 fflush(stdout);
 //getchar();
@@ -2142,7 +2390,7 @@ int getfromread(){
             strcpy(PATH[p],path);
             //printf("%s",PATH[p]);
             p++;
-            loadcontent();
+            loadcontent(-2);
             printf("\n");
             fflush(stdout);
             strcpy(path,"");
@@ -2182,7 +2430,7 @@ BOOL PASS1=FALSE;
 int nend[39999];
 //int premode;
 int ran;
-
+//int RAN;//错题集需要不变的序号
 int num=-1;
     char order;
 
@@ -2191,7 +2439,27 @@ regex_t regex;
 regmatch_t match;
 
 void RWfp(char * bword){
-
+strcpy(default_rw,"CORRECT.txt");
+if(calendar==TRUE && ( CORRECT==TRUE || REMOVE==TRUE )){
+int i;
+int m;
+for(i=0;i<txtn;i++){
+    for(m=1;m<99999+1;m++){
+        if(the_ints[i][m]==-2){
+            break;
+        }
+        if(RAN==the_ints[i][m]){
+            //printf("%s",CORRECT_PATH[i]);
+            strcpy(default_rw,CORRECT_PATH[i]);
+            break;
+        }
+}
+        if(the_ints[i][m]==-2){
+            continue;
+        }
+        break;
+}
+}
 char * rbuffer;
 char * rtxt;
 rbuffer=(char *)malloc(9999);
@@ -2222,7 +2490,7 @@ int P=0;
         strcpy(btxt,"");
         strcpy(Buffer,"");
         strcpy(word1,"");
-    rrpp = fopen("CORRECT.txt", "r");
+    rrpp = fopen(default_rw, "r");
     strcpy(word1,answer1);
     strcat(word1,"\t\t");
     //printf("\n\n%s\n",word1);
@@ -2276,17 +2544,17 @@ else if(premode=='2'){
 
 
 
-if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv1=='s' || rw==TRUE && CORRECT==TRUE && ysv1=='S' ){
+if (rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) && flag==TRUE || rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) &&  ysv1=='s' || rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) && ysv1=='S' ){
     //printf("\n222\n");
    // if(rfpr!=NULL )
    // fclose(rfpr);
    // if(wfpn!=NULL )
    // fclose(wfpn);
     strcpy(xtxt,"");
-    wfpn = fopen("CORRECT.txt", "a");
+    wfpn = fopen(default_rw, "a");
     fprintf(wfpn,"%s","\n\n\n\n\n");
     fclose(wfpn);
-    rfpr = fopen("CORRECT.txt", "r");
+    rfpr = fopen(default_rw, "r");
     //strcpy(xtxt,"");
     while (fgets(rbuffer,9998,rfpr)  ){
         if ( Checkstr(rbuffer,"\t",1)==TRUE  ){
@@ -2368,12 +2636,13 @@ if (rw==TRUE && CORRECT==TRUE && flag==TRUE || rw==TRUE && CORRECT==TRUE &&  ysv
 
 
 
-else if (rw==FALSE && CORRECT==TRUE && flag!=TRUE && ysv1!='s' && ysv1!='S'){
-
+else if (rw==FALSE && ( CORRECT==TRUE || REMOVE==TRUE ) && flag!=TRUE && ysv1!='s' && ysv1!='S'){ //没有找到该错题，需要追加
+//printf("222222\n\n\n");
+char * rp;
 for(P=0;P<p;P++){
 yFp=fopen(PATH[P],"r");
-    while (fgets(rbuffer,3998,yFp)){
-        if (strcmp(rbuffer,"\n")!=0 ){
+    while ((rp = fgets(rbuffer,3998,yFp))){
+        if (strcmp(rbuffer,"\n")!=0 && rp!=NULL ){
             strcpy(bbuffer,rbuffer);
             if(Checkstr(bbuffer,answer1,strlen(answer1)) && regexec(&regex, bbuffer, 1, &match, 0) == 0){
                 vflag=TRUE;
@@ -2384,6 +2653,7 @@ yFp=fopen(PATH[P],"r");
         else
             {
 		if (vflag==TRUE){
+               // printf("222222\n\n\n");
                 strcpy(xtxt,rtxt);
                 strcat(xtxt,"\n");
                 strcpy(rtxt,"");
@@ -2399,6 +2669,23 @@ yFp=fopen(PATH[P],"r");
             }
                 strcpy(rbuffer,"");
                 strcpy(bbuffer,"");
+ }
+
+ if(rp==NULL){
+		if (vflag==TRUE){
+               // printf("222222\n\n\n");
+                strcpy(xtxt,rtxt);
+                strcat(xtxt,"\n");
+                strcpy(rtxt,"");
+                strcpy(rbuffer,"");
+                strcpy(bbuffer,"");
+		    break;
+		}
+		else{
+                strcpy(rbuffer,"");
+                strcpy(bbuffer,"");
+                strcpy(rtxt,"");
+		}
  }
 
     fflush(stdout);
@@ -2668,7 +2955,7 @@ num--;
 }
 
 
-if (CORRECT==TRUE){
+if (CORRECT==TRUE || REMOVE==TRUE){
 RWfp(bword);
 }
 free(rbuffer);
@@ -3209,7 +3496,7 @@ else{
 
          
                 fflush(stdin);
-                if(CORRECT==TRUE)
+                if(CORRECT==TRUE || REMOVE==TRUE )
                 rwfp(answer1,ch,flag);
                 fflush(stdin); 
 
@@ -3227,6 +3514,16 @@ printf("\033[?25h\n");
 
     struct termios new_setting;
     struct termios new_settingback;
+
+
+int findPosition(int arr[], int length, int target) {
+    for (int i = 0; i < length; i++) {
+        if (arr[i] == target) {
+            return i; // 返回目标值在数组中的位置
+        }
+    }
+    return -1; // 如果未找到目标值，返回-1表示未找到
+}
 
 int fun(){
     evalue.it_value.tv_sec=0;
@@ -3304,7 +3601,7 @@ tcsetattr(0, TCSANOW, &new_setting);
   //  newt.c_lflag &= ~(ICANON | ECHO);
    // tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 
-    
+
 if(premode=='\x0'){
 
     flags = fcntl(STDIN_FILENO, F_GETFL, 0);
@@ -3408,11 +3705,22 @@ if(FUN3==FALSE)
         }
             
         }
+int NUM=num;
+int origin_nends[NUM];
+
+
+
 if(FUN3==FALSE){
         nend[0]=-1;
 nend[num+1]=max;
 }
-      //  int ran;
+        for(i=0;i<num;i++){
+	/*printf("%d",i);*/
+        /***printf("%c",txt[i]);***/
+            origin_nends[i]=nend[i];
+            
+        }
+              //  int ran;
     srand((unsigned)time(NULL));
 	while (TRUE){
         
@@ -3433,8 +3741,24 @@ nend[num+1]=max;
         
         rx++;
         ran=rand() % num;
+
+
+
+
         n=nend[ran];
         /*printf("%d",nend[ran]);*/    
+
+    int position = findPosition(origin_nends, NUM, n);
+
+    if (position != -1) {
+        RAN=position;
+        //printf("目标值 %d 在数组中的位置是 %d\n", target, position);
+    } else {
+       // printf("目标值 %d 未在数组中找到\n", n); //顺序时会报错，但不影响运行效果
+    }
+
+
+      //  RAN=ran;
         strcpy(word,"");
 	if(n==0)
             strncat(word,&txt[0],1);
@@ -3627,9 +3951,21 @@ i=-1;
         }
             
         }
+int NUM=num;
+int origin_nends[NUM];
+
+
         nend[0]=-1;
         nend[num+1]=max;
 ran=num+1;
+
+        for(i=0;i<num;i++){
+	/*printf("%d",i);*/
+        /***printf("%c",txt[i]);***/
+            origin_nends[i]=nend[i];
+            
+        }
+
 //strcpy(word,"");
 while (TRUE){
 //printf("@22");
@@ -3637,6 +3973,17 @@ while (TRUE){
 	if(ran==-1){
         ran=num;
     }
+
+    int position = findPosition(origin_nends, NUM, nend[ran]);
+
+    if (position != -1) {
+        RAN=position;
+        //printf("目标值 %d 在数组中的位置是 %d\n", target, position);
+    } else {
+        RAN=NUM;
+        // printf("目标值 %d 未在数组中找到\n", n); //顺序时会报错，但不影响运行效果
+    }
+
 
             for (n=nend[ran]+1;n<nend[ran+1];n++){
                 if(txt[n]=='\n'){
@@ -3835,9 +4182,23 @@ colourp();
         }
             
         }
+
+int NUM=num;
+int origin_nends[NUM];
+
+
 nend[0]=-1;
 nend[num+1]=max;
 ran=-1;
+
+        for(i=0;i<num;i++){
+	/*printf("%d",i);*/
+        /***printf("%c",txt[i]);***/
+            origin_nends[i]=nend[i];
+            
+        }
+
+
 while (TRUE){
 if ( ysv1!='S' && ysv1!='s' && ysv1!='V' && ysv1!='Y' && flag==FALSE ){
     ran++;
@@ -3845,6 +4206,15 @@ if ( ysv1!='S' && ysv1!='s' && ysv1!='V' && ysv1!='Y' && flag==FALSE ){
 	if(ran==num+1){
         ran=0;
     } 
+
+    int position = findPosition(origin_nends, NUM, nend[ran]);
+
+    if (position != -1) {
+        RAN=position;
+        //printf("目标值 %d 在数组中的位置是 %d\n", target, position);
+    } else {
+        // printf("目标值 %d 未在数组中找到\n", n); //顺序时会报错，但不影响运行效果
+    }
           
             for (n=nend[ran]+1;n<nend[ran+1];n++){
                 if(txt[n]=='\n'){
@@ -4116,6 +4486,7 @@ continue;
 //srand((unsigned)time(NULL));
 ran5=rand() % 4 + 1;
 ran=RAN0[ran5-1];
+
 break;
         }
 printf("\n\033[2m%s\033[0m",strs);
@@ -4643,8 +5014,9 @@ int main(int argc, char *argv[]){
 int arga;
 
 Thepath=NULL;
-	while ((arga = getopt(argc, argv, ":irpt:")) != -1) {
+	while ((arga = getopt(argc, argv, ":irRpt:")) != -1) {
 		switch (arga) {
+			case 'R': printf("剔除模式\n");fflush(stdout);REMOVE=TRUE; break;            
 			case 'r': printf("错题集模式\n");fflush(stdout);CORRECT=TRUE; break;
 			case 'i': printf("优化ish\n");fflush(stdout);ish=TRUE;termux=TRUE; break;
             case 'p': printf("通关模式\n");fflush(stdout);PASS1=TRUE; break;
@@ -4652,6 +5024,11 @@ Thepath=NULL;
             			
 		}
 	}
+
+if(REMOVE==TRUE && CORRECT==TRUE){
+    printf("-r与-R参数冲突\n");
+    return 0;
+}
 
 	if(signal(SIGALRM,handler) == SIG_ERR){  //信号注册函数
     perror("signal");
@@ -4688,7 +5065,7 @@ alltxt=(char *)malloc(8999999);
     }
    
 
-    calendar();
+    std();
     char* directories;
 if(Thepath!=NULL){
     directories = ls(Thepath);
@@ -4700,8 +5077,10 @@ else{
     if(directories==NULL){
         getfromread();
     }
-    else
+    else{
+    calendar=TRUE;
     entries(directories);
+    }
     //getfromread();
     //getchar();
    // loadcontent();
