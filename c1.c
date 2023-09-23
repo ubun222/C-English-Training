@@ -337,7 +337,7 @@ strcat(word1,"\t\t");
       //  strcpy(en1,"");
       //  strcpy(zh1,"");
 //printf("ran:%d",ran);
-if(calendar==TRUE && ( CORRECT==TRUE || REMOVE==TRUE )){
+if( ( CORRECT==TRUE  && calendar == TRUE) || REMOVE==TRUE ){
 int i;
 int m;
 
@@ -1894,7 +1894,7 @@ char * txt_;
 int loadcontent(int the_txtn){
 //the_ints[0][1]=0;
 
-    if (CORRECT==TRUE && calendar!=TRUE){ //不使用txt文件夹
+    if (CORRECT==TRUE && calendar!=TRUE && REMOVE!=TRUE){ //不使用txt文件夹
         rfp = fopen("CORRECT.txt", "r");
         if(rfp==NULL){
         printf("\n错题集合不存在，在当前目录自动生成CORRECT.txt");
@@ -1925,14 +1925,14 @@ fflush(stdout);
             del_char(buffer,'\r');
             strncat(txt,buffer,100);
             lines++;
-            if (( CORRECT==TRUE || REMOVE==TRUE )&& calendar==TRUE){ //使用txt文件夹
+            if ( CORRECT==TRUE || REMOVE==TRUE ){ //使用txt文件夹
             the_ints[the_txtn][lines]=lines-1;
             }
         }
         else if(buffer[1] == '\\' )
         break;
     }
-if (( CORRECT==TRUE || REMOVE==TRUE )&& calendar==TRUE) //使用txt文件夹
+if ( CORRECT==TRUE || REMOVE==TRUE ) //使用txt文件夹
     the_ints[the_txtn][lines+1]=-2;
     if(txt[strlen(txt)-1]!='\n')
     strcat(txt,"\n"); //
@@ -1986,11 +1986,17 @@ rfp = fopen(the_Dir, "r");
 
 }
 else if (REMOVE==TRUE && calendar==TRUE){
-
 printf("\n对%s直接删改\n",PATH[the_txtn]);
 strcpy(CORRECT_PATH[the_txtn],PATH[the_txtn]);
 
 }
+
+else if (REMOVE==TRUE && calendar==FALSE){
+printf("\n对%s直接删改\n",PATH[the_txtn]);
+strcpy(CORRECT_PATH[the_txtn],PATH[the_txtn]);
+
+}
+
 fflush(stdout);
 //printf("%s",txt);
 return 0;
@@ -2389,12 +2395,14 @@ int getfromread(){
             else{  
             strcpy(PATH[p],path);
             //printf("%s",PATH[p]);
+            loadcontent(p);
             p++;
-            loadcontent(-2);
+            //loadcontent(p);
             printf("\n");
             fflush(stdout);
             strcpy(path,"");
             }
+            txtn=p;
             //strcat(PATH,"\n");
             strcpy(path,"");
             continue;
@@ -2440,7 +2448,7 @@ regmatch_t match;
 
 void RWfp(char * bword){
 strcpy(default_rw,"CORRECT.txt");
-if(calendar==TRUE && ( CORRECT==TRUE || REMOVE==TRUE )){
+if(( CORRECT==TRUE  && calendar == TRUE) || REMOVE==TRUE ){
 int i;
 int m;
 for(i=0;i<txtn;i++){
@@ -2455,6 +2463,7 @@ for(i=0;i<txtn;i++){
         }
 }
         if(the_ints[i][m]==-2){
+            
             continue;
         }
         break;
