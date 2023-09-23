@@ -1551,6 +1551,7 @@ void searchTxtFiles(const char* path, char*** filePaths, int* numFiles, int* tot
     directory = opendir(path);
     if (directory == NULL) {
         printf("无法打开目录: %s\n", path);
+        calendar=FALSE;
         fflush(stdout);
         return;
     }
@@ -1900,16 +1901,17 @@ int loadcontent(int the_txtn){
         rfp = fopen("CORRECT.txt", "w+");
         rfpa = fopen("CORRECT.txt", "a+");
         fprintf(rfp,"%s","\\\\\\\n");
+        fclose(rfp);
    // Fp=fopen(path,"r");
 }
-else
+else 
 {
-   // printf("\n使用./CORRECT.txt");
+    printf("\n使用./CORRECT.txt");
     rfpa = fopen("CORRECT.txt", "a+");
 }
 
 fflush(stdout);
-fclose(rfp);
+
 }
 
     char buffer[9999];
@@ -1930,6 +1932,7 @@ fclose(rfp);
         else if(buffer[1] == '\\' )
         break;
     }
+if (( CORRECT==TRUE || REMOVE==TRUE )&& calendar==TRUE) //使用txt文件夹
     the_ints[the_txtn][lines+1]=-2;
     if(txt[strlen(txt)-1]!='\n')
     strcat(txt,"\n"); //
@@ -1980,6 +1983,7 @@ rfp = fopen(the_Dir, "r");
         fclose(rfp);
         fclose(rfpa);
         }
+
 }
 else if (REMOVE==TRUE && calendar==TRUE){
 
@@ -1987,10 +1991,6 @@ printf("\n对%s直接删改\n",PATH[the_txtn]);
 strcpy(CORRECT_PATH[the_txtn],PATH[the_txtn]);
 
 }
-fflush(stdout);
-fclose(rfp);
-
-
 fflush(stdout);
 //printf("%s",txt);
 return 0;
