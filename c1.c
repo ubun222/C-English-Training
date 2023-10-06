@@ -85,6 +85,8 @@ BOOL p6;
 
 BOOL calendar=FALSE;
 
+BOOL AUTO=FALSE;
+
 void  handler()
 {
 //printf("rxit");
@@ -890,6 +892,7 @@ strcpy(baline,"");
 //else
 
     if(ysv1=='v' || ysv1=='V'){
+
         while(mi=mi+1,mi<=strlen(aline)){
 strncpy(valine,&aline[mi],leng);
 //printf(":%s:%s:",valine,answer1);
@@ -897,8 +900,9 @@ if(strncmp(valine,answer1,leng)==0){
 break;
 }
     }
-    if (mi==1 || mi==0 || mi>=strlen(aline))
+    if (mi==1 || mi==0 || mi>=strlen(aline)){
     return aline;
+    }
         strcpy(aaline,"");
         strcpy(baline,"");
         strncat(aaline,aline,mi);
@@ -911,7 +915,6 @@ break;
 
 
     }
-
 return aline;
 }
 
@@ -961,9 +964,10 @@ int getlines(char * string){
     while(i<=3){
     if (l<4){
         for(m=0;m<4;m++){
-            if(strlen(aline[m])>=5)
+            if(strlen(aline[m])>=5){
+
         printf("\n%s",aprt(&aline[m][1]));
-   
+            }
     }
     break;
     }
@@ -975,7 +979,10 @@ int getlines(char * string){
     if(ifre(rans,ran)==TRUE){
     rans[i]=ran;
     if(aline[ran][0]!='\0')
+    {
+
     printf("\n%s",aprt(&aline[ran][1]));
+    }
     i++;
     }
     else{
@@ -983,6 +990,9 @@ int getlines(char * string){
         continue;
     }
     }
+
+
+
     }
 
     return l;
@@ -1918,23 +1928,28 @@ fflush(stdout);
     //int buffer_ints[9999];
    // int lastlines;
    // printf("\n");
-    while (fgets(buffer,150,fp)){ 
-        if ( checkstr(buffer,"\t",0,1) && buffer[0]!='\n' ){
+
+
+
+    while (fgets(buffer,150,fp)!=NULL){ 
+
+        if(Checkstr(buffer,"\\",1)){
+            break;
+        }
+        if ( Checkstr(buffer,"\t",1) && buffer[0]!='\n'){
             /***printf("%s",buffer);***/
-            if ( checkstr(buffer,"\r",0,1))
+            if ( Checkstr(buffer,"\r",1))
             del_char(buffer,'\r');
-            strncat(txt,buffer,100);
+            strncat(txt,buffer,150);
             lines++;
             if ( CORRECT==TRUE || REMOVE==TRUE ){ //使用txt文件夹
             the_ints[the_txtn][lines]=lines-1;
             }
         }
-        else if(buffer[1] == '\\' )
-        break;
     }
 if ( CORRECT==TRUE || REMOVE==TRUE ) //使用txt文件夹
     the_ints[the_txtn][lines+1]=-2;
-    if(txt[strlen(txt)-1]!='\n')
+    if(txt[strlen(txt)-1]!='\n' && strlen(txt)!=0 )
     strcat(txt,"\n"); //
 printf("已加载%d组单词\033[K\r",lines);
 
@@ -2759,19 +2774,23 @@ strcpy(bbuffer,"");
 //yFp=fopen(path,"r");
 BOOL non=FALSE;
 
-
+if(AUTO==TRUE){
+    ysv1='V';
+    ysv0='V';
+}
 if (ysv0==' ')
 while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r')
     continue;
 else{
     ysv1=ysv0;
 }
-
+ysv0=' ';
 //printf("%c",ysv1);
-if (ysv1=='V'){
+if (ysv1=='V' && premode=='1'){
 ishprt("\r\033[%dC%s\r",col-2,eline);
-
 }
+
+
 if (ysv1=='v' || ysv1=='V'){
     if (flag!=TRUE){
     printf("\n%s",bword);
@@ -2851,9 +2870,9 @@ for(P=0;P<p;P++){
     theline[strlen(theline)-1]='\0';
    /// printf("\n\n222");
     getlines(&rtxt[locate]);
-    if(theline[0]!='\0')
+    if(theline[0]!='\0'){
     printf("\n%s",aprt(theline));
-
+    }
     //printf("\n%s",theline);
     fflush(stdout);
     }
@@ -2870,7 +2889,7 @@ for(P=0;P<p;P++){
 
 }
 else if (ysv1=='y' || ysv1=='Y'){
-if (ysv1=='Y'){
+if (ysv1=='Y' && premode=='1'){
 ishprt("\r\033[%dC%s\r",col-2,eline);
 }
 
@@ -2941,7 +2960,7 @@ for(P=0;P<p;P++){
 
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
 NL=FALSE;
-if (ysv1=='S' || ysv1=='s')
+if ( (ysv1=='S'  || ysv1=='s' ) &&  premode=='1')
 ishprt("\r\033[%dC%s\r",col-2,eline);
 if(flag==FALSE){
     printf("\n%s",bword);
@@ -3007,6 +3026,7 @@ int i;
 int M;
     int N;
     int I;
+    BOOL autosleep=TRUE;
 while(TRUE){
     leng3=strlen(aword);
     setitimer(ITIMER_REAL,&value0,NULL);
@@ -3023,7 +3043,23 @@ if( getin==TRUE && bd==FALSE){
 if (waiting==FALSE){
    // setvbuf(stdout, NULL, _IOLBF, 512);
     //printf("g");
+    if(AUTO==TRUE && autosleep==TRUE){
+    sleep(2);
+    autosleep=FALSE;
+    }
     fflush(stdin);
+    if(AUTO==TRUE && getin==FALSE){
+    if(ez=='1')
+    usleep(40000);
+    if(ez=='2')
+    sleep(1);
+    //printf("%s",zh);
+    strcpy(yword,"\x09");
+    getin=TRUE;
+                zd=FALSE;
+                waiting=TRUE;
+    }
+
     if(getin==FALSE){
         zword=rd(fd1);
        // nd=FALSE;
@@ -5023,13 +5059,14 @@ int main(int argc, char *argv[]){
 int arga;
 
 Thepath=NULL;
-	while ((arga = getopt(argc, argv, ":irRpt:")) != -1) {
+	while ((arga = getopt(argc, argv, ":airRpt:")) != -1) {
 		switch (arga) {
 			case 'R': printf("剔除模式\n");fflush(stdout);REMOVE=TRUE; break;            
 			case 'r': printf("错题集模式\n");fflush(stdout);CORRECT=TRUE; break;
 			case 'i': printf("优化ish\n");fflush(stdout);ish=TRUE;termux=TRUE; break;
             case 'p': printf("通关模式\n");fflush(stdout);PASS1=TRUE; break;
             case 't': printf("自定义txt文件夹路径:%s\n",optarg);fflush(stdout);Thepath=optarg; break;
+            case 'a': printf("自动化\n");fflush(stdout);AUTO=TRUE; break;
             			
 		}
 	}
