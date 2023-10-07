@@ -962,6 +962,7 @@ int getlines(char * string){
 
     i=0;
     while(i<=3){
+
     if (l<4){
         for(m=0;m<4;m++){
             if(strlen(aline[m])>=5){
@@ -969,6 +970,7 @@ int getlines(char * string){
         printf("\n%s",aprt(&aline[m][1]));
             }
     }
+
     break;
     }
     else {
@@ -983,6 +985,9 @@ int getlines(char * string){
 
     printf("\n%s",aprt(&aline[ran][1]));
     }
+    if(AUTO==TRUE && i==0){
+    usleep(3500000);
+} 
     i++;
     }
     else{
@@ -995,11 +1000,13 @@ int getlines(char * string){
 
     }
 
+
+
     return l;
 }
 
 char yword[9999];
-BOOL flag = FALSE;
+BOOL flag;
 //char azh[10][100];
 int zm=0;
 int c;
@@ -1208,7 +1215,7 @@ return TRUE;
    // break;
 }
 else{
-    flag=FALSE;
+   // flag=FALSE;
     return FALSE;
 }
 }
@@ -2452,7 +2459,7 @@ return 0;
 BOOL PASS1=FALSE;
 int nend[39999];
 //int premode;
-int ran;
+//int ran;
 //int RAN;//错题集需要不变的序号
 int num=-1;
     char order;
@@ -2568,7 +2575,7 @@ else if(premode=='2'){
 
 
 
-if (rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) && flag==TRUE || rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) &&  ysv1=='s' || rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) && ysv1=='S' ){
+if (rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) && flag==TRUE || rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) &&  ysv1=='s' || rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) && ysv1=='S' || rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) && ysv1=='V' || rw==TRUE && ( CORRECT==TRUE || REMOVE==TRUE ) && ysv1=='Y' ){
     //printf("\n222\n");
    // if(rfpr!=NULL )
    // fclose(rfpr);
@@ -2775,9 +2782,12 @@ strcpy(bbuffer,"");
 BOOL non=FALSE;
 
 if(AUTO==TRUE){
-    ysv1='V';
-    ysv0='V';
+    ysv1='v';
+    ysv0='v';
 }
+
+
+
 if (ysv0==' ')
 while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r')
     continue;
@@ -2785,6 +2795,17 @@ else{
     ysv1=ysv0;
 }
 ysv0=' ';
+
+if(PASS1==TRUE){
+    if ( ysv1=='S' || ysv1=='s' || ysv1=='V' || ysv1=='Y' || flag==TRUE ){
+        
+        for (i=ran;i<=num;i++){
+            nend[i]=nend[i+1];
+        }
+num--;
+    }
+}  //放在后面会莫名其妙失效
+
 //printf("%c",ysv1);
 if (ysv1=='V' && premode=='1'){
 ishprt("\r\033[%dC%s\r",col-2,eline);
@@ -2814,7 +2835,7 @@ for(P=0;P<p;P++){
             }
             alocate=zlocate;
             strcpy(rtxt,"");
-            
+            strcpy(rbuffer,"");
             nrtxt=0;
 
         } 
@@ -2834,6 +2855,7 @@ for(P=0;P<p;P++){
            //  printf("\nEn:%s",En);
            //  printf("\nEN:%s",answer1);
         }
+        strcpy(rbuffer,"");
     }
     if(theline[0]!='\0'){
     break;
@@ -2870,6 +2892,11 @@ for(P=0;P<p;P++){
     theline[strlen(theline)-1]='\0';
    /// printf("\n\n222");
     getlines(&rtxt[locate]);
+
+fflush(stdout);
+if(AUTO==TRUE){
+    usleep(5500000);
+} 
     if(theline[0]!='\0'){
     printf("\n%s",aprt(theline));
     }
@@ -2959,7 +2986,7 @@ for(P=0;P<p;P++){
 }
 
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
-NL=FALSE;
+//NL=FALSE;
 if ( (ysv1=='S'  || ysv1=='s' ) &&  premode=='1')
 ishprt("\r\033[%dC%s\r",col-2,eline);
 if(flag==FALSE){
@@ -2971,15 +2998,19 @@ strcpy(alltxt,"");
 strcpy(word1,"");
 
 if(PASS1==TRUE){
-    if (ysv1=='S' || ysv1=='s' || ysv1=='V' || ysv1=='Y' ||  flag==TRUE){
-        for (i=ran;i<=num;i++){
-            nend[i]=nend[i+1];
-        }
-num--;
-    }
 
         if(ysv1=='v' || ysv1=='V' || ysv1=='y' || ysv1=='Y' )
+        {
+                                            if(AUTO==TRUE){
+    usleep(2500000);
+} 
         printf("\n还有%d题",num);
+
+                                            if(AUTO==TRUE){
+    usleep(2500000);
+} 
+
+        }
 }
 
 
@@ -3050,9 +3081,9 @@ if (waiting==FALSE){
     fflush(stdin);
     if(AUTO==TRUE && getin==FALSE){
     if(ez=='1')
-    usleep(40000);
+    usleep(50000);
     if(ez=='2')
-    sleep(1);
+    usleep(1800000);
     //printf("%s",zh);
     strcpy(yword,"\x09");
     getin=TRUE;
@@ -3513,6 +3544,7 @@ int colourp(){
                 } 
                 }
                 else{
+                    flag=TRUE;
                     ysv(bword,' ');
                 }
             }
@@ -3524,6 +3556,7 @@ int colourp(){
                     ysv(bword,' ');
                 }
 else if (ifRight()==TRUE){
+    flag=TRUE;
     ishprt("\r\033[%dC%s\r",col-2,tline);
     fflush(stdout);
     ysv(bword,' ');
@@ -3534,9 +3567,10 @@ else{
     ysv(bword,' ');
 }
                  } 
-                else
+                else{
+                 flag=TRUE;
                  ysv(bword,' ');
-                
+                }
             }
 
          
@@ -3970,12 +4004,23 @@ zd=FALSE;
 //nd=FALSE;
 bk=FALSE;
 c=0;
-        
+if(AUTO==TRUE){
+    usleep(10000);
+}      
                     //fflush(stdout);
-Read() ;                   
+Read() ; 
+                 
 colourp();               
                     /***printf("%d",xword);***/ 
     }
+if(AUTO==TRUE){
+    usleep(1500000);
+} 
+
+if ( flag==TRUE){
+    flag=FALSE;
+}
+
             }
 
     else if(order=='2'){
@@ -4085,7 +4130,7 @@ strncat(word,&txt[n],1);
             strcpy(azh[n],"");
             } 
             }
-            flag=FALSE;
+           // flag=FALSE;
             getin=FALSE;
             acount=0;
             m=-1;
@@ -4196,12 +4241,20 @@ zd=FALSE;
 //nd=FALSE;
 bk=FALSE;
 c=0;
-
+if(AUTO==TRUE){
+    usleep(10000);
+} 
 Read();
+
 colourp(); 
 }
 
-    
+if(AUTO==TRUE){
+    usleep(1500000);
+} 
+if ( flag==TRUE){
+    flag=FALSE;
+}  
     }
     //return(0);
         
@@ -4245,7 +4298,7 @@ ran=-1;
 
 
 while (TRUE){
-if ( ysv1!='S' && ysv1!='s' && ysv1!='V' && ysv1!='Y' && flag==FALSE ){
+if ( ysv1!='S' && ysv1!='s' && ysv1!='V' && ysv1!='Y' && flag!=TRUE ){
     ran++;
 }
 	if(ran==num+1){
@@ -4293,7 +4346,7 @@ strncat(word,&txt[n],1);
 	    /*printf("%c",ez);*/ 
 		}
         acount=0;
-        flag=FALSE;
+       // flag=FALSE;
         getin=FALSE;
 	    if(ez=='1'){
             zh=strtok(word,"\t");
@@ -4426,10 +4479,19 @@ zd=FALSE;
 //nd=FALSE;
 bk=FALSE;
 c=0;
+if(AUTO==TRUE){
+    usleep(10000);
+} 
 Read();
+
 colourp();
 }
-    
+ if(AUTO==TRUE){
+    usleep(1500000);
+} 
+if ( flag==TRUE){
+    flag=FALSE;
+}
     }
 return 0;
     }
