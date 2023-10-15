@@ -936,6 +936,8 @@ int getlines(char * string){
     int m;
     int rans[5]={-1,-1,-1,-1,-1};
     for(i=0;i<n;i++){
+        if(l==50)
+        break;
         if(strings[i]=='\n'){
             ni[l]=i;
             l++;
@@ -1215,7 +1217,7 @@ return TRUE;
    // break;
 }
 else{
-   // flag=FALSE;
+    flag=FALSE;
     return FALSE;
 }
 }
@@ -3967,9 +3969,9 @@ nend[num+1]=max;
             strcpy(ltemp,"");
             aii=0;
             //backed=FALSE;
-
+            strcpy(yword,"");
             if(ez=='1'){
-                strcpy(yword,"");
+                //strcpy(yword,"");
                 yword[0]='\0';
                 //printf("%s\n",answer1);
             for(si=0;si<strlen(answer1);si++){
@@ -4017,9 +4019,7 @@ if(AUTO==TRUE){
     usleep(1500000);
 } 
 
-if ( flag==TRUE){
     flag=FALSE;
-}
 
             }
 
@@ -4061,7 +4061,7 @@ while (TRUE){
 //printf("@22");
  ran--;
 	if(ran==-1){
-        ran=num;
+        ran=n=num;
     }
 
     int position = findPosition(origin_nends, NUM, nend[ran]);
@@ -4200,13 +4200,18 @@ strncat(word,&txt[n],1);
             strcpy(ii,"");
             tleng=0;
             leng=0; 
-        acount=0;       
+            acount=0;       
             /***if (fgets(aword,2,stdin) != '\0'){*///
+            strcpy(temp,"");
+            fflush(stdin);
+            flag = FALSE;
+            iii=0;
 
              aii=0;  /*** if ((xword = getchar()) != '\n') { ***/
                   /***   strncat(aword,&xword,1); ***/
+            strcpy(yword,"");
             if(ez=='1'){
-                strcpy(yword,"");
+                //strcpy(yword,"");
                 yword[0]='\0';
                 //printf("%s\n",answer1);
             for(si=0;si<strlen(answer1);si++){
@@ -4252,9 +4257,7 @@ colourp();
 if(AUTO==TRUE){
     usleep(1500000);
 } 
-if ( flag==TRUE){
-    flag=FALSE;
-}  
+    flag=FALSE;  
     }
     //return(0);
         
@@ -4441,10 +4444,14 @@ strncat(word,&txt[n],1);
             leng=0;        
             /***if (fgets(aword,2,stdin) != '\0'){*///
 
-             aii=0;  /*** if ((xword = getchar()) != '\n') { ***/
-                  /***   strncat(aword,&xword,1); ***/
+            strcpy(temp,"");
+            fflush(stdin);
+            flag = FALSE;
+            iii=0;
+
+            strcpy(yword,"");
             if(ez=='1'){
-                strcpy(yword,"");
+                //strcpy(yword,"");
                 yword[0]='\0';
                 //printf("%s\n",answer1);
             for(si=0;si<strlen(answer1);si++){
@@ -4489,9 +4496,7 @@ colourp();
  if(AUTO==TRUE){
     usleep(1500000);
 } 
-if ( flag==TRUE){
     flag=FALSE;
-}
     }
 return 0;
     }
