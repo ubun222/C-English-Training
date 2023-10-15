@@ -3888,20 +3888,12 @@ nend[num+1]=max;
             mmm=0;
             zhleng=0;
             zhleng=strlen(zh);
-            /*strcpy(azh[0],"");
-            strcpy(azh[1],"");
-            strcpy(azh[2],"");
-            strcpy(azh[3],"");
-            strcpy(azh[4],"");
-            strcpy(azh[5],"");
-            strcpy(azh[6],"");*/
             for(n=0;n<10;n=n+1){
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
                 strcpy(w1[n],"");
                 strcpy(czh[n],"");
             }
-
 
             for(n=0;n<10;n=n+1){
                 /*printf("%d\n",zhleng);*/
@@ -4106,6 +4098,7 @@ strncat(word,&txt[n],1);
 	    /*printf("%c",ez);*/ 
 		}
         acount=0;
+        getin=FALSE;
 	    if(ez=='1'){
             zh=strtok(word,"\t");
             /*del_char(zh,'\01');*/
@@ -4123,21 +4116,22 @@ strncat(word,&txt[n],1);
             else if(ez=='2'){
             en=strtok(word,"\t");
             zh=strtok(NULL,"\t");
-            strcpy(answer1,en);
             strcpy(ch,zh);
-            for(n=0;n<10;n=n+1){
-            strcpy(bzh[n],"");
-            strcpy(azh[n],"");
-            } 
-            }
-           // flag=FALSE;
-            getin=FALSE;
-            acount=0;
+            strcpy(answer1,en);
             m=-1;
             mm=0;
             mmm=0;
             zhleng=0;
             zhleng=strlen(zh);
+            for(n=0;n<10;n=n+1){
+            strcpy(bzh[n],"");
+            strcpy(azh[n],"");
+            strcpy(w1[n],"");
+            strcpy(czh[n],"");
+            } 
+           // flag=FALSE;
+
+
             //strcpy(azh[1],"");
             for(n=0;n<10;n=n+1){
                 strcpy(bzh[n],"");
@@ -4161,6 +4155,7 @@ strncat(word,&txt[n],1);
                         else
                         dzh=&ch[mmm+3];
                         strncat(azh[n],dzh,cmmm);
+                        strncat(bzh[n],dzh,cmmm);
                         break;
                     }
                 }
@@ -4169,6 +4164,7 @@ strncat(word,&txt[n],1);
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
             zm=n;
+            }
             /*printf("%s\n",azh[0]);*/
             printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
             /***puts(en);***/
@@ -4195,7 +4191,7 @@ strncat(word,&txt[n],1);
             fflush(stdout);
             /***fgets(aword,2,stdin);***/
             aword[0]='\0';
-            strcpy(word,"");
+            //strcpy(word,""); #导致findword后不显示
             zword='\0';
             strcpy(ii,"");
             tleng=0;
@@ -4359,7 +4355,10 @@ strncat(word,&txt[n],1);
             strcpy(answer1,zh);
             strcpy(ch,en);
 
-
+            for(n=0;n<10;n=n+1){
+            strcpy(bzh[n],"");
+            strcpy(azh[n],"");
+            } 
             }
 
             else if(ez=='2'){
@@ -4367,11 +4366,6 @@ strncat(word,&txt[n],1);
             zh=strtok(NULL,"\t");
             strcpy(answer1,en);
             strcpy(ch,zh);
-            for(n=0;n<10;n=n+1){
-                strcpy(bzh[n],"");
-                strcpy(azh[n],"");
-            } 
-            }
             m=-1;
             mm=0;
             mmm=0;
@@ -4382,7 +4376,8 @@ strncat(word,&txt[n],1);
                 strcpy(azh[n],"");
                 strcpy(w1[n],"");
                 strcpy(czh[n],"");
-            }
+            } 
+
             for(n=0;n<10;n=n+1){
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
@@ -4398,6 +4393,7 @@ strncat(word,&txt[n],1);
                         else
                         dzh=&ch[mmm+3];
                         strncat(azh[n],dzh,cmmm);
+                        strncat(bzh[n],dzh,cmmm);
                         break;
                     }
                 }
@@ -4407,6 +4403,7 @@ strncat(word,&txt[n],1);
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
             zm=n;
+            }
             /*printf("%s\n",azh[0]);*/
             printf("\n\033[2m%s\n\033[0m",strs);
             printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
@@ -4431,7 +4428,7 @@ strncat(word,&txt[n],1);
             fflush(stdout);
             /***fgets(aword,2,stdin);***/
             
-            strcpy(word,"");
+            //strcpy(word,""); 导致findword后不显示
             aword[0]='\0';
             zword='\0';
             /*system("stty -icanon");*/
