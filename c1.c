@@ -5160,7 +5160,7 @@ if(REMOVE==TRUE && CORRECT==TRUE){
     printf("-r与-R参数冲突\n");
     return 0;
 }
-
+if(Thepath!=NULL)
     for(int p=strlen(Thepath)-1 ; p>0; p--){
 
     if(Thepath[p]=='/')
