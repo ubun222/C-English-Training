@@ -1980,7 +1980,10 @@ if(Thepath!=NULL){
     //directories = ls(Thepath);
     //char default_dir[]=theDir;
     the_Dir=strcat(theDir,&txt_[strlen(Thepath)+1]);
-    prefix=strlen(Thepath)+1;
+    prefix=strlen(theDir)-8;
+    
+    //prefix++;
+
 }
 else{
 strcat(theDir,"./txt/CORRECT/");
@@ -2014,16 +2017,7 @@ stat(preDir, &st);
     } else {
      //   printf("复制失败！\n");
     }
-if(Thepath!=NULL){
-    strcpy(theDir,Thepath);
-    if(theDir[strlen(theDir)-1]!='/')
-    strcat(theDir,"/");
-    strcat(theDir,"CORRECT/");
-    //directories = ls(Thepath);
-    //char default_dir[]=theDir;
-}
-else
-strcpy(theDir,default_dir);
+
  the_Dir=strcat(theDir,&PATH[the_txtn][prefix]);
  printf("\n使用%s记录错题\n",the_Dir);
  strcpy(CORRECT_PATH[the_txtn],the_Dir);
@@ -5166,6 +5160,15 @@ if(REMOVE==TRUE && CORRECT==TRUE){
     printf("-r与-R参数冲突\n");
     return 0;
 }
+
+    for(int p=strlen(Thepath)-1 ; p>0; p--){
+
+    if(Thepath[p]=='/')
+        Thepath[p]='\0';
+    else
+        break;
+    
+    }
 
 	if(signal(SIGALRM,handler) == SIG_ERR){  //信号注册函数
     perror("signal");
