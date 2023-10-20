@@ -1977,10 +1977,10 @@ if(Thepath!=NULL){
     strcat(theDir,"/");
     strcat(theDir,"CORRECT/");
     strcpy(preDir,theDir);
+    prefix=strlen(theDir)-8;
     //directories = ls(Thepath);
     //char default_dir[]=theDir;
-    the_Dir=strcat(theDir,&txt_[strlen(Thepath)-6]);
-    prefix=strlen(theDir)-8;
+    the_Dir=strcat(theDir,&txt_[strlen(Thepath)+1]);
     
     //prefix++;
 
