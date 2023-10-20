@@ -1979,14 +1979,14 @@ if(Thepath!=NULL){
     strcpy(preDir,theDir);
     //directories = ls(Thepath);
     //char default_dir[]=theDir;
-    the_Dir=strcat(theDir,&txt_[strlen(Thepath)+1]);
+    the_Dir=strcat(theDir,&txt_[strlen(Thepath)-6]);
     prefix=strlen(theDir)-8;
     
     //prefix++;
 
 }
 else{
-strcat(theDir,"./txt/CORRECT/");
+strcpy(theDir,"./txt/CORRECT/");
 strcpy(preDir,theDir);
 the_Dir=strcat(theDir,&txt_[6]);
 prefix=6;
@@ -2018,7 +2018,7 @@ stat(preDir, &st);
      //   printf("复制失败！\n");
     }
 
- the_Dir=strcat(theDir,&PATH[the_txtn][prefix]);
+ the_Dir=strcat(preDir,&PATH[the_txtn][prefix]);
  printf("\n使用%s记录错题\n",the_Dir);
  strcpy(CORRECT_PATH[the_txtn],the_Dir);
 rfp = fopen(the_Dir, "r");
