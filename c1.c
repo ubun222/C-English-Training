@@ -1910,9 +1910,12 @@ int copyDirectory(const char *srcDir, const char *destDir) {
 }
 
 char * txt_;
+
+char *Thepath=NULL;
+
 int loadcontent(int the_txtn){
 //the_ints[0][1]=0;
-
+char default_dir[]="./txt/CORRECT/";
     if (CORRECT==TRUE && calendar!=TRUE && REMOVE!=TRUE){ //不使用txt文件夹
         rfp = fopen("CORRECT.txt", "r");
         if(rfp==NULL){
@@ -1964,24 +1967,42 @@ printf("已加载%d组单词\033[K\r",lines);
 
 if (CORRECT==TRUE && calendar==TRUE){ //使用txt文件夹
 
-char theDir[999];
-char * the_Dir;
+char theDir[999]; // ./txt/CORRECT/词汇
+char preDir[999]; // ./txt/CORRECT
+char * the_Dir;  // ./txt/CORRECT/词汇
+int prefix;
+if(Thepath!=NULL){
+    strcat(theDir,Thepath);
+    if(theDir[strlen(theDir)-1]!='/')
+    strcat(theDir,"/");
+    strcat(theDir,"CORRECT/");
+    strcpy(preDir,theDir);
+    //directories = ls(Thepath);
+    //char default_dir[]=theDir;
+    the_Dir=strcat(theDir,&txt_[strlen(Thepath)+1]);
+    prefix=strlen(Thepath)+1;
+}
+else{
 strcat(theDir,"./txt/CORRECT/");
+strcpy(preDir,theDir);
 the_Dir=strcat(theDir,&txt_[6]);
+prefix=6;
+}
     struct stat st;
 int status;
-stat("./txt/CORRECT", &st);
+stat(preDir, &st);
         if (S_ISDIR(st.st_mode)) {
             printf("");
            // printf("\nCORRECT文件夹存在\n");
         }
                 else{
-            status = mkdir("./txt/CORRECT",S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+            status = mkdir(preDir,S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
             if (status == 0) {
-                printf("\n./txt/CORRECT/不存在，重新创建\n");
+                    printf("\n%s不存在，重新创建\n",preDir);         
             }
             else{
-                printf("\n无法重新创建./txt/CORRECT/\n");
+                printf("%d",errno);
+                    printf("\n无法重新创建%s\n",preDir);
             }
         }
 
@@ -1993,9 +2014,17 @@ stat("./txt/CORRECT", &st);
     } else {
      //   printf("复制失败！\n");
     }
-
-strcpy(theDir,"./txt/CORRECT/");
- the_Dir=strcat(theDir,&PATH[the_txtn][6]);
+if(Thepath!=NULL){
+    strcpy(theDir,Thepath);
+    if(theDir[strlen(theDir)-1]!='/')
+    strcat(theDir,"/");
+    strcat(theDir,"CORRECT/");
+    //directories = ls(Thepath);
+    //char default_dir[]=theDir;
+}
+else
+strcpy(theDir,default_dir);
+ the_Dir=strcat(theDir,&PATH[the_txtn][prefix]);
  printf("\n使用%s记录错题\n",the_Dir);
  strcpy(CORRECT_PATH[the_txtn],the_Dir);
 rfp = fopen(the_Dir, "r");
@@ -2026,8 +2055,6 @@ fflush(stdout);
 return 0;
 }
 int p=0;
-
-char *Thepath=NULL;
 
 //int txtn=0;
 
