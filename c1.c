@@ -1972,7 +1972,7 @@ char preDir[999]; // ./txt/CORRECT
 char * the_Dir;  // ./txt/CORRECT/词汇
 int prefix;
 if(Thepath!=NULL){
-    strcat(theDir,Thepath);
+    strcpy(theDir,Thepath);
     if(theDir[strlen(theDir)-1]!='/')
     strcat(theDir,"/");
     strcat(theDir,"CORRECT/");
