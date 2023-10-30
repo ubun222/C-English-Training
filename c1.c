@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -1120,6 +1119,10 @@ if(strlen(tch) >=2 ){
 //printf("%s",w1[n]);
 //c=0;
 //printf("%d",zm);
+
+char * beforedot;
+char alldot[999];
+
 for(m=0;m<zm+1;m=m+1){
 
 if(strcmp(azh[m],w1[n])==0 && strcmp(w1[n],"")!=0){
@@ -1136,6 +1139,14 @@ else{
 }
 strcpy(yword,"*，");
 return(2);
+}
+if(Checkstr(azh[m],"...",3)){
+strcpy(alldot,azh[m]);
+beforedot=strtok(alldot,"...");
+if(strcmp(w1[n],beforedot)==0){
+strcpy(yword,"*...");
+return(2);
+}
 }
 
 }
