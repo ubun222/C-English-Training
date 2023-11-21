@@ -31,6 +31,32 @@ struct termios init_setting;
 #define   RD_EOF   -1
 #define   RD_EIO   -2
 
+enum PartOfSpeech {
+    NOUN,
+    VERBT,
+    VERBI,
+    ADJECTIVE,
+    ADVERB,
+    PREPOSITION,
+    PRONOUN,
+    CONJUNCTION,
+    INTERJECTION,
+    ARTICLE
+};
+
+#define MAX_SIZE 120
+#define MAX_LENGTH 6880
+
+#define MAX_SIZE1 12
+#define MAX_LENGTH1 688
+// 定义包含词性分类信息的结构体
+struct WordInfo {
+    char words[MAX_SIZE1][MAX_LENGTH1];
+    int count;
+    enum PartOfSpeech pos;
+};
+
+
 struct itimerval value, value0;
 struct itimerval evalue, evalue0;
 
@@ -201,27 +227,57 @@ strcpy(strz,"");
      *(a+j)='\0';
  }
 
- int checkstr(char *s, char *t, int sflag,int lenstr)
-{
-    char *q;
-    for (; *(s + lenstr); s++)
-    {
-        if (sflag)  // 不区分大小写
-        {
-          for (q = t; (*s == *q||*s-32==*q||*s+32==*q) && *q; s++, q++)
-            ;
-
-        }else  //区分大小写
-        {
-            for (q = t; *s == *q && *q; s++, q++)
-            ;
+  char * delchar(char a[],char c[])  //仅适用于删除开头
+  {
+     int i,j,k;
+     k=-1;
+          for(i=0,j=0; *(a+i)!='\0'; i++)
+      {
+        if(k==-1){
+          if(*(a+i)==c[0]){
+                k++;
+             i--;
+          }
         }
-        
-        if (!*q)
+         else if(k>=0)
+         {
+            if(*(a+i)==c[k]){
+                k++;
+                continue;
+            }
+            else{
+            *(a+j)=*(a+i);
+             j++;
+         }
+         }
+     }
+     *(a+j)='\0';
+
+return a;
+ }
+
+
+ int checkstr(char *s, char *t, int lenstr)
+{
+    int n=0;
+    int m=0;
+    BOOL same=FALSE;
+
+            for (n=0;n<lenstr;n++){
+            if(s[n+m] == t[n]){
+               // printf("%c",s[n+m]);
+                same=TRUE;
+            }
+            else{
+                same=FALSE;
+                break;
+            }
+            }
+
+        if (same==TRUE)
         {
             return 1;
         }
-    }
 
     return 0;
 }
@@ -299,7 +355,55 @@ static inline int rd(const int Fd)
  * Actual errno will be unchanged.
 */
 //BOOL re;
+int getArrayCount(char strArray[MAX_SIZE1][MAX_LENGTH1]) {
+    int count = 0;
 
+    // 遍历数组直到遇到NULL为止
+    while (strcmp(strArray[count],"")!=0) {
+        //printf("\n------\n");
+        count++;
+    }
+
+    return count;
+}
+//char * str2[MAX_SIZE1];
+char azh2[MAX_SIZE1][MAX_LENGTH1];
+int nmax=0;
+int mergeDuplicates(char str[MAX_SIZE1][MAX_LENGTH1]) {
+    //char pstr[MAX_SIZE1][MAX_LENGTH1];
+    //printf("，\n\n，");
+    nmax=0;
+    int rowCount=getArrayCount(str);
+    //int rowCount=getArrayCount(str);
+    for (int i = 0; i < rowCount; ++i) {
+        strcpy(azh2[i],str[i]);
+    }
+    for (int i = 0; i < rowCount; ++i) {
+        if(strcmp(str[i],"")==0 )
+        break;
+       // azh2[i]=(char *)malloc(MAX_LENGTH1);
+       // strcpy(azh2[i],str[i]);
+        //printf("，\n\n，");
+        for (int j = i + 1; j < rowCount; ++j) {
+
+            if (strcmp(azh2[i], azh2[j]) == 0 && strcmp(azh2[i], "") != 0 ) {
+                // 找到重复项，将后面的项移动到数组末尾
+                //printf("\nduplicate:%s\n",azh2[i]);
+                for (int k = i; k < rowCount - 1; ++k) {
+                    strcpy(azh2[k], azh2[k + 1]);
+                }
+                nmax++;
+                strcpy(azh2[rowCount-1], "");
+                rowCount--; // 更新数组大小
+                j--; // 继续检查当前位置，因为移动后的元素可能还是重复的
+            }
+        }
+    }
+   // pstr=str2;
+   // for(int l=0;l<rowCount;l++)
+    //printf("%s，",azh2[l]);
+return 0;
+}
 
 char ysv1;
 
@@ -434,7 +538,7 @@ strcpy(xtxt,"");
 return 0;
 }
 
-int words(char * aword){
+int Words(char * aword){
     int i;
     char theword[1999];
     char abc[4];
@@ -708,12 +812,18 @@ if (result >= '0' && result <= '9') {
    // else 
    // return 2;
 }
-char azh[10][100];
-char bzh[10][100];
+
+char ezh[MAX_SIZE1][MAX_LENGTH1];
+char azh[MAX_SIZE1][MAX_LENGTH1];
+//char azh[10][100];
+char bzh[MAX_SIZE1][MAX_LENGTH1];
 BOOL ish=FALSE;
 int premode;
 BOOL FUN3=FALSE;
+char lastpron[25];
+int zm=0;
 int findword(char * en, char * en2 , char * txt){
+    strcpy(lastpron,"");
     char Eng[399];
     char Zword;
     char Zword2;
@@ -832,13 +942,7 @@ int findword(char * en, char * en2 , char * txt){
     }
     strcpy(answer1,Zwords);
 int n;
-            for(n=0;n<10;n=n+1){
-                strcpy(azh[n],bzh[n]);
-
-                if(bzh[n][0]=='\x00' )
-                break;
-                /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
-            }
+mergeDuplicates(azh);
 
     // ysv(FALSE,Zwords,ez);
     strcpy(Zwords,"");
@@ -1009,10 +1113,9 @@ int getlines(char * string){
 char yword[9999];
 BOOL flag;
 //char azh[10][100];
-int zm=0;
 int c;
 
-char w1[10][9999];
+char w1[MAX_SIZE1][MAX_LENGTH1];
 
 int         rown, rowm;
 int coln=-1;
@@ -1071,9 +1174,109 @@ va_end(ap);
 
 return 0;
 }
+char newrstr[MAX_LENGTH1]; 
+char * removealphas(char *str) {
+    int i, j;
+    int len = strlen(str);
+    //if(newstr!=NULL)
+   // free(newstr);
+    strcpy(newrstr,"");
+    //newstr = (char*)malloc(len + 1);
+    
+   // strcpy(newstr,"");
+    for (i = 0, j = 0; i < len; i++) {
+        if (isalpha(str[i])) {
+            if(str[i+1]=='.' && ( !isascii(str[i+2]) || str[i+2]=='<' || str[i+2]=='('  ) ){
+                i=i+2;
+            }
+            else if(str[i+2]=='.' && ( isalpha(str[i+1]) && !isascii(str[i+3])  || str[i+3]=='<' || str[i+3]=='(' ) ){ //adj.(的例外
+                i=i+3;
+            }
+            else if(str[i+3]=='.' && ( isalpha(str[i+2]) && !isascii(str[i+4])  || str[i+4]=='<' || str[i+4]=='(')  ){
+                i=i+4;
+            }
+            else if(str[i+4]=='.' && ( isalpha(str[i+3]) && !isascii(str[i+5])  || str[i+5]=='<' || str[i+5]=='(')  ){
+                i=i+5;
+            }
 
+        }
+        newrstr[j++] = str[i];
+    }
+
+    // Null-terminate the modified string
+    newrstr[j] = '\0';
+    //printf("\nnew:%s\n",newstr);
+    return newrstr;
+
+}
+char newstr[MAX_LENGTH1];
+char * removeParenthesesAndBrackets(char *str) {
+    int i, j;
+    int len = strlen(str);
+    int insideParentheses = 0;
+    int insideBrackets = 0;
+    int insidepronounce = 0;
+   // char *newstr = (char*)malloc(len + 1); debug防止segmentation error
+    for (i = 0, j = 0; i < len; i++) {
+        if (str[i] == '(') {
+            insideParentheses++;
+        } else if (str[i] == ')') {
+            insideParentheses--;
+        } else if (str[i] == '<') {
+            insideBrackets++;
+        } else if (str[i] == '>') {
+            insideBrackets--;
+        } else if (isalpha(str[i])) {
+            insidepronounce++;
+        } else if (str[i] == '.') {
+                if(insidepronounce==0)
+            newstr[j++] = str[i];
+            insidepronounce=0;
+        } else if (!insideParentheses && !insideBrackets && insidepronounce<=0) {
+            // Copy only if not inside parentheses or brackets
+            newstr[j++] = str[i];
+        }
+    }
+
+    // Null-terminate the modified string
+    newstr[j] = '\0';
+    //printf("\n\n%s\n\n",newstr);
+    return newstr;
+
+}
+
+char * readjust(char * str){
+    int i, j;
+    int len = strlen(str);
+    char *newstr1 = (char*)malloc(len + 1);
+    for (i = 0, j = 0; i < len; i++) {
+        if(str[i]==',' || str[i]==';' ){
+            newstr1[j++] = '\xef';
+            newstr1[j++] = '\xbc';
+            newstr1[j++] = '\x8c';
+            continue;
+        }
+        newstr1[j++] = str[i];
+        if ((!isascii(str[i]) || str[i]==')' || str[i]==']' || str[i]=='>' ) && (isalpha(str[i+1])   )) {
+            if(str[i-2]=='\xef' && str[i-1]=='\xbc' && str[i]=='\x8c')
+            continue;
+            newstr1[j++] = '\xef';
+            newstr1[j++] = '\xbc';
+            newstr1[j++] = '\x8c';
+        }
+    }
+// /ch[m]=='\xef' && ch[m+1]=='\xbc' && ch[m+2]=='\x8c'
+    // Null-terminate the modified string
+    newstr1[j] = '\0';
+    //printf("\nnew:%s\n",newstr);
+    return newstr1;
+}
+
+
+int lastw;
 int ififright(char * aword){
     //int ifright;
+lastw=-1;
 int i,n;
 int cmmm,mmm,m;
 char tch[9999];
@@ -1084,7 +1287,7 @@ char * dzh;
         cmmm=0;
         mmm=0;
         strcpy(tch,"");
-    strcpy(tch,aword);
+    strcpy(tch,removeParenthesesAndBrackets(aword));
     //char w1[10][9999];
 if(strlen(tch) >=2 ){
             for(n=0;n<10;n=n+1){
@@ -1100,6 +1303,7 @@ if(strlen(tch) >=2 ){
                     //printf("222");
                     //strcpy(w1[n],"");
                     if(tch[m]=='\xef' && tch[m+1]=='\xbc' && tch[m+2]=='\x8c' ||  tch[m]=='\0'  ){
+                        lastw++;
                         cmmm=m-mmm-3;
                         if(n==0){
                         dzh=&tch[mmm+1];
@@ -1108,6 +1312,9 @@ if(strlen(tch) >=2 ){
                         else
                         dzh=&tch[mmm+3];
                         strncat(w1[n],dzh,cmmm);
+if(w1[0][0]=='\xef' && w1[0][1]=='\xbc' && w1[0][2]=='\x8c')
+                        delchar(w1[n],"，");
+                        //printf("\nif:%s\n",w1[n]);
                         //printf("%s",w1[n]);
                         break;
                     }
@@ -1123,12 +1330,12 @@ if(strlen(tch) >=2 ){
 char * beforedot;
 char alldot[999];
 
-for(m=0;m<zm+1;m=m+1){
 
-if(strcmp(azh[m],w1[n])==0 && strcmp(w1[n],"")!=0){
+for(m=0;m<zm+1;m=m+1){
+if(strcmp(azh2[m],w1[n])==0 && strcmp(w1[n],"")!=0){
 c++;
-strcpy(azh[m],"");
-if (c==zm+1){
+strcpy(azh2[m],"");
+if (c>=zm+1){
     flag=TRUE;
     ishprt("\r\033[%dC%s\r",col-2,tline);
     c=0;
@@ -1137,11 +1344,11 @@ if (c==zm+1){
 else{
     flag=FALSE;
 }
-strcpy(yword,"*，");
+strcpy(yword,"，");
 return(2);
 }
-if(Checkstr(azh[m],"...",3)){
-strcpy(alldot,azh[m]);
+if(Checkstr(azh2[m],"...",3)){
+strcpy(alldot,azh2[m]);
 beforedot=strtok(alldot,"...");
 if(strcmp(w1[n],beforedot)==0){
 strcpy(yword,"*...");
@@ -1181,13 +1388,13 @@ cc=0;
         mmm=0;
         strcpy(tch,"");
     strcpy(tch,aword);
-    char w1[10][9999];
+    char w1[MAX_SIZE1][MAX_LENGTH1];
     
 if(ez=='2'){
-            for(n=0;n<10;n=n+1){
+            for(n=0;n<MAX_SIZE1;n=n+1){
                 //printf("222");
                 //strcpy(bzh[n],"");
-                strcpy(w1[n],"");
+                //strcpy(w1[n],"");
                 //strcpy(dzh,"");
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
@@ -1204,7 +1411,7 @@ if(ez=='2'){
                         }
                         else
                         dzh=&aword[mmm+3];
-                        strncat(w1[n],dzh,cmmm);
+                        strncpy(w1[n],dzh,cmmm);
                         //printf("%s",w1[n]);
                         break;
                     }
@@ -1372,6 +1579,8 @@ int ezback(){
 return 0;
 }
 
+char property[10][8888];//词性分类
+
 char zword;
 char cword[4];
 BOOL getin=FALSE;
@@ -1381,11 +1590,60 @@ char xword;
 BOOL c1=FALSE;
 BOOL c2=FALSE;
 BOOL c3=FALSE;
+char Byword[2999];
 int ezprintf(){
 now2='\x00';
 now3='\x00';
 //now4=FALSE;
-if(ez=='2'){
+
+if(ez=='1' || (isascii(zword) && strcmp(Byword,"")!=0)){
+//cursor_position(&grown,&gcoln);
+fflush(stdin);
+if (((int)zword>=65  && (int)zword<=122) || ((int)zword==32 || (int)zword==46 || (int)zword==45 ) || (isascii(zword) && strcmp(Byword,"")!=0) ){
+                        while (TRUE){
+                        //if(ish==TRUE)
+                        coln=colm;
+                        //cursor_position(&rown,&coln);
+//                        fprintf(stdout,"%c",zword);
+//                        if(colm==col){
+  //                          printf("%c\n",zword);
+    //                        now2=TRUE;
+      //                     
+                       // fflush(stdout);
+//}
+if(coln==col){ 
+ishprt("%c",zword);
+fflush(stdout);
+}
+else
+printf("%c",zword);
+fflush(stdout);
+//ef(ish==TRUE)
+			//
+                        cursor_position(&rowm,&colm);
+			if(coln==col && colm==col){
+			ishprt("\n");
+            break;
+            }
+                        if(ish==TRUE)
+                        if(coln==colm)
+                        continue;
+                        
+                       // if(coln==colm && colm==col){
+                            //printf("2222");
+                         //   now3=TRUE;
+                           // break;
+                        //}
+                        
+                        break;
+                        }
+strncat(aword,&zword,1);
+}
+return(0);
+//cursor_position(&growm,&gcolm);
+}
+
+else if(ez=='2'){
 //strcpy(cword,"");
 //strncat(cword,&zword,1);
 if ( zword==',' || zword==' '  ){
@@ -1399,7 +1657,7 @@ return(2);
     //strncat(aword,&zword,2);
 }
 
-else if ( zword=='.' || zword=='-'  ){
+else if ( zword=='.' || zword=='-' ){
     strcpy(cword,"");
 
                         while (TRUE){
@@ -1502,7 +1760,7 @@ strncat(cword,&zword,1);
     
     return 0;
 }
-else{
+else {
     c3=FALSE;
     c2=FALSE;
     //printf("222");
@@ -1511,52 +1769,6 @@ else{
 }
 //strcpy(cword,"");
 }
-}
-if(ez=='1'){
-//cursor_position(&grown,&gcoln);
-fflush(stdin);
-if (((int)zword>=65  && (int)zword<=122) || ((int)zword==32 || (int)zword==46 || (int)zword==45 ) ){
-                        while (TRUE){
-                        //if(ish==TRUE)
-                        coln=colm;
-                        //cursor_position(&rown,&coln);
-//                        fprintf(stdout,"%c",zword);
-//                        if(colm==col){
-  //                          printf("%c\n",zword);
-    //                        now2=TRUE;
-      //                     
-                       // fflush(stdout);
-//}
-if(coln==col){ 
-ishprt("%c",zword);
-fflush(stdout);
-}
-else
-printf("%c",zword);
-fflush(stdout);
-//ef(ish==TRUE)
-			//
-                        cursor_position(&rowm,&colm);
-			if(coln==col && colm==col){
-			ishprt("\n");
-            break;
-            }
-                        if(ish==TRUE)
-                        if(coln==colm)
-                        continue;
-                        
-                       // if(coln==colm && colm==col){
-                            //printf("2222");
-                         //   now3=TRUE;
-                           // break;
-                        //}
-                        
-                        break;
-                        }
-strncat(aword,&zword,1);
-}
-return(0);
-//cursor_position(&growm,&gcolm);
 }
 //strcpy(&zword,"");
 
@@ -3058,7 +3270,7 @@ free(theline);
 free(bbuffer);
 return 0;
 }
-char bword[100];
+char bword[MAX_LENGTH];
 
 
 
@@ -3083,8 +3295,100 @@ BOOL nd=TRUE;
 //int si=0;
 char a1[10][9999];
 
-char czh[10][200];
+//char Byword[999];
+char prelastw[MAX_LENGTH];
+char dword[MAX_LENGTH];
+
+struct WordInfo wordInfos[MAX_SIZE1];
+struct WordInfo* Getprops(char zh[MAX_SIZE1][MAX_LENGTH1]) {
+int maxn = getArrayCount(zh);
+int n;
+char tempzh[MAX_SIZE1][MAX_LENGTH1];
+//struct WordInfo* wordInfos = (struct WordInfo*)malloc(sizeof(struct WordInfo) );
+//struct WordInfo* wordInfos; //直接segment报错
+int lastprop=-1;
+
+wordInfos[NOUN].count=0;
+wordInfos[VERBT].count=0;
+wordInfos[VERBI].count=0;
+wordInfos[ADJECTIVE].count=0;
+wordInfos[ADVERB].count=0;
+wordInfos[CONJUNCTION].count=0;
+wordInfos[PREPOSITION].count=0;
+wordInfos[PRONOUN].count=0;
+for(n=0;n<MAX_SIZE1;n++){
+    strcpy(wordInfos[NOUN].words[n],"");
+    strcpy(wordInfos[VERBT].words[n],"");
+    strcpy(wordInfos[VERBI].words[n], "");
+    strcpy(wordInfos[ADJECTIVE].words[n], "");
+    strcpy(wordInfos[ADVERB].words[n], "");
+    strcpy(wordInfos[CONJUNCTION].words[n], "");
+    strcpy(wordInfos[PREPOSITION].words[n], "");
+    strcpy(wordInfos[PRONOUN].words[n], "");
+   // printf("\n---%s---\n",zh[n]);
+}
+
+for(n=0;n<maxn;n++){
+    if(Checkstr(zh[n],"n.",2)){
+//printf("\n---%s---\n",zh[0]);
+        strcpy(wordInfos[NOUN].words[wordInfos[NOUN].count], &(zh[n])[2]);
+        wordInfos[NOUN].count++;
+        lastprop=0;
+    }else if(Checkstr(zh[n],"vt.",3)){
+
+        strcpy(wordInfos[VERBT].words[wordInfos[VERBT].count], &(zh[n])[3]);
+        wordInfos[VERBT].count++;
+        lastprop=1;
+    }else if(Checkstr(zh[n],"vi.",3)){
+
+        strcpy(wordInfos[VERBI].words[wordInfos[VERBI].count], &(zh[n])[3]);
+        wordInfos[VERBI].count++;
+        lastprop=2;
+    }else if(Checkstr(zh[n],"adj.",4)){
+
+        strcpy(wordInfos[ADJECTIVE].words[wordInfos[ADJECTIVE].count], &(zh[n])[4]);
+        wordInfos[ADJECTIVE].count++;
+        lastprop=3;
+    }else if(Checkstr(zh[n],"adv.",4)){
+
+        strcpy(wordInfos[ADVERB].words[wordInfos[ADVERB].count], &(zh[n])[4]);
+        wordInfos[ADVERB].count++;
+        lastprop=4;
+    }else if(Checkstr(zh[n],"conj.",5)){
+
+        strcpy(wordInfos[CONJUNCTION].words[wordInfos[CONJUNCTION].count], &(zh[n])[5]);
+        wordInfos[CONJUNCTION].count++;
+        lastprop=7;
+    }else if(Checkstr(zh[n],"prep.",5)){
+
+        strcpy(wordInfos[PREPOSITION].words[wordInfos[PREPOSITION].count], &(zh[n])[5]);
+        wordInfos[PREPOSITION].count++;
+        lastprop=5;
+    }else if(Checkstr(zh[n],"pron.",5)){
+
+        strcpy(wordInfos[PRONOUN].words[wordInfos[PRONOUN].count], &(zh[n])[5]);
+        wordInfos[PRONOUN].count++;
+        lastprop=6;
+    }else if(lastprop!=-1){
+        strcpy(wordInfos[lastprop].words[wordInfos[lastprop].count], zh[n]);
+        wordInfos[lastprop].count++;  
+    }
+}
+    return wordInfos;
+}
+
+
+
+struct WordInfo * TheWordInfo;
+char prons[25];
+char czh[MAX_SIZE][MAX_LENGTH];
 int Read(){
+
+BOOL prting=FALSE;
+//struct WordInfo* TheWordInfo;
+
+    char lastword[MAX_LENGTH1];
+    int m;
 int leng3;
 int yn=0;
 int i;
@@ -3126,6 +3430,9 @@ if (waiting==FALSE){
     }
 
     if(getin==FALSE){
+        strcpy(dword,"");
+        strcpy(Byword,"");
+        prting=FALSE;
         zword=rd(fd1);
        // nd=FALSE;
         pd=TRUE;
@@ -3217,6 +3524,8 @@ waiting=TRUE;
 //zd=FALSE;
 //zword='\x00';
 
+
+
 }
 
 if(bd!=TRUE && strcmp(yword,"\x7f")!=0 && strlen(yword)==1 && pd==TRUE ){
@@ -3232,7 +3541,7 @@ else{
 if( strcmp(yword,"")!=0 && getin==FALSE ){
 bd=TRUE;
 }
-
+//strcpy(dword,""); 
 while (getin==FALSE && pd==TRUE && zd==TRUE){
 if( strcmp(yword,"\t")==0 ){
     //bd=FALSE;
@@ -3302,7 +3611,8 @@ else{
     bd=TRUE;
    //printf("22222");
     //waiting=TRUE;
-    strncat(yword,&xword,1);
+    strncat(dword,&xword,1); //当前输入
+    strncat(yword,&xword,1); //所有输入
 //yn=strlen(yword);
 
 if(strlen(yword)==2) {
@@ -3327,10 +3637,8 @@ if(strlen(yword)==2) {
 }
 
 }
-//nd=FALSE;
-yn=strlen(yword);
 
-//printf("%d\n",yn);
+//nd=FALSE;
 
 //setitimer(ITIMER_REAL,&value0,NULL);
 fflush(stdin);
@@ -3350,13 +3658,116 @@ fflush(stdin);
 //yn=strlen(yword);
 //printf("%s",yword);
 
-
+yn=strlen(yword);
 //printf("%d",yi);
 if(waiting==TRUE && ( bd==TRUE || getin==TRUE )  ){
    // printf("%d",yi);
     //waiting=TRUE;
+
+//printf("%d\n",yn);
+//printf("%s",w1[lastw]);
+
     yi=yi+1;
     zword=yword[yi];
+//if(strcmp(yword,czh[M])==0)
+//zword='\x0';
+//printf("\nyword:%s\n",yword);
+//printf("\nczh:%s\n",czh[M]);
+if(yi==0 && strcmp(yword,"，")!=0 && ez=='2' && prting==FALSE && zword!='\x7f' ){  //防止循环 //debug防止segmentation error
+    //strcpy(lastword,""); 
+    //if(strcmp(aword,"")!=0)
+strcpy(lastword,aword);
+                for(int i=strlen(aword);i>-1;i--){
+                    if(aword[i-2]=='\xef' && aword[i-1]=='\xbc' && aword[i]=='\x8c' ){
+                        //lastw++;
+                        strcpy(lastword,"");
+                        strcpy(lastword,&aword[i+1]);
+                       //printf("last:%s",prelastw);
+                        break;
+                    }
+
+                }
+strcpy(prelastw,"");
+if(strcmp(lastword,"")!=0)//debug防止segmentation error
+strcat(prelastw,lastword);
+if(zword!='\x0' && zword!='\t' && zword!='\x7f' )  //防止循环
+strncat(prelastw,&zword,1);
+else if(zword=='\t'){
+    strncat(prelastw,&zword,0);
+}
+if(strcmp(dword,"")!=0)//debug防止segmentation error
+strcat(prelastw,dword);
+//printf("1:%s\n",prelastw);
+
+strcpy(prons, "");
+for(m=0;m<MAX_SIZE1;m=m+1){
+    //printf("%s",azh[m]);
+if(strcmp(azh[m],prelastw)==0 && strcmp(prelastw,"")!=0){
+//char B[]="\x7f abc";
+strcpy(Byword,"");
+//strcat(Byword,B);
+//strcat(Byword,"*");
+
+for(int bi=0;bi<Words(lastword);bi++){
+    strcat(Byword,"\x7f");
+}
+for(int pi=0;pi<MAX_SIZE1;pi++){
+
+for(int wi=0;wi<TheWordInfo[pi].count;wi++){
+    //printf("\n2222\n");
+if (strcmp(removeParenthesesAndBrackets(TheWordInfo[pi].words[wi]),azh[m])==0 ){ //==0不能不加 //不能为azh2，要原来的顺序
+switch (pi) {
+    case 0: strcat(prons, "n.");
+            break;
+    case 1: strcat(prons, "vt.");
+            break;
+    case 2: strcat(prons, "vi.");
+            break;
+    case 3: strcat(prons, "adj.");
+            break;
+    case 4: strcat(prons, "adv.");
+            break;
+    case 5: strcat(prons, "prep.");
+            break;
+    case 6: strcat(prons, "pron.");
+            break;
+    case 7: strcat(prons, "conj.");
+            break;
+    case 8: strcat(prons, "inte.");
+            break;
+    case 9: strcat(prons, "art.");
+            break;
+    default: strcpy(prons, "");
+    break;
+}    
+    break;
+}
+
+}
+
+}
+if(strcmp(lastpron,prons)!=0 || strcmp(lastpron,"")==0 ) 
+strcat(Byword,prons);
+//printf("\nezh:%s\n",ezh[m]);
+strcat(Byword,removealphas(ezh[m]));
+
+//printf("2");
+strcpy(yword,"");
+strcat(yword,Byword);
+prting=TRUE;
+yi=-1;
+zword='\x0';
+strcpy(dword,"");  //防止循环
+strcpy(lastpron,prons);
+strcpy(prons,"");
+break;
+}
+
+}
+
+
+}
+
     //yi=yi+1;
     //yword[yi]='\x00';
 }
@@ -3390,22 +3801,54 @@ if (ez=='1'){
 }
 else if (ez=='2'){
     N=0;
-    for (I=0;I<10;I++){
+    for (I=0;I<MAX_SIZE1;I++){
         strcpy(czh[I],"");
-        if(strcmp(azh[I],"")!=0){
-            strcpy(czh[N],azh[I]);
+        if(strcmp(azh2[I],"")!=0){ 
+            strcpy(czh[N],azh2[I]); 
             N++;
         }
     }
 
     srand((unsigned)time(NULL));
     if(N>0){
+
+if(strcmp(lastword,"")==0){
+
     M=rand()%(N);
 
-    strcpy(yword," ");
-    strcat(yword,czh[M]);
+    //strcpy(yword,"*");
+    strcpy(yword,czh[M]);
+    strcpy(dword,czh[M]);
+    strcpy(Byword,""); //防止循环
 nd=TRUE;
+waiting=TRUE;
+getin=TRUE;
+yi=-1;
+yword[0]='\t';
+continue;
+}
+else{
+   //  printf("\n%s\n",lastword);
+for(int i=0;i<N;i++){
+    if(checkstr(czh[i],lastword,strlen(lastword))){
+//printf("\n\n");
+//strcpy(yword,delchar(czh[i],lastword));
 
+//strcpy(yword,delchar(czh[i],lastword));
+
+            strcpy(dword,delchar(czh[i],lastword));
+    strcpy(Byword,""); //防止循环
+nd=TRUE;
+waiting=TRUE;
+getin=TRUE;
+yi=-1;
+//yn=strlen()
+yword[0]='\t';
+break;
+    }
+}
+continue;
+}
     }
 }
 //getin=TRUE;
@@ -3416,7 +3859,7 @@ nd=TRUE;
 
 
 //printf("%d",leng3);
- leng=words(aword);
+ leng=Words(aword);
 leng3=strlen(aword);
             if(zword == '\x7f' ){
                     //zword='\x00';
@@ -3550,7 +3993,8 @@ break;
 }
 return 0;
 }
-char ch[200];
+char ch[MAX_LENGTH];
+char ch2[MAX_LENGTH];
 int colourp(){
             //colm=-1;
             //coln=-2;
@@ -3649,7 +4093,6 @@ int fun(){
     evalue0.it_interval.tv_sec=0;
     evalue0.it_interval.tv_usec=0;
 
-    int ywordi;
   //  yword=(char *)malloc(9999);
   //  int leng3; Read()
 //    struct itimerval evalue, evalue0;
@@ -3690,7 +4133,7 @@ int fun(){
     char * dzh;
     //char temp[200];
     //char ltemp[200];
-    char word[200];
+    char word[MAX_LENGTH];
 
 
     int aii;
@@ -3835,7 +4278,7 @@ nend[num+1]=max;
         }
               //  int ran;
     srand((unsigned)time(NULL));
-	while (TRUE){
+	while (TRUE){        //模式三 乱序
         
         if(PASS1==TRUE){
             if(num==0){
@@ -3843,7 +4286,6 @@ nend[num+1]=max;
                 return 0;
             }
         }
-
         ci=0;
         strcpy(astrs,"");
         //strcpy(word,"");
@@ -3851,6 +4293,7 @@ nend[num+1]=max;
         iii=0;
 
         getin=FALSE;
+        strcpy(lastpron,"");
         
         rx++;
         ran=rand() % num;
@@ -3896,6 +4339,13 @@ nend[num+1]=max;
 	    /*printf("%c",ez);*/ 
 		}
         acount=0;
+
+
+
+   // TheWordInfo = (struct WordInfo*)malloc(sizeof(struct WordInfo));
+
+    //free(TheWordInfo);
+
 	    if(ez=='1'){
             zh=strtok(word,"\t");
             /*del_char(zh,'\01');*/
@@ -3912,49 +4362,87 @@ nend[num+1]=max;
     
         else if(ez=='2'){
             en=strtok(word,"\t");
+           // printf("%s",en); //debug
             zh=strtok(NULL,"\t");
             strcpy(ch,zh);
+            strcpy(ch2,readjust(ch)); //++
             strcpy(answer1,en);
             m=-1;
             mm=0;
             mmm=0;
             zhleng=0;
-            zhleng=strlen(zh);
-            for(n=0;n<10;n=n+1){
+            zhleng=strlen(ch2);
+
+//strcpy(Byword,"");
+            for(n=0;n<MAX_SIZE1;n=n+1){
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
                 strcpy(w1[n],"");
                 strcpy(czh[n],"");
+                strcpy(ezh[n],"");
+                strcpy(azh2[n],"");
             }
 
-            for(n=0;n<10;n=n+1){
+            for(n=0;n<MAX_SIZE1;n=n+1){
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
                 mmm=m;
                 m=m+2+cmmm;
                 while(m=m+1,m<=zhleng){
-                    if(ch[m]=='\xef' && ch[m+1]=='\xbc' && ch[m+2]=='\x8c' ||  ch[m]=='\0'  ){
+                    if(ch2[m]=='\xef' && ch2[m+1]=='\xbc' && ch2[m+2]=='\x8c' ||  ch2[m]=='\0'  ){
                         cmmm=m-mmm-3;
                         if(n==0){
-                        dzh=&ch[mmm+1];
+                        dzh=&ch2[mmm+1];
                         cmmm=cmmm+2;
                         }
-                        else
-                        dzh=&ch[mmm+3];
-                        strncat(azh[n],dzh,cmmm);
-                        strncat(bzh[n],dzh,cmmm);
+                        else{
+                            //printf("222222");
+                        dzh=&ch2[mmm+3];
+                        }
+                    
+                        strncat(ezh[n],dzh,cmmm); 
+                        //strncat(bzh[n],dzh,cmmm);
+                        strcpy(azh[n],removeParenthesesAndBrackets(ezh[n]));
+                        strcpy(bzh[n],azh[n]);
+                        //printf("\n%s\n",bzh[n]);
                         break;
                     }
+
+
                 }
-                if(ch[m]=='\0' )
+                if(ch2[m]=='\0' )
                 break;
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
 
+//wordInfos
+zm=n;
+//int mmax=0;
+
+mergeDuplicates(azh);
+
+//for(int l=0;l<zm+1;l++)
+//printf("\n%s\n",azh2[l]); #debug不重复的答案
+
+zm=zm-nmax; //需要输入中文单词的个数
+//printf("\nnmax:%d\n",zm); #debug不重复的答案数-1
+//printf("\nezh:%s\n",ezh[0]);
+//printf("\nezh:%s\n",ezh[1]);
+//printf("\nezh:%s\n",ezh[2]);
+TheWordInfo = Getprops(ezh); //排序
+//printf("%s\n",TheWordInfo[0].words[0]);
+//printf("%s\n",TheWordInfo[0].words[1]);
+//printf("%s\n",TheWordInfo[1].words[0]);
+//printf("%s\n",TheWordInfo[1].words[1]);
+//printf("%s\n",TheWordInfo[2].words[0]);
+//printf("%s\n",TheWordInfo[2].words[1]);
+//printf("%s\n",TheWordInfo[3].words[0]);
+//printf("%s\n",TheWordInfo[3].words[1]);
+//printf("%s\n",TheWordInfo[4].words[0]);
+//printf("%s\n",TheWordInfo[4].words[1]);
             /*printf("\n%s\n",azh[0]);
             printf("\n%s\n",azh[1]);
             printf("\n%s\n",azh[2]);*/
-            zm=n;
             }
             printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
 
@@ -3980,7 +4468,7 @@ nend[num+1]=max;
             /*word[0]='\0';*/
             fflush(stdout);
             /***fgets(aword,2,stdin);***/
-            aword[0]='\0';
+            strcpy(aword,"");
             zword='\0';
             tleng=0;
             leng=0;
@@ -4019,7 +4507,7 @@ waiting=FALSE;
             }
             leng=-1;
 strcpy(cword,"");
-int yn=0;
+int yn;
 //free(yword);
 zword='\x00';
 yi=-1;
@@ -4034,6 +4522,7 @@ if(AUTO==TRUE){
     usleep(10000);
 }      
                     //fflush(stdout);
+
 Read() ; 
                  
 colourp();               
@@ -4081,7 +4570,7 @@ ran=num+1;
         }
 
 //strcpy(word,"");
-while (TRUE){
+while (TRUE){  //模式二 倒序
 //printf("@22");
  ran--;
 	if(ran==-1){
@@ -4098,7 +4587,7 @@ while (TRUE){
         // printf("目标值 %d 未在数组中找到\n", n); //顺序时会报错，但不影响运行效果
     }
 
-
+strcpy(word,"");
             for (n=nend[ran]+1;n<nend[ran+1];n++){
                 if(txt[n]=='\n'){
                     break;
@@ -4116,11 +4605,12 @@ strncat(word,&txt[n],1);
 
        // if(i==0 | txt[i]=='\n'){
 	    /*printf("%d",i);*/
-            puts("");
+            //puts("");
             /*printf("%s",word);*/
+        strcpy(lastpron,"");
 	    zh="\0";
 	    en="\0";
-        printf("\033[2m%s\n\033[0m",strs);
+        printf("\033[2m\n%s\n\033[0m",strs);
 	    if(ez=='3'||iez==TRUE){
 	    iez=TRUE;   
             //srand(times * (ab+1) * (ab+1));
@@ -4149,53 +4639,60 @@ strncat(word,&txt[n],1);
             en=strtok(word,"\t");
             zh=strtok(NULL,"\t");
             strcpy(ch,zh);
+            strcpy(ch2,readjust(ch));
             strcpy(answer1,en);
             m=-1;
             mm=0;
             mmm=0;
             zhleng=0;
-            zhleng=strlen(zh);
-            for(n=0;n<10;n=n+1){
+            zhleng=strlen(ch2);
+            for(n=0;n<MAX_SIZE1;n=n+1){
             strcpy(bzh[n],"");
             strcpy(azh[n],"");
             strcpy(w1[n],"");
             strcpy(czh[n],"");
+            strcpy(ezh[n],"");
+            strcpy(azh2[n],"");
             } 
            // flag=FALSE;
 
 
             //strcpy(azh[1],"");
-            for(n=0;n<10;n=n+1){
-                strcpy(bzh[n],"");
-                strcpy(azh[n],"");
-                strcpy(w1[n],"");
-                strcpy(czh[n],"");
-            }
-            for(n=0;n<10;n=n+1){
+            for(n=0;n<MAX_SIZE1;n=n+1){
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
                 mmm=m;
                 m=m+2+cmmm;
-                strcpy(w1[n],"");
                 while(m=m+1,m<=zhleng){
-                    if(ch[m]=='\xef' && ch[m+1]=='\xbc' && ch[m+2]=='\x8c' ||  ch[m]=='\0'  ){
+                    if(ch2[m]=='\xef' && ch2[m+1]=='\xbc' && ch2[m+2]=='\x8c' ||  ch2[m]=='\0'  ){
                         cmmm=m-mmm-3;
                         if(n==0){
-                        dzh=&ch[mmm+1];
+                        dzh=&ch2[mmm+1];
                         cmmm=cmmm+2;
                         }
-                        else
-                        dzh=&ch[mmm+3];
-                        strncat(azh[n],dzh,cmmm);
-                        strncat(bzh[n],dzh,cmmm);
+                        else{
+                            //printf("222222");
+                        dzh=&ch2[mmm+3];
+                        }
+                    
+                        strncat(ezh[n],dzh,cmmm); 
+                        //strncat(bzh[n],dzh,cmmm);
+                        strcpy(azh[n],removeParenthesesAndBrackets(ezh[n]));
+                        strcpy(bzh[n],azh[n]);
+                        //printf("\n%s\n",bzh[n]);
                         break;
                     }
+
+
                 }
-                if(ch[m]=='\0' )
+                if(ch2[m]=='\0' )
                 break;
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
             zm=n;
+            mergeDuplicates(azh);
+zm=zm-nmax;
+TheWordInfo = Getprops(ezh);
             }
             /*printf("%s\n",azh[0]);*/
             printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
@@ -4222,7 +4719,7 @@ strncat(word,&txt[n],1);
             /*printf("%s",word);*/
             fflush(stdout);
             /***fgets(aword,2,stdin);***/
-            aword[0]='\0';
+            strcpy(aword,"");
             //strcpy(word,""); #导致findword后不显示
             zword='\0';
             strcpy(ii,"");
@@ -4293,7 +4790,7 @@ if(AUTO==TRUE){
     else if(order=='1'){
         //flag=FALSE;
         //int n=-1;
-        strcpy(word,"");
+        //strcpy(word,"");
         fflush(stdin);
         i=-1;
         num=0;
@@ -4328,7 +4825,7 @@ ran=-1;
         }
 
 
-while (TRUE){
+while (TRUE){  //模式一 顺序
 if ( ysv1!='S' && ysv1!='s' && ysv1!='V' && ysv1!='Y' && flag!=TRUE ){
     ran++;
 }
@@ -4344,8 +4841,8 @@ if ( ysv1!='S' && ysv1!='s' && ysv1!='V' && ysv1!='Y' && flag!=TRUE ){
     } else {
         // printf("目标值 %d 未在数组中找到\n", n); //顺序时会报错，但不影响运行效果
     }
-          
-            for (n=nend[ran]+1;n<nend[ran+1];n++){
+          strcpy(word,"");
+            for (n=nend[ran]+1;n<nend[ran+1];n++){ 
                 if(txt[n]=='\n'){
                     break;
                 }
@@ -4365,6 +4862,7 @@ strncat(word,&txt[n],1);
 	    en="\0";
             ci=0;
             //strcpy(astrs,"");
+            strcpy(lastpron,"");
             iii=0;
             
             //getin=FALSE;
@@ -4398,43 +4896,55 @@ strncat(word,&txt[n],1);
             zh=strtok(NULL,"\t");
             strcpy(answer1,en);
             strcpy(ch,zh);
+            strcpy(ch2,readjust(ch));
             m=-1;
             mm=0;
             mmm=0;
             zhleng=0;
-            zhleng=strlen(zh);
-            for(n=0;n<10;n=n+1){
+            zhleng=strlen(ch2);
+
+            for(n=0;n<MAX_SIZE1;n=n+1){
                 strcpy(bzh[n],"");
                 strcpy(azh[n],"");
                 strcpy(w1[n],"");
                 strcpy(czh[n],"");
-            } 
+                strcpy(ezh[n],"");
+                strcpy(azh2[n],"");
+            }
 
-            for(n=0;n<10;n=n+1){
+            for(n=0;n<MAX_SIZE1;n=n+1){
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
                 mmm=m;
                 m=m+2+cmmm;
                 while(m=m+1,m<=zhleng){
-                    if(ch[m]=='\xef' && ch[m+1]=='\xbc' && ch[m+2]=='\x8c' ||  ch[m]=='\0'  ){
+                    if(ch2[m]=='\xef' && ch2[m+1]=='\xbc' && ch2[m+2]=='\x8c' ||  ch2[m]=='\0'  ){
                         cmmm=m-mmm-3;
                         if(n==0){
-                        dzh=&ch[mmm+1];
+                        dzh=&ch2[mmm+1];
                         cmmm=cmmm+2;
                         }
-                        else
-                        dzh=&ch[mmm+3];
-                        strncat(azh[n],dzh,cmmm);
-                        strncat(bzh[n],dzh,cmmm);
+                        else{
+                        dzh=&ch2[mmm+3];
+                        }
+                    
+                        strncat(ezh[n],dzh,cmmm); 
+                        strcpy(azh[n],removeParenthesesAndBrackets(ezh[n]));
+                        strcpy(bzh[n],azh[n]);
                         break;
                     }
-                }
 
-                if(ch[m]=='\0' )
+
+                }
+                if(ch2[m]=='\0' )
                 break;
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
-            zm=n;
+zm=n;
+mergeDuplicates(azh);
+zm=zm-nmax;
+TheWordInfo = Getprops(ezh);
+
             }
             /*printf("%s\n",azh[0]);*/
             printf("\n\033[2m%s\n\033[0m",strs);
@@ -4461,7 +4971,7 @@ strncat(word,&txt[n],1);
             /***fgets(aword,2,stdin);***/
             
             //strcpy(word,""); 导致findword后不显示
-            aword[0]='\0';
+            strcpy(aword,"");
             zword='\0';
             /*system("stty -icanon");*/
             /***if (fgets(aword,2,stdin) != '\0'){*///
