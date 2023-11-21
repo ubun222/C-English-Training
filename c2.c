@@ -1507,7 +1507,8 @@ int ezback(){
                         while (TRUE){
                         //if(ish==TRUE || termux==TRUE){
                         cursor_position(&rown,&coln);
-                        if(coln==1 && ( llword=='.' || llword=='-' ) ){
+                       // if(coln==1 && ( llword=='.' || llword=='-' ) ){
+                        if(coln==1 && isascii(llword) ){
                          //printf("2222");
                         if(now1==TRUE){
                            // printf("2222");
@@ -1596,10 +1597,50 @@ now2='\x00';
 now3='\x00';
 //now4=FALSE;
 
-if(ez=='1' || (isascii(zword) && strcmp(Byword,"")!=0)){
+if( ez=='2' && (isascii(zword) && strcmp(Byword,"")!=0)){
+    strcpy(cword,"");
+
+                        while (TRUE){
+                            coln=colm;
+                        //if(ish==TRUE)
+                       // cursor_position(&rown,&coln);
+                        printf("%s",&zword);
+                        fflush(stdout);
+                        //if(ish==TRUE)
+                        cursor_position(&rowm,&colm);
+                        if(ish==TRUE){
+                        if(coln==colm && coln!=col){
+                        continue;
+                        }
+                        }
+                        if(coln==colm && colm==col){
+                            now1=FALSE;
+                            now2='\x00';
+                            now3=TRUE;
+                            //now4=TRUE;
+                            break;
+                        }
+                        else if(coln==colm-1 && colm==col){
+                            now1=TRUE;
+                            now2=FALSE;
+                        }
+                        
+                        break;
+                        }
+                    
+                        fflush(stdout);       
+
+    strncat(aword,&zword,1);
+    return(0); 
+
+}
+
+else if(ez=='1'){
 //cursor_position(&grown,&gcoln);
 fflush(stdin);
-if (((int)zword>=65  && (int)zword<=122) || ((int)zword==32 || (int)zword==46 || (int)zword==45 ) || (isascii(zword) && strcmp(Byword,"")!=0) ){
+
+
+if (((int)zword>=65  && (int)zword<=122) || ((int)zword==32 || (int)zword==46 || (int)zword==45 ) ){
                         while (TRUE){
                         //if(ish==TRUE)
                         coln=colm;
