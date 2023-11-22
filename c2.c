@@ -111,7 +111,6 @@ BOOL p6;
 BOOL calendar=FALSE;
 
 BOOL AUTO=FALSE;
-
 void  handler()
 {
 //printf("rxit");
@@ -597,12 +596,12 @@ char asc[3]="”";
 
 int thewidth(char * aline){
     int i;
-    char theline[1999];
-    char abc[4];
+    char theline[MAX_LENGTH];
+   // char abc[4];
     int lengn=0;
     int co=col;
-    int lasti=0;
-    int whereadd;
+   // int lasti=0;
+   // int whereadd;
     strcpy(theline,aline);
     i=0;
         while(i<=strlen(theline)){
@@ -647,12 +646,12 @@ int thewidth(char * aline){
 
 int fresh(char * aline){
     int i;
-    char theline[1999];
-    char abc[4];
+    char theline[MAX_LENGTH];
+   // char abc[4];
     int lengn=0;
     int co=col;
     int lasti=0;
-    int whereadd;
+   // int whereadd;
     strcpy(theline,aline);
     i=0;
     while(i<=strlen(theline)){
@@ -958,7 +957,7 @@ return 0;
 
 
 BOOL termux=FALSE;
-
+//char aline[4999];
 char * aprt(char * aline){
 char aaline[2999];
 int mi=-1;
@@ -971,8 +970,8 @@ if(ish==TRUE){
 int whereadd=0;
 char vvline[4999];
 char alinea[4999];
-char bline[4999];
-strcpy(bline,aline);
+
+strcpy(aline,aline);
 while (TRUE){
     if((whereadd=fresh(aline))==-1){
         break;
@@ -995,7 +994,7 @@ strcpy(baline,"");
 //else
 
     if(ysv1=='v' || ysv1=='V'){
-
+strcpy(aline,aline);
         while(mi=mi+1,mi<=strlen(aline)){
 strncpy(valine,&aline[mi],leng);
 //printf(":%s:%s:",valine,answer1);
@@ -1018,6 +1017,7 @@ break;
 
 
     }
+
 return aline;
 }
 
@@ -1593,8 +1593,6 @@ BOOL c2=FALSE;
 BOOL c3=FALSE;
 char Byword[2999];
 int ezprintf(){
-now2='\x00';
-now3='\x00';
 //now4=FALSE;
 
 if( ez=='2' && (isascii(zword) && strcmp(Byword,"")!=0)){
@@ -1636,6 +1634,8 @@ if( ez=='2' && (isascii(zword) && strcmp(Byword,"")!=0)){
 }
 
 else if(ez=='1'){
+now2='\x00';
+now3='\x00';
 //cursor_position(&grown,&gcoln);
 fflush(stdin);
 
@@ -1685,6 +1685,8 @@ return(0);
 }
 
 else if(ez=='2'){
+    now2='\x00';
+now3='\x00';
 //strcpy(cword,"");
 //strncat(cword,&zword,1);
 if ( zword==',' || zword==' '  ){
@@ -5520,7 +5522,11 @@ else{
             if(the=='\x41'){
                 if(flag1==FALSE){
                     thei=1;
-                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    ENS[thei-1][0]='-';
+                    ENS[thei-1][1]='>';
+                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    ENS[thei-1][0]=' ';
+                    ENS[thei-1][1]=' ';
                     fflush(stdout);
        // if(LS[thei-1]>1)
         if(LS[thei-1]>1)
@@ -5550,7 +5556,11 @@ fflush(stdout);
                     else
                     printf("\033[1A\r");
                     }
-                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    ENS[thei-1][0]='-';
+                    ENS[thei-1][1]='>';
+                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    ENS[thei-1][0]=' ';
+                    ENS[thei-1][1]=' ';
                     fflush(stdout);
                     if(LS[thei-1]>1)
                         printf("\033[%dA\r",LS[thei-1]-1);
@@ -5566,7 +5576,11 @@ fflush(stdout);
      if(the==' '){
         if(flag1==FALSE){
         thei=1;
-        printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    ENS[thei-1][0]='-';
+                    ENS[thei-1][1]='>';
+                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    ENS[thei-1][0]=' ';
+                    ENS[thei-1][1]=' ';
         fflush(stdout);
        // if(LS[thei-1]>1)
         if(LS[thei-1]>1)
@@ -5597,7 +5611,11 @@ fflush(stdout);
             printf("\033[1B\r");
 
         }
-        printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    ENS[thei-1][0]='-';
+                    ENS[thei-1][1]='>';
+                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    ENS[thei-1][0]=' ';
+                    ENS[thei-1][1]=' ';
         //printf("\n");
         fflush(stdout);
         if(LS[thei-1]>1)
@@ -5610,7 +5628,11 @@ fflush(stdout);
         //the='\x00';
         if(flag1==FALSE){
             thei=1;
-    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    ENS[thei-1][0]='-';
+                    ENS[thei-1][1]='>';
+                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    ENS[thei-1][0]=' ';
+                    ENS[thei-1][1]=' ';
     fflush(stdout);
             flag1=TRUE;
             //printf("\033[%dB",LS[thei-1]);
@@ -5644,7 +5666,11 @@ fflush(stdout);
                     if(thewidth(ZHS[thei-1])<-col){
                     printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col-1);
                     }
-                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&ENS[thei-1][2]));
+                    ENS[thei-1][0]='-';
+                    ENS[thei-1][1]='>';
+                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    ENS[thei-1][0]=' ';
+                    ENS[thei-1][1]=' ';
                     fflush(stdout);
             if(LS[thei-1]>1)
         printf("\033[%dA\r",LS[thei-1]-1);
