@@ -5358,18 +5358,25 @@ if(ez=='2'){
             strcpy(ZH1,"  ");
             ZHS[0]=strcat(EN1,strtok(Word1,"\t"));
 	        ENS[0]=strcat(ZH1,strtok(NULL,"\t"));
+aprt(ENS[0]);
+
             strcpy(EN2,"  ");
             strcpy(ZH2,"  ");
             ZHS[1]=strcat(EN2,strtok(Word2,"\t"));
 	        ENS[1]=strcat(ZH2,strtok(NULL,"\t"));
+aprt(ENS[1]);
+
             strcpy(EN3,"  ");
             strcpy(ZH3,"  ");
             ZHS[2]=strcat(EN3,strtok(Word3,"\t"));
 	        ENS[2]=strcat(ZH3,strtok(NULL,"\t"));
+aprt(ENS[2]);
+
             strcpy(EN4,"  ");
             strcpy(ZH4,"  ");
             ZHS[3]=strcat(EN4,strtok(Word4,"\t"));
 	        ENS[3]=strcat(ZH4,strtok(NULL,"\t"));
+aprt(ENS[3]);
 //printf("%s",ENS);
 
            // ran5=rand() % 4 + 1;
@@ -5414,7 +5421,7 @@ else{
 strcpy(answer1,en0);
 //printf("%s\n",aprt(EN1));
 //int l1;
-l1=thewidth(ZH1);
+l1=thewidth(ENS[0]);
 fflush(stdout);
 if (l1<0 && -l1>col ){
 l1=(-l1-1)/col+1;
@@ -5423,11 +5430,11 @@ else{
     l1=1;
 }
 
-printf("%s\n",aprt(ZH1));
+printf("%s\n",ENS[0]);
 
 //int l2;
-l2=thewidth(ZH2);
-printf("%s\n",aprt(ZH2));
+l2=thewidth(ENS[1]);
+printf("%s\n",ENS[1]);
 fflush(stdout);
 if (l2<0 && -l2>col ){
 l2=(-l2-1)/col+1;
@@ -5437,8 +5444,8 @@ else{
 }
 
 //int l3;
-l3=thewidth(ZH3);
-printf("%s\n",aprt(ZH3));
+l3=thewidth(ENS[2]);
+printf("%s\n",ENS[2]);
 fflush(stdout);
 if (l3<0 && -l3>col ){
 l3=(-l3-1)/col+1;
@@ -5448,8 +5455,8 @@ else{
 }
 
 //int l4;
-l4=thewidth(ZH4);
-printf("%s",aprt(ZH4));
+l4=thewidth(ENS[3]);
+printf("%s",ENS[3]);
 fflush(stdout);
 if (l4<0 && -l4>col ){
 l4=(-l4-1)/col+1;
@@ -5524,7 +5531,7 @@ else{
                     thei=1;
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -5558,7 +5565,7 @@ fflush(stdout);
                     }
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -5578,7 +5585,7 @@ fflush(stdout);
         thei=1;
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         fflush(stdout);
@@ -5613,7 +5620,7 @@ fflush(stdout);
         }
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         //printf("\n");
@@ -5630,7 +5637,7 @@ fflush(stdout);
             thei=1;
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
     fflush(stdout);
@@ -5668,7 +5675,7 @@ fflush(stdout);
                     }
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",aprt(ENS[thei-1]));
+                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
