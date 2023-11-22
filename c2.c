@@ -3871,7 +3871,7 @@ continue;
 else{
    //  printf("\n%s\n",lastword);
 for(int i=0;i<N;i++){
-    if(checkstr(czh[i],lastword,strlen(lastword))){
+    if(checkstr(czh[i],lastword,strlen(lastword)) ){
 //printf("\n\n");
 //strcpy(yword,delchar(czh[i],lastword));
 
@@ -3888,7 +3888,7 @@ yword[0]='\t';
 break;
     }
 }
-continue;
+//continue;
 }
     }
 }
