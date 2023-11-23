@@ -971,7 +971,7 @@ int whereadd=0;
 char vvline[4999];
 char alinea[4999];
 
-strcpy(aline,aline);
+//strcpy(aline,aline);
 while (TRUE){
     if((whereadd=fresh(aline))==-1){
         break;
@@ -1351,7 +1351,7 @@ if(Checkstr(azh2[m],"...",3)){
 strcpy(alldot,azh2[m]);
 beforedot=strtok(alldot,"...");
 if(strcmp(w1[n],beforedot)==0){
-strcpy(yword,"*...");
+strcpy(yword,"...");
 return(2);
 }
 }
@@ -1602,7 +1602,7 @@ if( ez=='2' && (isascii(zword) && strcmp(Byword,"")!=0)){
                             coln=colm;
                         //if(ish==TRUE)
                        // cursor_position(&rown,&coln);
-                        printf("%s",&zword);
+                        printf("%c",zword);
                         fflush(stdout);
                         //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
@@ -1706,7 +1706,7 @@ else if ( zword=='.' || zword=='-' ){
                         while (TRUE){
                         //if(ish==TRUE)
                         cursor_position(&rown,&coln);
-                        printf("%s",&zword);
+                        printf("%c",zword);
                         fflush(stdout);
                         //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
@@ -3427,7 +3427,6 @@ char prons[25];
 char czh[MAX_SIZE][MAX_LENGTH];
 int Read(){
 
-BOOL prting=FALSE;
 //struct WordInfo* TheWordInfo;
 
     char lastword[MAX_LENGTH1];
@@ -3475,7 +3474,6 @@ if (waiting==FALSE){
     if(getin==FALSE){
         strcpy(dword,"");
         strcpy(Byword,"");
-        prting=FALSE;
         zword=rd(fd1);
        // nd=FALSE;
         pd=TRUE;
@@ -3716,7 +3714,7 @@ if(waiting==TRUE && ( bd==TRUE || getin==TRUE )  ){
 //zword='\x0';
 //printf("\nyword:%s\n",yword);
 //printf("\nczh:%s\n",czh[M]);
-if(yi==0 && strcmp(yword,"，")!=0 && ez=='2' && prting==FALSE && zword!='\x7f' ){  //防止循环 //debug防止segmentation error
+if(yi==0 && strcmp(yword,"，")!=0 && ez=='2' && zword!='\x7f' ){  //防止循环 //debug防止segmentation error
     //strcpy(lastword,""); 
     //if(strcmp(aword,"")!=0)
 strcpy(lastword,aword);
@@ -3789,7 +3787,7 @@ switch (pi) {
 }
 
 }
-if(strcmp(lastpron,prons)!=0 || strcmp(lastpron,"")==0 ) 
+if(strcmp(lastpron,prons)!=0 || strcmp(lastpron,"")==0 )
 strcat(Byword,prons);
 //printf("\nezh:%s\n",ezh[m]);
 strcat(Byword,removealphas(ezh[m]));
@@ -3797,13 +3795,13 @@ strcat(Byword,removealphas(ezh[m]));
 //printf("2");
 strcpy(yword,"");
 strcat(yword,Byword);
-prting=TRUE;
 yi=-1;
 zword='\x0';
 strcpy(dword,"");  //防止循环
 strcpy(lastpron,prons);
 strcpy(prons,"");
 break;
+
 }
 
 }
