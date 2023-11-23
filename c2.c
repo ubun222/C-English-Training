@@ -1244,11 +1244,11 @@ char * removeParenthesesAndBrackets(char *str) {
     return newstr;
 
 }
-
+char newstr1[MAX_LENGTH1*MAX_SIZE1];
 char * readjust(char * str){
     int i, j;
     int len = strlen(str);
-    char *newstr1 = (char*)malloc(len + 1);
+  //  char *newstr1 = (char*)malloc(len + 1); debug ish illegal instruction
     for (i = 0, j = 0; i < len; i++) {
         if(str[i]==',' || str[i]==';' ){
             newstr1[j++] = '\xef';
