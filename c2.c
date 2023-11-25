@@ -994,7 +994,7 @@ strcpy(baline,"");
 //else
 
     if(ysv1=='v' || ysv1=='V'){
-strcpy(aline,aline);
+//strcpy(aline,aline);
         while(mi=mi+1,mi<=strlen(aline)){
 strncpy(valine,&aline[mi],leng);
 //printf(":%s:%s:",valine,answer1);
@@ -1379,7 +1379,7 @@ return 0;
 int ifRight(){
 int i,n,cc,k;
 int cmmm,mmm,m;
-char tch[9999];
+char tch[MAX_LENGTH1*MAX_SIZE1];
 char * dzh;
 cc=0;
         //c=0;
@@ -1387,7 +1387,7 @@ cc=0;
         cmmm=0;
         mmm=0;
         strcpy(tch,"");
-    strcpy(tch,aword);
+    strcpy(tch,removeParenthesesAndBrackets(aword));
     char w1[MAX_SIZE1][MAX_LENGTH1];
     
 if(ez=='2'){
@@ -1400,23 +1400,23 @@ if(ez=='2'){
                 cmmm=0;
                 mmm=m;
                 m=m+2+cmmm;
-                while(m=m+1,m<=strlen(aword)){
+                while(m=m+1,m<=strlen(tch)){
                     //printf("222");
                     strcpy(w1[n],"");
-                    if(aword[m]=='\xef' && aword[m+1]=='\xbc' && aword[m+2]=='\x8c' ||  aword[m]=='\0'  ){
+                    if(tch[m]=='\xef' && tch[m+1]=='\xbc' && tch[m+2]=='\x8c' ||  tch[m]=='\0'  ){
                         cmmm=m-mmm-3;
                         if(n==0){
-                        dzh=&aword[mmm+1];
+                        dzh=&tch[mmm+1];
                         cmmm=cmmm+2;
                         }
                         else
-                        dzh=&aword[mmm+3];
+                        dzh=&tch[mmm+3];
                         strncpy(w1[n],dzh,cmmm);
                         //printf("%s",w1[n]);
                         break;
                     }
                 }
-                if(aword[m]=='\0' )
+                if(tch[m]=='\0' )
                 break;
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
@@ -1687,8 +1687,11 @@ return(0);
 }
 
 else if(ez=='2'){
+
+    if(zword!='\t'){
     now2='\x00';
 now3='\x00';
+    }
 //strcpy(cword,"");
 //strncat(cword,&zword,1);
 if ( zword==',' || zword==' '  ){
