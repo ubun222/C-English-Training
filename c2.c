@@ -704,7 +704,7 @@ int cursor_position(int *const Row ,int *const Col)
     value.it_value.tv_sec=0;
     value.it_value.tv_usec=150000;
     value.it_interval.tv_sec=0;
-    value.it_interval.tv_usec=200000;
+    value.it_interval.tv_usec=0;
 
     value0.it_value.tv_sec=0;
     value0.it_value.tv_usec=0;
@@ -754,15 +754,15 @@ retry=0;
 //fseek(stdin,0,SEEK_END);
 //printf("\033[6n");
 //ualarm(100000,9999999);
-    setitimer(ITIMER_REAL,&value,NULL);
+  //  setitimer(ITIMER_REAL,&value,NULL);
 //setvbuf(stdin, NULL, _IONBF, 2);
 while(((result = rd(fd1)) ))
 {
 if (result=='R'){
-setitimer(ITIMER_REAL,&value0,NULL);
+//setitimer(ITIMER_REAL,&value0,NULL);
 break;
 }
-    setitimer(ITIMER_REAL,&value,NULL);
+  //  setitimer(ITIMER_REAL,&value,NULL);
     //ualarm(0,0);
     //setitimer(ITIMER_REAL,&value0,NULL);
   //  if ((int)result==-1 || (int)result==-2 ){
@@ -784,7 +784,7 @@ if (result >= '0' && result <= '9') {
         }
     }
     if(retry==1){
-       setitimer(ITIMER_REAL,&value0,NULL); 
+     //  setitimer(ITIMER_REAL,&value0,NULL); 
     //strncat(b,&result,1);
 if (result >= '0' && result <= '9') {
     b = 10 * b + result - '0';
@@ -1138,6 +1138,7 @@ char result;
 while(TRUE){
 b=0;
 printf(format2,format3,format4);
+//fflush(stdout);
 setitimer(ITIMER_REAL,&value,NULL);
    // b++;
     // ..
@@ -1338,7 +1339,9 @@ strcpy(azh2[m],"");
 if (c>=zm+1){
     flag=TRUE;
     ishprt("\r\033[%dC%s\r",col-2,tline);
+    fflush(stdout);
     c=0;
+    strcpy(yword,"");
     break;
 }
 else{
@@ -1368,6 +1371,7 @@ return(0);
        if(strcmp(aword,answer1)==0){
         flag=TRUE;
         ishprt("\r\033[%dC%s\r",col-2,tline);
+	fflush(stdout);
         return 0;
        }
 
@@ -1580,7 +1584,6 @@ int ezback(){
 return 0;
 }
 
-char property[10][8888];//词性分类
 
 char zword;
 char cword[4];
@@ -1639,7 +1642,7 @@ else if(ez=='1'){
 now2='\x00';
 now3='\x00';
 //cursor_position(&grown,&gcoln);
-fflush(stdin);
+//fflush(stdin);  偶发输入中断
 
 
 if (((int)zword>=65  && (int)zword<=122) || ((int)zword==32 || (int)zword==46 || (int)zword==45 ) ){
@@ -1752,7 +1755,7 @@ else if (c3==TRUE) {
                         //if(ish==TRUE)
                         coln=colm;
                         //cursor_position(&rown,&coln);
-                        fprintf(stdout,"%s",cword);
+                        printf("%s",cword);
                         fflush(stdout);
                         //if(ish==TRUE)
                         cursor_position(&rowm,&colm);
@@ -3035,6 +3038,7 @@ free(rtxt);
             int l3;
             int l4;
 //char *pattern = "[a-zA-Z]+[\\s]*\\[[^\\[\\]]+\\][\\s]*";
+int flags;
 int ysv(char * bword,char ysv0){
 //char eline[]="\033[32m○\033[0m";
 char * rbuffer;
@@ -3084,8 +3088,6 @@ if(AUTO==TRUE){
     ysv0='v';
 }
 
-
-
 if (ysv0==' ')
 while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r')
     continue;
@@ -3093,7 +3095,6 @@ else{
     ysv1=ysv0;
 }
 ysv0=' ';
-
 if(PASS1==TRUE){
     if ( ysv1=='S' || ysv1=='s' || ysv1=='V' || ysv1=='Y' || flag==TRUE ){
         
@@ -3433,13 +3434,12 @@ for(n=0;n<maxn;n++){
 struct WordInfo * TheWordInfo;
 char prons[25];
 char czh[MAX_SIZE][MAX_LENGTH];
-int flags;
 struct termios new_setting;
 int Read(){
-
 //struct WordInfo* TheWordInfo;
-
+ysv1='\x00';
     char lastword[MAX_LENGTH1];
+    char bwords[MAX_LENGTH];
     int m;
 int leng3;
 int yn=0;
@@ -3450,7 +3450,7 @@ int M;
     BOOL autosleep=TRUE;
 while(TRUE){
     leng3=strlen(aword);
-    setitimer(ITIMER_REAL,&value0,NULL);
+    //setitimer(ITIMER_REAL,&value0,NULL);
 
 //if(yi==yn){
 //    waiting=FALSE;
@@ -3467,7 +3467,7 @@ if (waiting==FALSE){
     sleep(2);
     autosleep=FALSE;
     }
-    fflush(stdin);
+   // fflush(stdin);
     if(AUTO==TRUE && getin==FALSE){
     if(ez=='1')
     usleep(50000);
@@ -3483,7 +3483,12 @@ if (waiting==FALSE){
     if(getin==FALSE){
         strcpy(dword,"");
         strcpy(Byword,"");
+        fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
         zword=rd(fd1);
+        //fgets(&zword,222222,stdin);
+        //printf("22222");
+if(zword=='\x06')
+        fcntl(STDIN_FILENO, F_SETFL, flags);
        // nd=FALSE;
         pd=TRUE;
         //if (zword=='\x00')
@@ -3521,6 +3526,7 @@ break;
 if( zword=='\x06' && getin==FALSE ){ //查找
 findword(answer1,en,txt);
             if(ez=='1'){
+                
                 strcpy(yword,"");
                 yword[0]='\0';
                 //printf("%s\n",answer1);
@@ -3529,7 +3535,7 @@ findword(answer1,en,txt);
                 yword[si+strlen(answer1)]='\x7f';
                 yword[si+strlen(answer1)*2]='\x7f';
             }
-
+cursor_position(&rowm,&colm);
             //printf("\n%lu\n",strlen(zwords));
                 //strcpy(zwords,backs);
                 zd=FALSE;
@@ -3546,7 +3552,7 @@ waiting=FALSE;
             leng=-1;
 strcpy(cword,"");
 strcpy(aword,"");
-int yn=0;
+//yn=0;
 //free(yword);
 zword='\x00';
 yi=-1;
@@ -3581,22 +3587,18 @@ strncat(yword,&zword,1);
 if(bd!=TRUE && strlen(yword)==1 && pd==TRUE ){
    // printf("2222");
 //setitimer(ITIMER_REAL,&evalue,NULL);
-fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
-tcsetattr(0, TCSANOW, &new_setting);
-
-
 //printf("1");
 if( strcmp(yword,"")!=0 && getin==FALSE ){
 bd=TRUE;
 }
 //strcpy(dword,""); 
-while (getin==FALSE && pd==TRUE && zd==TRUE){
+if (getin==FALSE && pd==TRUE && zd==TRUE){
 if( strcmp(yword,"\x7f")==0 ){ // 不能加\t 否则lastword无法实时更新
     waiting=TRUE;
     bd=FALSE; //str和strs区别
 
     //strcpy(yword,"");    
-    yn=0;
+    yn=-1;
 
 yi=0;
 
@@ -3604,7 +3606,7 @@ yi=0;
     //fcntl(STDIN_FILENO, F_SETFL, flags);
     zd=FALSE;
     pd=FALSE;
-    break;
+   // break;
 }
 //setitimer(ITIMER_REAL,&evalue0,NULL);
 //continue;
@@ -3618,40 +3620,64 @@ yi=0;
 //xword=readword(fd1);
 
 //setitimer(ITIMER_REAL,&value0,NULL);
+//xword='\x00';
+    //yn=0;
+//yn=strlen(yword);
+strcpy(bwords,"");
 
-if(fgets(&xword,2,stdin)!=NULL){
+//fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
+
+while (fscanf(stdin,"%c",&xword)!=-1){
+    strcat(bwords,&xword);
+}
+while (fscanf(stdin,"%c",&xword)!=-1){
+    strcat(bwords,&xword);
+}
+while (fscanf(stdin,"%c",&xword)!=-1){
+    strcat(bwords,&xword);
+}
+usleep(10000); //0.01秒
+while (fscanf(stdin,"%c",&xword)!=-1){
+    strcat(bwords,&xword);
+}
+
+       // fcntl(STDIN_FILENO, F_SETFL, flags);
+
+if (strcmp(bwords,"")!=0){
 
   //  nd=FALSE;
     //setitimer(ITIMER_REAL,&value0,NULL);
     bd=TRUE;
    //printf("22222");
     //waiting=TRUE;
-    strncat(dword,&xword,1); //当前输入
-    strncat(yword,&xword,1); //所有输入
+    strcat(dword,bwords); //当前输入
+    strcat(yword,bwords); //所有输入
 //yn=strlen(yword);
-
-
-}
-else{
-//printf("\n\n2222:%c\n\n",xword);
-        fcntl(STDIN_FILENO, F_SETFL, flags);
-        fflush(stdin);
-
-//zd=FALSE;
-yn=0;
 yn=strlen(yword);
-if(strlen(dword)>=1){
     waiting=TRUE;
     bd=TRUE;
     yi=-1;
+    fcntl(STDIN_FILENO, F_SETFL, flags);
+   // break;
 }
+
 else{
-    yi=-1;
+        yi=-1;
     waiting=TRUE;
-    bd=TRUE; // 下面的开关
+    bd=TRUE;
     pd=FALSE;
     zd=FALSE;
 }
+//printf("\n\n2222:%c\n\n",xword);
+    fcntl(STDIN_FILENO, F_SETFL, flags);
+        //fflush(stdin);
+
+//zd=FALSE;
+//if(strlen(dword)>=1){
+
+//}
+//else{
+//}
 //setvbuf(stdout, NULL, _IOLBF, 512);
 //waiting=TRUE;
 
@@ -3660,20 +3686,18 @@ else{
 
 //printf("3");
 //pd=FALSE;
-    break;
+ //   break;
     //printf("%c",xword);
    // continue;
-}
-
 }
 }
 
 //nd=FALSE;
 
 //setitimer(ITIMER_REAL,&value0,NULL);
-fflush(stdin);
+//fflush(stdin);
 
-fcntl(STDIN_FILENO, F_SETFL, flags);
+//fcntl(STDIN_FILENO, F_SETFL, flags);
 /*
 else if(waiting==TRUE && yn==yi-1){
 waiting=FALSE;
@@ -3685,10 +3709,10 @@ fflush(stdin);
 }*/
 
 
-//yn=strlen(yword);
+yn=strlen(yword);
+
 //printf("%s",yword);
 
-yn=strlen(yword);
 //printf("%d",yi);
 if(waiting==TRUE && ( bd==TRUE || getin==TRUE )  ){
    // printf("%d",yi);
@@ -3984,9 +4008,9 @@ bk=FALSE;
 }
 //printf("%d",yn);
 
-        if (yn==yi){
+        if (yn==yi ){
     //setitimer(ITIMER_REAL,&value0,NULL);
-          //  printf("2222");
+         //   printf("2222");
 if(getin==FALSE)
 bd=FALSE;
 
@@ -3996,6 +4020,7 @@ waiting=FALSE;
 //zword='\x00';
 //free(yword);
 strcpy(yword,"");
+yn=-1;
 yi=-1;
 //zd=FALSE;
 zd=FALSE;
@@ -4008,7 +4033,7 @@ pd=FALSE;
 xword='\x00';
 //bd=FALSE;
 //pd=FALSE;
-fflush(stdin);
+//fflush(stdin);
 if( bk==FALSE && ififright(aword)==2){
     //printf("222");
 waiting=TRUE;
@@ -4194,8 +4219,6 @@ tcsetattr(0, TCSANOW, &new_setting);
 
 
 if(premode=='\x0'){
-
-    flags = fcntl(STDIN_FILENO, F_GETFL, 0);
     fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 
 printf("\033[2m\033[3m\n\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
@@ -5768,7 +5791,7 @@ if(Thepath!=NULL)
     perror("signal");
     exit(-1);
       }
-
+flags = fcntl(STDIN_FILENO, F_GETFL, 0);
 atexit(my_exit);
 xtxt=(char *)malloc(8999999);
 alltxt=(char *)malloc(8999999); 
