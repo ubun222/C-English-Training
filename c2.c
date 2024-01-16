@@ -41,7 +41,8 @@ enum PartOfSpeech {
     PRONOUN,
     CONJUNCTION,
     INTERJECTION,
-    ARTICLE
+    ARTICLE,
+    VERB
 };
 
 #define MAX_SIZE 120
@@ -1172,7 +1173,7 @@ va_end(ap);
     // ...
     va_end(ap); 
     }
-
+fflush(stdout);
 return 0;
 }
 char newrstr[MAX_LENGTH1]; 
@@ -2352,6 +2353,7 @@ void entries(char * directories){
                rows[rown][i]=directories1[n];               //
                 i++;
             }
+            
         }
 int LS[rown];
 int LSall=0;
@@ -2370,6 +2372,7 @@ int LSall=0;
         }
         LSall=LSall+LS[i];
     }
+if(LSall>1)
 printf("\033[%dA",LSall-1);
 fflush(stdout);
 BOOL flag1=FALSE;
@@ -2413,6 +2416,7 @@ while (1){
                     thei--;
                     if(thei==0){
                         thei=LSall;
+                        if(LSall-LS[rown-1]>0)
                         printf("\033[%dB",LSall-LS[rown-1]);
                         fflush(stdout);
                     }
@@ -3368,6 +3372,7 @@ wordInfos[ADVERB].count=0;
 wordInfos[CONJUNCTION].count=0;
 wordInfos[PREPOSITION].count=0;
 wordInfos[PRONOUN].count=0;
+wordInfos[VERB].count=0;
 for(n=0;n<MAX_SIZE1;n++){
     strcpy(wordInfos[NOUN].words[n],"");
     strcpy(wordInfos[VERBT].words[n],"");
@@ -3377,11 +3382,18 @@ for(n=0;n<MAX_SIZE1;n++){
     strcpy(wordInfos[CONJUNCTION].words[n], "");
     strcpy(wordInfos[PREPOSITION].words[n], "");
     strcpy(wordInfos[PRONOUN].words[n], "");
+    strcpy(wordInfos[VERB].words[n], "");
    // printf("\n---%s---\n",zh[n]);
 }
 
 for(n=0;n<maxn;n++){
-    if(Checkstr(zh[n],"n.",2)){
+    
+    if(Checkstr(zh[n],"v.",2)){
+//printf("\n---%s---\n",zh[0]);
+        strcpy(wordInfos[VERB].words[wordInfos[VERB].count], &(zh[n])[2]);
+        wordInfos[VERB].count++;
+        lastprop=10;
+    }if(Checkstr(zh[n],"n.",2)){
 //printf("\n---%s---\n",zh[0]);
         strcpy(wordInfos[NOUN].words[wordInfos[NOUN].count], &(zh[n])[2]);
         wordInfos[NOUN].count++;
@@ -3790,6 +3802,8 @@ switch (pi) {
     case 8: strcat(prons, "inte.");
             break;
     case 9: strcat(prons, "art.");
+            break;
+    case 10: strcat(prons, "v.");
             break;
     default: strcpy(prons, "");
     break;
@@ -4411,7 +4425,7 @@ nend[num+1]=max;
 	        en=strtok(NULL,"\t");
             strcpy(answer1,zh);
             strcpy(ch,en);
-            
+            en=aprt(en);
             for(n=0;n<10;n=n+1){
             strcpy(bzh[n],"");
             strcpy(azh[n],"");
@@ -4686,6 +4700,7 @@ strncat(word,&txt[n],1);
 	        en=strtok(NULL,"\t");
             strcpy(answer1,zh);
             strcpy(ch,en);
+            en=aprt(en);
             for(n=0;n<10;n=n+1){
             strcpy(bzh[n],"");
             strcpy(azh[n],"");
@@ -4942,7 +4957,7 @@ strncat(word,&txt[n],1);
 	        en=strtok(NULL,"\t");
             strcpy(answer1,zh);
             strcpy(ch,en);
-
+            en=aprt(en);
             for(n=0;n<10;n=n+1){
             strcpy(bzh[n],"");
             strcpy(azh[n],"");
