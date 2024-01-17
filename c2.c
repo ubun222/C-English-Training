@@ -3387,13 +3387,7 @@ for(n=0;n<MAX_SIZE1;n++){
 }
 
 for(n=0;n<maxn;n++){
-    
-    if(Checkstr(zh[n],"v.",2)){
-//printf("\n---%s---\n",zh[0]);
-        strcpy(wordInfos[VERB].words[wordInfos[VERB].count], &(zh[n])[2]);
-        wordInfos[VERB].count++;
-        lastprop=10;
-    }if(Checkstr(zh[n],"n.",2)){
+    if(Checkstr(zh[n],"n.",2)){
 //printf("\n---%s---\n",zh[0]);
         strcpy(wordInfos[NOUN].words[wordInfos[NOUN].count], &(zh[n])[2]);
         wordInfos[NOUN].count++;
@@ -3433,6 +3427,11 @@ for(n=0;n<maxn;n++){
         strcpy(wordInfos[PRONOUN].words[wordInfos[PRONOUN].count], &(zh[n])[5]);
         wordInfos[PRONOUN].count++;
         lastprop=6;
+    }else if(Checkstr(zh[n],"v.",2)){
+//printf("\n---%s---\n",zh[0]);
+        strcpy(wordInfos[VERB].words[wordInfos[VERB].count], &(zh[n])[2]);
+        wordInfos[VERB].count++;
+        lastprop=10;
     }else if(lastprop!=-1){
         strcpy(wordInfos[lastprop].words[wordInfos[lastprop].count], zh[n]);
         wordInfos[lastprop].count++;  
