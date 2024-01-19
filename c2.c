@@ -1150,7 +1150,7 @@ printf("\r\033[%dC\033[0m\033[3m<>\033[2m      \r",col/2-3);usleep(120000);fflus
 anykey=getchar();if(anykey!=-1)break;
 
 }
-printf("\r\033[0m\033[%dC        ",col/2-4+col%2);
+printf("\r\033[0m\033[%dC         ",col/2-4+col%2);
 printf("\r\033[1A");
 fcntl(STDIN_FILENO, F_SETFL, flags);
 }
