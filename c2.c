@@ -3315,10 +3315,11 @@ for(P=0;P<p;P++){
     if(rtxt[0]!='\0'){
     getlines(rtxt);
     }
-    if(theline[0]!='\0')
+    if(theline[0]!='\0'){
     printf("\n%s",aprt(theline));
     fflush(stdout);
     loading();
+    }
     // NL=TRUE;
     if(theline[0]!='\0'){
     break;
