@@ -1116,19 +1116,19 @@ void loading(){
 printf("\n");
 fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 while(TRUE){
-printf("\r\033[%dC\033[3m\033[2m<>\033[0m      \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m\033[2m<>      \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1){printf("%d",anykey);break;};
-printf("\r\033[%dC\033[3m\033[0m<>      \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m<>      \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[2m<>\033[0m<>    \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m\033[2m<>\033[0m\033[3m<>    \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[2m<><>\033[0m<>  \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m\033[2m<><>\033[0m\033[3m<>  \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[2m<><><>\033[0m<>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m\033[2m<><><>\033[0m\033[3m<>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m  \033[2m<><>\033[0m<>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m  \033[2m<><>\033[0m\033[3m<>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m    \033[2m<>\033[0m<>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m    \033[2m<>\033[0m\033[3m<>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
 printf("\r\033[%dC\033[3m      <>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
@@ -1136,17 +1136,17 @@ printf("\r\033[%dC\033[3m      \033[2m<>\033[0m\r",col/2-3);usleep(120000);fflus
 anykey=getchar();if(anykey!=-1)break;
 printf("\r\033[%dC\033[3m      <>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m    \033[0m<>\033[2m<>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m    <>\033[2m<>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m  \033[0m<>\033[2m<><>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m  <>\033[2m<><>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[0m<>\033[2m<><><>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m<>\033[2m<><><>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[0m<>\033[2m<><>  \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m<>\033[2m<><>  \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[0m<>\033[2m<>    \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m<>\033[2m<>    \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[0m<>\033[2m      \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m<>\033[2m      \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
 
 }
