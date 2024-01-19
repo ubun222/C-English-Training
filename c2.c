@@ -1023,7 +1023,7 @@ return aline;
 }
 
 
-
+int flags;
 int getlines(char * string){
     int i;
     char strings[2999999];
@@ -1105,10 +1105,54 @@ int getlines(char * string){
 
 
     }
-
-
-
     return l;
+}
+
+
+void loading(){
+ int anykey;
+//等待动画
+//<><><><>
+printf("\n");
+fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
+while(TRUE){
+printf("\r\033[%dC\033[3m\033[2m<>\033[0m      \r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1){printf("%d",anykey);break;};
+printf("\r\033[%dC\033[3m\033[0m<>      \r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m\033[2m<>\033[0m<>    \r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m\033[2m<><>\033[0m<>  \r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m\033[2m<><><>\033[0m<>\r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m  \033[2m<><>\033[0m<>\r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m    \033[2m<>\033[0m<>\r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m      <>\r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m      \033[2m<>\033[0m\r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m      <>\r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m    \033[0m<>\033[2m<>\r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m  \033[0m<>\033[2m<><>\r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m\033[0m<>\033[2m<><><>\r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m\033[0m<>\033[2m<><>  \r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m\033[0m<>\033[2m<>    \r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+printf("\r\033[%dC\033[3m\033[0m<>\033[2m      \r",col/2-3);usleep(120000);fflush(stdout);
+anykey=getchar();if(anykey!=-1)break;
+
+}
+printf("\r\033[0m\033[%dC        ",col/2-4+col%2);
+printf("\r\033[1A");
+fcntl(STDIN_FILENO, F_SETFL, flags);
 }
 
 char yword[9999];
@@ -2324,6 +2368,8 @@ strcpy(CORRECT_PATH[the_txtn],PATH[the_txtn]);
 }
 
 fflush(stdout);
+     printf("\033[2J"); // 清屏
+    printf("\033[0;0H"); // 光标移动到左上角
 //printf("%s",txt);
 return 0;
 }
@@ -3042,7 +3088,6 @@ free(rtxt);
             int l3;
             int l4;
 //char *pattern = "[a-zA-Z]+[\\s]*\\[[^\\[\\]]+\\][\\s]*";
-int flags;
 int ysv(char * bword,char ysv0){
 //char eline[]="\033[32m○\033[0m";
 char * rbuffer;
@@ -3205,6 +3250,7 @@ if(AUTO==TRUE){
     }
     //printf("\n%s",theline);
     fflush(stdout);
+    loading();
     }
 //    if(theline[0]!='\0'){
 //    break;
@@ -3272,6 +3318,7 @@ for(P=0;P<p;P++){
     if(theline[0]!='\0')
     printf("\n%s",aprt(theline));
     fflush(stdout);
+    loading();
     // NL=TRUE;
     if(theline[0]!='\0'){
     break;
@@ -4234,7 +4281,7 @@ tcsetattr(0, TCSANOW, &new_setting);
 if(premode=='\x0'){
     fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 
-printf("\033[2m\033[3m\n\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
+printf("\033[2m\033[3m\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
 
     for (cc=0;cc<col-col%2;cc++){
         usleep(19000);
