@@ -2368,8 +2368,8 @@ strcpy(CORRECT_PATH[the_txtn],PATH[the_txtn]);
 }
 
 fflush(stdout);
-     printf("\033[2J"); // 清屏
-    printf("\033[0;0H"); // 光标移动到左上角
+//     printf("\033[2J"); // 清屏
+//    printf("\033[0;0H"); // 光标移动到左上角
 //printf("%s",txt);
 return 0;
 }
@@ -2636,6 +2636,8 @@ txtn++;
 printf("\n");
 if(txtn>0){
 printf("\r");
+     printf("\033[2J"); // 清屏
+    printf("\033[0;0H"); // 光标移动到左上角
 fflush(stdout);
 //getchar();
 //printf("\n");
@@ -2786,7 +2788,9 @@ int getfromread(){
             
             //printf("\n\n%s",path);
     }
-
+     printf("\033[2J"); // 清屏
+    printf("\033[0;0H"); // 光标移动到左上角
+    fflush(stdout);
 return 0;
 
 }
@@ -4282,7 +4286,7 @@ tcsetattr(0, TCSANOW, &new_setting);
 if(premode=='\x0'){
     fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 
-printf("\033[2m\033[3m\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
+printf("\n\033[2m\033[3m\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
 
     for (cc=0;cc<col-col%2;cc++){
         usleep(19000);
