@@ -1073,10 +1073,14 @@ char * getlines(char * string,int Line_num_1){
         for(m=0;m<4;m++){
             if(strlen(aline[m])>=5){
 
-if(Line_num_1==1){
-    return aprt(&aline[m][1]);
+if(Line_num_1>=1){
+    //int ran_3=rand() % 4;
+    return aprt(&aline[m-1+Line_num_1][1]);
 }
         printf("\n%s",aprt(&aline[m][1]));
+            }
+            else{
+                return NULL;
             }
     }
 
@@ -1091,8 +1095,8 @@ if(Line_num_1==1){
     rans[i]=ran;
     if(aline[ran][0]!='\0')
     {
-if(Line_num_1==1){
-    return aprt(&aline[ran][1]);
+if(Line_num_1>=1){
+    return aprt(&aline[Line_num_1-1][1]);
 }
     printf("\n%s",aprt(&aline[ran][1]));
     }
@@ -5235,7 +5239,7 @@ int fun2(){
     printf("\033[0m");
 int max;
  num=0;
-int RAN;
+int RAN_3;
 char Aline[999]; //单行长度
 char EN_3[199]; //单词长度
 char ZH_3[799]; //中文长度
@@ -5270,6 +5274,8 @@ int WIDTH_3; //行宽度
 //int WIDTH_3_1; //行宽度
 //int LINES_3_1; //行高度
 char *getlines_3 ;
+char Getlines_3[9999] ; //三行例句
+
         for (int i=0;i<max;i++){
 	/*printf("%d",i);*/
         /***printf("%c",txt[i]);***/
@@ -5284,40 +5290,75 @@ char *getlines_3 ;
         nend[0]=-1;
         nend[num+1]=max;
         int M=0;
+
+int NUM=num;
+int origin_nends[NUM];
+
+
+        for(i=0;i<num;i++){
+	/*printf("%d",i);*/
+        /***printf("%c",txt[i]);***/
+            origin_nends[i]=nend[i];
+            
+        }
+
+
         while (1){
-                    if(PASS1==TRUE){
-            if(num==0){
-                printf("\n过关了！");
+          //printf("\n\033[1m000000000\033[0m\n");
+                   // if(PASS1==TRUE){
+            if(num<=0){
+                printf("\n过关了！\n");
                 return 0;
             }
-        }
-            flag=FALSE; //Read()归位
+      //  }
+            flag=FALSE; 
             //yn=0;
-            strcpy(aword,"");//Read()归位
+            strcpy(aword,"");
 
             strcpy(bot,"");
             strcpy(Aline,"");
             strcpy(fragment1,"");
             strcpy(fragment2,"");
-            M=0;
-            RAN=rand() % num;
-            for(int m=nend[RAN]+1;m<nend[RAN+1];m++){
-                strncat(Aline,&txt[m],1); //不能用=赋值，否则strcpy清除不了
+         //  
+            RAN_3=rand() % num;
+             M=0;
+            //printf("\n\033[1m111111111\033[0m\n");
+            for(int m=nend[RAN_3]+1;m<nend[RAN_3+1];m++){
+               // strncpy(Aline,&txt[nend[RAN_3]+1],1); //不能用=赋值，否则strcpy清除不了.末尾加\x00即可
+               Aline[M]=txt[m];
                 M++;
             }
            // getchar();
+               Aline[M]='\x00';
+    int position = findPosition(origin_nends, NUM, nend[RAN_3]);
 
-            en_3=strtok(Aline,"\t");
+    if (position != -1) {
+        RAN=position;
+        //printf("目标值 %d 在数组中的位置是 %d\n", target, position);
+    } else {
+        RAN=NUM;
+        printf("\n目标值未在数组中找到\n"); //顺序时会报错，但不影响运行效果
+    }
+
+strcpy(ZH_3,"");
+            strcpy(EN_3,"");
+            en_3=strtok(Aline,"\n");
+            
             /*del_char(zh,'\01');*/
 	    /*del_char(zh,'\0');*/
-	        zh_3=strtok(NULL,"\t");
+        //strtok(NULL,"\n");
+	        en_3=strtok(Aline,"\t");
+            zh_3=strtok(NULL,"\t");
             strcpy(ZH_3,zh_3);
             strcpy(EN_3,en_3);
+            //strcpy(Aline,"");
 //printf("\n\n%s\n\n",EN_3);
 
-
-
+//printf("\n\033[1m333333333\033[0m\n");
 for(P=0;P<p;P++){
+    strcpy(rbuffer,"");
+    strcpy(rtxt,"");
+    strcpy(bbuffer,"");
         strcpy(rtxt,"");
     strcpy(theline,"");
     vflag=FALSE;
@@ -5394,6 +5435,9 @@ for(P=0;P<p;P++){
     getlines_3=getlines(&rtxt[locate],1);
    // printf("\n%s\n",getlines_3);
 if(getlines_3!=NULL){
+//strcpy(Getlines_3,"");
+//strcpy(Getlines_3,getlines_3); //可以直接用getlines_3
+
 N=0;
 WIDTH_3=thewidth(getlines_3);
 strcpy(bot,"");
@@ -5407,22 +5451,39 @@ strcat(bot,"-");
 char* context;
             fragment=strtok_strs(getlines_3,EN_3, &context);
             if(context==NULL){
-                        for (i=ran;i<=num;i++){
+for(int t=0;t<20;t++){
+srand((unsigned)time(NULL));
+getlines_3=getlines(&rtxt[locate],t+1);
+//printf("\ncontinue\n");
+if(getlines_3!=NULL){
+    fragment=strtok_strs(getlines_3,EN_3, &context);
+    if(context!=NULL)
+    break;
+else{
+    continue;
+}
+}
+}
+if(context==NULL){
+                free(context);
+                        for (i=RAN_3;i<=num;i++){
             nend[i]=nend[i+1];
         }
 num--;
-strcpy(EN_3,"");
-strcpy(ZH_3,"");
+//printf("\ncontinue\n");
+
                 continue;
+}
             }
+            printf("\n\033[1m%s\033[0m",strs);
             strcpy(fragment1,fragment);
             /*del_char(zh,'\01');*/
 	    /*del_char(zh,'\0');*/
         //strcpy(fragment,"");
 	        fragment=strtok_strs(NULL,"\n", &context);
             strcpy(fragment2,fragment);
+if(context!=NULL)
 free(context); // 释放上下文分配的内存
-printf("\n\033[1m%s\033[0m",strs);
 printf("\n%s%s%s",fragment1,bot,fragment2);
 
 if(WIDTH_3<0){
@@ -5448,6 +5509,7 @@ if(WIDTH_3_1%col!=0)
 printf("\r\033[%dC",WIDTH_3_1%col);
 ez='1';
 strcpy(answer1,EN_3);
+strcpy(ch,ZH_3);
 zword='\x00';
 yi=-1;
 bd=FALSE;
@@ -5467,16 +5529,15 @@ strcpy(bword,"");
 strcat(bword,EN_3);
 strcat(bword," ");
 strcat(bword,ZH_3);
-ran=RAN;
+ran=RAN_3;
 colourp();
 }
 else{
-        for (i=ran;i<=num;i++){
+        for (i=RAN_3;i<=num;i++){
             nend[i]=nend[i+1];
         }
 num--;
-strcpy(EN_3,"");
-strcpy(ZH_3,"");
+//printf("\ncontinue\n");
 continue;
 }
 fflush(stdout);
@@ -6243,10 +6304,12 @@ else{
    printf("\033[?25l");
    int MODE=fun();
     if(MODE==3){
-        fun3();
+        fun3();  //四选一
+    return 0;
     }
     else if(MODE==2){
-        fun2();
+        fun2(); //完形填空
+    return 0;
     };
     return 0;
 }
