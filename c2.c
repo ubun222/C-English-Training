@@ -1537,7 +1537,6 @@ BOOL now4=FALSE;
 
 int ezback(){
    // int         rown, coln, rowm, colm;
-
    // setvbuf(stdin, NULL, _IONBF, 1);
    if(ez=='1'){
                         while (TRUE){
@@ -1724,6 +1723,8 @@ now3='\x00';
 //cursor_position(&grown,&gcoln);
 //fflush(stdin);  偶发输入中断
 
+if(premode=='3')
+printf("\033[4m");
 
 if (((int)zword>=65  && (int)zword<=122) || ((int)zword==32 || (int)zword==46 || (int)zword==45 ) ){
                         while (TRUE){
@@ -1765,6 +1766,8 @@ fflush(stdout);
                         }
 strncat(aword,&zword,1);
 }
+if(premode=='3')
+printf("\033[0m");
 return(0);
 //cursor_position(&growm,&gcolm);
 }
@@ -5475,7 +5478,7 @@ num--;
                 continue;
 }
             }
-            printf("\n\033[1m%s\033[0m",strs);
+            printf("\n\033[2m%s\033[0m",strs);
             strcpy(fragment1,fragment);
             /*del_char(zh,'\01');*/
 	    /*del_char(zh,'\0');*/
@@ -5494,7 +5497,7 @@ else{LINES_3=1;}
 
 WIDTH_3_1=thewidth(fragment1);
 if(WIDTH_3_1<0){
-LINES_3_1=(-(WIDTH_3_1+1)/col)+1;
+LINES_3_1=(-(WIDTH_3_1)/col)+1;
 WIDTH_3_1=-WIDTH_3_1;
 //printf("\033[%dA\r",LINES_3_1);
 }
@@ -5521,7 +5524,9 @@ zd=FALSE;
 bk=FALSE;
 waiting=FALSE;
 getin=FALSE;
+//printf("\033[4m"); //下划线
 Read();
+//printf("\033[0m");
 if(LINES_3-LINES_3_1>0)
 printf("\r\033[%dB",LINES_3-LINES_3_1);
 
