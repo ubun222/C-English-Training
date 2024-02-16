@@ -5439,7 +5439,7 @@ if(getlines_3!=NULL){
 //strcpy(Getlines_3,getlines_3); //可以直接用getlines_3
 
 N=0;
-WIDTH_3=thewidth(getlines_3);
+
 strcpy(bot,"");
 strcat(bot,"\033[5m");
 strncat(bot,&EN_3[0],1);
@@ -5485,25 +5485,26 @@ num--;
 if(context!=NULL)
 free(context); // 释放上下文分配的内存
 printf("\n%s%s%s",fragment1,bot,fragment2);
-
+WIDTH_3=thewidth(getlines_3);
 if(WIDTH_3<0){
-LINES_3=-(WIDTH_3+1)/col;
+LINES_3=(-(WIDTH_3+1)/col)+1;
 //printf("\033[%dA\r",LINES_3);
 }
-else{LINES_3=0;}
+else{LINES_3=1;}
 
 WIDTH_3_1=thewidth(fragment1);
 if(WIDTH_3_1<0){
-LINES_3_1=-(WIDTH_3_1+1)/col;
+LINES_3_1=(-(WIDTH_3_1+1)/col)+1;
 WIDTH_3_1=-WIDTH_3_1;
 //printf("\033[%dA\r",LINES_3_1);
 }
-else{LINES_3_1=0;}
+else{LINES_3_1=1;}
 
 
 if(LINES_3-LINES_3_1>0)
 printf("\r\033[%dA",LINES_3-LINES_3_1);
 
+printf("\r");
 
 if(WIDTH_3_1%col!=0)
 printf("\r\033[%dC",WIDTH_3_1%col);
