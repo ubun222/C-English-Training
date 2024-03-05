@@ -652,6 +652,7 @@ int fresh(char * aline){
     int lengn=0;
     int co=col;
     int lasti=0;
+    BOOL skip033=FALSE;
    // int whereadd;
     strcpy(theline,aline);
     i=0;
@@ -669,6 +670,22 @@ int fresh(char * aline){
         }
         //printf("%c",theline[i]);
         //sleep(1);
+       if (skip033==TRUE && theline[i]=='m'){
+        i=i+1; 
+        skip033=FALSE;
+        continue;
+       }
+
+if(skip033==TRUE){
+    i=i+1; 
+    continue;
+}
+
+if(skip033==FALSE && theline[i]=='\033'){
+    skip033=TRUE;
+    i=i+1; 
+    continue;
+}
        if ((int)theline[i]-12<=128 && (int)theline[i]>12 ){
             lengn=lengn+1;
             i=i+1;   
@@ -4645,21 +4662,13 @@ TheWordInfo = Getprops(ezh); //排序
             cursor_position(&rowm,&colm);
             /***puts(en);***/
             strcpy(bword,"");
-            if (ish==TRUE){
-            strcat(bword,en);
-            strcat(bword," ");
-            strcat(bword,zh);
-            if(fresh(bword)!=-1)
-                strcpy(bword,"~");
-            else
-                strcpy(bword,"");
-            }
+
             strcat(bword,en);
             strcat(bword," ");
             strcat(bword,"\033[1m");
             strcat(bword,zh);
             strcat(bword,"\033[0m");
-            
+            aprt(bword);
             /*word[0]='\0';*/
             fflush(stdout);
             /***fgets(aword,2,stdin);***/
@@ -4896,20 +4905,13 @@ TheWordInfo = Getprops(ezh);
 
             cursor_position(&rowm,&colm);
             strcpy(bword,"");
-            if (ish==TRUE){
-            strcat(bword,en);
-            strcat(bword," ");
-            strcat(bword,zh);
-            if(fresh(bword)!=-1)
-                strcpy(bword,"~");
-            else
-                strcpy(bword,"");
-            }
+
             strcat(bword,en);
             strcat(bword," ");
             strcat(bword,"\033[1m");
             strcat(bword,zh);
             strcat(bword,"\033[0m");
+            aprt(bword);
             /*word[0]='\0'; */
             /*memset(word,0,sizeof word); */
             /*printf("%s",word);*/
@@ -5148,21 +5150,13 @@ TheWordInfo = Getprops(ezh);
             /***puts(en);***/
             cursor_position(&rowm,&colm);
             strcpy(bword,"");
-            if (ish==TRUE){
-            strcat(bword,en);
-            strcat(bword," ");
-            strcat(bword,zh);
-            if(fresh(bword)!=-1)
-                strcpy(bword,"~");
-            else
-                strcpy(bword,"");
-            }
+
             strcat(bword,en);
             strcat(bword," ");
             strcat(bword,"\033[1m");
             strcat(bword,zh);
             strcat(bword,"\033[0m");
-            
+            aprt(bword);
             fflush(stdout);
             /***fgets(aword,2,stdin);***/
             
@@ -5525,6 +5519,7 @@ bk=FALSE;
 waiting=FALSE;
 getin=FALSE;
 //printf("\033[4m"); //下划线
+cursor_position(&rowm,&colm);
 Read();
 //printf("\033[0m");
 if(LINES_3-LINES_3_1>0)
