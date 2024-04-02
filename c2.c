@@ -917,7 +917,7 @@ int findword(char * en, char * en2 , char * txt){
         else{
             if(Checkstr(Word,Zwords,strlen(Zwords))){
                 if(ish==TRUE){
-                    if(fresh(Word)!=-1)
+                    if(fresh(Word)!=-1) //去掉了循环只有一次判断
                 printf("\n~");
                     else
                 printf("\n");
@@ -3221,7 +3221,7 @@ ishprt("\r\033[%dC%s\r",col-2,eline);
 
 if (ysv1=='v' || ysv1=='V'){
     if (flag!=TRUE){
-    printf("\n%s",bword);
+    printf("\n%s",aprt(bword));
     fflush(stdout);
     }
 for(P=0;P<p;P++){
@@ -3329,7 +3329,7 @@ ishprt("\r\033[%dC%s\r",col-2,eline);
 }
 
         if (flag!=TRUE){
-    printf("\n%s",bword);
+    printf("\n%s",aprt(bword));
     fflush(stdout);
     }
 
@@ -3400,7 +3400,7 @@ else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
 if ( (ysv1=='S'  || ysv1=='s' ) &&  premode=='1')
 ishprt("\r\033[%dC%s\r",col-2,eline);
 if(flag==FALSE){
-    printf("\n%s",bword);
+    printf("\n%s",aprt(bword));
     fflush(stdout);
 }
 }
@@ -4227,7 +4227,7 @@ int colourp(){
                 ishprt("\r\033[%dC%s\r",col-2,fline);
                 fflush(stdout);
                 ysv(bword,' '); 
-                //printf("\n%s",bword);
+                //printf("\n%s",aprt(bword));
                 //fflush(stdout);
                 } 
                 }
@@ -4668,7 +4668,7 @@ TheWordInfo = Getprops(ezh); //排序
             strcat(bword,"\033[1m");
             strcat(bword,zh);
             strcat(bword,"\033[0m");
-            aprt(bword);
+            ////aprt(bword);
             /*word[0]='\0';*/
             fflush(stdout);
             /***fgets(aword,2,stdin);***/
@@ -4911,7 +4911,7 @@ TheWordInfo = Getprops(ezh);
             strcat(bword,"\033[1m");
             strcat(bword,zh);
             strcat(bword,"\033[0m");
-            aprt(bword);
+            ////aprt(bword);
             /*word[0]='\0'; */
             /*memset(word,0,sizeof word); */
             /*printf("%s",word);*/
@@ -5156,7 +5156,7 @@ TheWordInfo = Getprops(ezh);
             strcat(bword,"\033[1m");
             strcat(bword,zh);
             strcat(bword,"\033[0m");
-            aprt(bword);
+            ////aprt(bword);
             fflush(stdout);
             /***fgets(aword,2,stdin);***/
             
