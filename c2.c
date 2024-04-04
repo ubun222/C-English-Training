@@ -2874,7 +2874,7 @@ int nend[39999]; //单词总数极限
 int num=-1;
     char order;
 
-char *pattern = "[a-zA-Z]+[|ˈˌɪəʊɪʊɔɪʌæɜːɑːʊəɪɒʃθðŋʧʤŋ]+";
+char *pattern = "[a-zA-Z].+[|ˈˌɪəʊɪʊɔɪʌæɜːɑːʊəɪɒʃθðŋʧʤŋ]+";
 regex_t regex;
 regmatch_t match;
 
