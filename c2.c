@@ -1142,7 +1142,7 @@ void loading(){
 printf("\n");
 fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 while(TRUE){
-printf("\r\033[%dC\033[0m\033[3m\033[2m<>      \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m\033[0m\033[3m<>      \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1){printf("%d",anykey);break;};
 printf("\r\033[%dC\033[0m\033[3m<>      \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
@@ -1158,7 +1158,7 @@ printf("\r\033[%dC\033[3m    \033[2m<>\033[0m\033[3m<>\r",col/2-3);usleep(120000
 anykey=getchar();if(anykey!=-1)break;
 printf("\r\033[%dC\033[3m      <>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m      \033[2m<>\033[0m\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m      \033[0m\033[3m<>\033[0m\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
 printf("\r\033[%dC\033[3m      <>\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
@@ -3214,7 +3214,7 @@ num--;
 }  //放在后面会莫名其妙失效
 
 //printf("%c",ysv1);
-if (ysv1=='V' && premode=='1'){
+if (ysv1=='V' && ( premode=='1' || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
 }
 
@@ -3324,7 +3324,7 @@ if(AUTO==TRUE){
 
 }
 else if (ysv1=='y' || ysv1=='Y'){
-if (ysv1=='Y' && premode=='1'){
+if (ysv1=='Y' && ( premode=='1' || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
 }
 
@@ -4421,6 +4421,10 @@ fflush(stdout);
     while ((premode=getchar())!='\n' && premode!='\r' && premode!='1' && premode!='2' && premode!='3'){
         continue;
     }
+    if(premode=='\n' || premode=='\r' ){
+premode='1';
+    }
+
     if(premode=='2'){
         srand((unsigned)time(NULL));
 return 3;
@@ -5238,6 +5242,7 @@ int max;
  num=0;
 int RAN_3;
 char Aline[999]; //单行长度
+char Bline[999]; //单行长度
 char EN_3[199]; //单词长度
 char ZH_3[799]; //中文长度
 char * en_3; 
@@ -5314,6 +5319,7 @@ int origin_nends[NUM];
 
             strcpy(bot,"");
             strcpy(Aline,"");
+            strcpy(Bline,"");
             strcpy(fragment1,"");
             strcpy(fragment2,"");
          //  
@@ -5348,6 +5354,9 @@ strcpy(ZH_3,"");
             zh_3=strtok(NULL,"\t");
             strcpy(ZH_3,zh_3);
             strcpy(EN_3,en_3);
+            strcpy(Bline,EN_3);
+            strcat(Bline," ");
+            strcat(Bline,ZH_3);
             //strcpy(Aline,"");
 //printf("\n\n%s\n\n",EN_3);
 
@@ -5532,6 +5541,9 @@ strcat(bword," ");
 strcat(bword,ZH_3);
 ran=RAN_3;
 colourp();
+if(flag==TRUE){
+    printf("\n%s",aprt(Bline));
+}
 }
 else{
         for (i=RAN_3;i<=num;i++){
