@@ -6026,7 +6026,7 @@ else{
                     thei=1;
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
+                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -6060,7 +6060,7 @@ fflush(stdout);
                     }
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
+                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -6080,7 +6080,7 @@ fflush(stdout);
         thei=1;
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
+                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         fflush(stdout);
@@ -6094,7 +6094,6 @@ fflush(stdout);
         }
         else{
         printf("\033[0m");
-fflush(stdout);
         fflush(stdout);
         printf("\r%s\033[K\r",aprt(ENS[thei-1]));
         if(LS[thei-1]>1)
@@ -6115,7 +6114,7 @@ fflush(stdout);
         }
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
+                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         //printf("\n");
@@ -6132,7 +6131,7 @@ fflush(stdout);
             thei=1;
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
+                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
     fflush(stdout);
@@ -6170,7 +6169,7 @@ fflush(stdout);
                     }
                     ENS[thei-1][0]='-';
                     ENS[thei-1][1]='>';
-                    printf("\r\033[1m%s\033[K\r\033[0m",ENS[thei-1]);
+                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
