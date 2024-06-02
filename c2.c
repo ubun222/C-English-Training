@@ -379,13 +379,14 @@ int mergeDuplicates(char str[MAX_SIZE1][MAX_LENGTH1]) {
         strcpy(azh2[i],str[i]);
     }
     for (int i = 0; i < rowCount; ++i) {
-        if(strcmp(str[i],"")==0 )
-        break;
+        //if(strcmp(str[i],"")==0 )
+        //break;
        // azh2[i]=(char *)malloc(MAX_LENGTH1);
        // strcpy(azh2[i],str[i]);
         //printf("，\n\n，");
-        for (int j = i + 1; j < rowCount; ++j) {
-
+        for (int j = 0; j < rowCount; ++j) {
+            if(i==j){continue;}
+            printf("\1:%s\n2:%s\n",azh2[i],azh2[j]);
             if (strcmp(azh2[i], azh2[j]) == 0 && strcmp(azh2[i], "") != 0 ) {
                 // 找到重复项，将后面的项移动到数组末尾
                 //printf("\nduplicate:%s\n",azh2[i]);
@@ -395,6 +396,7 @@ int mergeDuplicates(char str[MAX_SIZE1][MAX_LENGTH1]) {
                 nmax++;
                 strcpy(azh2[rowCount-1], "");
                 rowCount--; // 更新数组大小
+                i--;
                 j--; // 继续检查当前位置，因为移动后的元素可能还是重复的
             }
         }
@@ -854,6 +856,8 @@ int findword(char * en, char * en2 , char * txt){
     int max;
     char * Txt;
     Txt=(char *)malloc(1999999);
+regex_t regex1;
+regmatch_t match1;
     strcpy(Txt,txt);
     //FILE * fp;
     strcpy(Eng,en);
@@ -907,14 +911,24 @@ int findword(char * en, char * en2 , char * txt){
     // max=strlen(txt);
     max=strlen(Txt);
     strcpy(Word,"");
+//printf("%s",reti);
+//char *pattern1 = Zwords;
+int reti= regcomp(&regex1, Zwords, REG_EXTENDED);
+BOOL tswitch=FALSE;
     while (I++,I<max){
         if(Txt[I] != '\n'){
             if(Txt[I] == '\t'){
-            continue;
+            Txt[I]='\x00';
+            if(tswitch==FALSE){    
+            Txt[I]=' ';
+            tswitch=TRUE;
+            }
             }
             strncat(Word,&Txt[I],1);
         }
         else{
+tswitch=FALSE;
+        if (reti) {
             if(Checkstr(Word,Zwords,strlen(Zwords))){
                 if(ish==TRUE){
                     if(fresh(Word)!=-1) //去掉了循环只有一次判断
@@ -932,6 +946,26 @@ int findword(char * en, char * en2 , char * txt){
                 strcpy(Word,"");
             }
             strcpy(Word,"");
+        }
+        else{
+                        if ( regexec(&regex1, Word, 1, &match1, 0) == 0) {
+                if(ish==TRUE){
+                    if(fresh(Word)!=-1) //去掉了循环只有一次判断
+                printf("\n~");
+                    else
+                printf("\n");
+            }
+                else
+                printf("\n");
+                
+                printf("%s",Word);
+                fflush(stdout);
+                strcat(ZWords,Word);
+                strcat(ZWords,"\n");
+                strcpy(Word,"");
+            }
+            strcpy(Word,"");
+        }
         }
     }
     //printf("%s",ZWords);
@@ -1522,15 +1556,19 @@ if(ez=='2'){
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
 for(k=0;k<n+1;k=k+1){
-for(m=0;m<zm+1;m=m+1){
-
-if(strcmp(bzh[m],w1[k])==0 && strcmp(w1[k],"")!=0){
+   // printf("\n%s\n",w1[k]);
+for(m=0;m<zm+1+nmax;m=m+1){
+//printf("\n%d\n",m);
+if(strcmp(bzh[m],w1[k])==0 && strcmp(w1[k],"")!=0 && strlen(w1[k])>0 ){
 cc++;
+//printf("\n%s\n",w1[k]);
+break;
 }
 
 }
 }
-if (cc==zm+1){
+//printf("\n%d\n",zm);
+if (cc>=zm+1){
     flag=TRUE;
 return TRUE;
    // break;
@@ -2321,7 +2359,7 @@ fflush(stdout);
 
 
 
-    while (fgets(buffer,150,fp)!=NULL){ 
+    while (fgets(buffer,MAX_LENGTH1,fp)!=NULL){ 
 
         if(Checkstr(buffer,"\\",1)){
             break;
@@ -2330,7 +2368,7 @@ fflush(stdout);
             /***printf("%s",buffer);***/
             if ( Checkstr(buffer,"\r",1))
             del_char(buffer,'\r');
-            strncat(txt,buffer,150);
+            strncat(txt,buffer,MAX_LENGTH1);
             lines++;
             if ( CORRECT==TRUE || REMOVE==TRUE ){ //使用txt文件夹
             the_ints[the_txtn][lines]=lines-1;
@@ -2715,7 +2753,7 @@ else if(strcmp(thetxt,"")!=0 && strcmp(thetxts,"")!=1){
     char *pattern1 = thetxt;
     regex_t regex1;
     regmatch_t match1;
-    int reti = regcomp(&regex1, pattern1, REG_EXTENDED);
+    int reti= regcomp(&regex1, pattern1, REG_EXTENDED);
         if (!reti) {
     printf("\033[2J"); // 清屏
     printf("\033[0;0H"); // 光标移动到左上角
@@ -4640,7 +4678,7 @@ mergeDuplicates(azh);
 //for(int l=0;l<zm+1;l++)
 //printf("\n%s\n",azh2[l]); #debug不重复的答案
 
-zm=zm-nmax; //需要输入中文单词的个数
+zm=zm-nmax; //需要输入中文单词的个数-1
 //printf("\nnmax:%d\n",zm); #debug不重复的答案数-1
 //printf("\nezh:%s\n",ezh[0]);
 //printf("\nezh:%s\n",ezh[1]);
