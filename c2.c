@@ -386,7 +386,7 @@ int mergeDuplicates(char str[MAX_SIZE1][MAX_LENGTH1]) {
         //printf("，\n\n，");
         for (int j = 0; j < rowCount; ++j) {
             if(i==j){continue;}
-            printf("\1:%s\n2:%s\n",azh2[i],azh2[j]);
+            //printf("\1:%s\n2:%s\n",azh2[i],azh2[j]);
             if (strcmp(azh2[i], azh2[j]) == 0 && strcmp(azh2[i], "") != 0 ) {
                 // 找到重复项，将后面的项移动到数组末尾
                 //printf("\nduplicate:%s\n",azh2[i]);
