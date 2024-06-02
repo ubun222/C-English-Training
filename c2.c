@@ -1521,15 +1521,20 @@ cc=0;
         m=-1;
         cmmm=0;
         mmm=0;
+        
         strcpy(tch,"");
     strcpy(tch,removeParenthesesAndBrackets(aword));
-    char w1[MAX_SIZE1][MAX_LENGTH1];
-    
+    char ww1[MAX_SIZE1][MAX_LENGTH1];
+     for (int a=0;a<MAX_SIZE1;a++){
+    for (int c=0;c<MAX_LENGTH1;c++){
+        ww1[a][c]='\x00';
+    }
+     }
 if(ez=='2'){
             for(n=0;n<MAX_SIZE1;n=n+1){
                 //printf("222");
                 //strcpy(bzh[n],"");
-                //strcpy(w1[n],"");
+                strcpy(ww1[n],"");
                 //strcpy(dzh,"");
                 /*printf("%d\n",zhleng);*/
                 cmmm=0;
@@ -1537,7 +1542,7 @@ if(ez=='2'){
                 m=m+2+cmmm;
                 while(m=m+1,m<=strlen(tch)){
                     //printf("222");
-                    strcpy(w1[n],"");
+                    strcpy(ww1[n],"");
                     if(tch[m]=='\xef' && tch[m+1]=='\xbc' && tch[m+2]=='\x8c' ||  tch[m]=='\0'  ){
                         cmmm=m-mmm-3;
                         if(n==0){
@@ -1546,7 +1551,8 @@ if(ez=='2'){
                         }
                         else
                         dzh=&tch[mmm+3];
-                        strncpy(w1[n],dzh,cmmm);
+                        strncpy(ww1[n],dzh,cmmm);
+			
                         //printf("%s",w1[n]);
                         break;
                     }
@@ -1555,13 +1561,13 @@ if(ez=='2'){
                 break;
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
-for(k=0;k<n+1;k=k+1){
-   // printf("\n%s\n",w1[k]);
-for(m=0;m<zm+1+nmax;m=m+1){
+for(int kk=0;kk<n+1;kk=kk+1){
+ //   printf("\n%s\n",ww1[kk]);
+for(int ii=0;ii<zm+2+nmax;ii=ii+1){
 //printf("\n%d\n",m);
-if(strcmp(bzh[m],w1[k])==0 && strcmp(w1[k],"")!=0 && strlen(w1[k])>0 ){
+if(strcmp(bzh[ii],ww1[kk])==0 && strcmp(w1[kk],"")!=0 ){
 cc++;
-//printf("\n%s\n",w1[k]);
+//printf("\n%s\n",ww1[k]);
 break;
 }
 
@@ -6270,9 +6276,13 @@ fflush(stdout);
 int main(int argc, char *argv[]){
 int arga;
 
+
+char HELPTXT[]="-r 错题集模式\n-R 剔除模式\n-p 通关模式\n-i 优化ish\n-t 自定义txt文件夹路径";
+
 Thepath=NULL;
-	while ((arga = getopt(argc, argv, ":airRpt:")) != -1) {
+	while ((arga = getopt(argc, argv, ":airRpht:")) != -1) {
 		switch (arga) {
+            case 'h': printf("%s\n",HELPTXT);fflush(stdout); return 0;
 			case 'R': printf("剔除模式\n");fflush(stdout);REMOVE=TRUE; break;            
 			case 'r': printf("错题集模式\n");fflush(stdout);CORRECT=TRUE; break;
 			case 'i': printf("优化ish\n");fflush(stdout);ish=TRUE;termux=TRUE; break;
