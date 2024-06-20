@@ -1567,6 +1567,7 @@ for(int ii=0;ii<zm+2+nmax;ii=ii+1){
 //printf("\n%d\n",m);
 if(strcmp(bzh[ii],ww1[kk])==0 && strcmp(w1[kk],"")!=0 ){
 cc++;
+strcpy(bzh[ii],"");
 //printf("\n%s\n",ww1[k]);
 break;
 }
@@ -3820,17 +3821,17 @@ strcpy(bwords,"");
 //fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 
 while (fscanf(stdin,"%c",&xword)!=-1){
-    strcat(bwords,&xword);
+    strncat(bwords,&xword,1); //某些32bit ssh环境中会导致捕获异常增多
 }
 while (fscanf(stdin,"%c",&xword)!=-1){
-    strcat(bwords,&xword);
+    strncat(bwords,&xword,1); //某些32bit ssh环境中会导致捕获异常增多
 }
 while (fscanf(stdin,"%c",&xword)!=-1){
-    strcat(bwords,&xword);
+    strncat(bwords,&xword,1); //某些32bit ssh环境中会导致捕获异常增多
 }
 usleep(10000); //0.01秒
 while (fscanf(stdin,"%c",&xword)!=-1){
-    strcat(bwords,&xword);
+    strncat(bwords,&xword,1); //某些32bit ssh环境中会导致捕获异常增多
 }
 
        // fcntl(STDIN_FILENO, F_SETFL, flags);
