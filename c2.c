@@ -3593,7 +3593,6 @@ for(n=0;n<maxn;n++){
 }
 
 
-
 struct WordInfo * TheWordInfo;
 char prons[25];
 char czh[MAX_SIZE][MAX_LENGTH];
@@ -3604,6 +3603,7 @@ int WIDTH_3_1; //行高度
 char bot[199]; //单词长度
 char fragment1[3999]; //前半行
 char fragment2[3999]; //后半行
+BOOL Auto=FALSE;
 int Read(){
 //struct WordInfo* TheWordInfo;
 ysv1='\x00';
@@ -3949,7 +3949,7 @@ strcat(prelastw,dword);
 strcpy(prons, "");
 for(m=0;m<MAX_SIZE1;m=m+1){
     //printf("%s",azh[m]);
-if(strcmp(azh[m],prelastw)==0 && strcmp(prelastw,"")!=0){
+if(Auto==TRUE && strcmp(azh[m],prelastw)==0 && strcmp(prelastw,"")!=0){
 //char B[]="\x7f abc";
 strcpy(Byword,"");
 //strcat(Byword,B);
@@ -3998,10 +3998,12 @@ switch (pi) {
 if(strcmp(lastpron,prons)!=0 || strcmp(lastpron,"")==0 )
 strcat(Byword,prons);
 //printf("\nezh:%s\n",ezh[m]);
+
 strcat(Byword,removealphas(ezh[m]));
 
 //printf("2");
 strcpy(yword,"");
+
 strcat(yword,Byword);
 yi=-1;
 zword='\x0';
@@ -4009,7 +4011,6 @@ strcpy(dword,"");  //防止循环
 strcpy(lastpron,prons);
 strcpy(prons,"");
 break;
-
 }
 
 }
@@ -4073,6 +4074,7 @@ if(strcmp(lastword,"")==0){
 waiting=TRUE;
 getin=TRUE;
 yi=-1;
+if(Auto==TRUE)
 yword[0]='\t';
 continue;
 }
@@ -4086,19 +4088,24 @@ for(int i=0;i<N;i++){
 //strcpy(yword,delchar(czh[i],lastword));
 
 //strcpy(yword,delchar(czh[i],lastword));
-
+if(Auto==TRUE)
             strcpy(dword,delchar(czh[i],lastword));
+else{
+strcpy(yword,delchar(czh[i],lastword));
+zd=FALSE;
+bd=TRUE;
+}
     strcpy(Byword,""); //防止循环
 //nd=TRUE;
 waiting=TRUE;
 getin=TRUE;
 yi=-1;
 //yn=strlen()
+if(Auto==TRUE)
 yword[0]='\t';
 break;
     }
 }
-//continue;
 }
     }
 }
@@ -6289,7 +6296,7 @@ Thepath=NULL;
 			case 'i': printf("优化ish\n");fflush(stdout);ish=TRUE;termux=TRUE; break;
             case 'p': printf("通关模式\n");fflush(stdout);PASS1=TRUE; break;
             case 't': printf("自定义txt文件夹路径:%s\n",optarg);fflush(stdout);Thepath=optarg; break;
-            case 'a': printf("自动化\n");fflush(stdout);AUTO=TRUE; break;
+            case 'a': printf("智能补全\n");fflush(stdout);Auto=TRUE; break;
             			
 		}
 	}
