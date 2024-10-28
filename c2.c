@@ -1002,7 +1002,7 @@ mergeDuplicates(azh);
     printf("\033[2m%s\n\033[0m",strs);
     fflush(stdout);
     if(premode!='2' && premode!='3' || FUN3==TRUE)
-    printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en2);
+    printf("\r\033[1m%s\033[0m\033[2m \033[3m‹─› \033[0m",en2);
     fflush(stdout);
 return 0;
 }
@@ -1172,41 +1172,41 @@ if(Line_num_1>=1){
 void loading(){
  int anykey;
 //等待动画
-//<><><><>
+//‹›‹›‹›‹›
 printf("\n");
 fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 while(TRUE){
-printf("\r\033[%dC\033[0m\033[3m\033[0m\033[3m<>      \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m\033[0m\033[3m‹›      \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1){printf("%d",anykey);break;};
-printf("\r\033[%dC\033[0m\033[3m<>      \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m‹›      \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[2m<>\033[0m\033[3m<>    \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m\033[2m‹›\033[0m\033[3m‹›    \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[2m<><>\033[0m\033[3m<>  \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m\033[2m‹›‹›\033[0m\033[3m‹›  \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[2m<><><>\033[0m\033[3m<>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m\033[2m‹›‹›‹›\033[0m\033[3m‹›\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m  \033[2m<><>\033[0m\033[3m<>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m  \033[2m‹›‹›\033[0m\033[3m‹›\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m    \033[2m<>\033[0m\033[3m<>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m    \033[2m‹›\033[0m\033[3m‹›\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m      <>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m      ‹›\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m      \033[0m\033[3m<>\033[0m\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m      \033[0m\033[3m‹›\033[0m\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m      <>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[3m      ‹›\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m    <>\033[2m<>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m    ‹›\033[2m‹›\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m  <>\033[2m<><>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m  ‹›\033[2m‹›‹›\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m<>\033[2m<><><>\r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m‹›\033[2m‹›‹›‹›\r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m<>\033[2m<><>  \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m‹›\033[2m‹›‹›  \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m<>\033[2m<>    \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m‹›\033[2m‹›    \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m<>\033[2m      \r",col/2-3);usleep(120000);fflush(stdout);
+printf("\r\033[%dC\033[0m\033[3m‹›\033[2m      \r",col/2-3);usleep(120000);fflush(stdout);
 anykey=getchar();if(anykey!=-1)break;
 
 }
@@ -4429,20 +4429,20 @@ printf("\n\033[2m\033[3m\033[%dCC-English-Training\033[1A\r\033[0m",col/2-9);
         usleep(19000);
 printf("\033[2m\033[3m");
 if(cc%2==0){
-printf("%s","<");
+printf("%s","‹");
 
-printf("\n\n\r\033[%dC%s",col-cc-1-col%2,">");
+printf("\n\n\r\033[%dC%s",col-cc-1-col%2,"›");
 
 printf("\033[2A\r\033[%dC",cc+1);
 
 }
 else if(cc%2==1){
-    printf("%s",">");
+    printf("%s","›");
 if(cc<col-col%2-1){
-    printf("\n\n\r\033[%dC%s",col-cc-1-col%2,"<");
+    printf("\n\n\r\033[%dC%s",col-cc-1-col%2,"‹");
 }
 else{
-    printf("\n\n\r%s","<");
+    printf("\n\n\r%s","‹");
 }
 printf("\033[2A\r\033[%dC",cc+1);
 }
@@ -4712,7 +4712,7 @@ TheWordInfo = Getprops(ezh); //排序
             printf("\n%s\n",azh[1]);
             printf("\n%s\n",azh[2]);*/
             }
-            printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹─› \033[0m",en);
 
             //cursor_position(&rown,&coln);
             cursor_position(&rowm,&colm);
@@ -4956,7 +4956,7 @@ zm=zm-nmax;
 TheWordInfo = Getprops(ezh);
             }
             /*printf("%s\n",azh[0]);*/
-            printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹─› \033[0m",en);
             /***puts(en);***/
 
             cursor_position(&rowm,&colm);
@@ -5202,7 +5202,7 @@ TheWordInfo = Getprops(ezh);
             }
             /*printf("%s\n",azh[0]);*/
             printf("\n\033[2m%s\n\033[0m",strs);
-            printf("\r\033[1m%s\033[0m\033[2m \033[3m<───> \033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹─› \033[0m",en);
             /***puts(en);***/
             cursor_position(&rowm,&colm);
             strcpy(bword,"");
