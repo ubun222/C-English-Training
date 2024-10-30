@@ -6036,10 +6036,10 @@ getin3=FALSE;
         flag1=FALSE;
         findword(answer1,en,txt);
         if(thewidth(answer)>0){
-printf("\033[%dC\033[1m%s\033[0m\n",(col-thewidth(answer))/2,aprt(answer));
+printf("\033[%dC\033[1m%s\033[0m\n",(col-thewidth(answer))/2+1,&aprt(answer)[2]);
 }
 else{
-    printf("\033[1m%s\033[0m\n",aprt(answer));
+    printf("\033[1m%s\033[0m\n",&aprt(answer)[2]);
 }
         if(ez=='2'){
             //printf("%s\n",strs);
@@ -6076,9 +6076,12 @@ else{
             if(the=='\x41'){
                 if(flag1==FALSE){
                     thei=1;
-                    ENS[thei-1][0]='-';
-                    ENS[thei-1][1]='>';
-                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
+                    //ENS[thei-1][0]='\xcb';
+                    //ENS[thei-1][1]='\x97';
+                    //ENS[thei-1][2]='\xe2';
+                    //ENS[thei-1][3]='\x80';
+                    //ENS[thei-1][4]='\xba';
+                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -6110,9 +6113,12 @@ fflush(stdout);
                     else
                     printf("\033[1A\r");
                     }
-                    ENS[thei-1][0]='-';
-                    ENS[thei-1][1]='>';
-                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
+                    //ENS[thei-1][0]='\xcb';
+                    //ENS[thei-1][1]='\x97';
+                    //ENS[thei-1][2]='\xe2';
+                    //ENS[thei-1][3]='\x80';
+                    //ENS[thei-1][4]='\xba';
+                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -6134,9 +6140,12 @@ fflush(stdout);
      if(the==' '){
         if(flag1==FALSE){
         thei=1;
-                    ENS[thei-1][0]='-';
-                    ENS[thei-1][1]='>';
-                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
+                    //ENS[thei-1][0]='\xcb';
+                    //ENS[thei-1][1]='\x97';
+                    //ENS[thei-1][2]='\xe2';
+                    //ENS[thei-1][3]='\x80';
+                    //ENS[thei-1][4]='\xba';
+                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         fflush(stdout);
@@ -6168,9 +6177,12 @@ fflush(stdout);
             printf("\033[1B\r");
 
         }
-                    ENS[thei-1][0]='-';
-                    ENS[thei-1][1]='>';
-                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
+                    //ENS[thei-1][0]='\xcb';
+                    //ENS[thei-1][1]='\x97';
+                    //ENS[thei-1][2]='\xe2';
+                    //ENS[thei-1][3]='\x80';
+                    //ENS[thei-1][4]='\xba';
+                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         //printf("\n");
@@ -6186,9 +6198,12 @@ fflush(stdout);
         if(flag1==FALSE){
             thei=1;
 
-                    ENS[thei-1][0]='-';
-                    ENS[thei-1][1]='>';
-                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
+                    //ENS[thei-1][0]='\xcb';
+                    //ENS[thei-1][1]='\x97';
+                    //ENS[thei-1][2]='\xe2';
+                    //ENS[thei-1][3]='\x80';
+                    //ENS[thei-1][4]='\xba';
+                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
 
@@ -6228,9 +6243,12 @@ fflush(stdout);
                     if(thewidth(ZHS[thei-1])<-col){
                     printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col-1);
                     }
-                    ENS[thei-1][0]='-';
-                    ENS[thei-1][1]='>';
-                    printf("\r\033[36m%c%c\033[0m\033[1m%s\033[K\r\033[0m",ENS[thei-1][0],ENS[thei-1][1],&ENS[thei-1][2]);
+                    //ENS[thei-1][0]='\xcb';
+                    //ENS[thei-1][1]='\x97';
+                    //ENS[thei-1][2]='\xe2';
+                    //ENS[thei-1][3]='\x80';
+                    //ENS[thei-1][4]='\xba';
+                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
