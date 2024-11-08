@@ -1002,7 +1002,7 @@ mergeDuplicates(azh);
     printf("\033[2m%s\n\033[0m",strs);
     fflush(stdout);
     if(premode!='2' && premode!='3' || FUN3==TRUE)
-    printf("\r\033[1m%s\033[0m\033[2m \033[3m‹─› \033[0m",en2);
+    printf("\r\033[1m%s\033[0m\033[2m \033[3m‹—› \033[0m",en2);
     fflush(stdout);
 return 0;
 }
@@ -4712,7 +4712,7 @@ TheWordInfo = Getprops(ezh); //排序
             printf("\n%s\n",azh[1]);
             printf("\n%s\n",azh[2]);*/
             }
-            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹─› \033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹—› \033[0m",en);
 
             //cursor_position(&rown,&coln);
             cursor_position(&rowm,&colm);
@@ -4956,7 +4956,7 @@ zm=zm-nmax;
 TheWordInfo = Getprops(ezh);
             }
             /*printf("%s\n",azh[0]);*/
-            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹─› \033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹—› \033[0m",en);
             /***puts(en);***/
 
             cursor_position(&rowm,&colm);
@@ -5202,7 +5202,7 @@ TheWordInfo = Getprops(ezh);
             }
             /*printf("%s\n",azh[0]);*/
             printf("\n\033[2m%s\n\033[0m",strs);
-            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹─› \033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹—› \033[0m",en);
             /***puts(en);***/
             cursor_position(&rowm,&colm);
             strcpy(bword,"");
