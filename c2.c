@@ -1561,11 +1561,11 @@ if(ez=='2'){
                 break;
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
-for(int kk=0;kk<n+1;kk=kk+1){
+for(int kk=0;kk<n;kk=kk+1){
  //   printf("\n%s\n",ww1[kk]);
 for(int ii=0;ii<zm+2+nmax;ii=ii+1){
 //printf("\n%d\n",m);
-if(strcmp(bzh[ii],ww1[kk])==0 && strcmp(w1[kk],"")!=0 ){
+if(strcmp(bzh[ii],ww1[kk])==0 && strcmp(w1[kk],"\x00")!=0 ){
 cc++;
 strcpy(bzh[ii],"");
 //printf("\n%s\n",ww1[k]);
@@ -3442,12 +3442,19 @@ for(P=0;P<p;P++){
 
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
 //NL=FALSE;
-if ( (ysv1=='S'  || ysv1=='s' ) &&  premode=='1')
+if ( (ysv1=='S'  || ysv1=='s' ) &&  premode=='1'){
 ishprt("\r\033[%dC%s\r",col-2,eline);
-if(flag==FALSE){
+//if(flag==FALSE){
+    printf("\n%s",aprt(bword));
+    fflush(stdout);
+//}
+}
+
+else if(flag==FALSE){
     printf("\n%s",aprt(bword));
     fflush(stdout);
 }
+
 }
 strcpy(alltxt,"");
 strcpy(word1,"");
