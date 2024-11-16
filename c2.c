@@ -1561,7 +1561,9 @@ if(ez=='2'){
                 break;
                 /*strcpy(azh[n],strtok(ch,"\xbc\xef"));*/
             }
-for(int kk=0;kk<n;kk=kk+1){
+for(int kk=0;kk<n+1;kk=kk+1){
+    if(strcmp(ww1[kk],"")==0)
+    continue;
  //   printf("\n%s\n",ww1[kk]);
 for(int ii=0;ii<zm+2+nmax;ii=ii+1){
 //printf("\n%d\n",m);
