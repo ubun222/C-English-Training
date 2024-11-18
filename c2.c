@@ -2544,73 +2544,71 @@ while (1){
                 //continue;
             }
             if(the=='\x41'){
-                if(flag1==FALSE){
-                    thei=1;
-                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
-                    fflush(stdout);
-       // if(LS[thei-1]>1)
-       // printf("\033[%sA\r",LS[thei-1]-1);
-                    flag1=TRUE;
-        //printf("\033[%dB",LS[thei-1]);
-            }
-                else{
                     printf("\033[0m");
-                    fflush(stdout);
-                    if(LS[thei-1]>1)
-                        printf("\033[%dB\r",LS[thei-1]-1);
                     fflush(stdout);
                     printf("\r%s\033[K\r",aprt(rows[thei-1]));
                     fflush(stdout);
+                    if(LS[thei-1]>1)
+                        printf("\033[%dA\r",LS[thei-1]-1);
+                    fflush(stdout);
                     thei--;
                     if(thei==0){
-                        thei=LSall;
+                        thei=rown;
                         if(LSall-LS[rown-1]>0)
                         printf("\033[%dB",LSall-LS[rown-1]);
                         fflush(stdout);
                     }
                     else{
+                    if(LS[thei-1]>1)
+                        printf("\033[%dA\r",LS[thei-1]);
+                    else
                     printf("\033[1A\r");
                     }
                     printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
         //printf("\n");
+                            fflush(stdout);
+                    if(LS[thei-1]>1)
+                        printf("\033[%dA\r",LS[thei-1]-1);
                     fflush(stdout);
 
-        }
 
             }
     }
     }
 
      if(the==' '){
-        if(flag1==FALSE){
-        thei=1;
-        printf("\r>>\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
-        fflush(stdout);
-       // if(LS[thei-1]>1)
-       // printf("\033[%sA\r",LS[thei-1]-1);
-        flag1=TRUE;
-        //printf("\033[%dB",LS[thei-1]);
-        }
-        else{
+
         printf("\033[0m");
-fflush(stdout);
-        if(LS[thei-1]>1)
-        printf("\033[%dA\r",LS[thei-1]-1);
+        //if(LS[thei-1]>1)
+        //printf("\033[%dA\r",LS[thei-1]-1);
         fflush(stdout);
         printf("\r%s\033[K\r",aprt(rows[thei-1]));
 fflush(stdout);
+        if(LS[thei-1]>1)
+        printf("\033[%dA\r",LS[thei-1]-1);
         thei++;
-        if(thei==LSall+1){
+        if(thei==rown+1){
+            printf("\033[%dA",LSall-LS[thei-2]);
             thei=1;
-            printf("\033[%dA",LSall);
+            
             fflush(stdout);
         }
-printf("\033[1B\r");
+                else{
+        if(LS[thei-2]>1)
+            printf("\033[%dB\r",LS[thei-2]);
+        else
+            printf("\033[1B\r");
+
+        }
 
         printf("\r>>\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
         //printf("\n");
+                fflush(stdout);
+        if(LS[thei-1]>1)
+            printf("\033[%dA\r",LS[thei-1]-1);
+        //printf("\n");
         fflush(stdout);
-        }
+        
         }
 
     else if(the=='\n' || the=='\r' || the=='\x43'){
