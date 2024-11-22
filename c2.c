@@ -2564,7 +2564,7 @@ while (1){
                     else
                     printf("\033[1A\r");
                     }
-                    printf("\r->\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
+                    printf("\r››\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
         //printf("\n");
                             fflush(stdout);
                     if(LS[thei-1]>1)
@@ -2588,6 +2588,7 @@ fflush(stdout);
         printf("\033[%dA\r",LS[thei-1]-1);
         thei++;
         if(thei==rown+1){
+            if(LSall-LS[thei-2]>0)
             printf("\033[%dA",LSall-LS[thei-2]);
             thei=1;
             
@@ -2601,7 +2602,7 @@ fflush(stdout);
 
         }
 
-        printf("\r>>\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
+        printf("\r››\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
         //printf("\n");
                 fflush(stdout);
         if(LS[thei-1]>1)
@@ -2614,7 +2615,7 @@ fflush(stdout);
     else if(the=='\n' || the=='\r' || the=='\x43'){
         if(flag1==FALSE){
             thei=1;
-    printf("\r>>\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
+    printf("\r››\033[1m%s\033[K\r\033[0m",aprt(&rows[thei-1][2]));
     fflush(stdout);
             flag1=TRUE;
             //printf("\033[%dB",LS[thei-1]);
@@ -4726,11 +4727,6 @@ TheWordInfo = Getprops(ezh); //排序
             /***puts(en);***/
             strcpy(bword,"");
 
-            strcat(bword,en);
-            strcat(bword," ");
-            strcat(bword,"\033[1m");
-            strcat(bword,zh);
-            strcat(bword,"\033[0m");
             ////aprt(bword);
             /*word[0]='\0';*/
             fflush(stdout);
@@ -4750,6 +4746,14 @@ TheWordInfo = Getprops(ezh); //排序
             //backed=FALSE;
             strcpy(yword,"");
             if(ez=='1'){
+strcat(bword,"\033[1m");
+            strcat(bword,zh);
+            strcat(bword,"\033[0m");
+            strcat(bword," ");
+            
+            strcat(bword,en);
+            
+
                 //strcpy(yword,"");
                 yword[0]='\0';
                 //printf("%s\n",answer1);
@@ -4769,6 +4773,12 @@ TheWordInfo = Getprops(ezh); //排序
             }
             else{
             //getin=FALSE;
+
+                        strcat(bword,en);
+            strcat(bword," ");
+            strcat(bword,"\033[1m");
+            strcat(bword,zh);
+            strcat(bword,"\033[0m");
 
 waiting=FALSE;
             }
