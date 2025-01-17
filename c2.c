@@ -2371,9 +2371,9 @@ fflush(stdout);
     while (fgets(buffer,MAX_LENGTH1,fp)!=NULL){ 
 
         if(Checkstr(buffer,"\\",1)){
-            break;
+            continue; /***不再需要兼容bash的\\\\ ***/
         }
-        if ( Checkstr(buffer,"\t",1) && buffer[0]!='\n'){
+        if ( Checkstr(buffer,"\t",1) && buffer[0]!='\n' && isalpha(buffer[0]) ){
             /***printf("%s",buffer);***/
             if ( Checkstr(buffer,"\r",1))
             del_char(buffer,'\r');
@@ -2386,8 +2386,9 @@ fflush(stdout);
     }
 if ( CORRECT==TRUE || REMOVE==TRUE ) //使用txt文件夹
     the_ints[the_txtn][lines+1]=-2;
-    if(txt[strlen(txt)-1]!='\n' && strlen(txt)!=0 )
+    if(strlen(txt)>1 && txt[strlen(txt)-1]!='\n' )
     strcat(txt,"\n"); //
+   // printf("\n%s\n",txt);
 printf("已加载%d组单词\033[K\r",lines);
 
 if (CORRECT==TRUE && calendar==TRUE){ //使用txt文件夹
@@ -6098,7 +6099,7 @@ else{
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -6135,7 +6136,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -6162,7 +6163,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         fflush(stdout);
@@ -6199,7 +6200,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         //printf("\n");
@@ -6220,7 +6221,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
 
@@ -6265,7 +6266,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m%c%c%c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xcb','\x97','\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
