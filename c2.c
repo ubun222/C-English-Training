@@ -2090,7 +2090,7 @@ char * ls(char * txtpath) {
     // 打开当前目录
     directory = opendir(txtpath);
     if (directory == NULL) {
-        printf("无法打开目录.\n");
+       // printf("无法打开目录.\n");
         fflush(stdout);
         return NULL;
     }
@@ -2347,13 +2347,13 @@ char default_dir[]="./txt/CORRECT/";
         printf("\n错题集合不存在，在当前目录自动生成CORRECT.txt");
         rfp = fopen("CORRECT.txt", "w+");
         rfpa = fopen("CORRECT.txt", "a+");
-        fprintf(rfp,"%s","\\\\\\\n");
+        fprintf(rfp,"%s","\n");
         fclose(rfp);
    // Fp=fopen(path,"r");
 }
 else 
 {
-    printf("\n使用./CORRECT.txt");
+    printf("使用./CORRECT.txt ");
     rfpa = fopen("CORRECT.txt", "a+");
 }
 
@@ -2452,7 +2452,7 @@ rfp = fopen(the_Dir, "r");
         //printf("\n错题集合不存在，在当前目录自动生成");
         rfp = fopen(the_Dir, "w+");
         rfpa = fopen(the_Dir, "a+");
-        fprintf(rfp,"%s","\\\\\\\n");
+        fprintf(rfp,"%s","\n");
         fclose(rfp);
         fclose(rfpa);
         }
@@ -2812,6 +2812,7 @@ else{
     char path[39999];
     FILE * fp;
     //int p=0;
+    char tplines[999999];
 int getfromread(){
     txt=(char *)malloc(9999999); 
     lines=0;
@@ -2824,6 +2825,39 @@ int getfromread(){
     strcpy(path,"");
     strcpy(&Path,"");
     pleng=0;
+
+
+    char * getfromline;
+
+    getfromline = strtok(tplines, "\n");
+    while (getfromline != NULL) {
+    fp=fopen(getfromline,"r");
+    printf("%s:",getfromline);
+    if(fp==NULL ){
+        strcpy(getfromline,"");
+        //strcpy(path,"");
+        printf("\n");
+        getfromline = strtok(NULL, "\n");  // 获取下一个分割出的单词
+        continue;
+    }  
+    else{  
+    strcpy(PATH[p],getfromline);
+    //printf("%s",PATH[p]);
+    loadcontent(p);
+    p++;
+    //loadcontent(p);
+    printf("\n");
+    fflush(stdout);
+    strcpy(getfromline,"");
+    }
+    txtn=p;
+    //strcat(PATH,"\n");
+    strcpy(getfromline,"");
+    getfromline = strtok(NULL, "\n");  // 获取下一个分割出的单词
+    continue;
+    }
+
+
     printf("\r输入txt文件路径，按回车键结束:\033[K");
     fflush(stdout);
            while((Path=getchar())  != '\0'){
@@ -3268,7 +3302,7 @@ ishprt("\r\033[%dC%s\r",col-2,eline);
 
 if (ysv1=='v' || ysv1=='V'){
     if (flag!=TRUE){
-    printf("\n%s",aprt(bword));
+    ishprt("\n%s",bword);
     fflush(stdout);
     }
 for(P=0;P<p;P++){
@@ -6326,6 +6360,26 @@ fflush(stdout);
 
 }
 
+
+
+int is_match(const char *filename, const char *pattern) {
+    regex_t regex;
+    int ret;
+    
+    // 编译正则表达式
+    ret = regcomp(&regex, pattern, REG_EXTENDED);
+    if (ret) {
+        fprintf(stderr, "无法编译正则表达式\n");
+        return 0;
+    }
+    
+    // 执行正则表达式匹配
+    ret = regexec(&regex, filename, 0, NULL, 0);
+    
+    regfree(&regex);
+    return ret == 0;  // 如果匹配成功，返回 1，否则返回 0
+}
+
 int main(int argc, char *argv[]){
 int arga;
 
@@ -6333,7 +6387,19 @@ int arga;
 char HELPTXT[]="-r 错题集模式\n-R 剔除模式\n-p 通关模式\n-i 优化ish\n-t 自定义txt文件夹路径";
 
 Thepath=NULL;
-	while ((arga = getopt(argc, argv, ":airRpht:")) != -1) {
+char * Directories;
+int porder;
+char tpath[99999];
+char Tpath[99999];
+char * tpline;
+porder=0;
+struct stat buffer;
+//printf("total:%d",argc);
+	while (1) {
+        if(porder>=argc)
+        break;
+    
+        if ((arga = getopt(argc, argv, ":airRpht:")) != -1){
 		switch (arga) {
             case 'h': printf("%s\n",HELPTXT);fflush(stdout); return 0;
 			case 'R': printf("剔除模式\n");fflush(stdout);REMOVE=TRUE; break;            
@@ -6344,7 +6410,65 @@ Thepath=NULL;
             case 'a': printf("智能补全\n");fflush(stdout);Auto=TRUE; break;
             			
 		}
+        porder=porder+1;
+    }
+        else {
+            if(porder>=argc)
+            break;
+          //  printf("%d:%s\n",porder,argv[porder]);
+strcpy(Tpath,"");
+strcpy(Tpath,argv[porder]);
+strcpy(tpath,"");
+strcpy(tpath,argv[porder]);            
+            if(strcmp(tpath,"")!=0)
+    for(int p=strlen(tpath)-1 ; p>0; p--){
+    if(tpath[p]=='/')
+    tpath[p]='\0';
+    else
+        break;
+    
+    }
+
+    Directories = ls(tpath);
+
+if(Directories!=NULL){
+
+    tpline = strtok(Directories, "\n");
+    while (tpline != NULL) {
+        //printf("分割出的单词: %s\n", tpline);
+        tpline = strtok(NULL, "\n");  // 获取下一个分割出的单词
+    }
+    
+
+    
+    if ( (stat(Tpath, &buffer) != 0 ) && (is_match(tpline, Tpath) != 0 )) {
+
+
+    //printf("%s",tpline);
+    strcat(tplines,tpline);
+    strcat(tplines,"\n");
+    }
+    else{
+
+        strcat(tplines,Tpath);
+        strcat(tplines,"\n");
+        
+    }
+}
+
+else{
+    if (stat(Tpath, &buffer) == 0){
+    strcat(tplines,Tpath);
+    strcat(tplines,"\n");
+
+    }
+}
+porder=porder+1;
+        }
 	}
+
+
+//printf("%s",tplines);
 
 if(REMOVE==TRUE && CORRECT==TRUE){
     printf("-r与-R参数冲突\n");
@@ -6405,6 +6529,7 @@ else{
 }
     //printf("%s", directories);
     if(directories==NULL){
+        printf("无法打开txt文件夹\n");
         getfromread();
     }
     else{
