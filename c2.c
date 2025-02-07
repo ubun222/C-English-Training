@@ -6392,15 +6392,15 @@ int porder;
 char tpath[99999];
 char Tpath[99999];
 char * tpline;
-porder=0;
+porder=-1;
 struct stat buffer;
 //printf("total:%d",argc);
 	while (1) {
         if(porder>=argc)
         break;
-    
         if ((arga = getopt(argc, argv, ":airRpht:")) != -1){
-		switch (arga) {
+        porder=porder+1;
+	switch (arga) {
             case 'h': printf("%s\n",HELPTXT);fflush(stdout); return 0;
 			case 'R': printf("剔除模式\n");fflush(stdout);REMOVE=TRUE; break;            
 			case 'r': printf("错题集模式\n");fflush(stdout);CORRECT=TRUE; break;
@@ -6410,12 +6410,11 @@ struct stat buffer;
             case 'a': printf("智能补全\n");fflush(stdout);Auto=TRUE; break;
             			
 		}
-        porder=porder+1;
     }
         else {
             if(porder>=argc)
             break;
-          //  printf("%d:%s\n",porder,argv[porder]);
+           // printf("%d:%s\n",porder,argv[porder]);
 strcpy(Tpath,"");
 strcpy(Tpath,argv[porder]);
 strcpy(tpath,"");
