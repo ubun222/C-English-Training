@@ -111,7 +111,6 @@ BOOL p6;
 
 BOOL calendar=FALSE;
 
-BOOL AUTO=FALSE;
 void  handler()
 {
 //printf("rxit");
@@ -1151,9 +1150,7 @@ if(Line_num_1>=1){
 }
     printf("\n%s",aprt(&aline[ran][1]));
     }
-    if(AUTO==TRUE && i==0){
-    usleep(3500000);
-} 
+
     i++;
     }
     else{
@@ -3272,11 +3269,6 @@ strcpy(bbuffer,"");
 //yFp=fopen(path,"r");
 BOOL non=FALSE;
 
-if(AUTO==TRUE){
-    ysv1='v';
-    ysv0='v';
-}
-
 if (ysv0==' ')
 while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r')
     continue;
@@ -3316,6 +3308,12 @@ for(P=0;P<p;P++){
     //strcat(answer1,"");
    // printf("\n\n222");
     while (fgets(rbuffer,9998,Fp)){
+
+
+        if(strstr(rbuffer,"\t") != NULL ){
+            continue;
+        }
+
         if (strcmp(rbuffer,"\n")==0){
             if(vflag==TRUE){
                 zlocate=strlen(rtxt);
@@ -3382,9 +3380,6 @@ for(P=0;P<p;P++){
     getlines(&rtxt[locate],0);
 
 fflush(stdout);
-if(AUTO==TRUE){
-    usleep(5500000);
-} 
     if(theline[0]!='\0'){
     printf("\n%s",aprt(theline));
     }
@@ -3421,6 +3416,12 @@ for(P=0;P<p;P++){
    //printf("\n\n222");
     while (fgets(rbuffer,9998,Fp)){
         if (strcmp(rbuffer,"\n")!=0 && zlocate!=0){
+
+
+            if(strstr(rbuffer,"\t") != NULL ){
+                continue;
+            }
+
             strncpy(bbuffer,rbuffer,9997);
             
             nrtxt=strlen(rtxt);
@@ -3494,22 +3495,6 @@ else if(flag==FALSE){
 }
 strcpy(alltxt,"");
 strcpy(word1,"");
-
-if(PASS1==TRUE){
-
-        if(ysv1=='v' || ysv1=='V' || ysv1=='y' || ysv1=='Y' )
-        {
-                                            if(AUTO==TRUE){
-    usleep(2500000);
-} 
-        printf("\n还有%d题",num);
-
-                                            if(AUTO==TRUE){
-    usleep(2500000);
-} 
-
-        }
-}
 
 
 if (CORRECT==TRUE || REMOVE==TRUE){
@@ -3675,22 +3660,7 @@ while(TRUE){
 if (waiting==FALSE){
    // setvbuf(stdout, NULL, _IOLBF, 512);
     //printf("g");
-    if(AUTO==TRUE && autosleep==TRUE){
-    sleep(2);
-    autosleep=FALSE;
-    }
    // fflush(stdin);
-    if(AUTO==TRUE && getin==FALSE){
-    if(ez=='1')
-    usleep(50000);
-    if(ez=='2')
-    usleep(1800000);
-    //printf("%s",zh);
-    strcpy(yword,"\x09");
-    getin=TRUE;
-                zd=FALSE;
-                waiting=TRUE;
-    }
 
     if(getin==FALSE){
         strcpy(dword,"");
@@ -4829,10 +4799,7 @@ ad=FALSE;
 zd=FALSE;
 //nd=FALSE;
 bk=FALSE;
-c=0;
-if(AUTO==TRUE){
-    usleep(10000);
-}      
+c=0; 
                     //fflush(stdout);
 
 Read() ; 
@@ -4840,9 +4807,6 @@ Read() ;
 colourp();               
                     /***printf("%d",xword);***/ 
     }
-if(AUTO==TRUE){
-    usleep(1500000);
-} 
 
     flag=FALSE;
 
@@ -5077,17 +5041,13 @@ zd=FALSE;
 //nd=FALSE;
 bk=FALSE;
 c=0;
-if(AUTO==TRUE){
-    usleep(10000);
-} 
+
 Read();
 
 colourp(); 
 }
 
-if(AUTO==TRUE){
-    usleep(1500000);
-} 
+
     flag=FALSE;  
     }
     //return(0);
@@ -5323,16 +5283,10 @@ zd=FALSE;
 //nd=FALSE;
 bk=FALSE;
 c=0;
-if(AUTO==TRUE){
-    usleep(10000);
-} 
 Read();
 
 colourp();
 }
- if(AUTO==TRUE){
-    usleep(1500000);
-} 
     flag=FALSE;
     }
 return 0;
@@ -6293,7 +6247,7 @@ fflush(stdout);
                     fflush(stdout);
                     getchar();
                     if(thewidth(ZHS[thei-1])<-col){
-                    printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col-1);
+                    printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col);
                     }
                     //ENS[thei-1][0]='\xcb';
                     //ENS[thei-1][1]='\x97';
@@ -6315,17 +6269,17 @@ fflush(stdout);
 
             case 1 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l1+l2+l3+l4-1);
+                printf("\033[%dB",1+l2+l3+l4-1);
                 vflag=TRUE;
                 break;
             case 2 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l2+l3+l4-1);
+                printf("\033[%dB",1+l3+l4-1);
                 vflag=TRUE;
                 break;
             case 3 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",l3+l4-1);
+                printf("\033[%dB",1+l4-1);
                 vflag=TRUE;
                 break;
             case 4 /* constant-expression */:
