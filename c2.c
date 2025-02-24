@@ -2370,7 +2370,7 @@ fflush(stdout);
         if(Checkstr(buffer,"\\",1)){
             continue; /***不再需要兼容bash的\\\\ ***/
         }
-        if ( Checkstr(buffer,"\t",1) && buffer[0]!='\n' && isalpha(buffer[0]) ){
+        if ( Checkstr(buffer,"\t",1) && buffer[0]!='\n' && ( isalpha(buffer[0]) || buffer[0]=='-'  ) ){
             /***printf("%s",buffer);***/
             if ( Checkstr(buffer,"\r",1))
             del_char(buffer,'\r');
@@ -3357,7 +3357,7 @@ for(P=0;P<p;P++){
     if(Fp!=NULL)
     fclose(Fp);
     Fp=fopen(PATH[P],"r");
-    strcpy(theline,"");
+    //strcpy(theline,"");
     while (fgets(rbuffer,9998,Fp)){
         if (Checkstr(rbuffer,answer1,strlen(answer1)) && !Checkstr(rbuffer,"\t",1) &&  regexec(&regex, rbuffer, 1, &match, 0)!=0 ){
            // printf("%s",rbuffer);
@@ -3372,15 +3372,15 @@ for(P=0;P<p;P++){
 }
     }
     if(vflag==TRUE){
-    if(rtxt[0]!='\0')
-    if(theline[0]!='\0')
-    //printf("\n%s",&rtxt[locate]);
-    theline[strlen(theline)-1]='\0';
-   /// printf("\n\n222");
+  //  if(rtxt[0]!='\0')
     getlines(&rtxt[locate],0);
 
 fflush(stdout);
     if(theline[0]!='\0'){
+        //printf("\n%s",&rtxt[locate]);
+        theline[strlen(theline)-1]='\0';
+       /// printf("\n\n222");
+
     printf("\n%s",aprt(theline));
     }
     //printf("\n%s",theline);
@@ -3496,6 +3496,14 @@ else if(flag==FALSE){
 strcpy(alltxt,"");
 strcpy(word1,"");
 
+if(PASS1==TRUE){
+
+        if(ysv1=='v' || ysv1=='V' || ysv1=='y' || ysv1=='Y' )
+        {
+        printf("\n还有%d题",num);
+
+        }
+}
 
 if (CORRECT==TRUE || REMOVE==TRUE){
 RWfp(bword);
@@ -6350,10 +6358,11 @@ porder=-1;
 struct stat buffer;
 //printf("total:%d",argc);
 	while (1) {
-        if(porder>=argc)
+        
+        porder=porder+1;
+		if(porder>=argc)
         break;
         if ((arga = getopt(argc, argv, ":airRpht:")) != -1){
-        porder=porder+1;
 	switch (arga) {
             case 'h': printf("%s\n",HELPTXT);fflush(stdout); return 0;
 			case 'R': printf("剔除模式\n");fflush(stdout);REMOVE=TRUE; break;            
@@ -6416,7 +6425,6 @@ else{
 
     }
 }
-porder=porder+1;
         }
 	}
 
