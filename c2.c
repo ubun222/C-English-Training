@@ -848,8 +848,8 @@ int findword(char * en, char * en2 , char * txt){
     char Zword3;
     char Zwords[399];
     char En[399];
-    char Word[999];
-    char ZWords[99999];
+    char Word[9999];
+    char ZWords[999999];
     int Lengn=0;
     int I=0;
     int max;
@@ -1403,6 +1403,7 @@ char * readjust(char * str){
 
 
 int lastw;
+BOOL Auto=FALSE;
 int ififright(char * aword){
     //int ifright;
 lastw=-1;
@@ -1496,6 +1497,13 @@ return(0);
     if(ez=='1'){
         //printf("%s\n",answer1);
       // printf("%s\n",aword);
+      if(Auto==TRUE){
+        if(  answer1[strlen(aword)]==' ' && strncmp(answer1,aword,strlen(aword))==0){
+            flag=FALSE;
+            strcpy(yword," ");
+            return(2);
+        }
+    }
        if(strcmp(aword,answer1)==0){
         flag=TRUE;
         ishprt("\r\033[%dC%s\r",col-2,tline);
@@ -3639,7 +3647,6 @@ int WIDTH_3_1; //行高度
 char bot[199]; //单词长度
 char fragment1[3999]; //前半行
 char fragment2[3999]; //后半行
-BOOL Auto=FALSE;
 int Read(){
 //struct WordInfo* TheWordInfo;
 ysv1='\x00';
