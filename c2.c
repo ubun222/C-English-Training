@@ -1065,8 +1065,6 @@ break;
         strcat(aaline,&aline[mi+leng]);
         strcpy(aline,aaline);
 
-ysv1='\x00';
-
     }
 
 return aline;
@@ -5769,13 +5767,15 @@ if (position != -1) {
 }
 break;
         }
+        ysv1='\x00';
         if(num<=4){
             if (num==0){
-            printf("\n通关了");
+            printf("\n%s\n通关了",strs);
                 exit(0);
             }
         //ran=num;
-        
+if(num==4)
+printf("\n词库不足");        
         
             n1=nend[0];
             n2=nend[0];
@@ -5785,7 +5785,7 @@ break;
             ran=0;
             n=nend[0];
             n=0;
-        printf("\n词库不足");
+
             //order='3';
             //FUN3=TRUE;
             //fun();
@@ -6278,7 +6278,7 @@ fflush(stdout);
         else{
            //printf("%s",ch);
            int offssset=0;
-                if(thei==ran5){
+                if(thei==ran5 || num<=4){
                     flag=TRUE;
                     if (LS[thei-1]>1 ){
                         printf("\033[%dB",LS[thei-1]-1);
