@@ -1001,7 +1001,7 @@ mergeDuplicates(azh);
     printf("\033[2m%s\n\033[0m",strs);
     fflush(stdout);
     if(premode!='2' && premode!='3' || FUN3==TRUE)
-    printf("\r\033[1m%s\033[0m\033[2m \033[3m‹—› \033[0m",en2);
+    printf("\r\033[1m%s\033[0m\033[2m \033[3m‹› \033[0m",en2);
     fflush(stdout);
 return 0;
 }
@@ -1065,7 +1065,7 @@ break;
         strcat(aaline,&aline[mi+leng]);
         strcpy(aline,aaline);
 
-
+ysv1='\x00';
 
     }
 
@@ -3302,6 +3302,9 @@ ishprt("\r\033[%dC%s\r",col-2,eline);
 
 if (ysv1=='v' || ysv1=='V'){
     if (flag!=TRUE){
+       // if(bword[strlen(bword)-1]=='\n'){
+       //     bword[strlen(bword)-1]='\x00';
+       // }
     ishprt("\n%s",bword);
     fflush(stdout);
     }
@@ -4740,7 +4743,7 @@ TheWordInfo = Getprops(ezh); //排序
             printf("\n%s\n",azh[1]);
             printf("\n%s\n",azh[2]);*/
             }
-            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹—› \033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹› \033[0m",en);
 
             //cursor_position(&rown,&coln);
             cursor_position(&rowm,&colm);
@@ -4987,7 +4990,7 @@ zm=zm-nmax;
 TheWordInfo = Getprops(ezh);
             }
             /*printf("%s\n",azh[0]);*/
-            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹—› \033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹› \033[0m",en);
             /***puts(en);***/
 
             cursor_position(&rowm,&colm);
@@ -5229,7 +5232,7 @@ TheWordInfo = Getprops(ezh);
             }
             /*printf("%s\n",azh[0]);*/
             printf("\n\033[2m%s\n\033[0m",strs);
-            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹—› \033[0m",en);
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹› \033[0m",en);
             /***puts(en);***/
             cursor_position(&rowm,&colm);
             strcpy(bword,"");
@@ -5689,6 +5692,7 @@ printf("\r\n\033[K1,中译英\033[%dC2,英译中\033[%dC3,混合:",col/2-13,col/
     fflush(stdout); 
 
 BOOL random=FALSE;
+
         while (i++,i<max){
 	/*printf("%d",i);*/
         /***printf("%c",txt[i]);***/
@@ -5700,8 +5704,19 @@ BOOL random=FALSE;
         }
             
         }
+        int origin_nends[num+1];
         nend[0]=-1;
         nend[num+1]=max;
+
+        for(i=0;i<num+1;i++){
+            /*printf("%d",i);*/
+                /***printf("%c",txt[i]);***/
+                    origin_nends[i]=nend[i];
+                    
+                }
+
+        int NUM=num+1;
+
       //  int ran;
   //  srand((unsigned)time(NULL));
         //ci=0;
@@ -5719,14 +5734,8 @@ strcpy(Word3,"");
 strcpy(Word4,"");
     //srand((unsigned)time(NULL));
         rx++;
-if(num<4){
-    printf("\n词库不足");
-    order='3';
-    FUN3=TRUE;
-    fun();
-    exit(0);
-}
-        while (1){
+
+        while (num>0){
        // srand((unsigned)time(NULL) *2 );
         ysv0=' ';
         RAN0[0]=rand() % num;
@@ -5741,16 +5750,47 @@ if(num<4){
         RAN0[3]=rand() % num;
         n4=nend[RAN0[3]];
        // strcpy(word,"");
-
-if(RAN0[0] == RAN0[1] || RAN0[0] == RAN0[2] || RAN0[0] == RAN0[3] || RAN0[1] == RAN0[2] || RAN0[1] == RAN0[3] || RAN0[2] == RAN0[3] ){
-continue;
+if( RAN0[0] == RAN0[1] || RAN0[0] == RAN0[2] || RAN0[0] == RAN0[3] || RAN0[1] == RAN0[2] || RAN0[1] == RAN0[3] || RAN0[2] == RAN0[3] ){
+    if(num>=4)
+    continue;
+    break;
 }
 //srand((unsigned)time(NULL));
 ran5=rand() % 4 + 1;
 ran=RAN0[ran5-1];
+n=nend[ran];
+int position = findPosition(origin_nends, NUM, n);
 
+if (position != -1) {
+    RAN=position;
+    //printf("目标值 %d 在数组中的位置是 %d\n", target, position);
+} else {
+   // printf("目标值 %d 未在数组中找到\n", n); //顺序时会报错，但不影响运行效果
+}
 break;
         }
+        if(num<=4){
+            if (num==0){
+            printf("\n通关了");
+                exit(0);
+            }
+        //ran=num;
+        
+        
+            n1=nend[0];
+            n2=nend[0];
+            n3=nend[0];
+            n4=nend[0];
+            ran5=1;
+            ran=0;
+            n=nend[0];
+            n=0;
+        printf("\n词库不足");
+            //order='3';
+            //FUN3=TRUE;
+            //fun();
+        }
+
 printf("\n\033[2m%s\033[0m",strs);
 //n=nend[RAN0[0]];
 if(n1==0)
@@ -6237,15 +6277,15 @@ fflush(stdout);
         }
         else{
            //printf("%s",ch);
-            
+           int offssset=0;
                 if(thei==ran5){
                     flag=TRUE;
                     if (LS[thei-1]>1 ){
-                        ishprt("\033[%dB",LS[thei-1]-1);
-                        ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
+                        printf("\033[%dB",LS[thei-1]-1);
+                        printf("\r\033[%dC%s\033[K\r",col-2,tline);
                     }
                     else{
-                        ishprt("\r\033[%dC%s\033[K\r",col-2,tline);
+                        printf("\r\033[%dC%s\033[K\r",col-2,tline);
                     }
                     fflush(stdout);
 //printf("%s",answer1);
@@ -6253,13 +6293,17 @@ fflush(stdout);
                 }
                 else{
                     flag=FALSE;
+                    
                     if (LS[thei-1]>1 ){
                     ///printf("\033[%dA\r",LS[thei-1]-1);
     }
-                    printf("\033[0m\r%s\033[K\r",aprt(ZHS[thei-1]));
+                    printf("\r\033[%dC%s\r",col-2,fline);
                     fflush(stdout);
-                    ishprt("\r\033[%dC%s\r",col-2,fline);
-                    fflush(stdout);
+                    if(Auto==TRUE){
+                        printf("\033[0m\r%s\033[K\r",aprt(ZHS[thei-1]));
+                        fflush(stdout);
+                        printf("\r\033[%dC%s\r",col-2,fline);
+                        fflush(stdout);
                     getchar();
                     if(thewidth(ZHS[thei-1])<-col){
                     printf("\033[%dA",(-thewidth(ZHS[thei-1])-1)/col);
@@ -6275,32 +6319,43 @@ fflush(stdout);
                     fflush(stdout);
             if(LS[thei-1]>1)
         printf("\033[%dA\r",LS[thei-1]-1);
-fflush(stdout);
-                    //ysv("");
+        fflush(stdout);
+        continue;
                 }
-                if (thei==ran5){            
+                else{
+                    offssset=0;
+                    flag=FALSE;
+                    //offssset
+                    for(i=4;i>thei;i--){
+                    offssset+=LS[i-1]-1;
+                    }
+                }
+                    //ysv("");
+
+                }           
             switch (thei)
             {
 
             case 1 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",1+l2+l3+l4-1);
+                printf("\033[%dB",l1+l2+l3+l4-1-offssset);
                 vflag=TRUE;
                 break;
             case 2 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",1+l3+l4-1);
+                printf("\033[%dB",l2+l3+l4-1-offssset);
                 vflag=TRUE;
                 break;
             case 3 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",1+l4-1);
+                if(l3+l4-1-offssset>0)
+                printf("\033[%dB",l3+l4-1-offssset);
                 vflag=TRUE;
                 break;
             case 4 /* constant-expression */:
                 /* code */
                 if(l4-1>0){
-                printf("\033[%dB",l4-1);
+                printf("\033[%dB",l4-1-offssset);
                 }
                 else{
                 printf("");
@@ -6308,13 +6363,21 @@ fflush(stdout);
  
                 vflag=TRUE;
                 break;
-        
             }
+            if(flag==FALSE){
+                ysv0=getchar();
+                if(ez=='1')
+                ysv(strcat(&ENS[ran5-1][2],ZHS[ran5-1]),ysv0);
+                if(ez=='2')
+                ysv(strcat(&ZHS[ran5-1][2],ENS[ran5-1]),ysv0);
+            }
+            else
             ysv("",ysv0);
-            rw=TRUE;
-            ysv1='s';
+            //rw=TRUE;
+            //ysv1='s';
+            if(CORRECT==TRUE || REMOVE==TRUE)
             rwfp(answer1,ch,flag);
-		}
+		
 	    if (vflag==TRUE){
                 vflag=FALSE;
                 break;
