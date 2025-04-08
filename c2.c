@@ -6367,9 +6367,9 @@ fflush(stdout);
             if(flag==FALSE){
                 ysv0=getchar();
                 if(ez=='1')
-                ysv(strcat(&ENS[ran5-1][2],ZHS[ran5-1]),ysv0);
+                ysv(strcat(&ENS[ran5-1][2],&ZHS[ran5-1][1]),ysv0);
                 if(ez=='2')
-                ysv(strcat(&ZHS[ran5-1][2],ENS[ran5-1]),ysv0);
+                ysv(strcat(&ZHS[ran5-1][2],&ENS[ran5-1][1]),ysv0);
             }
             else
             ysv("",ysv0);
