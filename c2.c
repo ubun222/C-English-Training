@@ -6366,10 +6366,19 @@ fflush(stdout);
             }
             if(flag==FALSE){
                 ysv0=getchar();
-                if(ez=='1')
-                ysv(strcat(&ENS[ran5-1][2],&ZHS[ran5-1][1]),ysv0);
-                if(ez=='2')
-                ysv(strcat(&ZHS[ran5-1][2],&ENS[ran5-1][1]),ysv0);
+                if(ez=='1'){
+                    char m1[899]="\033[1m";char m2[899]="\033[0m";
+                    strcat(m1,&ENS[ran5-1][2]);
+                    strcat(m2,&ZHS[ran5-1][1]);
+                ysv(strcat(m1,m2),ysv0);
+                
+            }
+                if(ez=='2'){
+                    char m1[899]="\033[0m";char m2[899]="\033[1m";
+                    strcat(m1,&ZHS[ran5-1][2]);
+                    strcat(m2,&ENS[ran5-1][1]);
+                ysv(strcat(m1,m2),ysv0);
+                }
             }
             else
             ysv("",ysv0);
