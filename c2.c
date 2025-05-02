@@ -607,8 +607,6 @@ int thewidth(char * aline){
     strcpy(theline,aline);
     i=0;
         while(i<=strlen(theline)){
-
-        
         //printf("%c",theline[i]);
         //sleep(1);
        if ((int)theline[i]-12<=128 && (int)theline[i]>12 ){
@@ -629,6 +627,8 @@ int thewidth(char * aline){
 
         }
         if((int)theline[i+1]+add>=128 && (int)theline[i]+add>=227 && (int)theline[i]+add<=239  ){
+            if(lengn%col==col-1)
+            lengn=lengn+1;
                 lengn=lengn+2;
                 i=i+3;
                 continue;
