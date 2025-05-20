@@ -6360,7 +6360,7 @@ fflush(stdout);
                 break;
             case 4 /* constant-expression */:
                 /* code */
-                if(l4-1>0){
+                if(0>1){
                 printf("\033[%dB",1-1);
                 }
                 else{
