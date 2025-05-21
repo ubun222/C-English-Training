@@ -6300,15 +6300,15 @@ fflush(stdout);
                     else{
                         printf("\r\033[%dC%s\033[K\r",col-2,tline);
                     }
-                    if (LS[thei-1]>1 ){
-                    ///printf("\033[%dA\r",LS[thei-1]-1);
-    }
                     printf("\r\033[%dC%s\r",col-2,fline);
+                    if(LS[thei-1]-1>=1)
+                    printf("\033[%dA",LS[thei-1]-1);
+                    fflush(stdout);
                     fflush(stdout);
                     if(Auto==TRUE){
                         printf("\033[0m\r%s\033[K\r",aprt(ZHS[thei-1]));
-                        fflush(stdout);
-                        printf("\r\033[%dC%s\r",col-2,fline);
+                        //fflush(stdout);
+                        //printf("\r\033[%dC%s\r",col-2,fline);
                         fflush(stdout);
                     getchar();
                     if(thewidth(ZHS[thei-1])<-col){
