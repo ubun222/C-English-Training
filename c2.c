@@ -6384,6 +6384,7 @@ fflush(stdout);
                     strcat(m1,&ZHS[ran5-1][2]);
                     strcat(m2,&ENS[ran5-1][1]);
                 ysv(strcat(m1,m2),ysv0);
+                printf("\033[0m");
                 }
             }
             else
