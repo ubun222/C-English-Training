@@ -1165,49 +1165,13 @@ if(Line_num_1>=1){
 
 
 void loading(){
- int anykey;
-//等待动画
-//‹›‹›‹›‹›
-printf("\n");
-fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
-while(TRUE){
-printf("\r\033[%dC\033[0m\033[3m\033[0m\033[3m‹›      \r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1){printf("%d",anykey);break;};
-printf("\r\033[%dC\033[0m\033[3m‹›      \r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[2m‹›\033[0m\033[3m‹›    \r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[2m‹›‹›\033[0m\033[3m‹›  \r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m\033[2m‹›‹›‹›\033[0m\033[3m‹›\r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m  \033[2m‹›‹›\033[0m\033[3m‹›\r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m    \033[2m‹›\033[0m\033[3m‹›\r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m      ‹›\r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m      \033[0m\033[3m‹›\033[0m\r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[3m      ‹›\r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m    ‹›\033[2m‹›\r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m  ‹›\033[2m‹›‹›\r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m‹›\033[2m‹›‹›‹›\r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m‹›\033[2m‹›‹›  \r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m‹›\033[2m‹›    \r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-printf("\r\033[%dC\033[0m\033[3m‹›\033[2m      \r",col/2-3);usleep(120000);fflush(stdout);
-anykey=getchar();if(anykey!=-1)break;
-
-}
-printf("\r\033[0m\033[%dC         ",col/2-4+col%2);
-printf("\r\033[1A");
 fcntl(STDIN_FILENO, F_SETFL, flags);
+printf("\r\n ···\033[%dC%s",col-6,"\033[2m\033[5m↩\033[0m");
+fflush(stdout);
+getchar();
+printf("\033[1D \r\033[2A");
+fflush(stdout);
+fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 }
 
 char yword[9999];
@@ -3276,7 +3240,7 @@ strcpy(bbuffer,"");
 BOOL non=FALSE;
 
 if (ysv0==' ')
-while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r')
+while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r' && ysv1!='\x06')
     continue;
 else{
     ysv1=ysv0;
@@ -3291,7 +3255,35 @@ if(PASS1==TRUE){
 num--;
     }
 }  //放在后面会莫名其妙失效
+if( ysv1=='\x06' ){ //查找
+    fcntl(STDIN_FILENO, F_SETFL, flags);
+    findword(answer1,en,txt);
+    if(premode=='3' || premode=='1' ){
 
+        //printf("%s",bword);
+        
+    if(strcmp(aword,"")==0){
+    printf("\r\033[%dC%s\r",col-2,nline);
+    }
+    else if(flag==TRUE){
+    printf("\r\033[%dC%s\r",col-2,tline);
+    }
+    else{
+    printf("\r\033[%dC%s\r",col-2,fline);
+    }
+    //ysv(bword,' ');
+    //return 0;
+    }
+else if(premode=='2' && flag==TRUE){
+    printf("\r\033[%dC%s\033[K\r",col-2,tline);
+}
+else if(premode=='2' && flag==FALSE){
+    printf("\r\033[%dC%s\r",col-2,fline);
+}
+fflush(stdout);
+while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r' && ysv1!='\x06')
+    continue;
+}
 //printf("%c",ysv1);
 if (ysv1=='V' && ( premode=='1' || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
@@ -3488,7 +3480,7 @@ for(P=0;P<p;P++){
 
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
 //NL=FALSE;
-if ( (ysv1=='S'  || ysv1=='s' ) &&  premode=='1'){
+if ( (ysv1=='S'  || ysv1=='s' ) &&  ( premode=='1' || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
 //if(flag==FALSE){
     printf("\n%s",aprt(bword));
@@ -5308,7 +5300,6 @@ colourp();
 return 0;
     }
 
-
 int fun2(){
     int i;
     printf("\033[0m");
@@ -6288,8 +6279,14 @@ fflush(stdout);
                         printf("\r\033[%dC%s\033[K\r",col-2,tline);
                     }
                     fflush(stdout);
+                    while ((ysv0=getchar())!='y' && ysv0!='Y' && ysv0!='v' && ysv0!='V' && ysv0!='s' && ysv0!='S' && ysv0!='\n' && ysv0!='\r' && ysv0!='\x06')
+    continue;
+    if ( ysv0=='S'  || ysv0=='s' || ysv0=='V' || ysv0=='Y')
+        ishprt("\r\033[%dC%s\r",col-2,eline);
+                    fflush(stdout);
 //printf("%s",answer1);
-                    ysv0=getchar();
+//while ((ysv0=getchar())!='y' && ysv0!='Y' && ysv0!='v' && ysv0!='V' && ysv0!='s' && ysv0!='S' && ysv0!='\n' && ysv0!='\r' && ysv0!='\x06')
+//    continue;
                 }
                 else{
                     flag=FALSE;
@@ -6301,6 +6298,11 @@ fflush(stdout);
                         printf("\r\033[%dC%s\033[K\r",col-2,tline);
                     }
                     printf("\r\033[%dC%s\r",col-2,fline);
+                    fflush(stdout);
+                    while ((ysv0=getchar())!='y' && ysv0!='Y' && ysv0!='v' && ysv0!='V' && ysv0!='s' && ysv0!='S' && ysv0!='\n' && ysv0!='\r' && ysv0!='\x06')
+    continue;
+    if ( ysv0=='S'  || ysv0=='s' || ysv0=='V' || ysv0=='Y')
+        ishprt("\r\033[%dC%s\r",col-2,eline);
                     if(LS[thei-1]-1>=1)
                     printf("\033[%dA",LS[thei-1]-1);
                     fflush(stdout);
@@ -6370,8 +6372,7 @@ fflush(stdout);
                 vflag=TRUE;
                 break;
             }
-            if(flag==FALSE){
-                ysv0=getchar();
+           // if(flag==FALSE){
                 if(ez=='1'){
                     char m1[899]="\033[1m";char m2[899]="\033[0m";
                     strcat(m1,&ENS[ran5-1][2]);
@@ -6386,9 +6387,9 @@ fflush(stdout);
                 ysv(strcat(m1,m2),ysv0);
                 printf("\033[0m");
                 }
-            }
-            else
-            ysv("",ysv0);
+            //}
+            //else
+            //ysv("",ysv0);
             //rw=TRUE;
             //ysv1='s';
             if(CORRECT==TRUE || REMOVE==TRUE)
