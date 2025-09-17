@@ -1165,13 +1165,13 @@ if(Line_num_1>=1){
 
 
 void loading(){
-fcntl(STDIN_FILENO, F_SETFL, flags);
+//fcntl(STDIN_FILENO, F_SETFL, flags);
 printf("\r\n ···\033[%dC%s",col-6,"\033[2m\033[5m↩\033[0m");
 fflush(stdout);
 getchar();
 printf("\033[1D \r\033[1A");
 fflush(stdout);
-fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
+//fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 }
 
 char yword[9999];
