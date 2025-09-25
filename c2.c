@@ -840,6 +840,7 @@ int premode;
 BOOL FUN3=FALSE;
 char lastpron[25];
 int zm=0;
+int flags;
 int findword(char * en, char * en2 , char * txt){
     strcpy(lastpron,"");
     char Eng[399];
@@ -861,6 +862,7 @@ regmatch_t match1;
     //FILE * fp;
     strcpy(Eng,en);
     strcpy(En,answer1);
+    fcntl(STDIN_FILENO, F_SETFL, flags);
     while(TRUE){
     printf("\n请输入要查找的单词:\033[K\n");
     printf("the word:\033[K");
@@ -1003,6 +1005,8 @@ mergeDuplicates(azh);
     if(premode!='2' && premode!='3' || FUN3==TRUE)
     printf("\r\033[1m%s\033[0m\033[2m \033[3m‹› \033[0m",en2);
     fflush(stdout);
+    if(premode!='2')
+    fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 return 0;
 }
 
@@ -1071,7 +1075,6 @@ return aline;
 }
 
 
-int flags;
 char * getlines(char * string,int Line_num_1){
     int i;
     char strings[2999999];
@@ -1165,13 +1168,15 @@ if(Line_num_1>=1){
 
 
 void loading(){
-//fcntl(STDIN_FILENO, F_SETFL, flags);
+if(premode!='2')
+fcntl(STDIN_FILENO, F_SETFL, flags);
 printf("\r\n ···\033[%dC%s",col-6,"\033[2m\033[5m↩\033[0m");
 fflush(stdout);
 getchar();
 printf("\033[1D \r\033[1A");
 fflush(stdout);
-//fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
+if(premode!='2')
+fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 }
 
 char yword[9999];
@@ -5714,6 +5719,7 @@ BOOL random=FALSE;
 int ran5;
         getin=FALSE;
   //  srand((unsigned)time(NULL));
+  fcntl(STDIN_FILENO, F_SETFL, flags);
         while(1){
             fflush(stdin);
 flag=FALSE;
