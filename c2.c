@@ -1371,6 +1371,8 @@ char * readjust(char * str){
 
 int lastw;
 BOOL Auto=FALSE;
+int LINES_3; //行高度
+int LINES_3_1; //行高度
 int ififright(char * aword){
     //int ifright;
 lastw=-1;
@@ -1473,6 +1475,12 @@ return(0);
     }
        if(strcmp(aword,answer1)==0){
         flag=TRUE;
+
+        
+if(premode=='3' && LINES_3-LINES_3_1>0){
+printf("\r\033[%dB",LINES_3-LINES_3_1);
+LINES_3=0;
+}
         ishprt("\r\033[%dC%s\r",col-2,tline);
 	fflush(stdout);
         return 0;
@@ -3486,6 +3494,7 @@ for(P=0;P<p;P++){
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
 //NL=FALSE;
 if ( (ysv1=='S'  || ysv1=='s' ) &&  ( premode=='1' || premode=='3' )){
+
 ishprt("\r\033[%dC%s\r",col-2,eline);
 //if(flag==FALSE){
     printf("\n%s",aprt(bword));
@@ -3639,8 +3648,8 @@ struct WordInfo * TheWordInfo;
 char prons[25];
 char czh[MAX_SIZE][MAX_LENGTH];
 struct termios new_setting;
-int LINES_3; //行高度
-int LINES_3_1; //行高度
+//int LINES_3; //行高度
+//int LINES_3_1; //行高度
 int WIDTH_3_1; //行高度
 char bot[199]; //单词长度
 char fragment1[3999]; //前半行
