@@ -3208,6 +3208,7 @@ free(rtxt);
             int l3;
             int l4;
 //char *pattern = "[a-zA-Z]+[\\s]*\\[[^\\[\\]]+\\][\\s]*";
+char * theline2;
 int ysv(char * bword,char ysv0){
 //char eline[]="\033[32m○\033[0m";
 char * rbuffer;
@@ -3288,9 +3289,11 @@ if( ysv1=='\x06' ){ //查找
     //return 0;
     }
 else if(premode=='2' && flag==TRUE){
+    printf("\033[1m%s\r\033[0m\033[36m\033[2m \033[3m›\033[0m",aprt(theline2));
     printf("\r\033[%dC%s\033[K\r",col-2,tline);
 }
 else if(premode=='2' && flag==FALSE){
+    printf("\033[1m%s\r\033[0m\033[36m\033[2m \033[3m›\033[0m",aprt(theline2));
     printf("\r\033[%dC%s\r",col-2,fline);
 }
 fflush(stdout);
@@ -3298,8 +3301,9 @@ while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s'
     continue;
 }
 //printf("%c",ysv1);
-if (ysv1=='V' && ( premode=='1' || premode=='3' )){
+if (ysv1=='V' && ( premode=='1' || strlen(theline2)>1 || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
+theline2=NULL;
 }
 
 
@@ -3417,8 +3421,9 @@ fflush(stdout);
 
 }
 else if (ysv1=='y' || ysv1=='Y'){
-if (ysv1=='Y' && ( premode=='1' || premode=='3' )){
+if (ysv1=='Y' && ( premode=='1' || strlen(theline2)>1  || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
+theline2=NULL;
 }
 if(premode=='3'){
     printf("\n%s",aprt(bword));
@@ -3500,8 +3505,8 @@ for(P=0;P<p;P++){
 
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
 //NL=FALSE;
-if ( (ysv1=='S'  || ysv1=='s' ) &&  ( premode=='1' || premode=='3' )){
-
+if ( (ysv1=='S'  || ysv1=='s' ) &&  ( premode=='1' || strlen(theline2)>1  || premode=='3' )){
+theline2=NULL;
 ishprt("\r\033[%dC%s\r",col-2,eline);
 //if(flag==FALSE){
     printf("\n%s",aprt(bword));
@@ -5735,6 +5740,8 @@ BOOL random=FALSE;
         //iii=0;
 int ran5;
         getin=FALSE;
+        int dupnend[4];
+        int subsequence=4;
   //  srand((unsigned)time(NULL));
   fcntl(STDIN_FILENO, F_SETFL, flags);
         while(1){
@@ -5750,6 +5757,7 @@ strcpy(Word4,"");
         while (num>0){
        // srand((unsigned)time(NULL) *2 );
         ysv0=' ';
+        if(num>4){
         RAN0[0]=rand() % num;
         n1=nend[RAN0[0]];
 // srand((unsigned)time(NULL));
@@ -5781,6 +5789,45 @@ if (position != -1) {
 }
 break;
         }
+        else{
+            if(num==4){
+                printf("\n词库不足");        
+                
+                dupnend[0]=nend[0];
+                dupnend[1]=nend[1];
+                dupnend[2]=nend[2];
+                dupnend[3]=nend[3];
+                }
+            RAN0[0]=0;
+            n1=dupnend[0];
+    // srand((unsigned)time(NULL));
+    RAN0[1]=1;
+            n2=dupnend[1];
+      //     srand((unsigned)time(NULL));
+      RAN0[2]=2;
+            n3=dupnend[2];
+     // srand((unsigned)time(NULL));
+     RAN0[3]=3;
+            n4=dupnend[3];
+            if( RAN0[0] == RAN0[1] || RAN0[0] == RAN0[2] || RAN0[0] == RAN0[3] || RAN0[1] == RAN0[2] || RAN0[1] == RAN0[3] || RAN0[2] == RAN0[3] ){
+                continue;
+                break;
+            } 
+            ran5=subsequence;
+            subsequence--;
+            ran=RAN0[ran5-1];
+            n=nend[ran];
+            int position = findPosition(origin_nends, NUM, n);
+            
+            if (position != -1) {
+                RAN=position;
+                //printf("目标值 %d 在数组中的位置是 %d\n", target, position);
+            } else {
+               // printf("目标值 %d 未在数组中找到\n", n); //顺序时会报错，但不影响运行效果
+            }
+            break;                     
+        }
+        }
         ysv1='\x00';
         if(num<=4){
             if (num==0){
@@ -5788,17 +5835,10 @@ break;
                 exit(0);
             }
         //ran=num;
-if(num==4)
-printf("\n词库不足");        
-        
-            n1=nend[0];
-            n2=nend[0];
-            n3=nend[0];
-            n4=nend[0];
-            ran5=1;
-            ran=0;
-            n=nend[0];
-            n=0;
+ //           ran5=1;
+ //           ran=0;
+ //           n=nend[0];
+ //           n=0;
 
             //order='3';
             //FUN3=TRUE;
@@ -6270,6 +6310,10 @@ fflush(stdout);
     }
     else if(the=='\n' || the=='\r' || the=='\x43'){
         //the='\x00';
+        if(ez=='1')
+        theline2=ENS[thei-1];
+        if(ez=='2')
+        theline2=ENS[thei-1];
         if(flag1==FALSE){
             thei=1;
 
@@ -6292,7 +6336,7 @@ fflush(stdout);
         else{
            //printf("%s",ch);
            int offssset=0;
-                if(thei==ran5 || num<=4){
+                if(thei==ran5){
                     flag=TRUE;
                     if (LS[thei-1]>1 ){
                         printf("\033[%dB",LS[thei-1]-1);
@@ -6302,7 +6346,7 @@ fflush(stdout);
                         printf("\r\033[%dC%s\033[K\r",col-2,tline);
                     }
                     fflush(stdout);
-                    while ((ysv0=getchar())!='y' && ysv0!='Y' && ysv0!='v' && ysv0!='V' && ysv0!='s' && ysv0!='S' && ysv0!='\n' && ysv0!='\r' && ysv0!='\x06')
+                while ((ysv0=getchar())!='y' && ysv0!='Y' && ysv0!='v' && ysv0!='V' && ysv0!='s' && ysv0!='S' && ysv0!='\n' && ysv0!='\r' && ysv0!='\x06')
     continue;
     if ( ysv0=='S'  || ysv0=='s' || ysv0=='V' || ysv0=='Y')
         ishprt("\r\033[%dC%s\r",col-2,eline);
