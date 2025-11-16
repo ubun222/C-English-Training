@@ -3308,7 +3308,7 @@ if (ysv1=='v' || ysv1=='V'){
         printf("\n%s",aprt(bword));
         fflush(stdout);
     }
-    if (flag!=TRUE){
+    else if (flag!=TRUE){
        // if(bword[strlen(bword)-1]=='\n'){
        //     bword[strlen(bword)-1]='\x00';
        // }
@@ -3424,7 +3424,7 @@ if(premode=='3'){
     printf("\n%s",aprt(bword));
     fflush(stdout);
 }
-        if (flag!=TRUE){
+       else if (flag!=TRUE){
     printf("\n%s",aprt(bword));
     fflush(stdout);
     }
