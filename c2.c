@@ -3506,6 +3506,9 @@ else if(flag==FALSE){
     printf("\n%s",aprt(bword));
     fflush(stdout);
 }
+else if(flag==TRUE && premode=='3'){
+    printf("\n%s",aprt(bword));
+}
 
 }
 strcpy(alltxt,"");
@@ -5620,9 +5623,7 @@ strcat(bword," ");
 strcat(bword,ZH_3);
 ran=RAN_3;
 colourp();
-if(flag==TRUE){
-    printf("\n%s",aprt(Bline));
-}
+
 }
 else{
         for (i=RAN_3;i<=num;i++){
