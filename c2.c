@@ -3300,8 +3300,11 @@ fflush(stdout);
 while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r' && ysv1!='\x06')
     continue;
 }
+else{
+theline2=NULL;
+}
 //printf("%c",ysv1);
-if (ysv1=='V' && ( premode=='1' || strlen(theline2)>1 || premode=='3' )){
+if (ysv1=='V' && ( premode=='1' || theline2!=NULL || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
 theline2=NULL;
 }
@@ -3421,7 +3424,7 @@ fflush(stdout);
 
 }
 else if (ysv1=='y' || ysv1=='Y'){
-if (ysv1=='Y' && ( premode=='1' || strlen(theline2)>1  || premode=='3' )){
+if (ysv1=='Y' && ( premode=='1' || theline2!=NULL  || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
 theline2=NULL;
 }
@@ -3505,7 +3508,7 @@ for(P=0;P<p;P++){
 
 else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
 //NL=FALSE;
-if ( (ysv1=='S'  || ysv1=='s' ) &&  ( premode=='1' || strlen(theline2)>1  || premode=='3' )){
+if ( (ysv1=='S'  || ysv1=='s' ) &&  ( premode=='1' || theline2!=NULL  || premode=='3' )){
 theline2=NULL;
 ishprt("\r\033[%dC%s\r",col-2,eline);
 //if(flag==FALSE){
