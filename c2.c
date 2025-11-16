@@ -3304,6 +3304,10 @@ ishprt("\r\033[%dC%s\r",col-2,eline);
 
 
 if (ysv1=='v' || ysv1=='V'){
+    if(premode=='3'){
+        printf("\n%s",aprt(bword));
+        fflush(stdout);
+    }
     if (flag!=TRUE){
        // if(bword[strlen(bword)-1]=='\n'){
        //     bword[strlen(bword)-1]='\x00';
@@ -3405,7 +3409,6 @@ fflush(stdout);
 //    break;
 
 //    }
-
    // fseek(fp,Max , SEEK_SET);
     // NL=TRUE;
     strcpy(rtxt,"");
@@ -3417,7 +3420,10 @@ else if (ysv1=='y' || ysv1=='Y'){
 if (ysv1=='Y' && ( premode=='1' || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
 }
-
+if(premode=='3'){
+    printf("\n%s",aprt(bword));
+    fflush(stdout);
+}
         if (flag!=TRUE){
     printf("\n%s",aprt(bword));
     fflush(stdout);
@@ -3480,6 +3486,7 @@ for(P=0;P<p;P++){
     break;
     }
 }
+
    // fseek(fp,Max , SEEK_SET);
        // fseek(Fp,max , SEEK_SET);
     strcpy(rbuffer,"");
