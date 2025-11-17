@@ -3209,6 +3209,7 @@ free(rtxt);
             int l4;
 //char *pattern = "[a-zA-Z]+[\\s]*\\[[^\\[\\]]+\\][\\s]*";
 char * theline2;
+int subsequence;
 int ysv(char * bword,char ysv0){
 //char eline[]="\033[32m○\033[0m";
 char * rbuffer;
@@ -3267,6 +3268,8 @@ if(PASS1==TRUE){
             nend[i]=nend[i+1];
         }
 num--;
+if(premode=='2' && subsequence<=4 && subsequence>0)
+subsequence--;
     }
 }  //放在后面会莫名其妙失效
 if( ysv1=='\x06' ){ //查找
@@ -5744,7 +5747,6 @@ BOOL random=FALSE;
 int ran5;
         getin=FALSE;
         int dupnend[4];
-        int subsequence=4;
   //  srand((unsigned)time(NULL));
   fcntl(STDIN_FILENO, F_SETFL, flags);
         while(1){
@@ -5794,6 +5796,7 @@ break;
         }
         else{
             if(num==4){
+                subsequence=4;
                 printf("\n词库不足");        
                 
                 dupnend[0]=nend[0];
@@ -5817,7 +5820,7 @@ break;
                 break;
             } 
             ran5=subsequence;
-            subsequence--;
+            //subsequence--;
             ran=RAN0[ran5-1];
             n=nend[ran];
             int position = findPosition(origin_nends, NUM, n);
