@@ -1170,7 +1170,7 @@ if(Line_num_1>=1){
 void loading(){
 if(premode!='2')
 fcntl(STDIN_FILENO, F_SETFL, flags);
-printf("\r\n ···\033[%dC%s",col-6,"\033[2m\033[5m↩\033[0m");
+printf("\r\n ···\033[%dC%s",col-7,"\033[2m\033[5m↩\033[0m");
 fflush(stdout);
 getchar();
 printf("\033[1D \r\033[1A");
@@ -3675,6 +3675,12 @@ int WIDTH_3_1; //行高度
 char bot[199]; //单词长度
 char fragment1[3999]; //前半行
 char fragment2[3999]; //后半行
+
+BOOL ifPrompt=FALSE;
+void toPrompt(){
+    ifPrompt=FALSE;
+}
+
 int Read(){
 //struct WordInfo* TheWordInfo;
 ysv1='\x00';
@@ -4087,9 +4093,17 @@ yi=1; //
 if (waiting==TRUE || getin==TRUE){
 
 //printf("%s",yword);
-if( strcmp(yword,"\t\t")==0 || strcmp(yword,"\t")==0 ){
+if( zword=='\t' ){
 //printf("2222");
 //strcpy(yword,"");
+alarm(0);
+if(ifPrompt==FALSE){
+    alarm(1);
+    ifPrompt=TRUE;
+continue;
+}
+alarm(0);
+ifPrompt=FALSE;
 if (ez=='1'){
     for(i=0;i<=strlen(aword);i++){
         if(answer1[i]==aword[i]){
@@ -6605,7 +6619,8 @@ if(Thepath!=NULL)
     
     }
 
-	if(signal(SIGALRM,handler) == SIG_ERR){  //信号注册函数
+	//if(signal(SIGALRM,handler) == SIG_ERR){  //信号注册函数
+    if(signal(SIGALRM,toPrompt) == SIG_ERR){
     perror("signal");
 
     exit(-1);
