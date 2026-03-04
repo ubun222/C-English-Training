@@ -4413,8 +4413,70 @@ int findPosition(int arr[], int length, int target) {
     }
     return -1; // 如果未找到目标值，返回-1表示未找到
 }
+char * newen;
+char * modify(char * input){
+strcpy(newen,"\x00");
+int s=-1;
+if(Auto!=TRUE && ez!='1'){
+while(s=s+1,s<=strlen(input)){
+if(input[s]=='a'){
+    strcat(newen,"\033[0m");
+    strcat(newen,"a");
+}
+else if(input[s]=='n'){
+    strcat(newen,"\033[0m");
+    strcat(newen,"n");
+}
+else if(input[s]=='i'){
+    strcat(newen,"\033[0m");
+    strcat(newen,"i");
+}
+else if(input[s]=='p'){
+    strcat(newen,"\033[0m");
+    strcat(newen,"p");
+}
+else if(input[s]=='c'){
+    strcat(newen,"\033[0m");
+    strcat(newen,"c");
+}
+else if(input[s]=='v'){
+    strcat(newen,"\033[0m");
+    strcat(newen,"v");
+}
+else if(input[s]=='.'){
+    strcat(newen,".");
+    strcat(newen,"\033[1m");
+}
+else if(input[s]=='<'){
+    strcat(newen,"\033[0m");
+    strcat(newen,"<");
+}
+else if(input[s]=='>'){
+    strcat(newen,">");
+    strcat(newen,"\033[1m");
+}
+else if(input[s]=='('){
+    strcat(newen,"\033[0m");
+    strcat(newen,"(");
+}
+else if(input[s]==')'){
+    strcat(newen,")");
+    strcat(newen,"\033[1m");
+}
+else{
+    strncat(newen,&input[s],1);
+}
+}
+strcat(newen,"\x00");
+return newen;
+}
+else{
+    return input;
+}
+}
 
 int fun(){
+newen=(char *)malloc(9999);
     evalue.it_value.tv_sec=0;
     evalue.it_value.tv_usec=15000;
     evalue.it_interval.tv_sec=0;
@@ -4782,8 +4844,11 @@ TheWordInfo = Getprops(ezh); //排序
             printf("\n%s\n",azh[1]);
             printf("\n%s\n",azh[2]);*/
             }
+            
+            if(ez=='2')
             printf("\r\033[1m%s\033[0m\033[2m \033[3m‹› \033[0m",en);
-
+            if(ez=='1')
+            printf("\r\033[1m%s\033[0m\033[2m \033[3m‹› \033[0m",modify(en));
             //cursor_position(&rown,&coln);
             cursor_position(&rowm,&colm);
             /***puts(en);***/
@@ -4812,9 +4877,8 @@ strcat(bword,"\033[1m");
             strcat(bword,zh);
             strcat(bword,"\033[0m");
             strcat(bword," ");
-            
             strcat(bword,en);
-            
+
 
                 //strcpy(yword,"");
                 yword[0]='\0';
@@ -4839,7 +4903,7 @@ strcat(bword,"\033[1m");
                         strcat(bword,en);
             strcat(bword," ");
             strcat(bword,"\033[1m");
-            strcat(bword,zh);
+            strcat(bword,modify(zh));
             strcat(bword,"\033[0m");
 
 waiting=FALSE;
@@ -5976,10 +6040,10 @@ default:
 }
 //printf("%s",ENS[0]); #ENS[0]使用strcpy赋值将乱码
 if(thewidth(&answer[2])>0){
-printf("\n\033[%dC\033[1m%s\033[0m\n",(col-thewidth(&answer[2]))/2,aprt(&answer[2]));
+printf("\n\033[%dC\033[1m%s\033[0m\n",(col-thewidth(&answer[2]))/2,modify(aprt(&answer[2])));
 }
 else{
-    printf("\n\033[1m%s\033[0m\n",aprt(&answer[2]));
+    printf("\n\033[1m%s\033[0m\n",modify(aprt(&answer[2])));
 }
 strcpy(answer1,en0);
 //printf("%s\n",aprt(EN1));
@@ -6216,7 +6280,7 @@ else{
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',modify(&ENS[thei-1][2]));
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -6253,7 +6317,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',modify(&ENS[thei-1][2]));
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
@@ -6280,7 +6344,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',modify(&ENS[thei-1][2]));
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         fflush(stdout);
@@ -6317,7 +6381,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',modify(&ENS[thei-1][2]));
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
         //printf("\n");
@@ -6342,7 +6406,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',modify(&ENS[thei-1][2]));
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
 
@@ -6408,7 +6472,7 @@ fflush(stdout);
                     //ENS[thei-1][2]='\xe2';
                     //ENS[thei-1][3]='\x80';
                     //ENS[thei-1][4]='\xba';
-                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',&ENS[thei-1][2]);
+                    printf("\r\033[36m %c%c%c\033[0m\033[1m%s\033[K\r\033[0m",'\xe2','\x80','\xba',modify(&ENS[thei-1][2]));
                     ENS[thei-1][0]=' ';
                     ENS[thei-1][1]=' ';
                     fflush(stdout);
