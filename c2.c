@@ -6424,10 +6424,10 @@ fflush(stdout);
                     flag=TRUE;
                     if (LS[thei-1]>1 ){
                         printf("\033[%dB",LS[thei-1]-1);
-                        printf("\r\033[%dC%s\033[K\r",col-2,tline);
+                        printf("\r\033[%dC%s\r",col-2,tline);
                     }
                     else{
-                        printf("\r\033[%dC%s\033[K\r",col-2,tline);
+                        printf("\r\033[%dC%s\r",col-2,tline);
                     }
                     fflush(stdout);
                 while ((ysv0=getchar())!='y' && ysv0!='Y' && ysv0!='v' && ysv0!='V' && ysv0!='s' && ysv0!='S' && ysv0!='\n' && ysv0!='\r' && ysv0!='\x06')
@@ -6494,7 +6494,6 @@ fflush(stdout);
                 }           
             switch (thei)
             {
-
             case 1 /* constant-expression */:
                 /* code */
                 printf("\033[%dB",l1+l2+l3+l4-1);
