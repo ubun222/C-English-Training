@@ -6443,10 +6443,10 @@ fflush(stdout);
                     flag=FALSE;
                     if (LS[thei-1]>1 ){
                         printf("\033[%dB",LS[thei-1]-1);
-                        printf("\r\033[%dC%s\033[K\r",col-2,tline);
+                        //printf("\r\033[%dC%s\033[K\r",col-2,tline);
                     }
                     else{
-                        printf("\r\033[%dC%s\033[K\r",col-2,tline);
+                        //printf("\r\033[%dC%s\033[K\r",col-2,tline);
                     }
                     printf("\r\033[%dC%s\r",col-2,fline);
                     fflush(stdout);
@@ -6497,24 +6497,24 @@ fflush(stdout);
 
             case 1 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",1+l2+l3+l4-1);
+                printf("\033[%dB",l1+l2+l3+l4-1);
                 vflag=TRUE;
                 break;
             case 2 /* constant-expression */:
                 /* code */
-                printf("\033[%dB",1+l3+l4-1);
+                printf("\033[%dB",l2+l3+l4-1);
                 vflag=TRUE;
                 break;
             case 3 /* constant-expression */:
                 /* code */
                 if(l3+l4-1>0)
-                printf("\033[%dB",1+l4-1);
+                printf("\033[%dB",l3+l4-1);
                 vflag=TRUE;
                 break;
             case 4 /* constant-expression */:
                 /* code */
-                if(0>1){
-                printf("\033[%dB",1-1);
+                if(l4>1){
+                printf("\033[%dB",l4-1);
                 }
                 else{
                 printf("");
