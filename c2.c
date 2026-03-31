@@ -3324,6 +3324,7 @@ if (ysv1=='v' || ysv1=='V'){
        //     bword[strlen(bword)-1]='\x00';
        // }
     ishprt("\n%s",bword);
+    printf("\033[0m");
     fflush(stdout);
     }
 for(P=0;P<p;P++){
@@ -3440,7 +3441,7 @@ if(premode=='3'){
     printf("\n%s",aprt(bword));
     fflush(stdout);
     }
-
+printf("\033[0m");
 for(P=0;P<p;P++){
     if(Fp!=NULL )
     fclose(Fp);
@@ -6540,7 +6541,6 @@ fflush(stdout);
                     char m1[899]="\033[0m";char m2[899]="\033[1m";
                     strcat(m1,&ZHS[ran5-1][2]);
                     strcat(m2,&ENS[ran5-1][1]);
-                    strcat(m2,"\033[0m");
                 ysv(strcat(m1,m2),ysv0);
                 printf("\033[0m");
                 }
