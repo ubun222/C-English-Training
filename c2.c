@@ -3210,6 +3210,7 @@ free(rtxt);
 //char *pattern = "[a-zA-Z]+[\\s]*\\[[^\\[\\]]+\\][\\s]*";
 char * theline2;
 int subsequence;
+int I;
 int ysv(char * bword,char ysv0){
 //char eline[]="\033[32m○\033[0m";
 char * rbuffer;
@@ -3534,10 +3535,12 @@ strcpy(word1,"");
 
 if(PASS1==TRUE){
 
-        if(ysv1=='v' || ysv1=='V' || ysv1=='y' || ysv1=='Y' )
+        if(ysv1=='v' || ysv1=='V')
         {
-        printf("\n还有%d题",num);
-
+        printf("\n@还有%d题",num);
+        }
+        else if (ysv1=='y' || ysv1=='Y'){
+        printf("\n@第%d题",I);
         }
 }
 
@@ -3692,7 +3695,6 @@ int yn=0;
 int i;
 int M;
     int N;
-    int I;
     BOOL autosleep=TRUE;
 while(TRUE){
     leng3=strlen(aword);
@@ -4417,7 +4419,7 @@ char * newen;
 char * modify(char * input){
 strcpy(newen,"\x00");
 int s=-1;
-if(Auto!=TRUE && ez!='1'){
+if(Auto!=TRUE && (( ez!='1' || premode=='1')) ){
 while(s=s+1,s<=strlen(input)){
 if(input[s]=='a'){
     strcat(newen,"\033[0m");
@@ -4474,7 +4476,7 @@ else{
     return input;
 }
 }
-
+int I=0;
 int fun(){
 newen=(char *)malloc(9999);
     evalue.it_value.tv_sec=0;
@@ -4679,7 +4681,7 @@ nend[num+1]=max;
               //  int ran;
     srand((unsigned)time(NULL));
 	while (TRUE){        //模式三 乱序
-        
+        I++;
         if(PASS1==TRUE){
             if(num==0){
                 printf("\n过关了！");
@@ -4969,6 +4971,7 @@ ran=num+1;
 //strcpy(word,"");
 while (TRUE){  //模式二 倒序
 //printf("@22");
+I++;
  ran--;
 	if(ran==-1){
         ran=n=num;
@@ -5213,6 +5216,7 @@ ran=-1;
 
 
 while (TRUE){  //模式一 顺序
+    I++;
 if ( ysv1!='S' && ysv1!='s' && ysv1!='V' && ysv1!='Y' && flag!=TRUE ){
     ran++;
 }
@@ -5611,6 +5615,7 @@ for(P=0;P<p;P++){
 }
     }
     if(vflag==TRUE){
+        I++;
     if(rtxt[0]!='\0')
     if(theline[0]!='\0')
     //printf("\n%s",&rtxt[locate]);
@@ -5828,6 +5833,7 @@ int ran5;
   //  srand((unsigned)time(NULL));
   fcntl(STDIN_FILENO, F_SETFL, flags);
         while(1){
+            I++;
             fflush(stdin);
 flag=FALSE;
 strcpy(Word1,"");
@@ -6534,6 +6540,7 @@ fflush(stdout);
                     char m1[899]="\033[0m";char m2[899]="\033[1m";
                     strcat(m1,&ZHS[ran5-1][2]);
                     strcat(m2,&ENS[ran5-1][1]);
+                    strcat(m2,"\033[0m");
                 ysv(strcat(m1,m2),ysv0);
                 printf("\033[0m");
                 }
