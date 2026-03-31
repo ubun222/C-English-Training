@@ -3429,6 +3429,10 @@ fflush(stdout);
 
 }
 else if (ysv1=='y' || ysv1=='Y'){
+    strcpy(theline,"");
+    strcpy(bbuffer,"");
+    strcpy(rbuffer,"");
+
 if (ysv1=='Y' && ( premode=='1' || theline2!=NULL  || premode=='3' )){
 ishprt("\r\033[%dC%s\r",col-2,eline);
 theline2=NULL;
