@@ -3211,6 +3211,7 @@ free(rtxt);
 char * theline2;
 int subsequence;
 int I;
+int Ii=0;
 int ysv(char * bword,char ysv0){
 //char eline[]="\033[32m○\033[0m";
 char * rbuffer;
@@ -3545,7 +3546,7 @@ if(PASS1==TRUE){
         printf("\n@还有%d题",num);
         }
         else if (ysv1=='y' || ysv1=='Y'){
-        printf("\n@第%d题",I);
+        printf("\n@第%d题",Ii);
         }
 }
 
@@ -4481,7 +4482,7 @@ else{
     return input;
 }
 }
-int I=0;
+
 int fun(){
 newen=(char *)malloc(9999);
     evalue.it_value.tv_sec=0;
@@ -4686,7 +4687,7 @@ nend[num+1]=max;
               //  int ran;
     srand((unsigned)time(NULL));
 	while (TRUE){        //模式三 乱序
-        I++;
+        Ii++;
         if(PASS1==TRUE){
             if(num==0){
                 printf("\n过关了！");
@@ -4976,7 +4977,7 @@ ran=num+1;
 //strcpy(word,"");
 while (TRUE){  //模式二 倒序
 //printf("@22");
-I++;
+Ii++;
  ran--;
 	if(ran==-1){
         ran=n=num;
@@ -5221,7 +5222,7 @@ ran=-1;
 
 
 while (TRUE){  //模式一 顺序
-    I++;
+    Ii++;
 if ( ysv1!='S' && ysv1!='s' && ysv1!='V' && ysv1!='Y' && flag!=TRUE ){
     ran++;
 }
@@ -5620,7 +5621,7 @@ for(P=0;P<p;P++){
 }
     }
     if(vflag==TRUE){
-        I++;
+        Ii++;
     if(rtxt[0]!='\0')
     if(theline[0]!='\0')
     //printf("\n%s",&rtxt[locate]);
@@ -5838,7 +5839,7 @@ int ran5;
   //  srand((unsigned)time(NULL));
   fcntl(STDIN_FILENO, F_SETFL, flags);
         while(1){
-            I++;
+            Ii++;
             fflush(stdin);
 flag=FALSE;
 strcpy(Word1,"");
