@@ -1087,7 +1087,7 @@ char * getlines(char * string,int Line_num_1){
     int times = (unsigned int)time(NULL);
     ni[0]=0;
     int rx=0;
-    //int ran;
+    int ran1;
     int m;
     int rans[5]={-1,-1,-1,-1,-1};
     for(i=0;i<n;i++){
@@ -1140,16 +1140,16 @@ if(Line_num_1>=1){
     else {
     srand(times * (rx+1));
     rx++;
-    ran=rand() % (l+1);
+    ran1=rand() % (l+1);
     //printf("%d",ran);
-    if(ifre(rans,ran)==TRUE){
-    rans[i]=ran;
-    if(aline[ran][0]!='\0')
+    if(ifre(rans,ran1)==TRUE){
+    rans[i]=ran1;
+    if(aline[ran1][0]!='\0')
     {
 if(Line_num_1>=1){
     return aprt(&aline[Line_num_1-1][1]);
 }
-    printf("\n%s",aprt(&aline[ran][1]));
+    printf("\n%s",aprt(&aline[ran1][1]));
     }
 
     i++;
