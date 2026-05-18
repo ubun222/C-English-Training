@@ -3257,7 +3257,7 @@ strcpy(bbuffer,"");
 BOOL non=FALSE;
 
 if (ysv0==' ')
-while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r' && ysv1!='\x06')
+while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r' && ysv1!='\x06' && ysv1!='\x0a' && ysv1!='\t'  && ysv1!=' ')
     continue;
 else{
     ysv1=ysv0;
@@ -3302,7 +3302,7 @@ else if(premode=='2' && flag==FALSE){
     printf("\r\033[%dC%s\r",col-2,fline);
 }
 fflush(stdout);
-while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r' && ysv1!='\x06')
+while ((ysv1=getchar())!='y' && ysv1!='Y' && ysv1!='v' && ysv1!='V' && ysv1!='s' && ysv1!='S' && ysv1!='\n' && ysv1!='\r' && ysv1!=' ')
     continue;
 }
 else{
@@ -3516,7 +3516,7 @@ for(P=0;P<p;P++){
 
 }
 
-else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r'){
+else if (ysv1=='S' || ysv1=='s' || ysv1=='\n' || ysv1=='\r' || ysv1=='\t' || ysv1==' '){
 //NL=FALSE;
 if ( (ysv1=='S'  || ysv1=='s' ) &&  ( premode=='1' || theline2!=NULL  || premode=='3' )){
 theline2=NULL;
