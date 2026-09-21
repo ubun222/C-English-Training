@@ -3748,7 +3748,16 @@ if(zword=='\x06')
 if (zd==TRUE){
 ad=FALSE;
 
-                if(zword == '\r' || zword == '\n' ){ // 回车继续
+if(zword == '\r' || zword == '\n' ){ // 回车继续
+if (ififright(aword)==2){
+waiting=TRUE;
+zword='\x00';
+//getin=TRUE;
+bd=TRUE;
+zd=TRUE;
+bk=FALSE;
+continue;
+}
 waiting=FALSE;
 strcpy(yword,"");
 getin=FALSE;
